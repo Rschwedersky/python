@@ -1,0 +1,21 @@
+{% load general_tags %}
+
+{% include 'email_templates/default/header.html' %}
+
+    <tr>
+      <tr>
+        <td width="640" align="left" valign="top" style="padding-left: 100px; padding-right: 60px; padding-bottom: 30px;">
+          <img src="https://i.imgur.com/CJXFfTn.png" alt="null" style="height: 120px; margin-left: 620px; margin-top: 40px; margin-bottom: 60px;">
+          <h1 style="font-family: 'Montserrat', sans-serif; font-weight: 400; text-align: left; font-size: 30px; margin-top: -160px; margin-bottom: 2px;"> {{ 'notification_of'|translate:language }}<br> <strong>{{ 'password_change'|translate:language }}</strong></h1>
+          <div style="height: 16px; background-color:#39FFB6; border-radius: 20px; margin-top: 0; width: 350px;"></div><!-- pseudosublinhado -->
+          <p style="font-family: 'Montserrat', sans-serif; font-size: 22px; padding-top: 60px;">
+            {{ 'hello'|translate:language }}, <strong>{{ user.first_name }}</strong>!<br>
+
+            {{ 'your_password_access_on_smarthis_hub_was_changed'|translate:language }}.<br>
+          </p>
+
+        </td>
+
+    </tr>
+
+{% include 'email_templates/default/footer.html' %}

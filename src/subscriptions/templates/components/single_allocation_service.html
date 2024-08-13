@@ -1,0 +1,27 @@
+{% load static %} {% load general_tags %}
+
+<section class="registration__single-service-box" data-type="{{data_type}}" data-automation_name="{{ automation_name }}">
+    <header class="registration__single-service-header" data-initial="registration-service-header-initial" data-hover="registration-service-header-hover" data-showcase="{% if automation_obj.is_showcase %}true{% else %}false{% endif %}">
+        <div class="registration__header-show" id="registration-service-header-initial">
+            <img src="{% static logo%}" alt="Service Logo" class="registration__single-service-box--logo">
+            <p class="m-0 color-muted--light">{{ automation_display_name }}</p>
+        </div>
+        
+        <div class="info-text d-none {% if is_active == False %} mt-3{% endif %} ">
+            <p class="color000000">
+            {{ automation_display_name }}
+            </p>
+            <p class="m-0 f-size-14 color-muted--light">{{text_hover}}</p>
+        </div>
+        <img src="{% static '/dashboard/img/three-dots.svg'%}" alt="Show service info" class='menu-info c-pointer opacity-hover' data-image="{% static '/dashboard/img/exit.svg'%}">    
+    </header>
+    <section class="registration__single-service-permissions">
+        <button class="btn__purple no-uppercase btn__add-service">{{'add'|translate:language }}</button>
+        <div class="d-none gap-10 align-items-center">
+            <button class="btn__green btn__green--small btn__manipulate-permissions{% if btn_manipulation != None %}--{{ btn_manipulation }}{% endif %}" data-manipulation="decrease">-</button>
+            <span class="color-muted--light"><span class="howmany_automations_added">01</span> {{'license'|translate:language}}</span>
+            <button class="btn__green btn__green--small btn__manipulate-permissions{% if btn_manipulation != None %}--{{ btn_manipulation }}{% endif %}" data-manipulation="increase">+</button>
+        </div>
+    </section>
+
+</section>

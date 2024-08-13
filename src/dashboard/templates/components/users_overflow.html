@@ -1,0 +1,35 @@
+<div class="overflow__wrapper">
+    <form>
+        <ul class="{% if crew_type == 'settings' %}crew__list{% else %}permissions__modal-email--list{% endif %}" id="{% if crew_type == 'settings' %}crew-list-settings{% else %}permissions-modal-email-list{% endif %}" >
+            {% if profiles.items != None %}
+                {% for key,profile in profiles.items %}
+                    {% with loop=forloop.counter|stringformat:"s" %}
+                        {% if crew_type == 'settings' %}
+                            {% if profile.user.get_full_name != user.get_full_name %}
+                                {% include 'components/single_crew.html' with parent_class='user_'|add:crew_type input_id=loop name=profile.user.get_full_name email=profile.user.email id=profile.user.id crew_type=crew_type profile=profile %}
+                            {% endif %}    
+                        {% else %}
+                                {% include 'components/single_permission_crew.html' with input_id=loop name=profile.user.get_full_name email=profile.user.email id=profile.user.id crew_type=crew_type profile=profile role=profile.user.role %}
+                        {% endif %}    
+                    {% endwith %}
+                {% endfor %}
+            {% else %}
+                {% for profile in profiles %}
+                    {% with loop=forloop.counter|stringformat:"s" %}
+                        {% if crew_type == 'settings' %}
+                            {% if profile.user.get_full_name != user.get_full_name %}
+                                {% include 'components/single_crew.html' with parent_class='user_'|add:crew_type input_id=loop name=profile.user.get_full_name email=profile.user.email id=profile.user.id crew_type=crew_type %}
+                            {% endif %}    
+                        {% else %}
+                                {% if profile.get_user != user %}
+                                    {% include 'components/single_permission_crew.html' with input_id=loop name=profile.user.get_full_name email=profile.user.email id=profile.user.id crew_type=crew_type role=profile.role %}
+                                {% endif %}
+                        {% endif %}    
+                    {% endwith %}
+                {% endfor %}
+            {% endif %}
+        </ul>
+        
+    </form>
+</div>
+

@@ -1,0 +1,52 @@
+{% load static %} {% load general_tags %} {% load dashboard_tags %} 
+
+
+{% if type == 'text' or type == 'email' %}
+
+{% if not label %}
+    <input type="{{ type }}" id="{{ id }}" class="form-control {{ input_classes }}"  placeholder="{{ placeholder }}" name="{{ name }}" {% if required %} required {% endif %} {% if pattern %} pattern="{{ pattern }}" {% endif %}>
+
+{% elif name == 'phone' %}
+    <div class="form-group">
+        <div>
+            <label for="{{ id }}" class="d-inline-block">{{ label }}</label>
+            {% include "components/_tooltip.html" with text="tooltip_phone_register"|translate:language %}
+        </div>
+        <input type="{{ type }}" id="{{ id }}" class="form-control {{ input_classes }}" name="{{ name }}" {% if required %} required {% endif %} {% if pattern %} pattern="{{ pattern }}" {% endif %}>
+        <span id="phone-error-msg" class="d-none"></span>
+    </div>
+{% else %}
+    <div class="form-group">
+        <label for="{{ id }}">{{ label }}</label>
+        <input type="{{ type }}" id="{{ id }}" class="form-control {{ input_classes }}"  placeholder="{{ placeholder }}" name="{{ name }}" {% if required %} required {% endif %} {% if pattern %} pattern="{{ pattern }}" {% endif %}>
+        <div class="invalid-feedback">{{error_msg}}</div>
+    </div>
+{% endif %}
+
+{% elif type == 'password' %}
+    <div class="input-container">
+        <label for="{{ id }}">{{"password"|translate:language}}</label>
+        <div class="password-input-container">
+            
+            <input type="password" name="{{ name }}" id="{{ id }}" placeholder="{{"password"|translate:language}}" class="w-100 form-control {% if no_validation %}no-validation{% endif %} {{ input_classes }}" {% if pattern %} pattern="{{ pattern }}" {% endif %} {% if required %} required {% endif %}>
+            
+            <button class="btn w-10 align-self-start" type="button">
+                <i class="fas fa-eye"></i>
+            </button>
+           
+            <div class="invalid-feedback">{{error_msg}}</div>
+        </div>
+        
+    </div>
+    
+
+{% elif type == 'select' %}
+    <div class="form-group">
+        <label for="{{ id }}">{{ label }}</label>
+        <select id="{{ id }}" class="custom-select form-control {{ input_classes }}" name="{{ name }}" {% if required %} required {% endif %}>
+        {% for option in options %}
+                <option value="{{ option|get_obj_attr:"value" }}">{{ option|get_obj_attr:"text" }}</option>
+        {% endfor %}                             
+        </select>    
+    </div>
+{% endif %}

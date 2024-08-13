@@ -1,0 +1,6 @@
+{% load dashboard_tags %}  {% load static %}
+<nav class="help-center__container help-center__container--no-wrap f-size-14">
+        {% for titulologo in tituloslogos  %}
+            {% include 'components/single_box_help_center.html' with   titulo=titulologo|get_obj_attr:'titulo' logo=titulologo|get_obj_attr:'logo' href=titulologo|get_obj_attr:'href' %}
+        {% endfor %}
+</nav>

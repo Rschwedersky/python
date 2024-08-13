@@ -1,0 +1,8 @@
+{% load general_tags %}
+
+<section class='banner__warning d-flex align-items-center px-4'>
+	{% if reason == 'end_of_trial'%}
+		{{'end_free_trial_warning_1'|translate:language }}.&nbsp;<a href="{% url 'end_of_trial_summary' %}" class='no__link' target='_blank'>{{'check_our_plans'|translate:language }}</a>&nbsp;{{'end_free_trial_warning_2'|translate:language }}.		
+	{% endif %}
+</section>
+

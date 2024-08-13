@@ -1,0 +1,31 @@
+{% load static %}
+{% load general_tags %}
+{% load dashboard_tags %}
+<div id="hours_returned_tab" class="dashboard_tab">  
+    {% comment %} {% csrf_token %} {% endcomment %}
+    <div class="d-flex justify-content-between align-items-start">
+        <div class="jsDashboardTitleAndDateContainer">
+            <p class="title color000000 f-size-26 mb-0 font-weight-bold">{{ "returned_hours"|translate:language }}</p>
+            <p class="period f-size-13 mb-1"></p>
+        </div>
+
+        <button class="btn d-flex align-items-center white-bg small gap-8" data-toggle="modal" data-target="#dashboard-modal" data-modal="hours-returned">
+            {% include 'icons/info-circle-white.svg' %}
+            {{ 'how_does_it_works'|translate:language }}
+        </button>
+    </div>
+    {% include 'dashboard/components/resumed_infos.html' with tab='return_hours' title='operation_performance'|translate:language %}
+    
+    <div class="charts o-hidden">
+        <div class="d-flex flex-column gap-16">
+            {% include 'dashboard/components/dashboard_with_table.html' with title='hours_returned_by_process' graph_id="returned-hours-process" table_header="summary"|translate:language table_id='returned-hours-processes-table' table_class="green" select_id='returned-hours-process-select' select_options=all_select_options|get_obj_attr:'returned-hours-process-select' legend_green="returned_hours"|translate:language %}
+
+            {% include 'dashboard/components/dashboard_with_table.html' with title='hours_returned_by_area' graph_id="returned-hours-area" table_header="summary"|translate:language table_id='returned-hours-areas-table' table_class="green" select_id='returned-hours-areas-select' select_options=all_select_options|get_obj_attr:'returned-hours-areas-select' legend_green="returned_hours"|translate:language %}
+
+            {% include 'dashboard/components/dashboard_single.html' with title='returned_hours_history'|translate:language header_label_name='view_by'|translate:language header_data_selected='month' header_select_id='hours-returned-history-select' graph_id='hours-returned-history' select_options=all_select_options|get_obj_attr:'hours-returned-history-select' legend_green="returned_hours"|translate:language %}
+        </div> 
+    </div>
+</div>
+{% block scripts %}
+<script src="{% static 'dashboard/js/dashboardReturnedHoursTab.js' %}"></script>
+{% endblock %}

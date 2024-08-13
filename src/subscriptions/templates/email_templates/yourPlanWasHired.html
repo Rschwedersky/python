@@ -1,0 +1,84 @@
+{% load general_tags %}
+
+{% include 'email_templates/default/header.html' %}
+<tr>
+    <td width="640" align="left" valign="top">
+        <h3 style="font-size: 26px; margin-bottom: 0;margin-top:16px;">
+          <strong>{{ "hello"|translate:language }}, {{user.get_full_name}}</strong>
+        </h3>
+        <p style="font-size: 22px; margin-bottom: 0;">
+          {{ "your_plan_subscription"|translate:language }} 
+          <strong>{{plan_name}}</strong>
+          {{"has_been_confirmed"|translate:language }}
+        </p>
+
+        <p style="font-size: 22px; margin-bottom: 0;">
+          {{ "we_are_very_happy_to_receive_you_..."|translate:language }} 
+        </p>
+        <p style="font-size: 22px; margin-bottom: 0;">
+          {{"check_the_information_below_carefully_..."|translate:language }} 
+        </p>
+
+        <p style="font-size: 22px; margin-bottom: 0;">
+          {{"plan"|translate:language }} 
+        </p>
+
+        <ul style="text-align: left; font-size: 20px; margin-bottom: 30px; margin-top: 0px;margin-left:0px; list-style-type: none;border-left: 1px solid;">
+          <li>
+            <strong>
+              {{ number_of_licenses }} 
+              {% if number_of_licenses == 1%}
+                {{ "license"|translate:language }}
+              {% else %}
+                {{ "licenses"|translate:language }}
+              {% endif %}
+            </strong>
+            {% if number_of_licenses == 1%}
+                {{ "available_singular"|translate:language }}
+            {% else %}
+              {{ "available"|translate:language }}
+            {% endif %}
+          </li>
+          <li>
+            <strong>
+              {{"up_to"|translate:language }} {{ queries }}
+            </strong>
+            {{"monthly_for_licenses"|translate:language }}
+          </li>
+          <li>{{"license_sharing"|translate:language }}</li>
+          <li>{{"maintenance_and_updates_on_our_own"|translate:language }}</li>
+        </ul>
+
+        <p style="font-size: 22px; margin-bottom: 0;">
+          {{"payment_data"|translate:language }} 
+        </p>
+
+        <ul style="text-align: left; font-size: 20px; margin-bottom: 30px; margin-top: 0px;margin-left:0px; list-style-type: none;border-left: 1px solid;">
+          <li>
+            <strong>
+              {{"signature_date"|translate:language }}:
+            </strong>
+            {{ today }}
+          </li>
+          <li>
+            <strong>
+              {{"payment"|translate:language }}:
+            </strong>
+            {{ payment_type }}
+          </li>
+          <li>
+            <strong>
+              {{"modality"|translate:language }}:
+            </strong>
+            {{ period }}
+          </li>
+          <li>
+            <strong>
+              Total:
+            </strong>
+            R$ {{ value }}
+          </li>
+        </ul>
+    </td>
+  </tr>
+{% include 'email_templates/default/footer.html' %}

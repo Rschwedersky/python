@@ -1,0 +1,73 @@
+{% load general_tags %} {% load dashboard_tags %}
+{% load static %}
+
+<section class="permissions-box__container" data-type="{{data_type}}">
+    <header class="permissions-box__header">
+        <div class="d-flex align-items-center gap-10">
+            <img src="{% static logo %}" alt="Services icon" class='manage__permissions--logo'  />
+            <h2 class="permissions-box__heading f-size-20 m-0">
+                {{ heading }}
+            </h2>
+        </div>    
+        <div class="permissions-box__header--permissions">
+            <div class="permissions-box__vertical-line"></div>
+            <svg class="progress__circular" height="80%" width="100%" viewBox="0 0 55 55">
+                <circle stroke="#aaa" stroke-width="5" fill="transparent" r="24" cx="50%" cy="50%"/>
+                <circle stroke="#3424c4" stroke-width="5" fill="transparent" r="24" cx="50%" cy="50%"
+                    class="progress__circular--ring" data-total="{{permissions_total}}"
+                    data-available="{{permissions_available}}" />
+                <image href="{% static "/img/ticket-light-gray.svg" %}" alt="Disabled Permission Ticket Icon" x="23%" y="23%" class="progress__circular--image no_permissions_available{% if permissions_available > 0 or permissions_available == permissions_total %} d-none{% endif %}" height="55%" width="55%"/>
+                <image href="{% static "/img/ticket-blue.svg" %}" alt="Blue Permission Ticket Icon" x="23%" y="23%" class="progress__circular--image progress__circular--image-enabled {% if permissions_available == 0 %} d-none{% endif %}" height="55%" width="55%" />
+            </svg>
+            <div>
+                <p class="m-0 f-size-26"><strong><span class="permissions_available secondary__color">{{ permissions_available }}</span></strong>/<span class="permissions_total">{{ permissions_total }}</span></p>
+                <p class="m-0 f-size-12 color-muted ">{{'my_licenses'|translate:language }}</p>
+            </div>
+            <img src="{% static "/dashboard/img/down-arrow.svg" %}" alt="Arrow Icon" class="c-pointer arrow__button--dropdown"  data-image="{% static '/dashboard/img/up-arrow.svg'%}">
+        </div>
+    </header>
+    <section class="permission-box__content">
+        <p class="m-0">{{'administrator'|translate:language }}:</p>
+        <div class="permission-box__content--admin">
+            <div class="d-flex gap-16">
+                <p class="m-0 border__circle border__circle--permissions">{{ admin.first_name|add:' '|add:admin.last_name|get_name_initials }}</p>
+                <div class="d-flex flex-column">
+                    <p class="m-0 f-size-16 color-muted">{{ admin.first_name|add:' '|add:admin.last_name }}</p>
+                    <p class="m-0 f-size-14 color-muted">{{ admin.email }}</p>
+                </div>
+            </div>    
+            <div class="w-85 mx-auto">
+                <div class="d-flex justify-content-between">
+                    <div>
+                        <img src="{% static "/img/permission-ticket.svg" %}" alt="Permission Icon" />
+                        <span><span class="progress_permissions_available">{{permissions_available}}</span>/{{permissions_total}}</span>
+                    </div>
+                    <div class="reset_permissions" data-heap="Resetar licenças da {{automation_name}}">
+                        <img src="{% static "/img/back-arrow.svg" %}" alt="Back Arrow Icon" class="c-pointer opacity-hover reset__permissions-icon--enabled{% if permissions_available == permissions_total %} d-none{% endif %}">
+                        
+                        <img src="{% static "/img/back-arrow-disabled.svg" %}" alt="Disabled Back Arrow Icon" class="reset__permissions-icon--disabled {% if permissions_available < permissions_total %} d-none{% endif %}">
+
+                        <span class="{% if permissions_available == permissions_total %}color-muted--lightest {% else %} c-pointer opacity-hover {% endif %}">{{'restore_licenses'|translate:language }}</span>
+                    </div>    
+                </div>
+                {% include 'components/progress_bar.html' with max=permissions_total value=permissions_available class="secondary_color_bar" %}
+            </div>
+            <button class="btn__purple btn__purple--permissions modal__open-button text-capitalize button__invite--hover" data-heading="{{heading}}" data-service="{{service}}" data-close=".permissions__collaborator-modal" data-modal=".permissions__collaborator-modal" data-background=".modal__background--permissions" data-automation_name="{{ automation_name }}" data-heap="Convidar colaboradores para {{automation_name}}">
+                <img src="{% static "/img/add-person.svg" %}" alt="Add Collaborator Icon">
+                <img src="{% static "/img/add-person-black.svg" %}" alt="Add Collaborator Icon">
+                {{'invite_collaborators'|translate:language }}
+            </button>
+        </div>
+        {% if permissions_available == 0 %}
+        <p class="permissions__warning--no-permissions">
+            <strong>{{ 'you_have_transferred_all_licenses'|translate:language }}. </strong>
+            {{ 'you_have_transferred_all_licenses_2'|translate:language }}. 
+            <a href="#" class='d-none'>Saiba mais aqui.</a>
+        </p>
+        {% endif %}
+        <section class="all_permission-box__content--collaborator">
+            <p class="m-0">{{'invited_collaborators'|translate:language }}:</p>
+            {% include 'components/permissions_box_content.html' %}
+        </section>
+    </section>
+</section>

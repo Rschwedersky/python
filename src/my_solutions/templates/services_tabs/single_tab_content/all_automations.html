@@ -1,0 +1,71 @@
+{% load static %} {% load general_tags %} {% load dashboard_tags %}
+
+{% if active_tab != 'my_services' %}
+    <div class="d-flex justify-content-center align-items-center p-5">
+        {% include 'components/loading.html' with show=True %}
+    </div>
+{% elif hired_services|length == 0  %}
+    {% include 'components/empty_state_automation.html' %}
+{% else %}
+    <form action="{% url 'services_search_results' %}" method="GET" role="search" id="search-results-form" class="d-flex search-form-services">
+        <div class="w-100">
+            <input class="form-control jsSearch input-search" type="search" placeholder="{{"search_by_services_or_terms"|translate:language}}" value="{{ request.GET.q }}" aria-label="Search" name="q">
+            
+            {% if 'search' in request.path %}
+                <button class="btn border-0" type="button">
+                    <a href="{% url 'services' %}">
+                        <i class="fas fa-times"></i>
+                    </a>
+                </button>
+            {% else %}
+                <button class="btn border-0" type="button">
+                    <i class="fas fa-times"></i>
+                </button>
+            {% endif %} 
+            
+            <button class="btn border-0" type="submit">
+                <i class="fas fa-search"></i>
+            </button>
+        </div>
+    </form>
+    <div class="filter-services">
+        {% include "components/button_pill.html" with filters=filters class_modifier="services" data_query="mysolutions_botoes" page='services' %}
+    </div>
+    <div class="responsive-columns py-4">
+        {% for solution in solutions %}
+            {% with automation_name=solution.name %}
+                    <div class="mysolutions_botoes p-3 {% if not solution.active or solution.is_showcase and user.profile.client.name != 'Smarthis' %}no-pointer-events {% endif %} " data-type="{{ solution.group|translate:language }}" data-heap="Iniciar serviço {{ automation_name }}" >
+                        {% if solution.is_showcase %}
+                            <div class="permissions-text--showcase middle f-size-14 ">
+                                <span class='d-block'><strong>{{'service_requested'|translate:language}}</strong></span>   
+                                <span class='d-block'>Em breve estará disponivel</span>
+                            </div>   
+                        {% elif not solution.active %}
+                            <div class="permissions-text--inactive middle f-size-14">
+                                <span class='d-block'><strong>{{'service_under_maintenance'|translate:language }}</strong></span>   
+                                <span class='color-muted d-block'>{{'will_soon_be_back'|translate:language}}</span>
+                            </div>   
+                        {% endif %}
+                        {% if is_admin %}
+                            {% with available_licenses=licenses_info|get_obj_attr:automation_name|get_obj_attr:'available' total_licenses_hired=licenses_info|get_obj_attr:automation_name|get_obj_attr:'total'  %}
+                                    <div class="permissions-text {% if available_licenses > 0 %} permissions-text--black {% else %} permissions-text--white {% endif %} {% if not solution.active %}opacity-50{% endif %}">
+                                        <small> {{ available_licenses }}/{{ total_licenses_hired }} {{ 'licenses'|translate:language }}</small>
+                                    </div>
+                            {% endwith %}
+                        {% endif %}
+                        <a href='/services/{{ automation_name }}' class="{% if not solution.active %}opacity-50{% endif %}">
+                            <div class="card-logo-mysolutions darkgreencolor">
+                                {% with 'img/logo_'|add:automation_name|add:'.png' as logo and %}
+                                    <img class="logo-mysolutions" src="{% static logo %}" />
+                                {% endwith %}
+                            </div>
+                            <p class="text-mysolutions f-size-16">
+                                {{ solution|get_automation_display_name:language }}
+                            </p>
+                        </a>
+                    </div>
+            {% endwith %}
+        {% endfor %}
+    </div>
+{% endif %}
+

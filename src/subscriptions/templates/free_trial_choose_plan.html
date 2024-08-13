@@ -1,0 +1,245 @@
+{% extends 'base.html' %} {% load static %} {% load general_tags %} {% load dashboard_tags %} {% load humanize %} {% load i18n %}
+{% block content %}
+    <div class='free-trial__end--plans dark-gray__color' data-plan="{{plan}}" data-licenses="{{plan_info.qnt_automations}}">
+        <nav class='d-flex align-items-center'>
+            <img src="{% static "dashboard/img/LogoSmarthisHub.png" %}" alt="Smarthis Hub Logo" />
+        </nav>
+        <div class='d-flex'>
+            <section class='d-flex flex-column p-5'>
+                <div>
+                    <p class="m-0 f-size-24"><strong>{{'which_licenses_keep_plan'|translate:language }}</strong></p>
+
+                    {% if plan == 'business' and has_plan_negotiation == False %}
+                        <p class="m-0 f-size-14">{{'build_bespoke_plan_receie_our_assessment_email'|translate:language }}.</p>
+                    {% else %}
+                        <div class='d-flex gap-5 align-items-center'>
+                            <p class="m-0 f-size-14">{{'you_can_choose_up_to'|translate:language }} {{plan_info.qnt_automations}} {% if plan_info.qnt_automations == 1 %}{{'license'|translate:language}}{% else %}{{ 'licenses'|translate:language }}{% endif %}.</p>
+                            <div class="info-popup__hover bottom">
+                                <img src="{% static 'img/info.svg' %}" alt="Info Icon with hover popup text">
+                                <span class='f-size-14' style='--hover-width: 24rem'>
+                                    <strong class='d-block'>
+                                    {{ 'the_plan'|translate:language }} {{plan|title}} {{'entitles_you_to'|translate:language}} {{plan_info.qnt_automations}} {% if plan_info.qnt_automations == 1 %}{{'license'|translate:language}}{% else %}{{ 'licenses'|translate:language }}{% endif %}.
+                                    </strong>
+                                    {{'for_more_licenses_choose_business'|translate:language }}
+                                </span>
+                            </div>
+                        </div>
+                    {% endif %}
+
+                    {% if plan != 'business' %}
+                        {% include 'components/progress_bar.html' with max=plan_info.qnt_automations value=licenses_used class="primary_color_bar" %}
+
+                        <span class='f-size-14 d-block text-right'>
+                        {{'you_used'|translate:language }} <span id="used-licenses">{{ licenses_used }}</span> {{'of'|translate:language}} <span id="licenses-limit">{{plan_info.qnt_automations}}</span>
+                        {% if plan_info.qnt_automations != 1 %}
+                        {{'licenses'|translate:language }}
+                        {% else %}
+                        {{'license'|translate:language }}
+                        {% endif %}
+                    {% else %}
+
+                        {% if licenses_limit >= 4 %}
+                            {% include 'components/progress_bar.html' with max=licenses_limit value=licenses_used class="primary_color_bar" %}
+                        {% else %}
+                            {% include 'components/progress_bar.html' with max=4 value=licenses_used class="primary_color_bar" %}
+                        {% endif %}
+
+                    <span class='f-size-14 d-block text-right'>
+                        {{'you_used'|translate:language }} <span id="used-licenses">{{licenses_used}}</span> {{'of'|translate:language}} 
+                        <span id="licenses-limit">
+                            {% if licenses_limit >= 4 %}
+                                {{licenses_limit}}
+                            {% else %}
+                                4
+                            {% endif %}
+                        </span> 
+                        {{'licenses'|translate:language }}
+                    {% endif %}
+                    </span>
+                </div>
+                <div class='mt-3'>
+                    <p>{{'my_licenses'|translate:language|title }}</p>
+                    {% if dashboard == True %}
+                        <p class="m-0">Dashboard</p>
+                        <hr class="mt-0">
+                        {% include 'components/trial_single_service_box.html' with service='dashboard' %}
+                    {% endif %}
+                    <div class="d-flex align-items-center gap-5">
+                        <p class="m-0">
+                        {{'services'|translate:language }}
+                        </p>
+                        <div class="info-popup__hover bottom">
+                            <img src="{% static 'img/info.svg' %}" alt="Info Icon with hover popup text">
+                            <span class='f-size-14' style='--hover-width: 14rem'>{{ 'you_will_able_exchange_service_no_cost'|translate:language }}.</span>
+                        </div>
+                    </div>
+                    <hr class="mt-0">
+                    <div class="d-flex flex-column gap-16">
+                    {% for service in services %}
+                        {% with service_identifier=service|get_obj_attr:'identifier' %}
+                            {% include 'components/trial_single_service_box.html' with service=service logo='/img/logo_'|add:service_identifier|add:'.png' %}
+                        {% endwith %}
+                    {% endfor %}
+                    </div>
+                </div>
+            </section>
+            <section>
+                <div class='p-3'>
+                    <p class='mb-2'>
+                        <span class="d-block color-muted f-size-20">{{'plan'|translate:language}}</span>
+                        <span class="d-block f-size-30"><strong>{{ plan|title }}</strong></span>
+                    </p>
+                    <p class="color-muted f-size-14">
+                        {% if plan == 'starter' %}
+                        <em>{{'starter_plan_subtitle'|translate:language }}</em>
+                        {% elif plan == 'advanced' %}
+                        <em>{{'advanced_plan_subtitle'|translate:language }}</em>
+                        {% else %}
+                        <em>{{'tailor_made_plan_needs'|translate:language }}</em>
+                        {% endif %}
+                    </p>
+                </div>
+                {% language language %}
+                <form class='p-3 js-submit-form'>
+
+                    {% if plan != 'business' or has_plan_negotiation != False %}
+                        {% if has_plan_negotiation == False %}
+                            <span class="d-block f-size-14">{{'charge'|translate:language}}:</span>
+
+                            <div class='d-flex align-items-center gap-16 mt-1' data-previous="{{period}}">
+                                {% include 'free_trial_choose_plan/radio_period_element.html' with period=period subscription=subscription %}
+                            </div>
+                            <hr>
+                            {% include 'free_trial_choose_plan/custom_extra_queries.html' with subscription=subscription plus=plus plan_info=plan_info period=period %}
+
+                        {% else %}
+                            <label for="plan-choose-no-changing" class='custom__radio--container'>
+                                <input type="hidden" id='plan-choose-no-changing' name='choose-plan' value="{{ period }}">
+                            </label>
+
+                            <ul>
+                                <li>
+                                <strong>{{ subscription.get_number_of_hired_services }} </strong>
+                                {% if plan_info.qnt_automations != 1 %}
+                                    {{'licenses'|translate:language}}
+                                {% else %}
+                                    {{'license'|translate:language}}
+                                {% endif %}
+                                </li>
+                                <li>
+                                    {% if subscription.get_queries_limit == 0 %}
+                                        <strong class="text-capitalize">{{ 'unlimited_queries'|translate:language }}</strong>
+                                        <button type="button" class="btn button__group active d-none" data-value='unlimited'>{{'unlimited'|translate:language}}</button>
+                                    {% else %} 
+                                        <strong>{{ subscription.get_queries_limit|intcomma }} </strong>{{'monthly_consultations_by_license'|translate:language}}
+                                        <button type="button" class="btn button__group active d-none" data-value="{{ subscription.get_queries_limit }}">{{'unlimited'|translate:language}}</button>
+                                    {% endif %}
+                                </li>
+                            </ul>
+                        {% endif %}
+
+                        <hr>
+                        <div class="justify-content-between align-items-center {% if period != 'yearly' %}d-none{% else %}d-flex{% endif %}" data-period='yearly'>
+                            <span class='plan__label--primary f-size-12 d-flex flex-column align-items-center align-self-start p-1'>
+                                <strong class='f-size-14'>{{'17%_off'|translate:language}}</strong>
+                            </span>
+                            <p class='d-flex flex-column'>
+                                {% if has_plan_negotiation  %}
+                                    <span class='color-muted--lightest text-decoration-through align-self-end'>
+                                        R$ <span class="js-previous-price-yearly">{{ subscription.get_value|multiply:12 }}</span>
+                                    </span>
+                                    <span><strong>1x R$ <span class="js-price-yearly" data-price="{{ subscription.get_value|multiply:10 }}" data-price_without_discount="{{ subscription.get_value|multiply:12 }}">{{ subscription.get_value|multiply:10 }}</span></strong></span>
+
+                                {% elif plus != None and plus %}
+                                    <span class='color-muted--lightest text-decoration-through align-self-end'>
+                                        R$ <span class="js-previous-price-yearly">
+                                            {% with plan_yearly_value=plan_info.value|multiply:12 %}
+                                                {% with plan_yearly_extraprice=plan_info.extra_price|multiply:12 %}
+                                                    {{ plan_yearly_value|add:plan_yearly_extraprice }},00
+                                                {% endwith %}
+                                            {% endwith %}
+                                        </span>
+                                    </span>
+                                    <span><strong>1x R$ <span class="js-price-yearly" data-price="{{ plan_info.value|multiply:10 }}" data-price_without_discount="{{ plan_info.value|multiply:12 }}">
+                                        {% with plan_yearly_value=plan_info.value|multiply:10 %}
+                                            {% with plan_yearly_extraprice=plan_info.extra_price|multiply:10 %}
+                                                {{ plan_yearly_value|add:plan_yearly_extraprice }},00
+                                            {% endwith %} 
+                                        {% endwith %}
+                                    </span></strong></span>
+                                {% else %}
+                                    <span class='color-muted--lightest text-decoration-through align-self-end'>
+                                        R$ <span class="js-previous-price-yearly">{{ plan_info.value|multiply:12 }}</span>
+                                    </span>
+                                    <span><strong>1x R$ <span class="js-price-yearly" data-price="{{ plan_info.value|multiply:10 }}" data-price_without_discount="{{ plan_info.value|multiply:12 }}">{{ plan_info.value|multiply:10 }}</span></strong></span>
+                                {% endif %}
+                            </p>
+                        </div>
+                        <p class="text-right {% if period != 'monthly' %}d-none{% endif %}" data-period='monthly'>
+                            <strong>R$ <span class="js-price-monthly" data-price="{% if has_plan_negotiation %}{{subscription.get_value}}{% else %}{{ plan_info.value}}{% endif %}">
+                                {% if plus != None and plus %}
+                                    {{ plan_info.value|add:plan_info.extra_price }}
+                                {% elif has_plan_negotiation %}
+                                    {{subscription.get_value}}
+                                {% else %}
+                                    {{ plan_info.value}}
+                                {% endif %}
+                            </span></strong>/{{'month'|translate:language}}
+                        </p>
+                        
+
+                        <button type='submit' id='submitEndOfTrialPlanButton' class="btn__purple allow-payment mx-auto no-uppercase px-4 py-2 mt-3" data-toggle="modal" data-target="#modalPagarmeInfos">{{'sign_plan'|translate:language}}</button>
+                        {% include 'components/loading.html' %}
+
+                    {% else %}
+
+                        <span class='f-size-14'>{{'number_of_licenses'|translate:language }}:</span>
+                        <div class='d-flex gap-32 align-items-center mt-1 mb-3'>
+                            <img src="{% static "/img/remove-blue-disabled.png" %}" alt="Remove License Button" class='arithmetic-button disabled' data-operation='decrease'>
+                            <span class='d-flex gap-10 align-items-center'>
+                                <img src="{% static "/img/ticket.svg" %}" alt="License Icon" >
+                                <span class="licenses-to-add">
+                                {% if licenses_limit >= 4 %}
+                                    {{licenses_limit}}
+                                {% else %}
+                                    4
+                                {% endif %}
+                                </span>
+                                {{'licenses'|translate:language }}
+                            </span>
+                            <img src="{% static "/img/add-blue.png" %}" alt="Add License Button" class='c-pointer opacity-hover arithmetic-button' data-operation='increase'>
+                        </div>
+                        <p class='f-size-14 mb-2'>{{'monthly_consultations_by_license'|translate:language|capfirst}}:</p>
+
+                        <div class="btn-group" role="group" aria-label="Basic example">
+                            <button type="button" class="btn button__group{% if chosen_queries == None or chosen_queries == 9000 %} active{% elif chosen_queries != 15000 and chosen_queries != 21000 and chosen_queries != 0 %} active{% endif %}" data-value='9000'>9.000</button>
+                            <button type="button" class="btn button__group{% if chosen_queries != None and chosen_queries == 15000 %} active{% endif %}" data-value='15000'>15.000</button>
+                            <button type="button" class="btn button__group{% if chosen_queries != None and chosen_queries == 21000 %} active{% endif %}" data-value='21000'>21.000</button>
+                            <button type="button" class="btn button__group{% if chosen_queries != None and chosen_queries == 0 %} active{% endif %}" data-value='unlimited'>{{'unlimited'|translate:language}}</button>
+                        </div>
+
+                        <button type='submit' id='submitEndOfTrialPlanButton' class="btn__purple mx-auto no-uppercase px-4 py-2 mt-4">{{'request_evaluation'|translate:language}}</button>
+                        {% include 'components/loading.html' %}
+
+                    {% endif %}
+
+                </form>
+                {% endlanguage %}
+            </section>
+        </div>
+    </div>
+    <input type="hidden" id='business-number-of-licenses' value="{% if licenses_limit >= 4 %} {{licenses_limit}} {% else %}4{% endif %}" >
+
+{% if plan != 'business' or has_plan_negotiation != False %}
+    {% include 'components/modal_pagarme_user_infos.html' %}
+{% endif %}
+
+<style>
+    body {
+        padding-top: 0;
+    }
+</style> 
+<input type="hidden" id="pagarmeEncryptionKey" value="{{ pagarme }}" />
+<script src="{% static 'js/pagarme.js' %}"></script>
+<script src="{% static 'js/freeTrial.js' %}"></script>
+{% endblock %}

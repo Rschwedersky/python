@@ -1,0 +1,22 @@
+{% load static %} {% load general_tags %}
+<div class="{{ class_empty_schedules_box }}">
+    <img class="{{ img_calendar }}" src="{% static 'img/calendar-with-pencil.svg' %}" />
+    <div class="noservices">
+        <p class="{{ empty_text1_class }}"><strong>{{ 'there_are_no_scheduled_services'|translate:language }}</strong></p>
+        <p class="{{ empty_text2_class }}">
+            {% if simplified_text %}
+                {{'schedule_the_execution_of_the_services_and_follow_them_here_simplified'|translate:language }}
+            {% else %}
+                {{ 'schedule_the_execution_of_the_services_and_follow_them_here'|translate:language }}
+            {% endif %}
+        </p>
+        {% if link_myservices %}
+            <p class="text-center">
+                <a href="{% url 'services' %}"><u class="goto_myservices color3424C4 c-pointer">{{ 'go_to'|translate:language }} <strong>{{ 'my_services'|translate:language }}</strong></u></a>
+            </p>
+        {% else %}
+            <u class="goto_myservices color3424C4 c-pointer">{{ 'go_to'|translate:language }} <strong>{{ 'my_services'|translate:language }}</strong></u>
+        {% endif %}
+
+    </div>
+</div>

@@ -1,0 +1,189 @@
+{
+"select \"ReleaseName\" from public.uipath_logs_job ulj group by ulj.\"ReleaseName\"": [
+	{
+		"ReleaseName" : "REBOCADORES_LINEUP_IHS_12C_PROD01"
+	},
+	{
+		"ReleaseName" : "REB_LINE_UP_PROD01"
+	},
+	{
+		"ReleaseName" : "TESTE_API_PROD01"
+	},
+	{
+		"ReleaseName" : "CORP_TAX_DOWNLOAD_NF_RDF_PROD01"
+	},
+	{
+		"ReleaseName" : "Manutencao_PROD01"
+	},
+	{
+		"ReleaseName" : "BANCODOC_PROD01"
+	},
+	{
+		"ReleaseName" : "PERFORMER_TUG_DIGITACAO_SAMA_PROD02"
+	},
+	{
+		"ReleaseName" : "REBOCADORES_STATE_EMISSAO_NOTAS_PROD01"
+	},
+	{
+		"ReleaseName" : "Relatorio_Boletos_Avulso_PowerBI_Contas_a_Receber"
+	},
+	{
+		"ReleaseName" : "Boleto_Teste_Contas_a_Receber"
+	},
+	{
+		"ReleaseName" : "DISPATCHER_TUG_DIGITACAO_SAMA_PROD01"
+	},
+	{
+		"ReleaseName" : "CORP_TAX_ISS_RETIDO_PROD01"
+	},
+	{
+		"ReleaseName" : "REBOCADORE_STATE_UPLOAD_NOTAS_PROD01"
+	},
+	{
+		"ReleaseName" : "CORP_PROJ_AVALARA_PROD02"
+	},
+	{
+		"ReleaseName" : "CORP_SUPRIMENTOS_ATUALIZACAO_MRP_PROD02"
+	},
+	{
+		"ReleaseName" : "PERFORMER_TUG_DIGITACAO_SAMA_PROD01"
+	},
+	{
+		"ReleaseName" : "BANCODOC_PROD02"
+	},
+	{
+		"ReleaseName" : "WakeUp_Robot_PROD01"
+	},
+	{
+		"ReleaseName" : "REBOCADORES_LINEUP_MERCANTE_PROD01"
+	},
+	{
+		"ReleaseName" : "JUR_AUTOMACAO_PECAS_PROD01"
+	},
+	{
+		"ReleaseName" : "TUG_DIGITACAO_SAMA_ROBO_NAOATENDIDO"
+	},
+	{
+		"ReleaseName" : "DISPATCHER_TUG_DIGITACAO_SAMA_ROBO_NAOATENDIDO"
+	},
+	{
+		"ReleaseName" : "ProcessoEmBranco_Contas_a_Receber"
+	},
+	{
+		"ReleaseName" : "Boletos_Avulso_Contas_a_Receber"
+	},
+	{
+		"ReleaseName" : "DISPATCHER_TUG_DIGITACAO_SAMA_PROD02"
+	},
+	{
+		"ReleaseName" : "CORP_PROJ_AVALARA_PROD01"
+	},
+	{
+		"ReleaseName" : "CORP_SUPRIMENTOS_CERTIDAO_INEDONEOS_PROD02"
+	},
+	{
+		"ReleaseName" : "CORP_TES_RESGATE_APLICACAO_PROD01"
+	},
+	{
+		"ReleaseName" : "Teste_BB_Bradesco_Contas_a_Receber"
+	},
+	{
+		"ReleaseName" : "CORP_TAX_RECEITA_FEDERAL_PROD02"
+	},
+	{
+		"ReleaseName" : "CORP_PS_PORTAL_GPA_ROBO_NAOATENDIDO"
+	},
+	{
+		"ReleaseName" : "REBOCADORES_LINEUP_MERCANTE_EMAIL_ROBO_NAOATENDIDO"
+	},
+	{
+		"ReleaseName" : "CORP_SUPRIMENTOS_CERTIDAO_INEDONEOS_PROD01"
+	},
+	{
+		"ReleaseName" : "RDF_Dispatcher_Consumer_PROD02"
+	},
+	{
+		"ReleaseName" : "PERFORMER_TUG_DIGITACAO_SAMA_ROBO_NAOATENDIDO"
+	},
+	{
+		"ReleaseName" : "CORP_TES_RESGATE_APLICACAO_PROD02"
+	},
+	{
+		"ReleaseName" : "CORP_TAX_ISS_RETIDO_ROBO_NAOATENDIDO"
+	},
+	{
+		"ReleaseName" : "CORP_TAX_DOWNLOAD_NF_RDF_ROBO_NAOATENDIDO"
+	},
+	{
+		"ReleaseName" : "TESTE_API_2_ROBO_NAOATENDIDO_2"
+	},
+	{
+		"ReleaseName" : "CORP_TAX_ISS_RETIDO_PROD02"
+	},
+	{
+		"ReleaseName" : "REB_LINE_UP_ROBO_NAOATENDIDO"
+	},
+	{
+		"ReleaseName" : "CORP_TAX_RECEITA_FEDERAL_PROD01"
+	},
+	{
+		"ReleaseName" : "CORP_PS_PORTAL_GPA_PROD01"
+	},
+	{
+		"ReleaseName" : "CORP_TAX_RECEITA_FEDERAL_ROBO_NAOATENDIDO"
+	},
+	{
+		"ReleaseName" : "CORP_SUPRIMENTOS_ATUALIZACAO_MRP_PROD01"
+	},
+	{
+		"ReleaseName" : "REBOCADORES_LINEUP_MERCANTE_ROBO_NAOATENDIDO_2"
+	},
+	{
+		"ReleaseName" : "JUR_AUTOMACAO_PECAS_ROBO_NAOATENDIDO"
+	},
+	{
+		"ReleaseName" : "CORP_JUR_PROCURACAO_ROBO_NAOATENDIDO"
+	},
+	{
+		"ReleaseName" : "CORP_TES_RESGATE_APLICACAO_ROBO_NAOATENDIDO"
+	},
+	{
+		"ReleaseName" : "Manutencao_PROD02"
+	},
+	{
+		"ReleaseName" : "CORP_TAX_DOWNLOAD_NF_RDF_PROD02"
+	},
+	{
+		"ReleaseName" : "RDF_Dispatcher_Consumer_PROD01"
+	},
+	{
+		"ReleaseName" : "CORP_SUPRIMENTOS_ATUALIZACAO_MRP_ROBO_NAOATENDIDO"
+	},
+	{
+		"ReleaseName" : "RDF_Dispatcher_Consumer_ROBO_NAOATENDIDO"
+	},
+	{
+		"ReleaseName" : "REBOCADORES_STATE_EMISSAO_NOTAS_PROD02"
+	},
+	{
+		"ReleaseName" : "REB_LINE_UP_PROD02"
+	},
+	{
+		"ReleaseName" : "CORP_TI_WIFI_CONVIDADO_ROBO_NAOATENDIDO_2"
+	},
+	{
+		"ReleaseName" : "CORP_TI_WIFI_CONVIDADO_ROBO_NAOATENDIDO"
+	},
+	{
+		"ReleaseName" : "Boleto_Avulso_EloPar_Contas_a_Receber"
+	},
+	{
+		"ReleaseName" : "CORP_PS_PORTAL_GPA_PROD02"
+	},
+	{
+		"ReleaseName" : "Manutencao_STUDIO"
+	},
+	{
+		"ReleaseName" : "REBOCADORE_STATE_UPLOAD_NOTAS_PROD02"
+	}
+]}

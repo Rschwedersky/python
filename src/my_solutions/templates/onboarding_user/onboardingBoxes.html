@@ -1,0 +1,28 @@
+{% load general_tags %} {% load dashboard_tags %} {% load static %}
+{% include 'onboarding_user/onboardingModal.html' with modal_title='confirm_your_email'|translate:language id='onboarding__modal_1' pontos='15' text_1='text_one_confirm_your_email'|translate:language btn_text='OK'  onboarding='/img/onboarding_'|add:'box4'|add:'.svg' completed=reference|get_obj_attr:'confirm_email'|get_obj_attr:'completed' %}
+{% include 'onboarding_user/onboardingModal.html' with modal_title='use_a_service'|translate:language id='onboarding__modal_2'  pontos='40' text_1='text_one_use_a_service'|translate:language text_2='text_two_use_a_service'|translate:language text_3='text_three_use_a_service'|translate:language btn_text='go_to_my_services'|translate:language bnt_href='services' onboarding='/img/onboarding_'|add:'box1'|add:'.svg' completed=reference|get_obj_attr:'use_service'|get_obj_attr:'completed' %}
+{% include 'onboarding_user/onboardingModal.html' with modal_title='choose_a_new_service'|translate:language id='onboarding__modal_3' pontos='30' text_1='text_one_choose_a_new_service'|translate:language text_2='text_two_choose_a_new_service'|translate:language btn_text='go_to_discover'|translate:language bnt_href='discover' onboarding='/img/onboarding_'|add:'box2'|add:'.svg' completed=reference|get_obj_attr:'new_service'|get_obj_attr:'completed' %}
+{% include 'onboarding_user/onboardingModal.html' with modal_title='invite_your_team'|translate:language id='onboarding__modal_4' pontos='15' text_1='text_one_invite_your_team'|translate:language text_2='text_two_invite_your_team'|translate:language btn_text='go_to_manage_licenses'|translate:language onboarding='/img/onboarding_'|add:'box3'|add:'.svg' completed=reference|get_obj_attr:'invite_crew'|get_obj_attr:'completed' %}
+
+<section class="responsive-columns_boxes c-pointer {% if total_progress == 100 %}disable-button{% endif %}" data-toggle={{class_modal}} data-target={{id_modal}}>
+    <section class="onboarding_boxes">
+        <section class="onboarding__box-header">
+            <span class="onboarding_icon_circle {% if completed %}check_box{% endif %}"><img class="mt-3 {% if completed %}check_img{% endif %}" src="{% static onboarding %}" alt="icons boxes"></span>
+            <p class="dark-gray__color m-0 light-bold"><strong>{{ text_box }}</strong></p>
+        </section>
+        <div class="d-flex  justify-content-center align-items-center">
+            <span class="btn_boxes color3424C4 {% if completed %}check_pontos{% endif %}">
+                <p class="text-center"> 
+                        <img src="{% if completed %}{% static 'img/icon_check-pontos.svg' %}{% else %}{% static 'img/icon_mais-pontos.svg' %}{% endif %}" /> 
+                    <strong>{{ pontos }}</strong> {{ 'points'|translate:language }}
+                </p>    
+            </span>
+        </div>
+
+        <span class="d-flex justify-content-center gap-5">
+            <img src="{% static 'img/icon_saiba-mais.svg' %}" /> 
+            {{ 'know_more'|translate:language }}
+        </span>
+    </section> 
+</section>   
+

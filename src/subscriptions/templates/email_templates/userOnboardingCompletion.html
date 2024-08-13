@@ -1,0 +1,40 @@
+{% load general_tags %}
+
+{% include 'email_templates/default/header.html' %}
+    <tr>
+      <td width="640" align="left" valign="top">
+          <h3 style="font-size: 26px; margin-bottom: 0;margin-top:16px;">
+            <strong>{{ "hello"|translate:language }}, {{ user.first_name }}</strong>
+          </h3>
+          <p style="font-size: 22px; margin-bottom: 0;">
+            {{ "congratulations_you_have_completed_all_the_steps_and_secured"|translate:language }} <strong>{{ "six_extra_days_in_your_trial_period"|translate:language }}</strong> {{ "to_continue_enjoying_all_the_benefits_of_the_hub_in_an_unlimited_way"|translate:language }}
+          </p>
+
+          
+            <p style="font-size: 22px;">{{ "login_to_your_account_now"|translate:language }}
+                <a href="{{hub_url}}">{{"by_clicking_here"|translate:language}}</a>
+                {{ "to_continue_transforming_the_way_you_work"|translate:language }} 
+            </p>
+          </p>
+          
+          <h2 style="margin-top: 4px; font-size: 22px; margin-bottom: 0px;"><strong>{{ "can_we_help"|translate:language }}</strong></h2>
+
+          <p style="font-size: 22px;">
+            {{ "how_about_scheduling_a_conversation_..."|translate:language }}
+          </p>
+
+          {% include 'email_templates/default/emailButton.html' with button_text="schedule_a_conversation"|translate:language button_link="https://calendly.com/guilherme-favoreto-smarthis" %}
+
+          <p style="font-size: 22px;">
+            {{ "if_you_prefer_feel_free_to_reply_to_this_email_with_questions_or_suggestions"|translate:language }} 
+          </p>
+
+          <p style="font-size: 22px;">
+            {{ "see_you_later"|translate:language }}
+          </p>
+
+
+          <div style="background-image: url(https://i.imgur.com/CzjVqq9.png);"></div>
+      </td>
+    </tr>
+{% include 'email_templates/default/footer.html' %}

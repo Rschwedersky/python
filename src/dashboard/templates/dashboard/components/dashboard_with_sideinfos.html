@@ -1,0 +1,38 @@
+{% load general_tags %}
+<article class="dashboard sideinfos__dashboard full-screen js-capture">
+    <div>
+        <header class='d-flex justify-content-between align-items-start mb-3'>
+            <div>
+                <div class='d-flex align-items-start'>
+                <h5><strong>{{ title|translate:language }}</strong></h5>
+                {% if title == 'roi_history' %}
+                    
+                <span role="button" class="info-white ml-2" data-toggle="modal" data-target="#dashboard-modal" data-modal="history-roi">
+                    {% include 'icons/info-circle-white.svg' %}
+                </span>
+                {% endif %}
+            </div>
+                {% if legend_blue or legend_green or legend_light_blue or legend_dashed or legend_solid %}
+                    {% include 'dashboard/components/legend.html' with legend_blue=legend_blue legend_green=legend_green legend_light_blue=legend_light_blue legend_dashed=legend_dashed legend_solid=legend_solid  %}
+                {% endif %}
+            </div>
+            {% if select_id %}
+                {% include 'dashboard/components/dashboard_select_order_by.html' with label_name='order_by'|translate:language select_id=select_id data_selected=selected  select_class="ml-1" %}
+            {% endif %}
+            {% include 'dashboard/components/dashboard_header_buttons.html' with graph_id=graph_id %}
+        </header>
+        <article class="sideinfos__dashboard--content d-flex justify-content-between">
+            <section class="single_chartcontent w-100">
+                <article id="{{graph_id}}">
+                    <div class="loading_div d-flex justify-content-center align-items-center">
+                        <div class="loader"></div>
+                    </div>
+                </article>
+            </section>
+            <div class="d-flex flex-column mx-4">
+                <span class="f-size-18 light-bold">{{"summary"|translate:language }}</span>
+                <div class="sideinfos_mini_tables d-flex flex-column gap-8 js-extra-content" data-heading={{'highlights'|translate:language}}></div>
+            </div>
+        </article>
+    </div>    
+</article>

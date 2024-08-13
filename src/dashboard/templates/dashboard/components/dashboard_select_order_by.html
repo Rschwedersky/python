@@ -1,0 +1,12 @@
+{% load dashboard_tags %}
+
+<nav {% if nav_class != None %}class="{{ nav_class }}"{% endif %}>
+    {% if label_name != None and label_name != '' %}
+        <label for="{{ select_id }}"{% if label_class %} class="{{ label_class }}"{% endif %}>{{ label_name }}:</label>
+    {% endif %}
+    <select name="orderBy" id="{{ select_id }}" class='p-2 dashboard-select-order-by {{ select_class }}' data-selected='{{ data_selected }}'>
+        {% for option in select_options %}
+            <option value="{{ option|get_obj_attr:'value' }}"{% if option|get_obj_attr:'selected' %} selected{% endif %}>{{ option|get_obj_attr:'text' }}</option>
+        {% endfor %}
+    </select>
+</nav>

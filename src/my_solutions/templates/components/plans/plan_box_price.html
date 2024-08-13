@@ -1,0 +1,30 @@
+{% load general_tags %}
+
+
+{% if 'yearly' in subscription.get_payment_period|lower and subscription.get_extra_queries and plan_name in plan_obj.get_plan_name|lower %}
+    <p class="mb-2 mr-auto single__plan-box--price" data-yearly_price="{{anual_price|add:anual_extra_price|floatformat:'0'}}" data-monthly_price="{{plan_info.value|floatformat:'0'}}">
+
+{% elif 'monthly' in subscription.get_payment_period|lower and subscription.get_extra_queries and plan_name in plan_obj.get_plan_name|lower %}
+    <p class="mb-2 mr-auto single__plan-box--price" data-yearly_price="{{anual_price|floatformat:'0'}}" data-monthly_price="{{plan_info_value|add:extra_price|floatformat:'0'}}">
+{% else %}
+    <p class="mb-2 mr-auto single__plan-box--price" data-yearly_price="{{anual_price|floatformat:'0'}}" data-monthly_price="{{plan_info.value|floatformat:'0'}}">
+{% endif%}
+    R$ <strong class="f-size-26">
+        {% if 'yearly' in subscription.get_payment_period|lower %}
+            {% if subscription.get_extra_queries and plan_name in plan_obj.get_plan_name|lower %}
+                {% with plus_price=anual_price|add:anual_extra_price %}
+                    {{ plus_price|floatformat:'0' }}
+                {% endwith %}
+            {% else %}
+                {{ anual_price|floatformat:'0' }}
+            {% endif %}
+            </strong><span class='secondary__color'>/ {{'year'|translate:language }}</span>
+        {% else %}
+            {% if subscription.get_extra_queries and plan_name in plan_obj.get_plan_name|lower %}
+                {{ plan_info_value|add:extra_price|floatformat:'0' }}
+            {% else %}
+                {{ plan_info_value|floatformat:'0' }}
+            {% endif %}
+            </strong><span class='secondary__color'>/ {{'month'|translate:language }}</span>
+        {% endif %}
+</p>

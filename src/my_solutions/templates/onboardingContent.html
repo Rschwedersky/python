@@ -1,0 +1,58 @@
+{% extends 'base.html' %}{% load static %} {% load general_tags %} {% load dashboard_tags %} 
+
+{% block content %}
+
+	<div class="content-onboarding">
+		<div class="d-flex align-items-center">
+			<div class="color000000 d-flex flex-column gap-15 px-5 f-size-16">
+				<strong class="name_text">{{ 'hello'|translate:language }}, {{user.get_full_name}}</strong>
+				<p class="py-2">{{ 'onboarding_welcome_text_one'|translate:language }}</p>
+				<p>{{ 'onboarding_welcome_text_two'|translate:language }}<strong> {{ 'onboarding_welcome_text_two_bold'|translate:language }}</strong></p>
+			</div> 
+			<div class="img_ellipse2_onboarding">
+				<img src="{% static 'img/ellipse2_onboarding.png' %}" /> 
+			</div>
+		</div>
+		{% include 'onboarding_user/modalConfirmYourEmail.html' with modal_title='confirm_your_email'|translate:language id='modal__confirm_email'  btn_text='ok' completed=reference|get_obj_attr:'confirm_email'|get_obj_attr:'completed' %}
+		
+
+		{% if total_progress == 100 %}
+			<script>
+				$(document).ready(function(){
+					$("#onboarding__completed").modal();
+				});
+			</script>
+			{% include 'onboarding_user/onboardingModal.html' with modal_title='you_have_completed_all_the_steps'|translate:language  id='onboarding__completed' text_1='Parabéns, ' name_user=user.get_full_name  text_completed='text_completed_onboarding'|translate:language text_2='text_two_full_onboarding'|translate:language text_3='text_three_full_onboarding'|translate:language help_center='help_center'|translate:language bnt_href='services' btn_text='back_to_my_services'|translate:language %}
+		{% endif %}
+		
+		<section class="d-flex flex-column px-5">
+			<p><strong class="f-size-16">{{ 'step_by_step'|translate:language }}</strong></p>
+
+			<div class="box_onboarding d-flex flex-column">
+				<div class="container m-0 p-0">
+					<div class="progress_pontos"><p class="mb-0"><strong><span data-stage="{{total_progress}}"></span>{{total_progress}}/100 </strong> pontos</p></div>
+					<div class="progress barra">
+						<div class="progress-bar" role="progressbar" style="width: {{total_progress}}%;" aria-valuenow="{{total_progress}}" aria-valuemin="0" aria-valuemax="100">
+						</div>
+					</div>
+				</div>
+				<div class="d-flex flex-grid gap-24">
+					{% include 'onboarding_user/onboardingBoxes.html' with text_box='confirm_your_email'|translate:language onboarding='/img/onboarding_'|add:'box4'|add:'.svg' pontos='15' id_modal='#onboarding__modal_1' class_modal='modal' completed=reference|get_obj_attr:'confirm_email'|get_obj_attr:'completed' %}
+					{% include 'onboarding_user/onboardingBoxes.html' with text_box='use_a_service'|translate:language onboarding='/img/onboarding_'|add:'box1'|add:'.svg'  pontos='40' id_modal='#onboarding__modal_2' class_modal='modal' completed=reference|get_obj_attr:'use_service'|get_obj_attr:'completed' %}
+					{% include 'onboarding_user/onboardingBoxes.html' with text_box='choose_a_new_service'|translate:language onboarding='/img/onboarding_'|add:'box2'|add:'.svg' pontos='30' id_modal='#onboarding__modal_3' class_modal='modal' completed=reference|get_obj_attr:'new_service'|get_obj_attr:'completed' %}
+					{% include 'onboarding_user/onboardingBoxes.html' with text_box='invite_your_team'|translate:language onboarding='/img/onboarding_'|add:'box3'|add:'.svg' pontos='15' id_modal='#onboarding__modal_4' class_modal='modal' completed=reference|get_obj_attr:'invite_crew'|get_obj_attr:'completed' %}
+				</div>
+			</div>  
+		</section> 
+		<div class="elipce_onboarding">
+			<img src="{% static 'img/elipce_onboarding.png' %}" /> 
+		</div> 
+	</div>
+
+	
+{% include 'components/footer.html' %}
+
+{% endblock %}
+
+
+

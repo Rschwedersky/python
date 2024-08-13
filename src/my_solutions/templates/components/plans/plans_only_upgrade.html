@@ -1,0 +1,27 @@
+{% load general_tags %}
+{% if 'business' in subscription.get_subscription_plan.get_plan_name|lower %}
+    <div class="d-flex justify-content-center gap-32 {{ plans_container_height_classes }} w-90 mx-auto align-items-center">
+        <div class="plan__box p-3 text-center">
+            {{ 'you_already_have_the_biggest_plan'|translate:language }}, </br>
+            {{ 'if_you_want_to_upgrade_send_a_message_to'|translate:language }} <strong>{{ 'hub_contact_email'|translate:language }}</strong>
+        </div>
+    </div>
+{% else %}
+    {% include "components/plans/plans_modal_body.html" with classes=classes id=id subscription=subscription plan_box_classes=plan_box_classes switch_button_classes=switch_button_classes only_upgrade=True %}
+
+    {% if footer_plan == 'manage_plan' %}
+        <footer class="inner__modal-footer justify-content-end p-3 mt-3">
+            <button class="button__link" data-dismiss="modal">{{'cancel'|translate:language }}</button>
+            {% include 'components/plans/plan_update_btn.html' with plan=subscription.plan %}
+        </footer>
+    {% else %}
+        <footer class="discover__inner-modal--footer justify-content-between">
+            <button class="button__link button__link--box modal__step" data-close=".modal__background--discover" data-step='return'>{{'go_back'|translate:language }}</button>
+            {% include 'components/plans/plan_update_btn.html' with plan=subscription.plan %}
+            <div class="gap-16 align-items-center d-none">
+                <button class="button__link modal__close discover__modal-close" data-close=".modal__background--discover">{{'cancel'|translate:language }}</button>
+                <button class="btn__purple px-5 py-2 text-capitalize modal__open-button" data-close='.discover__confirmation-modal' data-background='.modal__background--discover-confirmation' data-modal='.discover__confirmation-modal--success' disabled>{{'save_changes'|translate:language }}</button>
+            </div>
+        </footer>
+    {% endif %}
+{% endif %}

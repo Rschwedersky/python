@@ -1,0 +1,68 @@
+{% load static %} {% load general_tags %} {% load dashboard_tags %}
+
+<div class="container container-100 h-90 whitebackcolor py-3" id="manage_process">
+        <div class="top_header py-4 d-flex justify-content-between">
+            <p class="card-text "><small class="text-muted"> <a href="" class="back_settings"> {{ 'settings'|translate:language }}</a> > {{ 'processes'|translate:language }} </small></p>
+            {% if processes_not_registered|length > 0 %}
+                {% include 'dashboard/components/register_btn.html' %}
+            {% else %}
+                {% include 'dashboard/components/register_btn.html' with disable=True %}
+            {% endif %}
+        </div>
+        <nav class="process-text">
+            <a href="" class="back_settings">
+                <img src="{% static 'dashboard/img/undo.svg' %}" alt="Return Icon" class="c-pointer opacity-hover advanced__back-btn" id="back-to-manage_areas" data-back="advanced-settings-language"/>
+            </a>
+            <h3 class="title_tab light-bold f-size-24">{{ 'processes'|translate:language }}
+                <div class="green__underlined green_manage-areas"></div>
+            </h3>  
+        </nav>
+        <div class="px-4 f-size-14">
+            {{ 'create_processes_to_group_sub_processes_that_perform_the_same_taks'|translate:language }}
+        </div>
+
+        <div class="py-4">
+            <div class="d-flex gap-16 align-items-center mt-2 mb-5">
+                {% include "components/button_pill.html" with filters=filters class_modifier="dashboard-processes" data_query="process_table" data_to_hide="process_table" page='dashboard_processes' %}
+            </div>
+            <ul class="nav nav-tabs">
+                <li class="nav-item">
+                    <a class="nav-link active" data-toggle="tab" href="#processes_registered">{{ 'registered'|translate:language }}</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="tab" href="#processes_not_registered">{{ 'not_registered'|translate:language }}</a>
+                </li>
+            </ul>
+            <div class="tab-content mt-4">
+                <div class="tab-pane active" id="processes_registered">
+                    {% for releasename,process in processes_translated.items %}
+                        {% include 'dashboard/settings/single_process_registered.html' with process=process nickname=process|get_obj_attr:'name' subprocesses=process|get_obj_attr:'subprocesses' %}
+                        {% include 'dashboard/settings/empty_processes_registered.html' with hidden=True %}
+                    {% empty %}
+                        {% include 'dashboard/settings/empty_processes_registered.html' %}
+                    {% endfor %}
+                </div>
+                <div class="tab-pane" id="processes_not_registered">
+                    {% if processes_not_registered|length > 0 %}
+                        {% include 'dashboard/settings/subprocess_table.html' with all_subprocesses=processes_not_registered subprocesses_type='not_registered' %}
+                    {% else %}
+                        {% include 'dashboard/settings/subprocess_table.html' with all_subprocesses=processes_not_registered subprocesses_type='not_registered' hidden=True %}
+
+                        {% include 'dashboard/settings/empty_processes_not_registered.html' %}
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% block modal %}
+
+{% include 'dashboard/components/modals/_confirmation_modal.html' with title="delete_process"|translate:language %}
+
+{% include 'dashboard/components/modals/process_modal.html' with processes_filter=processes_filter %}
+{% include 'dashboard/components/modals/positive_modal.html' with title='' %}
+{% include 'dashboard/components/modals/negative_modal.html' with title='' %}
+
+{% endblock modal %}

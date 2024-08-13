@@ -1,0 +1,25 @@
+name: 'Workflow - Sanity Tests'
+
+on:
+  workflow_run:
+    workflows: ["Build and Deploy Homolog"]
+    types:
+      - completed
+  workflow_dispatch:
+
+
+
+jobs:
+  sanity-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Sanity tests
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.EC2_AUTOMATED_TEST_HOST }}
+          username: ${{ secrets.EC2_AUTOMATED_TEST_SSH_USERNAME }}
+          key: ${{ secrets.EC2_AUTOMATED_TEST_SSH_KEY}}
+          port: ${{ secrets.EC2_SSH_PORT }}
+          script: |
+            #!/bin/bash
+            robot ./Sanity-Tests/Hub

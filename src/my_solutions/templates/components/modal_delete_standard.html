@@ -1,0 +1,30 @@
+{% load static %} {% load general_tags %}
+<div class="modal fade" id="modaldelet" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg-standard" role="document">
+        <div class="modal-content w-80 m-auto">
+            <div class="modal-body px-0">
+                <div class="header_delete px-3">
+                    <button type="button" class="close d-flex justify-content-end" data-dismiss="modal" aria-label="Fechar">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h5 class="modal-title modal_titulo">
+                        <small> 
+                            <h4>{{ 'delete_this_template'|translate:language }}</h4>
+                        </small>
+                        <div class="green_line--modal-delete-automations"></div>
+                    </h5>
+                </div>
+                <div class="content_delete px-3 pt-4 pb-5">
+                    <p class="f-size-14">{{ 'by_clicking'|translate:language }} <span class="">{{ 'delete_the_template'|translate:language }}</span> <span class="automation_name color000000 light-bold"></span>, {{ 'will_be_permanently_deleted_and_cannot_be_recovered'|translate:language }}</p>
+                </div>
+                <div class="modal-footer pb-0">
+                    <button type="button" class="btn_modal cancel_exclude light-bold" data-dismiss="modal"> {{ 'no'|translate:language }} </button>
+                    <button class="btn_modal confirm_exclude brancocolor light-bold disabled" type="button" data-id="">
+                        {{ 'exclude'|translate:language }}
+                    </button>
+                    {% csrf_token %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

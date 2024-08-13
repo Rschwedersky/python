@@ -1,0 +1,12 @@
+{% load general_tags %}
+<div class="resumed_infos d-flex justify-content-between align-items-center">
+    <div class="left_infos ml-5">
+        <p class="title color000000 f-size-26 mb-0 light-bold">{{ title }}</p>
+        <p class="period f-size-13 mb-1">Mostrando a partir de 02/04/2022</p>
+    </div>
+    
+    <div class="resumed_infos d-flex mb-2">
+        {% include  'dashboard/components/single_box_resumed_info.html' with parent_class='execution px-5' icon='dashboard-topinfo-icons/icon-bot' box_about_text='Modelos executados' %}
+        {% include  'dashboard/components/single_box_resumed_info.html' with parent_class='sucess px-5' icon='dashboard-topinfo-icons/icon-check' box_about_text='Executados com sucesso' %}
+    </div>
+</div>

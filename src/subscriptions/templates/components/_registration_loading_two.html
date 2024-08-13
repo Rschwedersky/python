@@ -1,0 +1,28 @@
+{% load static %} {% load general_tags %} 
+
+<div class='bg-smarthis-loading py-4 conclude-registry-loading'>
+    <div class="bg-white d-flex m-auto p-4 max-width-1500px">
+        <div>
+            <h3 class="h3 font-weight-bold w-75">{{ "great_choices_wait_while_we_prepare"|translate:language }}</h3>
+
+            <div class="mt-4 pl-4">
+                <p class="f-size-24">{{"with_them_you_will"|translate:language }}</p>
+                <div class="jsRegistrationAnimationContainer registration-animation-container">
+                    <p class="f-size-24">
+                        {% include 'icons/my_location.svg' %}
+                        {{ "gain_more_freedom_to_focus_on_strategic_tasks"|translate:language }}.
+                    </p>
+                    <p class="f-size-24">
+                        {% include 'icons/announcement.svg' %}
+                        {{"decrease_error_avoid_delays"|translate:language }}.
+                    </p>
+                    <p class="f-size-24">
+                        {% include 'icons/cloud_done.svg' %}
+                        {{ "centralizes_information_one_place"|translate:language }}.
+                    </p>
+                </div>
+            </div>
+        </div>
+        <img class="ilustration" src="{% static 'img/ilust_screen_hub.svg' %}" alt="Ilustração" />
+    </div>
+</div>

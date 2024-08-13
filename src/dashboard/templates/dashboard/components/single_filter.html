@@ -1,0 +1,81 @@
+{% load general_tags %}
+<div class="single_filter mb-2 {{ parent_class }}">
+    <div class="header_filter d-flex justify-content-between">
+        <p class="color-muted mb-1 pl-1 limitoneline">{{ title }}</p>
+        {% if not no_clean %}
+        <div class="clean f-size-12 color-muted jsCleanSingleFilter">{{ 'clean'|translate:language }}</div>
+        {% endif %}
+    </div>
+    <div class="fake_select w-100 p-1">
+        <div class="selected_text d-flex justify-content-between">
+            <div class="w-100 d-flex align-items-center justify-content-start">
+                <p class="resume_choices_text color-muted f-size-14 mb-0 limitoneline w-75 mr-1">
+                    {% if resume_choices_text %}
+                        {{ resume_choices_text }}
+                    {% else %}
+                        {{ 'all_male'|translate:language }}
+                    {% endif %}
+                </p>
+                <span class="howmany_selected f-size-14"></span>
+            </div>
+            <div class="mb-0"><i class="arrow down"></i></div>
+        </div>
+    </div>
+    <div class="options y-scroll">
+        {% if parent_class == 'subprocesses' %}
+            <div class="all_single_filters">
+                {% for single_checkbox in inputs %}
+                    {% with loop=forloop.counter|stringformat:"s" %}
+                        {% include 'dashboard/components/input_checkbox.html' with input_id='subprocesses'|add:loop input_name='subprocesses' input_value=single_checkbox.releasename input_checked=False %}
+                    {% endwith %}
+                {% endfor %}
+            </div>
+        {% else %}
+            {% if inputs|length > 0 %}
+                {% include 'dashboard/components/input_checkbox.html' with input_id=parent_class|add:'0' input_name=parent_class input_value='all_male'|translate:language input_checked='True'  %}
+                <div class="all_single_filters">
+            {% endif %}
+
+            {% for single_checkbox in inputs %}
+                {% with loop=forloop.counter|stringformat:"s" %}
+                    {% include 'dashboard/components/input_checkbox.html' with input_id=parent_class|add:loop input_name=parent_class input_value=single_checkbox input_checked='True' %}
+                {% endwith %}
+            {% endfor %}
+
+            {% if inputs|length > 0 %}
+                </div>
+            {% endif %}
+        {% endif %}
+    </div>
+    {% if show_comment_filter %}
+        <span class="f-size-12">{{ show_comment_filter }}.</span>
+    {% endif %}
+    <input type="hidden" class="filters" data-type="{{ parent_class }}"/>
+</div>
+{% comment %} 
+<div class="single_filter subprocesses mb-2">
+    <div class="header_filter d-flex justify-content-between">
+        <p class="color-muted mb-1 pl-1 limitoneline">{{ 'sub_hyphen_processes'|translate:language }}</p>
+        <div class="clean f-size-12 color-muted">{{ 'clean'|translate:language }}</div>
+    </div>
+    <div class="fake_select w-100 p-1">
+        <div class="selected_text d-flex justify-content-between">
+            <div class="w-100 d-flex align-items-center justify-content-start">
+                <p class="resume_choices_text color-muted f-size-14 mb-0 limitoneline w-75 mr-1">{{ 'select'|translate:language }}</p>
+                <span class="howmany_selected f-size-14"></span>
+            </div>
+            <div class="mb-0"><i class="arrow down"></i></div>
+        </div>
+    </div>
+    <div class="options y-scroll">
+            <div class="all_single_filters">
+                {% for single_checkbox in processes_not_registered %}
+                    {% with loop=forloop.counter|stringformat:"s" %}
+                        {% include 'dashboard/components/input_checkbox.html' with input_id='subprocesses'|add:loop input_name='subprocesses' input_value=single_checkbox.releasename input_checked=False %}
+                    {% endwith %}
+                {% endfor %}
+            </div>
+    </div>
+
+    <input type="hidden" class="filters" data-type="subprocesses"/>
+</div> {% endcomment %}

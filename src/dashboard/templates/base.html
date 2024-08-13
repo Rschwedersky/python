@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="{{language}}">
+    {% load dashboard_tags %}
+<head>
+    <!-- Google Tag Manager -->
+        <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+        new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+        'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+        })(window,document,'script','dataLayer','GTM-PZPN649');</script>
+    <!-- End Google Tag Manager -->
+
+    <title>Smarthis Hub</title>
+    {% load static %}
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <script src="{% static 'js/session.js' %}"></script>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+    <link href="https://fonts.google.com/specimen/Roboto?preview.text_type=custom" rel="stylesheet">
+    <!-- Bootstrap core CSS -->
+    <link rel="canonical" href="https://getbootstrap.com/docs/4.3/examples/floating-labels/">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <link rel="apple-touch-icon" sizes="180x180" href="{% static 'dashboard/icon/apple-touch-icon.png' %}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{% static 'dashboard/icon/favicon-32x32.png' %}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{% static 'dashboard/icon/favicon-16x16.png' %}">
+    <link rel="manifest" href="{% static 'dashboard/icon/site.webmanifest' %}">
+    <meta name="msapplication-config" content="{% static 'dashboard/icon/browserconfig.xml' %}" />
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="theme-color" content="#ffffff">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="{% static 'dashboard/js/translate.js' %}"></script>
+
+    {% if not not_websocket %}
+        <script src="{% static 'js/websocket.js' %}"></script>
+    {% endif %}
+    
+    <script src="{% static 'dashboard/js/global.js' %}"></script>
+    <script src="{% static 'dashboard/js/utils.js' %}"></script>
+    <link href="{% static 'dashboard/css/offcanvas.css' %}" rel="stylesheet">
+    <link rel='stylesheet' type='text/css' media='screen' href="{% static 'dashboard/css/main.css' %}">
+    {% if allow_dashboard %}
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.0/main.min.css">
+        <link rel='stylesheet' type='text/css' media='screen' href="https://maxcdn.icons8.com/fonts/line-awesome/1.1/css/line-awesome-font-awesome.min.css">
+        <link rel='stylesheet' type='text/css' media='screen' href="https://cdnjs.cloudflare.com/ajax/libs/air-datepicker/2.2.3/css/datepicker.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.js"></script>
+        {% comment %} <script src="https://cdnjs.cloudflare.com/ajax/libs/air-datepicker/2.2.3/js/i18n/datepicker.en.js"></script> {% endcomment %}
+    {% endif %}
+    <!-- Font-Awesome-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
+    
+    <link rel='stylesheet' type='text/css' media='screen' href="{% static 'dashboard/css/responsive.css' %}">
+    
+    <script type="text/javascript">
+        window.heap=window.heap||[],heap.load=function(e,t){window.heap.appid=e,window.heap.config=t=t||{};var r=document.createElement("script");r.type="text/javascript",r.async=!0,r.src="https://cdn.heapanalytics.com/js/heap-"+e+".js";var a=document.getElementsByTagName("script")[0];a.parentNode.insertBefore(r,a);for(var n=function(e){return function(){heap.push([e].concat(Array.prototype.slice.call(arguments,0)))}},p=["addEventProperties","addUserProperties","clearEventProperties","identify","resetIdentity","removeEventProperty","setEventProperties","track","unsetEventProperty"],o=0;o<p.length;o++)heap[p[o]]=n(p[o])};
+        heap.load("63771412");
+    </script>
+    {% if pagarme != None %}
+        <script src="https://assets.pagar.me/checkout/1.1.0/checkout.js"></script>
+    {% endif %}
+    {% if request.is_prod %}
+        <script src="//code-sa1.jivosite.com/widget/o3qUpQoyMP" async></script>
+    {% endif %}
+</head>
+
+<body class="{% if body_class != None %}{{ body_class }}{% else %}bg-light{% endif %}">
+    <!-- Google Tag Manager (noscript) -->
+        <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PZPN649"
+        height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+    
+    {% if hidehole_navbar == None %}
+        <nav class="navbar navbar-expand-lg fixed-top whitebackcolor nav-sombra">
+            <div class="container">
+                <button class="navbar-toggler p-0 border-0" type="button" data-toggle="offcanvas">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <a class="navbar-brand ml-2 mr-auto mr-lg-0" href="{% url 'onboarding' %}" style="vertical-align: bottom;">
+                    <img src="{% static 'dashboard/img/LogoSmarthisHub.png' %}" alt="" height="40">
+                </a>
+                {% if hidenavbar == None %}
+                    {% include 'components/content_navbar.html' with user=user %}
+                {% endif %}
+            </div>
+        </nav>
+    {% endif %}
+
+    {% if free_trial_ended != None and free_trial_ended == True and hide_warnings == None %}
+        {% include "components/banner_warning.html" with reason="end_of_trial" %}
+    {% endif %}
+    
+    {% if confirm_email == False %}
+        <script src="{% static 'js/confirmEmailModal.js' %}"></script>
+    {% endif %}
+    
+    {% if is_free_trial and total_progress >= 0 %}
+        {% if user.profile.role == 3 or  user.profile.role == 4 %} 
+            <script src="{% static 'js/alertPointsOnboarding.js' %}"></script>
+            {% for key,value in reference.items %}
+                {% if completed == true and not value|get_obj_attr:"alerted" %}
+                    {{ value|get_obj_attr:"completed"|json_script:key }}
+                {% endif %}
+            {% endfor %}
+        {% endif %} 
+    {% endif %} 
+
+    
+
+
+
+    <main role="main">
+        <div class="">
+            {{ user.get_full_name|json_script:"user_full_name" }}
+            {{ user.email|json_script:"user_email" }}
+            {{ user.profile.client.name|json_script:"user_client" }}
+            <script>
+                
+                var userFullName = JSON.parse(document.getElementById('user_full_name').textContent) || 'Usuário sem nome fornecido';
+                var userEmail = JSON.parse(document.getElementById('user_email').textContent) || 'Usuário sem email fornecido';
+                var client = JSON.parse(document.getElementById('user_client').textContent) || 'Usuário sem cliente encontrado';
+
+                heap.identify(userEmail);
+                heap.addUserProperties({ Name: userFullName, Company: client });
+
+            </script>
+            <input type="hidden" value="{{request.is_prod}}" id='is-prod-environment'>
+            {% block content %} {% endblock %}
+        </div>
+
+        {% block modal %}{% endblock %}
+        {% if hidenavbar == None and hidehole_navbar == None %}
+            {% include 'settings.html' with standard_variables=standard_variables %}
+        {% endif %}
+    </main>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+                    <!-- 
+    <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.20/r-2.2.3/sp-1.0.1/datatables.min.js">
+    </script>
+    <script src="https://cdn.datatables.net/select/1.3.1/js/dataTables.select.min.js"></script> -->
+
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    {% if hidenavbar == None and hidehole_navbar == None %}
+        <script src="{% static 'dashboard/js/settings/profile_settings.js' %}"></script>
+        <script src="{% static 'dashboard/js/settings/profile.js' %}"></script>
+        <script src="{% static 'dashboard/js/settings/profile_password.js' %}"></script>
+    {% endif %}
+    <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.21/b-1.6.2/fh-3.1.7/r-2.2.5/sp-1.1.1/sl-1.3.1/datatables.min.js"></script>
+
+    {% block ga%} {% include "snippets/ga.html" %} {% endblock ga%}
+    {% block scripts %}{% endblock %}
+</body>
+
+</html>

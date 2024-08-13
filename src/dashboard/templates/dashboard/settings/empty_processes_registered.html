@@ -1,0 +1,10 @@
+{% load general_tags %}
+<section class="empty_data {% if hidden %}d-none{% endif %}">
+    <div class="w-100 h-100 d-flex flex-column justify-content-center align-items-between m-5 py-5 backgroundf7f7f7 text-center">
+        <div>
+            <strong>{{ 'no_process_registered_so_far'|translate:language }}.</strong>
+            <p>{{ 'start_registering_to_improve_visualization_of_your_dashboard_executions_and_returns'|translate:language }}.</p>
+            {% include 'dashboard/components/register_btn.html' %}
+        </div>
+    </div>
+</section>

@@ -1,0 +1,19 @@
+{% load static %} {% load general_tags %}
+
+
+<div class="box-empty__manage_area box-backcolor-light p-3 d-flex margin-bottom-15">
+    <div class="d-flex justify-content-around align-items-center w-100">
+        <div class="w-50 color000000">
+            <strong class="f-size-21">{{ 'you_do_not_have_registered_areas_yet'|translate:language }}</strong>
+            <p class="f-size-18 py-2">{{ 'register_business_areas_of_your_company_and_link_to_processes'|translate:language }}</p>
+            <button type="button" class="btn button__register-area mr-3 light-bold" data-toggle="modal" data-target="#new_area_modal">
+                {{ 'add_business_area'|translate:language }}
+            </button>
+        </div>  
+        <div>
+            <img class="img_empty_area" src="{% static 'dashboard/img/area_active_alt.png' %}"/>
+        </div>
+    </div>
+</div>
+
+   

@@ -1,0 +1,13 @@
+{% load subscriptions_tags %} {% load static %}
+
+<section class="{{classes}} modal__plans py-0" id="{{id}}">
+    {% include 'components/plans/plan_period_buttons.html' with payment_period=subscription.get_payment_period|lower only_upgrade=only_upgrade %}
+    <div class="d-flex justify-content-center gap-32 {{ plans_container_height_classes }} w-90 mx-auto">
+        {% with all_plans=None|get_plan_info %}
+            {% for plan_name,single_plan in all_plans.items %}
+                {% include 'components/plans/plan_box.html' with plan_name=plan_name plan_obj=subscription.plan active_plan=subscription.plan.name|lower classes=plan_box_classes switch_button_classes=switch_button_classes %}
+            {% endfor %}
+        {% endwith %}
+    </div>
+</section>
+<script src="{% static 'js/modal_manage_plan.js' %}"></script>

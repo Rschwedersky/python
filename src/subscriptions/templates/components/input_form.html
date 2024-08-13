@@ -1,0 +1,110 @@
+{% load static %} {% load general_tags %}
+<div class="{% if no_div_class == None %} w-100{% endif %} {% if input_div_class != None %}{{ input_div_class }}{% else %}mb-2{% endif %} {% if type == 'phone' %} tooltip-phone form-group has-danger{% endif %}">
+    {% if tooltip != None and type != 'checkbox' %}
+        <div class="d-flex justify-content-start align-items-center gap-5 mb-1">
+            <p class="f-size-14 mb-0">{{title}}</p>
+            {% include 'components/_tooltip.html' with text=tooltip %}
+        </div>
+    {% elif type != 'checkbox' %}
+        <p class="f-size-14 mb-1">
+            {{title}}
+            {% if inside_title != None %}
+                <span class="opacity-50"> ({{ inside_title }})</span>
+            {% endif %}
+        </p>
+    {% endif %}
+
+    {% if type == 'select' %}
+        <select class="input_{{ name }} w-100 px-2 py-1 f-size-14 color-muted custom-select form-control" name="{{ name }}" {% if required %}required{% endif %}>
+            <option value="">{{ empty_text }}</option>
+            <option value="Administrativo">{{'administrative'|translate:language }}</option>
+            <option value="Atendimento ao Cliente">{{'customer_service'|translate:language }}</option>
+            <option value="Centro de Excelência (CoE) em RPA">{{'center_of_excellence_in_rpa'|translate:language }}</option>
+            <option value="Compras e Suprimentos">{{'purchasing_and_supplies'|translate:language }}</option>
+            <option value="Consultoria">{{'consultancy'|translate:language }}</option>
+            <option value="Finanças e Contabilidade">{{'finance_and_accounting'|translate:language }}</option>
+            <option value="Fiscal">{{'supervisor'|translate:language }}</option>
+            <option value="Jurídico">{{'legal'|translate:language }}</option>
+            <option value="Marketing">Marketing</option>
+            <option value="Operações">{{'operations'|translate:language }}</option>
+            <option value="Recursos Humanos">{{'human_resources'|translate:language }}</option>
+            <option value="Tecnologia da Informação">{{'information_technology'|translate:language }}</option>
+            <option value="other">{{'another_area'|translate:language }}</option>
+        </select>
+        <input type="{{ textinput }}" name="otherDepartment" class="w-100 px-2 mt-3 f-size-14 color-muted form-control" placeholder="Insira a área" minlength="2"> 
+    {% elif type == 'select_job' %}
+        <select class="input_{{ name }} w-100 px-2 py-1 f-size-14 color-muted custom-select form-control" name="{{ name }}" {% if required %}required{% endif %}>
+            <option value="">{{ empty_text }}</option>
+            <option value="Analista">{{'analyst'|translate:language }}</option>
+            <option value="Gerente">{{'manager'|translate:language }}</option>
+            <option value="Diretor">{{'director'|translate:language }}</option>
+            <option value="Especialista">{{'specialist'|translate:language }}</option>
+            <option value="other">{{'other'|translate:language }}</option>
+        </select>
+        <input type="{{ textinput }}" name="otherJobs" class="w-100 px-2 mt-3 f-size-14 color-muted form-control" placeholder="Insira o cargo" minlength="2" > 
+    {% elif type == 'checkbox' %}
+        <div class="custom-control custom-checkbox">
+            {% if name == 'lgpd' %}
+
+            <input class="custom-control-input" id="lgpd-input" type="{{ type }}" name="{{ name }}" {% if required %}required{% endif %}>
+            <label class="f-size-14 custom-control-label" for="lgpd-input">
+                {{'affirm_that_i_read_and_agree'|translate:language}} <a href="{% static 'instructions/Politica_de_Privacidade.pdf' %}" target="_blank">{{'privacy_policy'|translate:language}}</a> {{'to'|translate:language}} <a href="{% static 'instructions/Termos_de_uso.pdf' %}" target="_blank">{{'terms_of_use'|translate:language}}</a> {{'of_masculine'|translate:language}} Smarthis Hub.
+            </label>
+            
+            {% else %}
+            <label>
+                <input class="form-control" type="{{ type }}" name="{{ name }}" {% if required %}required{% endif %}>
+                <span class="checkmark"></span>
+                {{ title }}
+            </label>
+            {% endif %}
+        </div>
+    {% elif type == 'password' and show_password != None %}
+        <div class="position-relative d-flex align-items-center">
+            <input 
+                type="{{ type }}" 
+                class="form-control input_{{ name }} w-100 px-2 py-1 f-size-14 color-muted" 
+                name="{{ name }}"
+                {% if input_id != None %} id="{{ input_id }}"{% endif %}
+                {% if page != 'login' %} pattern="^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[!@#$%^&*()_+]).{8,}$"{% endif %}
+                placeholder="{{'type_your_password'|translate:language}}"
+                {% if required %}required{% endif %}
+            />
+            {% include 'components/view_password.html' %}
+        </div>
+        {% if page != 'login' %}
+        <p class="mt-1 mb-2 f-size-12">
+                {{'passwords_requirements'|translate:language }}.
+        </p>
+        {% endif %}
+    {% else %}
+        <input 
+            type="{{ type }}" 
+            class="input_{{ name }} w-100 py-1 f-size-14 color-muted form-control" 
+            name="{{ name }}"
+            {% if type == "email" %}
+                pattern="(?![_.-])((?![_.-][_.-])[a-z\d_.-]){0,63}[a-z\d]@((?!-)((?!--)[a-z\d-]){0,63}[a-z\d]\.){1,2}([a-z]{2,14}\.)?[a-z]{2,14}"
+
+                {% if  pre_filled_email != None %}
+                    value="{{ pre_filled_email}}"
+                    disabled
+                {% endif %}
+            {% elif pre_filled_company and type == 'text'%}
+                value="{{ pre_filled_company }}"
+                disabled
+            {% endif %}
+
+            {% if input_id != None %} id="{{ input_id }}"{% endif %}
+
+            {% if min_length %} minlength="{{ min_length }}" {% endif %}
+            
+            {% if required %}required{% endif %}
+            {% if placeholder != None %} placeholder="{{placeholder}}"{% endif %}
+        />
+    {% endif %}
+    <p class="text_error mb-0">{{ text_error }}</p>
+    {% if type == 'phone' %} 
+        <span id="error-msg" class="hide"></span>
+    {% endif %}
+
+</div>

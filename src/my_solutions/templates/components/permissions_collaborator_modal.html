@@ -1,0 +1,35 @@
+{% load general_tags %} {% load dashboard_tags %}
+{% load static %}
+
+<section class="inner__modal  permissions__collaborator-modal">
+    {% include 'components/default_header_modal.html' with modal_title='invite_collaborator'|translate:language icon_img='add-person.svg' icon_alt='Add Person Icon' close_img='close-white.svg' close_data=".modal__background--permissions" close_class="modal__close--permissions" %}
+    <section class="inner__modal-content">
+        <div>
+            <p class="m-0" >
+                <span id="permissions-modal-heading"></span>
+                <div class="green__underlined green__underlined--heading"></div>
+            </p>
+        </div>
+        <strong><p class="my-3 f-size-14 color-muted">{{'choose_from_your_team_or_invite'|translate:language }}</p></strong>
+        <form class="permissions__modal-form">
+            {% csrf_token %}
+            <input type="email" autocomplete="on" placeholder="{{'enter_email_you_wish_invite'|translate:language}}"  name="collaborator_info" class="permissions__modal-form-input" pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9_-]+\..[a-zA-Z0-9-.]{2,61}"/>
+            <button type="submit" class="permissions__modal-form-button" name="form_collaborator_button" disabled>
+                <img src="{% static "/img/add-person-disabled.svg" %}" alt="Add Person Icon">
+                <img src="{% static '/img/add-person-enabled.svg' %}" alt="Add Person Icon">
+            </button>
+        </form>
+        {% include 'components/users_overflow.html' with crew_type='permissions' noedition=True profiles=request|getUsersfromClients:'' %}
+        <input type="hidden" id="permission_automation_name" value="" />
+    </section>
+    <footer class=" inner__modal-footer permissions__modal-footer">
+        <p class="m-0 f-size-14">
+            {{'you_can_distribute_up_to'|translate:language }} <strong class='licenses__limit'><span class="howmany_permissions">0</span> licenças</strong> {{'you_can_distribute_up_to_2'|translate:language }} <button class='button__link'  data-heap="Fazer upgrade" data-toggle="modal" data-target="#plans-modal--upgrade-button">{{'upgrade_imperative'|translate:language}}</button>.
+        </p>
+        <button class="btn__purple permissions__modal--btn button__invite--hover" disabled>
+            <img src="{% static "/img/add-person.svg" %}" alt"Add Person Icon"/>
+            <img src="{% static "/img/add-person-black.svg" %}" alt="Add Collaborator Icon">
+            {{'invite'|translate:language }}
+        </button>
+    </footer>
+</section>

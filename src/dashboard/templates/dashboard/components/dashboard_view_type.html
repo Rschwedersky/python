@@ -1,0 +1,32 @@
+{% load static %} {% load general_tags %} {% load dashboard_tags %}
+<div class="dashboard_view_type">
+    {% if 'admin'|comparing_variables:active %}
+        <div class="disabled view_header h-100 d-flex align-items-center justify-content-between px-3 c-pointer">
+            <span class="chosen_text">{{ 'admin'|translate:language }}</span> 
+            <span class="empy_img"></span>
+            <input type="hidden" name="invite_type" value="{{ active }}" />
+        </div>
+    {% else %}
+        <div class="view_header h-100 d-flex align-items-center justify-content-between px-3 c-pointer">
+            <span class="chosen_text">
+                {% if 'editor'|comparing_variables:active %}
+                    {{ 'editor'|translate:language }}
+                {% else %}
+                    {{ 'can_view'|translate:language }}
+                {% endif %}
+            </span> 
+            <img
+                src="{% static 'dashboard/img/down-arrow.svg' %}"
+                alt="Down arrow"
+            />
+        </div>
+        <div class="dashboard_view_type--options whitebackcolor">
+            {% include 'dashboard/components/dashboard_view_single_type.html' with title='editor'|translate:language text='can_view_graphs_edit_settings_and_invite_staff_members'|translate:language active='editor'|comparing_variables:active input_name='invite_type' input_value='editor' %}
+            {% include 'dashboard/components/dashboard_view_single_type.html' with title='can_view'|translate:language text='can_view_graphs_but_can_not_edit_settings_or_invite_staff_members'|translate:language active='leitor'|comparing_variables:active input_name='invite_type' input_value='leitor' %}
+            <input type="hidden" name="invite_type" value="{{ active }}" />
+            {% if with_exclude %}
+                {% include 'dashboard/components/dashboard_view_single_type.html' with title='exclude'|translate:language info_type='exclude' active=False %}
+            {% endif %}
+        </div>
+    {% endif %}
+</div>

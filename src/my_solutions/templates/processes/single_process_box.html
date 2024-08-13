@@ -1,0 +1,30 @@
+{% load general_tags %} {% load dashboard_tags %} {% load static %}
+
+{% with schedule_id=schedule|get_obj_attr:'id' %}
+	<div class="jsRealtime processes__history-content--item {% if task_state == 3 %}executing {% elif task_state == 4 %} error {% elif task_state == 6 or task_state == 7 %}success{% endif %}" data-type="{% if task_state == 3 %}executing{% elif task_state == 6 or task_state == 7 %}success{% elif task_state == 4 %}error{% endif %}" data-id="{{ schedule.id }}">
+			<div>
+				<img src="{% static logo %}" alt="Service Logo" class='manage__permissions--logo'>
+				<div class="d-flex flex-column">
+				<p class="process__history-item--header m-0"><strong>{{schedule.name}}</strong></p>
+				<p class="f-size-14 color-muted m-0">{{subtitle}}</p>
+				</div>
+			</div>
+			<p class="m-0 executed-on">{{'executed_on'|translate:language}} 
+				<span class="jsExecutedOnDate">{{date}}</span>
+			</p>
+
+			<div class="processes__history-status--container">
+				<p class="history__badge processes__history-badge--executing modal__open-button" data-close=".modal-processes-history__content" data-modal=".modal-processes-history__content--executing" data-background=".modal__background--processes">{{ 'in_execution'|translate:language }}</p>
+				<p class="history__badge processes__history-badge--success modal__open-button" data-close=".modal-processes-history__content" data-modal=".modal-processes-history__content--success" data-background=".modal__background--processes">{{ 'finished_with_success'|translate:language }} </p>
+				<p class="history__badge processes__history-badge--error modal__open-button" data-close=".modal-processes-history__content" data-modal=".modal-processes-history__content--error" data-background=".modal__background--processes">{{ 'finished_with_error'|translate:language }}</p>
+
+				<div class="spinner-grow spinner-grow-sm executing__icon">
+					<span class="sr-only">Loading...</span>
+				</div>
+
+				<img src="{% static "/img/history-check.svg" %}" alt="Check Icon" class="success__icon"/>
+
+				<img src="{% static "/img/history-x.svg" %}" alt="Error Icon" class="error__icon"/>
+			</div>	
+	</div>
+{% endwith %}

@@ -1,0 +1,18 @@
+{% load general_tags %} {% load static %}
+
+<section class="end-of-trial-alert--services d-flex align-items-center justify-content-around py-4 {{extra_classes}}">
+    <div class='d-flex flex-column align-items-start'>
+        <h3><strong>{{'end_free_trial_warning_1'|translate:language }}</strong></h3>
+        <p class='f-size-18'>{{'end_free_trial_warning_3'|translate:language }}</p>
+        <a href="{% url 'end_of_trial_summary' %}" target='_blank' class="btn__purple px-4 py-3 no-uppercase" ><strong>{{'end_free_trial_button'|translate:language }}</strong></a>
+    </div>
+    <img src="{% static 'img/end_trial_banner.svg'%}" alt="End Of Trial Banner">
+</section>
+
+{% if no_dots != True %}
+<div class="dot__square--container">
+    <div class='dot__square'></div>
+    <div class='dot__square'></div>
+    <div class='dot__square'></div>
+</div>
+{% endif %}

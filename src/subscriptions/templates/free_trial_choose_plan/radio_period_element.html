@@ -1,0 +1,20 @@
+{% load general_tags %}
+{% if subscription.get_subscription_plan.get_plan_name == 'Free Trial' %}
+    <label for="plan-choose-yearly" class='custom__radio--container'>
+        <input type="radio" id='plan-choose-yearly' name='choose-plan' value='yearly' {% if period == 'yearly' %}checked{% endif %}>
+        <span class="radio"></span>
+        {{'yearly'|translate:language}}
+    </label>
+
+    <label for="plan-choose-monthly" class='custom__radio--container'>
+        <input type="radio" id='plan-choose-monthly' name='choose-plan' value='monthly' {% if period == 'monthly' %}checked{% endif %}>
+        <span class="radio"></span>
+        {{'monthly_capitalized_small_portuguese'|translate:language}}
+    </label>
+{% else %}
+    <label for="plan-choose-{{period}}" class='custom__radio--container'>
+        <input type="radio" id='plan-choose-{{period}}' name='choose-plan' value='{{period}}' checked>
+        <span class="radio"></span>
+        {{ period|translate:language}}
+    </label>
+{% endif %}

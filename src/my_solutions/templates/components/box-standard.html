@@ -1,0 +1,95 @@
+{% load static %} {% load general_tags %} {% load dashboard_tags %}
+<div class="example">
+    <section>
+        <header>
+            <div class="img_box-intrucoes">
+                <img class="arrow__button--dropdown img_box_padrao c-pointer" data-info="" src="{% static 'img/img_box_padrao.png' %}" data-image="{% static 'img/img_box_none.png'%}">
+            </div> 
+            <div class="standard--min-box__content box-backcolor-light ex-instrucoes-file f-size-18 color707573 light-bold py-3">
+                <p class="px-3">
+                    {% if automation_type == 'credential' or automation_type == 'credential_and_filter_notes' %}
+                        {{ 'instructions'|translate:language }}
+                    {% else %}
+                        {{ 'instructions_and_standard_file'|translate:language }}
+                    {% endif %}
+                <div class="horizontal__gray-line mb-2"></div>
+                <p class="px-3">{{ 'about_the_service'|translate:language }}</p>
+            </div>
+        </header>
+        
+        <section class="standard--center-box__content">
+            <div class="box-backcolor-light p-3 {% if automation_type == 'credential' %}box-standard-credential{% else %} box-standard {% endif %}">
+                <p class="ex-instrucoes-file f-size-18 color-muted light-bold">
+                    {% if automation_type == 'credential' or automation_type == 'credential_and_filter_notes' %}
+                        {{ 'instructions'|translate:language }}
+                    {% else %}
+                        {{ 'instructions_and_standard_file'|translate:language }}
+                    {% endif %}
+                </p>
+                <p class="text-file color-muted">
+                    {{ standard_variables|get_obj_attr:'subtitle_example_and_instructions' }}
+                    {% if automation_name == 'extrato-bancario' %}
+                        <p class="text-file color-muted py-1">{{ 'after_that_your_model_is_saved_to_use_whenever_you_need_it'|translate:language }}</p> 
+                    {% endif %}
+                </p>
+            
+                {% with automation_obj=automation_name|get_automation_by_name %}
+                    {% if automation_type == 'upload' or automation_type == 'upload_and_credential' %}
+                        {% with href_file='instructions/example_'|add:automation_name|add:'.xlsx' %}
+                            {% if is_automation_active == True or user.profile.client.name == 'Smarthis' %}
+                                <a href="{% static href_file %}" id="button-file" class="button-file mb-4 w-100 py-3 d-flex justify-content-center align-items-center" data-heap="Pegar arquivo de exemplo da {{automation_name}}">
+                                    <div class="px-3">
+                                        <img class="img_file--default" src="{% static 'img/logo_file.png' %}"/>
+                                        <img class="img_file--hover" src="{% static 'img/logo_file_active.png' %}"/>
+                                    </div>
+                                    <div class="{% if automation_name == 'inidoneos'%}line__inidoneios{% endif %}">
+                                        <p class="text-left light-bold f-size-14"> 
+                                            {{ 'standard_file_download'|translate:language }}
+                                        </p>
+                                        <small>
+                                            {{ automation_obj|get_automation_display_name:language }}
+                                        </small>
+                                    </div>  
+                                </a>
+                            {% else %}
+                                <button id="button-file" class='button-file mb-4 w-100 py-3 d-flex justify-content-center align-items-center' data-toggle="modal" data-target="#service-under-maintenance-modal" data-backdrop='static' data-heap="Pegar arquivo de exemplo da {{automation_name}}">
+                                    <div class="px-3">
+                                        <img class="img_file--default" src="{% static 'img/logo_file.png' %}"/>
+                                        <img class="img_file--hover" src="{% static 'img/logo_file_active.png' %}"/>
+                                    </div>
+                                    <div class="{% if automation_name == 'inidoneos'%}line__inidoneios{% endif %}">
+                                        <p class="text-left light-bold f-size-14"> 
+                                            {{ 'standard_file_download'|translate:language }}
+                                        </p>
+                                        <small>
+                                            {{ automation_obj|get_automation_display_name:language }}
+                                        </small>
+                                    </div>  
+                                </button>
+                            {% endif %}    
+                        {% endwith %}
+                    {% endif %}
+                {% endwith %}
+                
+                <p class="text-left text-cadeado"> 
+                    <img class="logo_cadeado" src="{% static 'img/logo_cadeado.png' %}"/>
+                    {{ 'do_not_worry'|translate:language }}
+                    <strong> {{ 'your_data_is_safe'|translate:language }}</strong> 
+                </p>
+            
+            </div>
+
+            <div class="box-backcolor-light p-3 box-standard">
+                <p class="ex-instrucoes-file f-size-18 color-muted light-bold">
+                    {{ 'about_the_service'|translate:language }}
+                </p>
+                <p class="text-file color-muted">
+                    <p>{{ standard_variables|get_obj_attr:'title_text_solution' }}</p>
+                    <strong>{{ standard_variables|get_obj_attr:'subtitle_text_solution' }}</strong>
+                </p>
+            </div>   
+        </section>
+    </section>
+</div>
+
+

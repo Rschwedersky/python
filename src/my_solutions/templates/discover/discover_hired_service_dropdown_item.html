@@ -1,0 +1,21 @@
+{% load dashboard_tags %} {% load subscriptions_tags %} {% load static %}
+
+{% with collaborators_infos=user|getAllClientCollaboratorsInfo %}
+
+    <button class="discover__switch-service-select" data-permissions="{{permissions_total}}" data-service={{automation_name}}>
+        <img src="{% static logo %}" alt="Service Logo" class="discover__switch-service-logo">
+        <div class="text-left">
+            <p class="m-0">{{heading}}</p>
+            <span class='color-muted f-size-14'></span>
+        </div>
+    </button>
+
+    <div>
+        {% for user_id, user_info in collaborators.items %}
+            <input type="hidden" data-name="{{user_info|get_obj_attr:'name'}}" data-ticket="{% static "/img/permission-ticket-disabled.svg" %}" data-arrow="{% static '/img/double-arrow-right.svg' %}" data-hover="{% static '/img/double-arrow-right-black.svg'%}" data-user="{{user_id}}" data-schedules={{ user_info|get_obj_attr:'qnt' }} >
+        {% endfor %}
+    </div>
+
+    <input type="hidden" data-name="{{user.get_full_name}}" data-ticket="{% static "/img/permission-ticket-disabled.svg" %}" data-arrow="{% static '/img/double-arrow-right.svg' %}" data-user="{{user.id}}" data-permissions="{{permissions_available}}" data-hover="{% static '/img/double-arrow-right-black.svg'%}">
+
+{% endwith %}        

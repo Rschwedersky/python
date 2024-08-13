@@ -1,0 +1,9 @@
+{% extends 'base.html' %} {% block content %} {% load static %}
+<div id="services" class="pt-5">
+    <div class="container container-90 h-90 whitebackcolor py-3">
+        {% include 'all_services_tabs.html' with all_services_tabs=all_services_tabs free_trial_ended=free_trial_ended %}
+    </div>
+</div>
+{% include 'components/footer.html' %}
+<script src="{% static 'js/services.js' %}"></script>
+{% endblock %}

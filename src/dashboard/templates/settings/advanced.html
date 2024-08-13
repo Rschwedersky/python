@@ -1,0 +1,154 @@
+{% load static %}
+
+<section class="advanced-content d-none" id="advanced-content">
+    <div class="settings-content__title">
+        <h6><strong>Avançadas</strong></h6>
+        <div class="hr-bold"></div>
+    </div>
+    <div class="advanced__container" id="advanced-settings-container">
+        <div
+            class="advanced__box"
+            data-setting="advanced-settings-language"
+        >
+            <img
+                src="{% static 'dashboard/img/language.svg' %}"
+                alt="Language Icon"
+                class="advanced-settings--icon"
+            />
+            <p class="m-0 f-size-14">Idioma</p>
+            <p class="m-0 f-size-12 color-muted">PT-BR</p>
+        </div>
+        <div class="advanced__box" data-setting="">
+            <img
+                src="{% static 'dashboard/img/privacy_security.svg' %}"
+                alt="Privacy and Security Icon"
+                class="advanced-settings--icon"
+            />
+            <p class="m-0 f-size-14">Privacidade e Segurança</p>
+        </div>
+        <div
+            class="advanced__box"
+            data-setting="advanced-settings-notifications"
+        >
+            <img
+                src="{% static 'dashboard/img/bell.svg' %}"
+                alt="Bell Icon"
+                class="advanced-settings--icon"
+            />
+            <p class="m-0 f-size-14">Notificações</p>
+        </div>
+    </div>
+
+    {% comment %} Language {% endcomment %}
+    <div
+        class="
+            advanced__language-container advanced__individual-container
+        "
+        id="advanced-settings-language"
+    >
+        <nav class="settings__breadcrumbs">
+            <img
+                src="{% static 'dashboard/img/undo.svg' %}"
+                alt="Return Icon"
+                class="c-pointer opacity-hover advanced__back-btn"
+                id="back-to-advanced"
+                data-back="advanced-settings-language"
+            />
+            <p class="color-muted m-0">Avançadas</p>
+            >
+            <a href="#">Idiomas</a>
+        </nav>
+        <div class="d-flex justify-content-between">
+            <div id="settings-language-container">
+                <p class="f-size-14 m-0">Idioma atual:</p>
+
+                <button
+                    class="language__dropdown--option opacity-hover"
+                    id="selected-language-dropdown"
+                >
+                    <img
+                        src="{% static 'dashboard/img/brazil.svg' %}"
+                        alt="Brazil's flag"
+                    />
+                    PT-BR | Português (Brasil)
+                    <img
+                        src="{% static 'dashboard/img/arrow_drop_down.svg' %}"
+                        alt="Dropdown arrow"
+                        class="margin-left-auto"
+                    />
+                </button>
+                <div
+                    class="language__dropdown-menu"
+                    id="language-dropdown-menu"
+                    data-showing="false"
+                >
+                    <button
+                        class="language__dropdown--option opacity-hover"
+                    >
+                        <img
+                            src="{% static 'dashboard/img/united-states.svg' %}"
+                            alt="Brazil's flag"
+                        />
+                        EN | English
+                    </button>
+                    <button
+                        class="language__dropdown--option opacity-hover"
+                    >
+                        <img
+                            src="{% static 'dashboard/img/spain.svg' %}"
+                            alt="Brazil's flag"
+                        />
+                        ES | Español
+                    </button>
+                </div>
+            </div>
+            <img
+                src="{% static 'dashboard/img/language-big.svg' %}"
+                alt="Big language icon"
+                class="language__big-icon"
+            />
+        </div>
+    </div>
+
+    {% comment %} Notifications {% endcomment %}
+
+    <div
+        class="
+            advanced__notifications-container
+            advanced__individual-container
+        "
+        id="advanced-settings-notifications"
+    >
+        <nav class="settings__breadcrumbs">
+            <img
+                src="{% static 'dashboard/img/undo.svg' %}"
+                alt="Return Icon"
+                class="c-pointer opacity-hover advanced__back-btn"
+                id="back-to-advanced"
+                data-back="advanced-settings-notifications"
+            />
+            <p class="color-muted m-0">Avançadas</p>
+            >
+            <a href="#">Notificações</a>
+        </nav>
+
+        <p class="f-size-14">Receber e-mail quando</p>
+        <div class="advanced__notifications--btn-container">
+            <button
+                class="advanced__notifications--button opacity-hover"
+            >
+                Um processo for finalizado
+            </button>
+            <button
+                class="advanced__notifications--button opacity-hover"
+            >
+                Nossos serviçoes estiverem disponíveis
+            </button>
+            <button
+                class="advanced__notifications--button opacity-hover"
+            >
+                Lorem Ipsum Dolor Sit Amet
+            </button>
+        </div>
+    </div>
+</section>

@@ -1,0 +1,9 @@
+{% load static %}
+<div class="box-help__center box-backcolor-light p-3 d-flex flex-column align-items-center justify-content-center">
+    <a class="no__link d-flex flex-column align-items-center justify-content-center gap-10" href="{{href}}">
+            {% with 'img/logo_'|add:logo|add:'.png' as logo %}
+                <img class="" src="{% static logo %}">
+            {% endwith %}
+        <p class="text-center">{{titulo}}</p>
+    </a>
+</div>  

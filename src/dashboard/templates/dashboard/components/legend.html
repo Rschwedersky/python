@@ -1,0 +1,21 @@
+<div class="single_legend d-flex justify-content-start gap-16">
+    {% if legend_green %}
+        <p class="mb-0 f-size-12 color000000"><span class="caption_color__green"></span> {{ legend_green }}</p>
+    {% endif %}
+
+    {% if legend_blue %}
+        <p class="mb-0 f-size-12 color000000"><span class="caption_color__blue"></span>  {{ legend_blue }}</p>
+    {% endif %}
+    {% if legend_light_blue %}
+        <p class="mb-0 f-size-12 color000000"><span class="caption_color__light_blue"></span>  {{ legend_light_blue }}</p>
+    {% endif %}
+
+    {% if legend_solid %}
+    <p class="mb-0 f-size-12 color000000"><span class="caption_color__solid-line"></span>  {{ legend_solid }}</p>
+    {% endif %}
+
+    {% if legend_dashed %}
+        <p class="mb-0 f-size-12 color000000"><span class="caption_color__dashed-line"></span>  {{ legend_dashed }}</p>
+    {% endif %}
+
+</div>

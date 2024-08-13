@@ -1,0 +1,6 @@
+{% load static %}
+<div class="{{ main_class }} single_menu d-flex justify-content-center py-2 px-2"{% if idtab != None %} data-idtab="{{ idtab }}"{% endif %}{% if is_modal != None and is_modal %} data-heading="{{heading}}" data-service="Serviço" data-close=".dashboard_invite_modal" data-modal=".dashboard_invite_modal" data-background=".modal__background" data-automation_name="TESTE" data-heap="Convidar colaboradores para"{% endif %}>
+    <img src="{% static 'dashboard/img/menu-icons/'|add:img_src|add:'.svg' %}" class="default" /> 
+    <img src="{% static 'dashboard/img/menu-icons/'|add:img_src|add:'-hover.svg' %}" class="hover" />
+    <img src="{% static 'dashboard/img/menu-icons/'|add:img_src|add:'-active.svg' %}" class="active" />
+</div>

@@ -1,0 +1,18 @@
+{% load general_tags %} {% load static %}
+
+<div class="modal fade modal--plans" id="{{modal_id}}"tabindex="-1" role="dialog" aria-labelledby="plansModal" aria-hidden="true">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+        <header class='p-3'>
+            <div class="d-inline-block">
+                <p class="lighter-bold discover__inner-modal--heading dark-gray__color">{{'change_of_plan'|translate:language }}</p>
+                <div class="green__underlined green__underlined--discover-modal"></div>
+            </div>
+            <button type="button" class="close align-self-end" data-dismiss="modal" aria-label="Close">
+                <img src="{% static "/dashboard/img/exit.svg" %}" alt="">
+            </button>
+        </header>
+        {% include 'components/plans/plans_only_upgrade.html' with footer_plan='manage_plan' classes=classes id=id subscription=subscription plan_box_classes=plan_box_classes switch_button_classes=switch_button_classes only_upgrade=True %}
+    </div>
+  </div>
+</div>

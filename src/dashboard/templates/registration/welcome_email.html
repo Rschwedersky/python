@@ -1,0 +1,49 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    body{
+      font-family: 'Calibri', sans-serif;
+      background-color: white;
+      color: #333;
+      font-size: 11pt;
+    }
+  </style>
+</head>
+<body>
+  <p>Olá, {{user.get_full_name}}. </p>
+  <p>A {{user.profile.client}} agora faz parte da nossa plataforma, o <b>Smarthis Hub</b>. Estamos realmente felizes com isso.</p>
+  <p>Você poderá gerenciar a operação de RPA através de um dashboard completo. Ele foi projetado com as métricas e visualizações mais relevantes, com base na experiência acumulada em todos os projetos para nossos clientes.</p>
+  <p>Temos como visão oferecer na plataforma cada vez mais produtos que irão contribuir para que a sua empresa <b>dê passos mais largos na jornada de Transformação Digital</b>. Seja em Automação, <i>Analytics</i> ou Inteligência Artificial.</p>
+  <p>Tem alguma sugestão de produtos ou do que podemos melhorar hoje? Será um grande prazer recebê-la, conte com a gente. <b>Vamos construir juntos o Smarthis Hub</b>.</p>
+  
+  <p>Para ativar sua conta por favor siga o link abaixo:<br>
+    <a href="{{ protocol}}://{{ domain }}{% url 'password_reset_confirm' uidb64=uid token=token %}">{{ protocol}}://{{ domain }}{% url 'password_reset_confirm' uidb64=uid token=token %}</a>
+    
+  </p>
+  <p>Seja muito bem-vinda(o)!</p>
+  <br>
+  Abraços,<br>
+  --<br>
+  
+  <b>
+  <span style="color: rgb(0,51,51); font-size: 12pt; font-family: 'Calibri Light', sans-serif;">
+  Equipe Smarthis Hub
+  </span>
+  </b><br>
+  <a href="mailto:hub-contato@smarthis.com.br">hub-contato@smarthis.com.br</a><br>
+  <img src="{{ protocol}}://{{ domain }}{% static 'dashboard/img/logo-smarthis-site.png' %}" alt="" class="logo-on-form"><br>
+  <a href="https://hub.smarthis.com.br">hub.smarthis.com.br</a>
+  <br>
+  
+  
+  
+</body>
+</html>
+
+
+

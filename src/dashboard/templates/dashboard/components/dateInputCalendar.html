@@ -1,0 +1,106 @@
+{% load static %} {% load general_tags %} {% load dashboard_tags %}
+
+{% with all_data_infos=language|getAllowedYearsDashboard:date %}
+<div class="date_calendar">
+    <div class="input_date c-pointer">
+        <input type="text" class="w-100 f-size-14 color-muted {{ input_class }}" value="{{ all_data_infos|get_obj_attr:'date_string' }}"/>
+        <img src="{% static 'dashboard/img/calendar.svg' %}" alt="date icon" width="22" height="22">
+    </div>
+    <div class="calendar">
+        <div class="header backcolor0E0E0E d-flex justify-content-end px-2 py-1">
+            <i class="close_icon"></i>
+        </div>
+        <div class="calendar_content">
+            <div class="active_date_infos px-2">
+                <div class="month py-1 d-flex justify-content-between align-items-center">
+                    <div class="prev c-pointer color-muted"> < </div>
+                    <div class="all_months">
+                        {% for month in all_data_infos|get_obj_attr:'all_months' %}
+                            <span class="value f-size-14 color-muted{% if month|get_obj_attr:'active' %} active{% endif %}" data-number_translation="{{ month|get_obj_attr:'number' }}">{{ month|get_obj_attr:'month' }}</span>
+                        {% endfor %}
+                    </div>
+                    <div class="next c-pointer color-muted"> > </div>
+                </div>
+                <div class="day py-1 d-flex justify-content-center align-items-center">
+                    <span class="value f-size-20 dark-gray__color">{{ all_data_infos|get_obj_attr:'date' }}</span>
+                </div>
+                <div class="year py-1 d-flex justify-content-between align-items-center">
+                    <div class="prev c-pointer color-muted"> < </div>
+                    <div class="all_years">
+                        {% for year in all_data_infos|get_obj_attr:'all_years' %}
+                            <span class="value color707573{% if year == all_data_infos.selected_year %} active{% endif %}" data-number_translation="{{ year }}">{{ year }}</span>
+                        {% endfor %}
+                    </div>
+                    <div class="next c-pointer color-muted"> > </div>
+                </div>
+            </div>
+            <div class="month_dates p-2">
+                <div class="year_month color3424C4 text-center f-size-14">{{ all_data_infos|get_obj_attr:'month_year' }}</div>
+                <div class="header d-flex justify-content-between align-items-center px-2 pb-2 pt-3 mb-2">
+                    <div class="single_day c-pointer column1 color707573 w-100 text-center">{{ 'sunday_first_letter'|translate:language }}</div>
+                    <div class="single_day c-pointer column2 color707573 w-100 text-center">{{ 'monday_first_letter'|translate:language }}</div>
+                    <div class="single_day c-pointer column3 color707573 w-100 text-center">{{ 'tuesday_first_letter'|translate:language }}</div>
+                    <div class="single_day c-pointer column4 color707573 w-100 text-center">{{ 'wednessday_first_letter'|translate:language }}</div>
+                    <div class="single_day c-pointer column5 color707573 w-100 text-center">{{ 'thursday_first_letter'|translate:language }}</div>
+                    <div class="single_day c-pointer column6 color707573 w-100 text-center">{{ 'friday_first_letter'|translate:language }}</div>
+                    <div class="single_day c-pointer column7 color707573 w-100 text-center">{{ 'saturday_first_letter'|translate:language }}</div>
+                </div>
+                <div class="line1 d-flex justify-content-between align-items-center px-2">
+                    <div class="single_day c-pointer column1 color707573 w-100 text-center"></div>
+                    <div class="single_day c-pointer column2 color707573 w-100 text-center"></div>
+                    <div class="single_day c-pointer column3 color707573 w-100 text-center"></div>
+                    <div class="single_day c-pointer column4 color707573 w-100 text-center"></div>
+                    <div class="single_day c-pointer column5 color707573 w-100 text-center"></div>
+                    <div class="single_day c-pointer column6 color707573 w-100 text-center"></div>
+                    <div class="single_day c-pointer column7 color707573 w-100 text-center"></div>
+                </div>
+                <div class="line2 d-flex justify-content-between align-items-center px-2">
+                    <div class="single_day c-pointer column1 color707573 w-100 text-center"></div>
+                    <div class="single_day c-pointer column2 color707573 w-100 text-center"></div>
+                    <div class="single_day c-pointer column3 color707573 w-100 text-center"></div>
+                    <div class="single_day c-pointer column4 color707573 w-100 text-center"></div>
+                    <div class="single_day c-pointer column5 color707573 w-100 text-center"></div>
+                    <div class="single_day c-pointer column6 color707573 w-100 text-center"></div>
+                    <div class="single_day c-pointer column7 color707573 w-100 text-center"></div>
+                </div>
+                <div class="line3 d-flex justify-content-between align-items-center px-2">
+                    <div class="single_day c-pointer column1 color707573 w-100 text-center"></div>
+                    <div class="single_day c-pointer column2 color707573 w-100 text-center"></div>
+                    <div class="single_day c-pointer column3 color707573 w-100 text-center"></div>
+                    <div class="single_day c-pointer column4 color707573 w-100 text-center"></div>
+                    <div class="single_day c-pointer column5 color707573 w-100 text-center"></div>
+                    <div class="single_day c-pointer column6 color707573 w-100 text-center"></div>
+                    <div class="single_day c-pointer column7 color707573 w-100 text-center"></div>
+                </div>
+                <div class="line4 d-flex justify-content-between align-items-center px-2">
+                    <div class="single_day c-pointer column1 color707573 w-100 text-center"></div>
+                    <div class="single_day c-pointer column2 color707573 w-100 text-center"></div>
+                    <div class="single_day c-pointer column3 color707573 w-100 text-center"></div>
+                    <div class="single_day c-pointer column4 color707573 w-100 text-center"></div>
+                    <div class="single_day c-pointer column5 color707573 w-100 text-center"></div>
+                    <div class="single_day c-pointer column6 color707573 w-100 text-center"></div>
+                    <div class="single_day c-pointer column7 color707573 w-100 text-center"></div>
+                </div>
+                <div class="line5 d-flex justify-content-between align-items-center px-2">
+                    <div class="single_day c-pointer column1 color707573 w-100 text-center"></div>
+                    <div class="single_day c-pointer column2 color707573 w-100 text-center"></div>
+                    <div class="single_day c-pointer column3 color707573 w-100 text-center"></div>
+                    <div class="single_day c-pointer column4 color707573 w-100 text-center"></div>
+                    <div class="single_day c-pointer column5 color707573 w-100 text-center"></div>
+                    <div class="single_day c-pointer column6 color707573 w-100 text-center"></div>
+                    <div class="single_day c-pointer column7 color707573 w-100 text-center"></div>
+                </div>
+                <div class="line6 d-flex justify-content-between align-items-center px-2">
+                    <div class="single_day c-pointer column1 color707573 w-100 text-center"></div>
+                    <div class="single_day c-pointer column2 color707573 w-100 text-center"></div>
+                    <div class="single_day c-pointer column3 color707573 w-100 text-center"></div>
+                    <div class="single_day c-pointer column4 color707573 w-100 text-center"></div>
+                    <div class="single_day c-pointer column5 color707573 w-100 text-center"></div>
+                    <div class="single_day c-pointer column6 color707573 w-100 text-center"></div>
+                    <div class="single_day c-pointer column7 color707573 w-100 text-center"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endwith %}

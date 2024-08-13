@@ -1,0 +1,23 @@
+{% load general_tags %}
+
+<section class="processes__history-container">
+	{% if active_tab == 'processes_history' %}
+		<p class="f-size-14">Filtrar por:</p>
+		<nav class="filter-buttons__container f-size-14">
+			<button class="btn__pill btn__pill--processes btn__pill--active" data-type="allFilters" data-class="btn__pill--processes" data-query="processes__history-content--item">{{'all_male'|translate:language }}</button>
+			<button class="btn__pill btn__pill--processes" data-type="success" data-class="btn__pill--processes" data-query="processes__history-content--item">{{'finalized'|translate:language}}</button>
+			<button class="btn__pill btn__pill--processes" data-type="executing" data-class="btn__pill--processes" data-query="processes__history-content--item">{{'in_execution'|translate:language }}</button>
+			<button class="btn__pill btn__pill--processes" data-type="error" data-class="btn__pill--processes" data-query="processes__history-content--item">{{'error'|translate:language}}</button>
+		</nav>
+		<section class="processes__history-box--container">
+			{% url 'services' 'processes_history' as the_url %}
+
+			{% include 'schedule_list.html' with page_obj=schedules allowed_automations=automations_translate allschedule_credentials=allschedule_credentials tasks=tasks page='processes_history' the_url=the_url %}
+		</section>
+		{% include "processes/processes_history_modal.html" %}
+	{% else %}
+		<div class="d-flex justify-content-center align-items-center p-5">
+			{% include 'components/loading.html' with show=True %}
+		</div>
+	{% endif %}
+</section>

@@ -1,0 +1,12 @@
+<label for="{{ input_id }}" class="single_checkbox d-flex justify-content-start align-items-center mb-0 {{ extra_classes }}"> 
+    <input type="checkbox" id="{{ input_id }}" name="{{ input_name }}" value="{{ input_value }}"{% if input_checked != None and input_checked %} checked{% endif %}>
+    <span class="checkmark mr-1"></span>
+    {% if first_info != None %}
+        <div class="d-flex flex-column">
+            <p class="m-0 light-bold f-size-14 topinfo_checkbox">{{ name }}</p>
+            <p class="m-0 f-size-12 color-muted bottominfo_checkbox">{{ email }}</p>
+        </div>
+    {% else %}
+        <p class="f-size-12 color-muted limitoneline mb-0">{{ input_value }}</p>
+    {% endif %}
+</label>

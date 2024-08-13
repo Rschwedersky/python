@@ -1,0 +1,22 @@
+{% load general_tags %} {% load static %}
+
+{% comment %} <section class="discover__service-box discover__service-box--soon" data-automation="{{automation_name}}">
+    <div>
+        <section class="discover__box-header discover__box-header--soon">
+            <img src="{% static logo %}" alt="Automation Logo">
+            <p class="dark-gray__color m-0"><strong>{{ service_name }}</strong></p>
+        </section>
+        <p class="discover__box-soon--hover">{{ text_hover }}</p>
+    </div>
+    <button class="button__primary-color button__primary-color--discover-soon {% if interested == True %}button__primary-color--clicked{% endif %}" data-heap="Avise-me quando {{service_name}} estiver disponível">
+        {% if interested == True %}
+        <span>{{'you_will_receive_news'|translate:language }}</span>
+        {% else %}
+        <span>{{'warn_me'|translate:language }}</span>
+        {% endif %}
+        <img src="{% static 'img/green-check.svg' %}" alt="Green Check">
+        <div class="spinner-border text-dark spinner-border-sm spinner__hidden" role="status">
+            <span class="sr-only">Loading...</span>
+        </div>
+    </button>
+</section> {% endcomment %}

@@ -1,0 +1,84 @@
+{% load static %} {% load general_tags %} {% load dashboard_tags %} {% load subscriptions_tags %}
+
+{% with config_infos=user|getSettingsInfos:language %}
+	<div
+		class="modal fade"
+		id="modalsettings"
+		tabindex="-1"
+		role="dialog"
+		aria-labelledby="exampleModalLabel"
+		aria-hidden="true"
+	>
+		<div class="modal-dialog modal-xl" role="document">
+			<div class="modal-content w-100 h-100 m-auto">
+				<div class="modal-body h-100 p-0">
+					<div class="settings__content">
+						<header class='d-flex justify-content-between align-items-center px-3'>
+							<h5 class='m-0'>{{ 'my_configurations'|translate:language }}</h5>
+
+							<img src="{% static 'dashboard/img/exit.svg' %}" alt="Clear Input Box" class="opacity-hover c-pointer modal__close" data-paragraph="p-crew-name" data-close='#modalsettings' data-dismiss='modal' aria-label="Close"/>
+						</header>
+						
+						<section class="settings-tab-group">
+							<nav class="settings-tab">
+								{% for btn in config_infos|get_obj_attr:'all_btns' %}
+									<button
+										class="tab-button opacity-hover{% if config_infos|get_obj_attr:'active_tab' == btn|get_obj_attr:'id' %} tab-button--active{% endif %}"
+										id="{{ btn|get_obj_attr:'id' }}"
+									>
+										<span>{{ btn|get_obj_attr:'name' }}</span>
+										<div class="green__underlined green__underlined--tab"></div>
+									</button>
+								{% endfor %} 
+							</nav>
+
+							<section class="settings-content">
+								{% for btn in config_infos|get_obj_attr:'all_btns' %}
+									{% with path=btn|get_obj_attr:'id' %}
+										{% include 'settings/'|add:path|add:'.html' with config_infos=config_infos %}
+									{% endwith %}
+								{% endfor %}
+							</section>
+						</section>
+						<footer class="modal-footer py-0">
+							<button class="btn__modal--cancel modal__close" data-close='#modalsettings' data-dismiss='modal'>
+								{{ 'cancel'|translate:language }}
+							</button>
+							<button class="btn__purple submit_profile p-2 no-uppercase" disabled>
+								{{'save_and_exit'|translate:language }}
+							</button>
+						</footer>
+					</div>
+					{% comment %} NESTED MODALS {% endcomment %}
+					<section class="modal__background modal__background--settings" id="modal-background" >
+						<div class="inner__modal crew__settings-modal crew__settings-modal--exclude" id="crew-exclude-modal" data-error="{% static '/img/error_red_circle.png'%}" data-success="{% static '/img/check_green_circle.png'%}"
+						>
+							<header class="inner__modal-header">
+								<h2 class="f-size-18 m-0">
+									<img src="{% static 'dashboard/img/delete.svg' %}" alt"Trash can"/>
+									<span></span>
+								</h2>
+								<img
+									src="{% static 'dashboard/img/close-white.svg' %}"
+									alt="Close Modal"
+									class="c-pointer opacity-hover modal__close"
+									data-close='.modal__background--settings' aria-label="Fechar"
+								/>
+							</header>
+							<p class="crew__modal--text">
+							</p>
+							<footer class="inner__modal-footer">
+								<button class="button__link modal__close" data-close='.modal__background--settings'>{{'cancel'|translate:language }}</button>
+								<button id='settings-delete-collaborator-button' class="btn__purple crew__modal--btn">
+									{{'delete_collaborator'|translate:language }}
+								</button>
+							</footer>
+						</div>
+
+						{% include 'settings/crew-edit-modal.html' %}
+					</section>
+				</div>
+			</div>
+		</div>
+	</div>
+{% endwith %}

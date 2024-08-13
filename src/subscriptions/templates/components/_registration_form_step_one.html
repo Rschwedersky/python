@@ -1,0 +1,38 @@
+{% load static %} {% load general_tags %} {% load dashboard_tags %} 
+
+<div class="container register-content d-flex flex-column align-items-start p-5 jsRegistrationStep">
+    <div class="align-self-center d-flex flex-column align-items-center">
+        {% include "icons/hub_logo.svg" %}
+
+        <span class="f-size-24">
+            <strong>{{"create_your_account_on_hub"|translate:language }}</strong>
+        </span>
+        <span class="mb-4 f-size-18">{{"to_enjoy_14_day_trial"|translate:language }}</span>
+    </div>
+
+    <form id="register-form" class="container w-85 needs-validation" novalidate>
+        {% for input in inputs %}
+            {% if 'pattern'|exists_in_obj:input %}
+                {% include "components/_input_form.html" with error_msg=input|get_obj_attr:'error_message' id=input|get_obj_attr:'id' label=input|get_obj_attr:'label' type=input|get_obj_attr:'type' input_classes=input|get_obj_attr:'classes' pattern=input|get_obj_attr:'pattern' placeholder=input|get_obj_attr:'placeholder' name=input|get_obj_attr:'name' required=input|get_obj_attr:'required'   %}
+            {% else %}
+                {% include "components/_input_form.html" with error_msg=input|get_obj_attr:'error_message' id=input|get_obj_attr:'id' label=input|get_obj_attr:'label' type=input|get_obj_attr:'type' input_classes=input|get_obj_attr:'classes' placeholder=input|get_obj_attr:'placeholder' name=input|get_obj_attr:'name' required=input|get_obj_attr:'required'   %}
+            {% endif %}
+        {% endfor %} 
+            
+
+        <div class="custom-control custom-checkbox my-4">
+            <input type="checkbox" class="custom-control-input" id="lgpd-input" name="lgpd" required>
+            <label class="f-size-14 custom-control-label" for="lgpd-input">
+                {{"affirm_that_i_read_and_agree"|translate:language }} <a href="{% static 'instructions/Politica_de_Privacidade.pdf' %}" target="_blank">{{"privacy_policy"|translate:language }}</a> {{"and"|translate:language }} <a href="{% static 'instructions/Termos_de_uso.pdf' %}" target="_blank">{{"terms_of_use"|translate:language }}</a> {{"of_masculine"|translate:language}} Smarthis Hub.
+            </label>
+            <div class="invalid-feedback">{{"You_must_agree_before_submitting"|translate:language }}</div>
+        </div>
+
+        <button type="submit" class="btn-hub-primary f-size-20">{{"register"|translate:language }}</button>
+        <div class="container d-flex flex-column justify-content">
+            <p class="align-self-center f-size-14 mt-4">
+                <a style="color: #3C3E3E" href="{% url 'login' %}">{{"already_have_regsitration"|translate:language}}</a></p>
+        </div>
+        
+    </form>
+</div>

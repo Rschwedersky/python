@@ -1,0 +1,16 @@
+{% load static %} {% load general_tags %}
+
+<div class="box-empty__automation box-backcolor-light p-3 d-flex">
+    <div class="d-flex justify-content-center align-items-center w-100">
+        <div class="logo_empty">
+            <img alt="Empty Automation" src="{% static 'img/logo_empty_automation.png' %}"/>
+        </div>
+        <div class="text_box-empty w-50 ml-3">
+            <strong class="f-size-21">{{ 'you_dont_have_services_yet'|translate:language }}</strong>
+            <p class="f-size-18 sub_text__empty_automation color-muted">{{ 'to_gain_access_talk_to_your_administrator_or_contact_us_via'|translate:language }}
+                <strong>{{ 'hub_contact_email'|translate:language }}</strong> {{ 'to_hire_a_plan'|translate:language }}
+            </p>
+        </div>
+    </div>
+</div>
+

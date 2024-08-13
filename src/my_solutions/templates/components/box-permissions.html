@@ -1,0 +1,38 @@
+{% load static %} {% load general_tags %}
+<div class="box-permissions box-backcolor-light p-3">
+    <div class="box-text-permissions">
+        <p class="title-permissions f-size-26 light-bold color000000">
+            {{ 'you_have_no_licenses_available'|translate:language }}
+        </p>
+        <p class="subtitle-permissions">
+            {{ 'to_use_this_solution_manage_your_licenses_or_upgrade_the_plan'|translate:language }}
+        </p>
+    </div>
+    <div class="line-vertical-permissions"></div>
+    <div class="d-flex justify-content-center align-items-center button-box-permissions">
+        <a href="{% url 'services' 'manage_permissions' %}" class="btn button-permissions light-bold">{{ 'manage_licenses'|translate:language }}</a>
+    </div>
+    <div class="d-flex justify-content-center align-items-center button-box-permissions-upgrade">
+        <button type="button" class="btn permissions-upgrade light-bold no-uppercase modal__open-button btn__purple" data-heap="Fazer upgrade" data-background='.modal__background--plans--tabs' data-close='' data-modal='.modal__plans--tabs'>{{ 'do_upgrade'|translate:language }}</button>
+    </div>
+    <div class="imagem-permissions">
+        <img class="img_permissions" src="{% static 'img/logo_permissions.png' %}"/>
+        <div class="text-number-permissions f-size-30">
+            <p class="color-text-blue">0<span class="color-text-cinza">/1</span></p>
+        </div>
+        <div class="text-permissions">
+            {{ 'licenses'|translate:language }}
+        </div>
+    </div>
+    <div class="imagem-permissions-blue">
+        <img class="img_permissions-blue" src="{% static 'img/logo_permissions_blue.png' %}"/>
+        <div class="text-number-permissions-blue f-size-30">
+            <p class="color-text-blue">0<span class="color-text-cinza">/1</span></p>
+        </div>
+        <div class="text-permissions-blue">
+            {{ 'licenses'|translate:language }}
+        </div>
+    </div>
+</div>
+<br>
+<br>

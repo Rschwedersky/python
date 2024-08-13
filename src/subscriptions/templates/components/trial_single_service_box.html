@@ -1,0 +1,39 @@
+{% load static %} {% load general_tags %} {% load dashboard_tags %}
+
+{% if service != 'dashboard' %}
+
+{% with consuming_user=service|get_obj_attr:'utilizations' %}
+<article class='trial__choose-plan-service-box' data-service="{{service|get_obj_attr:'identifier'}}">
+    <img src="{% static logo %}" alt=" Logo {{ service|get_obj_attr:'display_name' }}">
+    <p class='m-0'>
+
+        {{ service|get_obj_attr:'display_name' }}
+
+        {% if service|get_obj_attr:'utilizations' %}
+            <span class="d-block f-size-14 color-muted">
+            <em data-id="{{consuming_user.id}}">{{'used_by'|translate:language }} {{consuming_user.get_full_name}} ({{consuming_user.email}})</em>
+            </span>
+        {% else %}
+            <span class="d-block f-size-14 color-muted">
+            <em>{{'not_used'|translate:language }}</em>
+            </span>
+        {% endif %}
+    </p>
+    {% include 'dashboard/components/input_checkbox.html' with extra_classes='justify-self-end' input_id='trial-end-services-checkbox-'|get_new_id input_checked=service|get_obj_attr:'checked'  %}
+    {% if service|get_obj_attr:'all_schedules' %}
+        {% for schedule in service|get_obj_attr:'all_schedules'%}
+            <input type="hidden"value="{{schedule.id}}">
+        {% endfor %}
+    {% endif %}
+</article>
+{% endwith %}
+
+{% else %}
+<article class='trial__choose-plan-service-box mb-3' data-service="{{service}}">
+    <img src="{% static 'img/dashboard-icon.png' %}" alt="Dashboard Logo">
+    <p class='m-0'>
+        <span class="d-block"><strong>Dashboard RPA</strong></span>
+    </p>
+    {% include 'dashboard/components/input_checkbox.html' with extra_classes='justify-self-end' input_id='trial-end-services-checkbox-'|get_new_id input_checked=dashboard_checked %}
+</article>
+{% endif %}

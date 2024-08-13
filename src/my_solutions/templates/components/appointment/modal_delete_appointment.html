@@ -1,0 +1,28 @@
+{% load static %} {% load general_tags %}
+
+<div class="modal" id="modaldeleteappointment" tabindex="-1" role="dialog" aria-labelledby="#modalDeleteAppointment" aria-hidden="true">
+    <div class="modal-dialog content_delete_template" role="document">
+        <div class="modal-content">
+            <div class="p-4">
+                <button class="close d-flex justify-content-end close_solucao modal__close" data-dismiss="modal" aria-label="Fechar" data-close="#modaldeleteappointment">
+                    <img src="/static/dashboard/img/exit.svg" alt="Close Modal" class="c-pointer" aria-hidden="true">
+                </button>
+                <div>
+                    <strong class="f-size-20">{{ 'delete_scheduling'|translate:language }}?</strong>
+                    <div class="green_line modal-schedule-delete"></div>
+                </div>
+                <div class="delete_appointment_content">
+                    <p>{{ 'you_will_no_longer_automatically_receive_results_on_scheduled_dates'|translate:language }}.</p>
+                    <p>{{ 'question_are_you_sure_you_want_to_exclude_the_appointment_execution_of_the_model'|translate:language }} <b class="template_name"></b>?</p>
+                </div>
+                <div class="modal-footer pb-0">
+                    <button type="button" class="btn_modal cancel_create_appointment light-bold" data-dismiss="modal">{{ 'cancel'|translate:language }}</button>
+                    <button class="delete_appointment btn_smarthis smaller py-2 px-3 brancocolor light-bold disabled" type="button" data-templateid="">{{ 'delete_scheduling'|translate:language }}</button>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="{% static 'js/modal_delete_appointment.js' %}"></script>

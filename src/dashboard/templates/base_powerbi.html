@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    {% load static %}
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Smarthis Hub</title>
+
+
+    <!-- Bootstrap core CSS -->
+    <link rel="canonical" href="https://getbootstrap.com/docs/4.3/examples/floating-labels/">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <!-- Font-Awesome-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
+
+    <link rel="apple-touch-icon" sizes="180x180" href="{% static 'dashboard/icon/apple-touch-icon.png' %}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{% static 'dashboard/icon/favicon-32x32.png' %}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{% static 'dashboard/icon/favicon-16x16.png' %}">
+    <link rel="manifest" href="{% static 'dashboard/icon/site.webmanifest' %}">
+    <meta name="msapplication-config" content="{% static 'dashboard/icon/browserconfig.xml' %}" />
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="theme-color" content="#ffffff">
+
+
+
+    <style>
+        body {
+            background-color: #fff;
+            height: 100%;
+        }
+        .nav-item.active>.nav-link {
+            color: lightskyblue !important;
+            font-weight: bold;
+        }
+        table.dataTable > tbody > tr{
+            cursor: pointer;
+        }
+
+        .iframe-container{
+            background-color: red;
+            height: 100%;
+            overflow: hidden;
+            padding: 0;
+            position: relative;
+        }
+
+        {% comment %} iframe {
+    display: block;       /* iframes are inline by default */
+    background: #000;
+    border: none;         /* Reset default border */
+    height: 94vh;        /* Viewport-relative units */
+    width: 100vw;
+} {% endcomment %}
+
+
+iframe {
+    position: fixed;
+    background: #000;
+    border: none;
+    top: 0; right: 0;
+    bottom: 0; left: 0;
+    width: 100%;
+    height: 100%;
+    padding-top:100px;
+}
+
+    </style>
+
+    <link href="{% static 'dashboard/css/offcanvas.css' %}" rel="stylesheet">
+
+</head>
+
+<body class="bg-light">
+    <nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-dark">
+        <div class="container">
+            <button class="navbar-toggler p-0 border-0" type="button" data-toggle="offcanvas">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <a class="navbar-brand ml-2 mr-auto mr-lg-0" href="{% url 'dashboard' %}" style="vertical-align: bottom;">
+                <img 
+                    src="https://smarthis.com.br/wp-content/uploads/2019/06/logo-smarthis-site.png"
+                    alt="" 
+                    height="25"
+                >
+            </a>
+            <div class="navbar-collapse offcanvas-collapse" id="navbarsExampleDefault">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="#"> <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item dropdown active">
+                        <a  class="nav-link dropdown-toggle mr-3" 
+                            href="#" 
+                            id="id_services_dropdown" 
+                            data-toggle="dropdown"
+                            aria-haspopup="true" 
+                            aria-expanded="false">
+                            <i class="fas fa-chart-line mr-1"></i>Analytics
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="id_services_dropdown">
+                            <a class="dropdown-item" href="/">Dashboard</a>
+                            <a class="dropdown-item disabled" href="#">Captcha Solvers</a>
+                            <a class="dropdown-item disabled" href="#">Chatbot</a>
+                        </div>
+
+
+                    </li>
+                    
+                    <li class="nav-item dropdown">
+                        <a  class="nav-link dropdown-toggle"
+                            href="#" 
+                            id="dropdown01" 
+                            data-toggle="dropdown"
+                            aria-haspopup="true" 
+                            aria-expanded="false">
+                            <i class="fas fa-user mr-1"></i>{{user.get_full_name }}
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="dropdown01">
+                            <a class="dropdown-item" href="{% url 'password_change' %}">Change password</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="{% url 'logout' %}">Logout</a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="nav-scroller bg-white shadow-sm">
+        <nav class="nav nav-underline container">
+        <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{% url 'dashboard'%}">Dashboard</a></li>
+                <li class="breadcrumb-item active" aria-current="page">{{dashboard.name}}</li>
+            </ol>
+        </nav>
+    </div>
+    
+    <main role="main" class="">
+          {% block content %}
+
+          {% endblock  %}
+        
+    </main>
+
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
+    </script>
+
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
+    </script>
+
+    {% comment %} <script src="{% static 'dashboard/css/offcanvas.js' %}"></script> {% endcomment %}
+    {% block ga%}
+        {% include "snippets/ga.html" %}
+    {% endblock ga%}
+</body>
+
+</html>

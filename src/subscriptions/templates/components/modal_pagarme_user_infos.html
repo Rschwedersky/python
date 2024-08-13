@@ -1,0 +1,63 @@
+{% load static %} {% load general_tags %}
+<div class="modal fade" id="modalPagarmeInfos" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg new-modal" role="document">
+        <div class="modal-content modal-border">
+            <div class="modal-body">
+                <header class="d-flex justify-content-between align-items-top">
+                    <div>
+                        <h5 class='m-0'><strong>{{ 'sign'|translate:language }}</strong></h5>
+                        <h5 class="mb-0 secondary__color"><strong>Smarthis Hub</strong></h5>
+                        <p class="f-size-13">Precisamos de mais alguns dados para gerar a sua assinatura</p>
+                    </div>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Fechar" style="justify-content:flex-end;display: flex;">
+                        <span aria-hidden="true" class='f-size-32 color000000'>&#x2715;</span>
+                    </button>
+                </header>
+
+                <form role="form" class="pagarme_user_infos_form px-5 pt-2 pb-4">
+                    <div class="step_company_data">
+                        {% include 'components/modal_pagarme_user_infos/steps_header.html' with first_step=True %}
+                        {% include "components/input_form.html" with title='Nome da empresa' type='text' name='company_name' required=True  %}
+                        <div class="d-flex justify-content-center gap-16">
+                            {% include "components/input_form.html" with title='cnpj'|translate:language type='text' name='cnpj' required=True placeholder='00.000.000/0000-00'  %}
+                            {% include "components/input_form.html" with title='telephone'|translate:language type='text' name='telephone' required=True placeholder='(00) 0000-0000' no_div_class=True %}
+                        </div>
+                        {% include "components/input_form.html" with title='Email' type='email' name='email' required=True tooltip='invoices_and_subscription_information_will_be_sent_to_this_email'|translate:language %}
+                        <button class="proceed btn__purple no-uppercase w-100 d-flex justify-content-between p-3 has-image-inside mt-5" disabled>
+                            {{ 'proceed'|translate:language }}
+                            <img class="normal" src="{% static 'img/arrow-rounded-white.svg' %}" />
+                            <img class="hover" src="{% static 'img/arrow-rounded-black.svg' %}" />
+                            <img class="disabled" src="{% static 'img/arrow-rounded-gray.svg' %}" />
+                        </button>
+                    </div>
+                    <div class="step_company_address d-none">
+                        {% include 'components/modal_pagarme_user_infos/steps_header.html' with first_step=True second_step=True %}
+                        <div class="d-flex justify-content-between gap-16 align-items-center">
+                            {% include "components/input_form.html" with title='zip_code'|translate:language type='text' name='cep' required=True placeholder='88888-888'  %}
+                            <a class="consult_cep f-size-12 color3424C4" href="https://buscacepinter.correios.com.br/app/endereco/index.php" target="_blank" rel="noreferrer"><u>{{ 'consult_my_zip_code'|translate:language }}</u></a>
+                        </div>
+                        <div class="d-flex justify-content-between gap-16">
+                            {% include "components/input_form.html" with title='street'|translate:language inside_title='avenue_etc'|translate:language type='text' name='street' required=True  %}
+                            {% include "components/input_form.html" with title='number'|translate:language type='text' name='number' required=True no_div_class=True input_div_class='w-50 mb-2' %}
+                        </div>
+                        <div class="d-flex justify-content-between gap-16">
+                            {% include "components/input_form.html" with title='complement'|translate:language type='text' name='complement' required=True  %}
+                            {% include "components/input_form.html" with title='district'|translate:language type='text' name='district' required=True %}
+                        </div>
+                        <div class="d-flex justify-content-between gap-16">
+                            {% include "components/input_form.html" with title='city'|translate:language type='text' name='city' required=True  %}
+                            {% include "components/input_form.html" with title='uf_capital'|translate:language type='text' name='uf' required=True no_div_class=True input_div_class='w-50 mb-2' %}
+                        </div>
+                        <button class="proceed btn__purple no-uppercase w-100 d-flex justify-content-between p-3 has-image-inside mt-5" disabled>
+                            {{ 'proceed'|translate:language }}
+                            <img class="normal" src="{% static 'img/arrow-rounded-white.svg' %}" />
+                            <img class="hover" src="{% static 'img/arrow-rounded-black.svg' %}" />
+                            <img class="disabled" src="{% static 'img/arrow-rounded-gray.svg' %}" />
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="{% static 'js/modal_pagarme.js' %}"></script>

@@ -1,0 +1,19 @@
+{% load general_tags %} {% load static %} {% load humanize %} {% load i18n %}
+
+<div class="h-100 plans__modal--footer p-3 pt-0  {% if plan_name == 'business' and plan_name not in active_plan %} backcolore6e3ff {% endif %}">
+    <div class="h-100 d-flex gap-10 align-items-center">
+        {% if plan_name != 'business'%}
+            <label class="custom__switch {{switch_button_classes}}">
+                <input type="checkbox"{% if subscription.get_extra_queries and plan_name in active_plan %} checked data-selected="true" data-period="{{ subscription.get_payment_period|lower }}"{% endif %}>
+                <span class="slider round"></span>
+            </label>
+            <p class="m-0 f-size-13">{{'add'|translate:language }} + <span class='extra-queries'>{{plan_info.qnt_extra_queries|intcomma}}</span> {{'monthly_appointments_to_your_plan'|translate:language }} R$ <span class='extra-queries-price'>{{plan_info.extra_price}}</span></p>
+        {% else %}
+            <img src="{% static 'img/email_purple.svg'%}" alt="E-mail icon">
+            <span class='f-size-13'>
+                {{'build_your_plan_and'|translate:language }}
+                <strong>{{ 'receive_our_evaluation_by_email'|translate:language }}</strong>
+            </span>
+        {% endif %} 
+    </div>
+</div>

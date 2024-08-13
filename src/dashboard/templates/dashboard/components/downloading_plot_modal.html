@@ -1,0 +1,15 @@
+{% load general_tags %} {% load static %}
+
+<div class="modal fade dashboard__downloading-plot-modal" id="downloading-plot-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" data-html2canvas-ignore>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <header class='p-3'>
+        <h5><strong>{{'capturing_graph'|translate:language }}...</strong></h5>
+      </header>
+      <section class='d-flex gap-32 align-items-center p-3'>
+        <img src="{% static 'dashboard/img/download-chart.svg'%}" alt="Wait while we download your chart">
+        <span>{{'please_wait_capture_chart'|translate:language }}.</span>
+      </section>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,46 @@
+{% load static %} {% load general_tags %}
+
+<div class="modal" id="modalcreateappointment" tabindex="-1" role="dialog" aria-labelledby="#modalCreateAppointment" aria-hidden="true">
+    <div class="modal-dialog content_create_schedule modal-xl" role="document">
+        <div class="modal-content">
+            <div class="p-4">
+                <button class="close d-flex justify-content-end close_solucao modal__close" data-dismiss="modal" aria-label="Fechar" data-close="#modalcreateappointment">
+                    <img src="/static/dashboard/img/exit.svg" alt="Close Modal" class="c-pointer" aria-hidden="true">
+                </button> 
+                <div class="px-3">
+                    <strong class="f-size-20">{{ 'scheduling'|translate:language }}</strong>
+                    <div class="green_line modal-schedule-create"></div>
+                </div>
+                <div class="d-flex justify-content-center align-items-center py-4">
+                    <strong>{{ 'what_day_do_you_want_your_model_to_run'|translate:language }}</strong>
+                </div>
+                <div class="d-flex justify-content-center align-items-center">
+                    <div class="mr-2">
+                        <div class="mb-4">
+                            <p class="mb-1 light-bold">{{ 'day'|translate:language }}:</p>
+                            <input type="date"  class="form-control appointment_date backgroundf7f7f7" value="">
+                            <small>{{ 'your_model_will_run'|translate:language }} {{ 'on'|translate:language }} <span class="date_execution text-lowercase"></span>.</small>
+                        </div>
+                        <div class="line__box-automations"></div>
+                        <div class="py-4">
+                            <label for="recurrence" class="light-bold">{{ 'repeat'|translate:language }}:</label>
+                            <select class="form-control backgroundf7f7f7" name="recurrence" id="recurrence">
+                                <option value="0">{{ 'does_not_repeat'|translate:language }} </option>
+                                <option value="30">{{ 'monthly_capitalized'|translate:language }}</option>
+                                <option value="7">{{ 'weekly_capitalized'|translate:language }} </option>
+                            </select>
+                            <small>{{ 'your_model_will_run'|translate:language }} {{ 'on'|translate:language }} <span class="date_execution_period text-lowercase"></span>.</small>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer pb-0">
+                    <button type="button" class="btn_modal cancel_create_appointment light-bold" data-dismiss="modal">{{ 'cancel'|translate:language }}</button>
+                    <button class="confirm_appointment btn_smarthis smaller py-2 px-3 brancocolor light-bold disabled" type="button" data-toggle="modal" data-target="#modalconfirmschedule" >{{ 'create_schedule'|translate:language }}</button>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="{% static 'js/modal_create_appointment.js' %}"></script>

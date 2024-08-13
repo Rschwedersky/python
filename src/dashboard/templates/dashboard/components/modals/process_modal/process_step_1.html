@@ -1,0 +1,23 @@
+{% load general_tags %} {% load dashboard_tags %} {% load static %}
+<div class='setup-content' id="step-1">
+    <section class="modal-body w-75 mx-auto pt-5">
+        <p>Nomeie este processo e informe as seguintes categorias.</p>
+        <div class="d-flex flex-column gap-16 px-4 justify-content-center align-items-start">
+            {% include 'dashboard/components/settings_input_form.html' with input_id='processStep1Nickname' title='process_nickname'|translate:language tooltip_text=False input_class='' input_type='text' label_class="" example_input='example_process_nickname'|translate:language %}
+            <label for="processStep1Area">{{'business_area'|translate:language}}:
+                <select name="" id="processStep1Area">
+                    <option value="">{{ 'select_department'|translate:language }}</option>
+                        {% for area in processes_filter.areas.areas %}
+                            <option value="{{ processes_filter.areas.id|get_obj_attr:forloop.counter0 }}"{% if area_selected == area %} selected{% endif %}>
+                                {{ area }}
+                            </option>
+                        {% endfor %}
+                </select>
+            </label>
+            {% include 'dashboard/components/settings_input_form.html' with input_id='processStep1Cost' title='investment'|translate:language tooltip_text=False input_class='input__money' input_type='text' label_class="" example_input='used_for_roi_calculation'|translate:language input_placeholder="R$ 0,00" %}
+        </div>
+    </section>
+
+
+    {% include 'dashboard/components/modals/process_modal/process_footer.html' with prev_btn_disabled=True next_btn_type='button' no_advance=False no_arrow=False show_next_arrow=True next_btn_text='next_male'|translate:language next_btn_disabled=True %}
+</div>

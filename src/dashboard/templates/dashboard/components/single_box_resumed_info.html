@@ -1,0 +1,10 @@
+{% load static %}
+<div class="{{ parent_class }} box">
+    <div class="d-flex justify-content-center align-items-center">
+        <img class="d-none" src="{% static 'dashboard/img/'|add:icon|add:'.svg' %}"> 
+        <div class="ml-3">
+            <span class="info text-center f-size-26 font-weight-bold color#3C3E3E"><div class="d-flex justify-content-center"><div class="loader small mt-2"></div></div></span>
+            <p class="mb-1 f-size-14-4">{{ box_about_text }}</p>
+        </div>
+    </div>
+</div>

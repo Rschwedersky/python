@@ -1,0 +1,30 @@
+{% load general_tags %}
+<div class="dashboard status single__dashboard">
+    <div class="h-100">
+        <article id="{{graph_id}}" class="single__dashboard--content h-100">
+            <section class="single_chartcontent d-flex h-100">
+                <article class="d-flex">
+                    <div class="graph_content pl-4 h-100 w-100">
+                        <p class="{{title_class}}">{{ title_automation }}</p>
+                        <div class="status_infos mt-3">
+                            <p class="mb-0"><b class="color13087b f-size-26 mb-1">0</b></p>
+                            <p class="mb-0 light-bold">{{title}}</p>
+                        </div>
+                        <div class="half_donut mt-5">
+                            <div class="circular">
+                                <div class="circular-progress"></div>
+                                <div class="smaller-circular"></div>
+                            </div>
+                            <div class="half_donut_infos text-center">
+                                <p class="percentage color009bf1 mb-0 mt-0 f-size-26"><strong>0%</strong></p>
+                                <p class="text f-size-12 color5f5f5f mb-0"><b>{{ 'completion_rate'|translate:language }}</b></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="infos_content w-100">
+                    </div>
+                </article>
+            </section>
+        </article>
+    </div>
+</div>

@@ -1,0 +1,32 @@
+{% extends 'base.html' %} {% block content %} {% load general_tags %} {% load static %}
+
+<div id="help_center" class="pt-5">
+    <div class="container container-90 h-90 whitebackcolor py-3 jsHelpContainer">
+        <h2 class="help__heading f-size-24  px-4 py-4">
+			Precisa de ajuda?
+			<div class="green__underlined green__help"></div>
+		</h2>
+        <br>
+        <div class="subtitle-help">
+            <small class="f-size-12 px-4 color-muted--light">
+                Confira as respostas para as dúvidas mais frequentes ou nos envie uma mensagem
+            </small>
+        </div>
+        {% include 'components/box_chat_help.html' with page='help_center' %}
+        <div class="px-4 d-flex gap-16 align-items-center mt-2 mb-5">
+            {% include 'components/box_help_center.html' %}
+        </div>
+        {% include 'components/help_container_boxes.html' %}
+        
+        <div class="container container-seta d-flex btn-help py-5 px-4" type="button">
+            <a href="#" class="btn-help">
+                <div class="circulo_seta--help">
+                    <img class="img-seta__help" src="{% static 'img/logo_seta.png' %}">
+                </div>
+            </a>   
+        </div>
+    </div>
+</div>
+
+{% include 'components/footer.html' %}
+{% endblock %}

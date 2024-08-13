@@ -1,0 +1,42 @@
+{% extends 'base.html' %}{% load static %} {% load general_tags %} 
+
+{% block content %}
+    <div id="back_opacity"></div>
+    {% include 'dashboard/components/filter_menu.html' %}
+    
+    <nav class="header_api">
+        <a class="logo no__link f-size-22 ">
+            <img class="logo_smarthis_api" src="{% static "dashboard/img/LogoSmarthisHub.png" %}" alt="Smarthis Hub Logo" />
+       
+        </a>
+    </nav>
+    <div id="menu" >
+        {% include 'dashboard/components/single_menu.html' with main_class='filter py-5' img_src='filter' %}
+    </div>
+
+    <div id="resize_plotly" class="backgroundf2f2f2 container container-100 h-100 container__height">
+        {% include 'dashboard_automation/resumed_infos_automation.html' with  title='Dashboard de execuções'%} 
+                <div class="topline d-flex justify-content-between gap-5">  
+                    <div class="pl-3 ml-3 pr-2">
+                    {% include 'dashboard/components/dashboard_status.html' with graph_id='bystatus_automation' title_automation='Histórico total de execuções' title='modelos executados' title_class='f-size-20 light-bold' %} 
+                    </div>
+                    <div class="plotly">
+                    {% include 'dashboard_automation/dash_bars_automation.html' %}  
+                    </div>
+                    {{ infos|json_script:"json-data" }}
+                    {{ client_id|json_script:"client-id" }}
+                    {{ tasks|json_script:"json-tasks" }}
+                </div>
+           
+    </div>
+
+    <script src="{% static 'dashboard/js/dashboard_utils.js' %}"></script>
+    <script src="{% static 'js/dashboardAutomation.js' %}"></script>
+
+    <script src="{% static 'js/automationDashboardFilter.js' %}"></script>
+    <script src="{% static 'dashboard/js/dateInputCalendar.js' %}"></script>
+    <script src="{% static 'dashboard/js/fake_select.js' %}"></script>
+    <script src="{% static 'dashboard/js/topic_selection.js' %}"></script>
+    {% comment %} {% include 'components/footer.html' %} {% endcomment %}
+
+{% endblock %}

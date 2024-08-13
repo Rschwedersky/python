@@ -1,0 +1,16 @@
+{% load static %}
+<div class="d-flex flex-column gap-16 px-4 py-3">
+    <section class="help--box__container">
+        <header class="help---box__header">
+            <div class="d-flex align-items-center gap-10">
+                <strong class="f-size-18 m-0">{{subtitletext}}</strong>
+            </div>
+            <div class="help-box__header--center">
+                <img src="{% static '/dashboard/img/down-arrow.svg' %}" alt="Arrow Icon" class="ml-auto c-pointer arrow__button--dropdown" data-info="" data-image="{% static '/dashboard/img/up-arrow.svg'%}">
+            </div>
+        </header>
+        <section class="help--center-box__content">
+            <p class="text--content-help m-0 w-100">{{ text | safe }}</p>
+        </section>
+    </section>
+</div>

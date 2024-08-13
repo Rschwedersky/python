@@ -1,0 +1,30 @@
+{% load static %} {% load general_tags %}
+
+<div class="modal fade" id="edit_area_modal" tabindex="-1" role="dialog" aria-labelledby="EditModalArea" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title color-muted" id="EditModalArea">{{ 'edit_area'|translate:language }}
+                    <div class="green__underlined green_modal__areas-edit"></div>
+                </h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+                <img src="{% static "/dashboard/img/exit.svg" %}" aria-hidden="true" class="modal__close c-pointer opacity-hover"/>
+                </button>
+            </div> 
+
+            <div class="modal-body modal__area-edit padding-0">
+                <form  class="text-center" id="form-edit-area">
+                    {% csrf_token %}
+                    <div class="form-item w-70 m-auto py-3" id="edit_area">
+                        <p class="input__text  mb-0 color000000">{{ 'area_name'|translate:language }}</p>
+                            <input  name="area" type="text" class="w-70 form-control control-text"/>
+                    </div>
+                    <div class="modal-footer d-flex justify-content-end mt-3">
+                        <button type="button" class="btn btn__cancel-area color000000" data-dismiss="modal">{{ 'cancel'|translate:language }}</button>
+                        <button type="submit" value="Criar" class="btn btn__submit-area-edit  ml-3" data-id="" disabled>{{ 'save_changes'|translate:language }}</button>
+                    </div>
+                </form>
+            </div> 
+        </div>
+    </div>
+</div>

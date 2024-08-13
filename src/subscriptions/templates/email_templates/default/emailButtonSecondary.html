@@ -1,0 +1,14 @@
+{% load general_tags %}
+
+<div style='text-align:center;'>
+  <!--[if mso]>
+    <v:rect xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word" href="http://" style="height:40px;v-text-anchor:middle;width:200px;" strokecolor="#3424c4" fillcolor="#01FFA9">
+      <w:anchorlock/>
+      <center style="color:#0E0E0E;font-family:sans-serif;font-size:13px;font-weight:bold;">Show me the button!</center>
+    </v:rect>
+  <![endif]-->
+  <a href="{{ button_link }}"
+  style="background-color:#01FFA9;border:1px solid #3424c4;border-radius:4px;color:#0E0E0E;display:inline-block;font-family:sans-serif;font-size:20px;font-weight:bold;line-height:85px;text-align:center;text-decoration:none;width:80%;max-width:400px;-webkit-text-size-adjust:none;mso-hide:all;">{{button_text}}</a>
+
+  <p style="margin-bottom: 40px; font-size: 14px;">{{ 'if_you_cant'|translate:language }}, <a href="{{ button_link }}">{{ 'click_here_small'|translate:language }}</a>
+</div>

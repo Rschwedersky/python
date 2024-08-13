@@ -1,0 +1,52 @@
+{% load static %} {% load general_tags %} {% load dashboard_tags %}
+
+{% if is_admin and licenses == 0 %}
+    {% include 'components/box-permissions.html' %}
+{% else %} 
+    <section id="my_automations">
+        {% if active_tab == 'processes_history' or active_tab == 'all_scheduled_automations' %}
+            <div class="d-flex justify-content-center align-items-center p-5">
+                {% include 'components/loading.html' with show=True %}
+            </div>
+        {% else %}
+            <div class="top_header">
+                <p class="card-text "><small class="text-muted"> <a href="{% url 'services' %}" >{{ 'my_services'|translate:language }}</a>  > {{ standard_variables|get_obj_attr:'title' }} </small></p>
+            </div>
+            <div class="responsive-columns my-solutions-inner">
+                <div class="download">
+                    <h2 class="mysolutions_title_standard f-size-21 dark-gray__color light-bold mb-5">
+                    {{ automation_obj|get_automation_display_name:language }}
+                    </h2>
+                    <div class="d-flex justify-content-center align-items-center">
+                        {% if is_automation_active == True or user.profile.client.name == 'Smarthis' %}
+                            {% if can_create_model != 1 %}
+                                <button type="button" id="btn_newconfig" class="btn" data-toggle="modal" data-target="#modal_request_create_model"  data-automation = {{ automation_name }} data-heap="Configurar novo modelo da {{automation_name}}">{{ 'configure_new_template'|translate:language }}</button>
+                            {% else %}
+                                <button type="button" id="btn_newconfig" class="btn" data-toggle="modal" data-target="#modalExemplo"  data-automation = {{ automation_name }} data-heap="Configurar novo modelo da {{automation_name}}">{{ 'configure_new_template'|translate:language }}</button>
+                            {% endif %}
+                        {% else %}
+                            <button type="button" id="btn_newconfig" class="btn" data-toggle="modal" data-target="#service-under-maintenance-modal" data-backdrop='static' data-heap="Configurar novo modelo da {{automation_name}}">{{ 'configure_new_template'|translate:language }}</button>
+                        {% endif %}
+                    </div>
+
+                    <div class="allschedules pt-5 mb_allschedules d-flex flex-column">
+                        {% if can_create_model == 2 %}
+                            <div class="w-100">
+                                {% include 'components/box_waiting_for_model_creation.html' %}
+                            </div>
+                        {% endif %}
+                        {% include 'schedule_list.html' with page_obj=schedules standard_variables=standard_variables allschedule_credentials=allschedule_credentials tasks=tasks is_automation_active=is_automation_active allowed_automations=automations_translate %}
+                    </div>
+                </div>
+                {% include 'components/box-standard.html' with standard_variables=standard_variables %}
+            </div>
+            {% if is_automation_active == False %}
+                {% include 'components/modals/modal_service_under_maintance.html' %}
+            {% endif %}
+            {% include 'components/appointment/modal_create_appointment.html' %}
+            {% include 'components/appointment/modal_delete_appointment.html' %}
+            {% include 'components/appointment/modal_confirm_appointment.html' %}
+        {% endif %}
+    </section>
+
+{% endif %}

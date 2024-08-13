@@ -1,0 +1,25 @@
+{% load static %} {% load general_tags %} {% load dashboard_tags %}
+<li class="permissions__modal-email--item c-pointer" data-user={{id}}>
+    <div>
+        <span class="border__circle border__circle--permissions">{{name|get_name_initials }}
+        </span>
+        <div class="d-flex flex-column">
+            <p class="m-0 light-bold topinfo_checkbox">{{ name }}</p>
+            <p class="m-0 f-size-14 color-muted bottominfo_checkbox">{{ email }}</p>
+        </div>
+    </div>
+    {% if crew_type == 'dashboard_invite' %}
+        {% if role == 6 %}
+            {% include 'dashboard/components/dashboard_view_type.html' with with_exclude=True active='leitor' %}
+        {% elif role == 3 or role == 4 %}
+            {% include 'dashboard/components/dashboard_view_type.html' with with_exclude=False active='admin' %}
+        {% else %}
+            {% include 'dashboard/components/dashboard_view_type.html' with with_exclude=True active='editor' %}
+        {% endif %}
+    {% else  %}
+        <span class="color-muted f-size-14">{{ 'employee'|translate:language }}</span>
+        {% if 'services' in profile and profile|get_obj_attr:'services'|length > 0 %}
+            <input type="hidden" class="services_by_user" value="{{ profile|get_obj_attr:'services'|getStringFromDictionary }}"/>
+        {% endif %} 
+    {% endif %}
+</li>

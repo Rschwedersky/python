@@ -1,0 +1,149 @@
+{% extends 'dashboard/components/modals/_base_modal.html' %}  {% load static %} {% load dashboard_tags %} {% load general_tags %}
+
+{% block id %}dashboard-modal{% endblock %}
+
+{% block modal_body %}
+
+{% comment %} {% include 'consumer_accounts/components/_modal_stepper.html' %} {% endcomment %}
+
+<div data-identifier="how-it-works-roi" class="d-none">
+    <h5 class="margin-bottom-12"><strong>{{ 'how_does_it_works'|translate:language }}</strong></h5>
+    <p>
+        {{ 'roi_breakdown'|translate:language }}
+    </p>
+
+    <div class="d-flex justify-content-center margin-y-24">
+        <div class="math-formula">
+            {{ 'roi_formula_top'|translate:language }}
+            <hr>
+            {{ 'roi_formula_bottom'|translate:language }}
+        </div>
+    </div>
+
+    <p>
+        {{ 'with_this_formula_roi'|translate:language }}
+    </p>
+
+    <p class="margin-bottom-40">
+        {{ 'start_viewing_roi'|translate:language }}
+    </p>
+
+    <h5 class="margin-bottom-12"><strong>{{ 'graphics'|translate:language }}</strong></h5>
+
+    <p>
+        {{ 'know_roi'|translate:language }}
+    </p>
+
+    <p class="margin-bottom-40">
+        {{ 'roi_summary'|translate:language }}
+    </p>
+
+</div>
+
+<div data-identifier="empty-state-roi" class="d-none">
+    <h5 class="margin-bottom-12"><strong>{{ 'how_does_it_works'|translate:language }}</strong></h5>
+    <p>
+        {{ 'roi_breakdown'|translate:language }}
+    </p>
+
+    <div class="d-flex justify-content-center margin-y-24">
+        <div class="math-formula">
+            {{ 'roi_formula_top'|translate:language }}
+            <hr>
+            {{ 'roi_formula_bottom'|translate:language }}
+        </div>
+    </div>
+
+    <p>
+        {{ 'with_this_formula_roi'|translate:language }}
+    </p>
+
+    <p class="margin-bottom-40">
+        {{ 'start_viewing_roi'|translate:language }}
+    </p>
+</div>
+
+<div data-identifier="history-roi" class="d-none">
+    <p>
+        {{ 'history_and_evolution_roi'|translate:language }}
+    </p>
+    <p>
+        {{ 'horizontal_lines_roi'|translate:language }}
+    </p>
+    <p>
+        {{ 'vertical_lines_roi'|translate:language }}
+    </p>
+    <p>
+        {{ 'from_this_moment_roi'|translate:language }}
+    </p>
+    <p>
+        {{ 'important_roi'|translate:language }}
+    </p>
+
+</div>
+
+<div data-identifier="hours-returned" class="d-none">
+    <h5 class="margin-bottom-12"><strong>{{ 'how_does_it_works'|translate:language }}</strong></h5>
+    <p>
+        {{ 'the_number_of_hours_returned_is_obtained_by_the'|translate:language }} 
+        <strong> {{ 'how_returned_hours_works'|translate:language }}</strong>
+         {{ 'in_other_words_returned_hours'|translate:language }}:
+    </p>
+    <div class="d-flex justify-content-center margin-y-24">
+        <div class="math-formula">{{ 'formula_hours_returned'|translate:language }}</div>
+    </div>
+    <p>{{ 'formula_it_is_possible_to_understand_hours_returned'|translate:language }}</p>
+    <p>
+        {{ 'to_start_viewing_this_information_hours_returned'|translate:language }}
+        <a href="#">{{ 'settings_processes'|translate:language }}</a>
+        {{ 'the_more_accurate_the_information_provided'|translate:language }}
+    </p>
+    <h5 class="margin-bottom-12"><strong>{{ 'graphics'|translate:language }}</strong></h5>
+    <p>{{ 'view_the_number_of_hours_returned_individually'|translate:language }}</p>
+    <p>{{ 'also_have_access_to_the_history_of_the_hours_returned'|translate:language }}</p>
+    <p><strong>{{ 'important'|translate:language }}: </strong>{{ 'having_fewer_hours_returned'|translate:language }}</p>
+</div>
+
+<div data-identifier="robots_tab_modal" class="d-none">
+    <h5 class="margin-bottom-12"><strong>Ocupação</strong></h5>
+    <p>{{ 'get_access_to_your_robot_occupancy'|translate:language }}</p>
+    <p>{{ 'robot_occupancy_use_these_insights_to_better_schedule'|translate:language }}</p>
+    <h5 class="margin-bottom-12"><strong>Histórico de execuções</strong></h5>
+    <p>{{ 'view_the_history_of_the_status_of_all_the_executions_of_your_processes'|translate:language }}</p>
+    <p>
+        <strong>{{ 'completed_processes'|translate:language }},</strong>
+        {{ 'are_those_that_managed_to_run_to_the_scheduled_end'|translate:language }}
+        <strong>{{ 'failed_processes'|translate:language }},</strong> 
+        {{ 'encountered_a_problem_that_prevented_the_execution'|translate:language }}
+        <strong>{{ 'paused_processes'|translate:language }},</strong> 
+        {{ 'are_those_currently_on_hold_in_your_orchestrator_ui_path'|translate:language }}
+    </p>
+</div>
+
+<div class="w-100 justify-content-center align-items-center d-none jsLoading mb-24-px">
+    <div class="spinner-border text-hub" style="width: 3rem; height: 3rem;" role="status">
+        <span class="sr-only">Loading...</span>
+    </div>
+</div>
+
+<div data-identifier="how-it-works-rpa" class="d-none">
+    
+    <p>
+        {{ 'rpa_modal_1'|translate:language }}
+    </p>
+
+    <p>
+        {{ 'rpa_modal_2'|translate:language }}
+    </p>
+
+    <p>
+        {{ 'rpa_modal_3'|translate:language }}
+    </p>
+
+    <p>
+        {{ 'rpa_modal_4'|translate:language }}
+    </p>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,22 @@
+{% load general_tags %} {% load general_tags %} {% load dashboard_tags %}  {% load static %}
+<div class="row setup-content" id="step-1">
+    <div class="col-12">
+        <div class="form-group">
+            <p class="text-left light-bold color11067A text-utilization d-flex justify-content-center">
+                {{ 'how_would_you_like_to_call_this_model'|translate:language }}
+            </p>
+            <div class="form-item w-50 m-auto">
+                <small class="control-label">
+                    {{ 'model_name'|translate:language }}
+                </small>
+                <input id='name-automation-input' maxlength="100" type="text" name="name" class="form-control control-text" />
+                <small id="identificacao" class="form-text text-muted">
+                    <i>
+                        {{ standard_variables|get_obj_attr:'input_small' }}
+                    </i>
+                </small>
+            </div>
+        </div>
+        {% include 'components/modal_footer.html' with next_btn_text='advance'|translate:language next_btn_class='step-1' prev_btn_disabled=True next_btn_type='button' %}
+    </div>
+</div>

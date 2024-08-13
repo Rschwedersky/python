@@ -1,0 +1,46 @@
+{% if success %}
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+    {{ success }}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+{% elif error %}
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+    {{ error }}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+{% endif %}
+<!-- Tab panes -->
+{% load static %}
+<div class="tab-pane active p-3" id="settings" role="tabpanel" aria-labelledby="settings-tab">
+    <form id="register_email" action="{% url 'mysolutions:update_settings' %}" method="post">
+        {% csrf_token %}
+        <div class="mb-3">
+            <label for="id_txtLogin" class="form-label d-flex justify-content-start align-items-center">Login <img src="{% static 'img/padlock.png' %}" width="15" height="15" class="ml-1" data-toggle="tooltip" data-placement="top" title="Seus dados estão seguros: o login fornecido será criptografado"/></label>
+            <input type="password" class="form-control" name="login" id="id_txtLogin" aria-describedby="emailHelp">
+            <p class="text_error f-size-10 mb-1"></p>
+        </div>
+        <div class="mb-3">
+            <label for="id_txtPassword" class="form-label d-flex justify-content-start align-items-center">Senha <img src="{% static 'img/padlock.png' %}" width="15" height="15" class="ml-1" data-toggle="tooltip" data-placement="top" title="Seus dados estão seguros: a senha fornecida será criptografada"/></label>
+            <input type="password" class="form-control" name="password" id="id_txtPassword">
+            <p class="text_error f-size-10 mb-1"></p>
+        </div>
+        <div class="mb-3">
+            <label for="id_txtEmail" class="form-label">Email (de recebimento do arquivo)</label>
+            <input type="email" class="form-control" name="email" id="id_txtEmail" aria-describedby="emailHelp">
+            <p class="text_error f-size-10 mb-1"></p>
+        </div>
+        <div class="mb-3">
+            <label for="id_frequency" class="form-label">Periodicidade</label>
+            <select name="frequency" id="id_frequency" class="form-control">
+                <option value="12">12 horas</option>
+                <option value="24">24 horas</option>
+            </select>
+            <p class="text_error f-size-10 mb-1"></p>
+        </div>
+        <button type="submit" class="btn btn-primary px-5">Salvar</button>
+    </form>
+</div>

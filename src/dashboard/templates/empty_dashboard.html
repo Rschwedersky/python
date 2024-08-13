@@ -1,0 +1,86 @@
+{% load static %} {% load general_tags %}
+
+<div id="empty" class="pt-5">
+    <div class="container container-90 h-90 whitebackcolor py-5">
+        <div class="box-empty box-backcolor-light p-3">
+            <img class="img_block" src="{% static "/img/logo_block.png" %}" alt="logo block">
+            <div class="text-box-empty f-size-24">
+                <strong>Parece que você ainda não tem acesso a nenhum dashboard.</strong> 
+                Confira abaixo o que o Smarthis Hub já oferece na área.
+            </div>
+        </div>
+        <section class="empty__dashboard--content">
+            <div class="d-flex flex-column align-items-start gap-16 mt-4 pl-5 py-5">
+                <div class="mb-4 w-50">
+                    <h1 class="f-size-21 light-bold">Conheça o Dashboard de RPA</h1>
+                    <div class="green__underlined green__underlined--empty-dashboad"></div>
+                </div>
+                <div class="color-muted--light">
+                    <p>Faça gestão da sua operação RPA UiPath com o Dashboard de RPA Smarthis Hub.</p> 
+                    <p>Acompanhe e compare seus robôs e processos por períodos, áreas e mais, tirando insights valiosos para o seu negócio</p> 
+                    <p class="m-0">O dashboard de RPA pode ser adicionado ao seu pacote sem custos extras, apenas consumindo 01 permissão.</p>
+                </div>
+                <button class="btn__purple--empty-rpa f-size-14" disabled>
+                    <p class="p_purple--empty">Para contratar, entre em contato por: </p>
+                    <strong>hub-contato@smarthis.com.br</strong>
+                    <div class="logo__email">
+                        <img src="{% static "/img/logo_email.png" %}" alt="logo email">
+                    </div>
+                </button>
+                <div>
+                    <p class="mb-1 color-muted--light f-size-12">{{ 'uipath_operations_are_required'|translate:language }}</p>
+                    <img src="{% static "/img/logoUIpath.png" %}" alt="UI Path Logo">
+                </div>        
+            </div>
+            <div class="dash-img__antigo py-5">
+                <img src="{% static "/img/rpa-dashboard-demo.png" %}" alt="RPA Dashboard Demo Image">
+            </div>
+        </section>
+        <section class="text-center">
+            <section class="empty-dashboard__steps-container py-5">
+                <figure>
+                    <img src="{% static '/img/logo_area_processos.png'%}" class="py-4 " alt="">
+                    <br>
+                    <strong>Áreas e Processos</strong>
+                        <figcaption class="py-3">Cadastre áreas, associe aos processos e crie apelidos para eles, facilitando a análise de dados e a comunicação da equipe.</figcaption>  
+                </figure>
+                <figure>
+                    <img src="{% static '/img/grafico_analises.png'%}" class="py-4 " alt="">
+                    <br>
+                    <strong>Gráficos e Análises</strong>
+                        <figcaption class="py-3">Acompanhe horas trabalhadas por área (Colaborador x RPA), tempo de execução dos processos, ocupação de robôs e mais.</figcaption>
+                </figure>
+                <figure>
+                    <img src="{% static '/img/logo_filtro.png'%}" class="py-4 " alt="">
+                    <br>
+                    <strong>Filtros</strong>
+                        <figcaption class="py-3">Ajuste os filtros do seu Dashboard RPA para obter insights mais específicos nas áreas, processos, robôs, status e mais.</figcaption>
+                </figure>
+            </section>
+        </section>
+        <div class="container__box--uipath">
+            <div class="box-empty__uipath box-backcolor-light p-3 py-5">
+                <div class="box-img__uipath">
+                    <img src="{% static "/img/logoUIpath.png" %}" height="60" alt="UI Path Logo">
+                    <img src="{% static "/img/logo_orchestrator.png" %}"  alt="UI Path Logo">
+                </div>  
+            </div>
+            <div>
+                <p class="f-size-21 light-bold w-50">Integração com o Orquestrador UiPath</p>
+                <div class="green__underlined green__underlined--empty-uipath"></div>
+                <p class="py-3">Ajuste os filtros do seu Dashboard RPA para obter insights mais específicos nas áreas, processos, robôs, status e mais.</p>
+            </div>
+            <div class="py-5">
+                <p class="f-size-18 light-bold w-0">Próximos lançamentos</p>
+                <div class="green__underlined green__underlined--empty-lancamento"></div>
+                <div class="py-5">
+                    {% include 'dashboard/components/carrousel_dashboard.html' with img='teste-dash' %}
+                </div>
+            </div>
+        </div>
+        <div class="box-business">
+            {% include 'dashboard/components/box_which_analyzes_impact_your_business.html' %}
+        </div>
+    </div>
+</div>   
+{% include 'components/footer.html' %}

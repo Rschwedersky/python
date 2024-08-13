@@ -1,0 +1,51 @@
+{% load general_tags %} {% load humanize %}
+{% if subscription.get_subscription_plan.get_plan_name == 'Free Trial' %}
+    <ul>
+        <li>
+            <strong>{{ plan_info.qnt_automations }} </strong>
+            {% if plan_info.qnt_automations != 1 %}
+                {{'licenses'|translate:language}}
+            {% else %}
+                {{'license'|translate:language}}
+            {% endif %}
+        </li>
+        <li><strong>{{ plan_info.qnt_queries|intcomma }} </strong>{{'monthly_consultations_by_license'|translate:language}}</li>
+    </ul>
+    <label class="f-size-14 d-flex gap-32 align-items-center">
+        <div class="custom__switch w-3rem">
+            <input type="checkbox" name='queries'{% if plus != None and plus %} checked{% endif %}>
+            <span class="slider round w-3rem h-1_5rem"></span>
+        </div>
+        <span>
+            {{'add'|translate:language }} <strong>+ {{ plan_info.qnt_extra_queries|intcomma }}</strong> {{'monthly_appointments_to_your_plan'|translate:language }} R$ <span class="js-extra-price">{{ plan_info.extra_price }}</span>
+            {% if period == 'yearly' %}
+                {{'per_month'|translate:language }}.
+            {% endif %}
+        </span>
+    </label>
+{% else %}
+    <ul>
+        <li>
+            <strong>{{ plan_info.qnt_automations }} </strong>
+            {% if plan_info.qnt_automations != 1 %}
+                {{'licenses'|translate:language}}
+            {% else %}
+                {{'license'|translate:language}}
+            {% endif %}
+        </li>
+        <li>
+            <strong>
+                {% if plus != None and plus %}
+                    {% with qnt_queries=plan_info.qnt_queries|add:plan_info.qnt_extra_queries %}
+                        {{ qnt_queries|intcomma }}
+                    {% endwith %}
+                    <input type="checkbox" class="d-none" name='queries' checked>
+                {% else %}
+                    {{ plan_info.qnt_queries|intcomma }}
+                    <input type="checkbox" class="d-none" name='queries'>
+                {% endif %}
+            </strong>
+            {{'monthly_consultations_by_license'|translate:language}}
+        </li>
+    </ul>
+{% endif %}

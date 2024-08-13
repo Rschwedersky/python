@@ -1,0 +1,16 @@
+{% load static %} {% load general_tags %}
+
+<article id='service-under-maintenance-modal' class='modal fade'tabindex="-1" role="dialog" >
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-body d-flex align-items-center justify-content-between p-5">
+                <div>
+                    <p class='f-size-30'><strong>{{'service_under_maintenance'|translate:language }}</strong></p>
+                    <p class="color-muted f-size-18">{{'dont_worry_will_soon_be_back'|translate:language }}.</p>
+                    <a href={% url 'services'%} class="btn__purple d-inline-block p-3 no-uppercase">{{'back_to_my_services'|translate:language }}</a>
+                </div>
+                <img src="{% static 'img/icone-manutencao.svg' %}" alt="Under Maintenance Icon">
+            </div>
+        </div>
+    </div>
+</article>

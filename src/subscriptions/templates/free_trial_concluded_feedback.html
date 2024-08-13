@@ -1,0 +1,91 @@
+{% extends 'base.html' %} {% load static %} {% load general_tags %} {% load dashboard_tags %} {% load mysolutions_tags %} {% load humanize %} {% load i18n %}
+{% block content %}
+    <div class='free-trial__end--feedback dark-gray__color h-100vh' data-plan="{{plan}}" data-licenses="{{plan.get_plan_qnt_automations}}">
+        <nav class='d-flex align-items-center'>
+            <img src="{% static "dashboard/img/LogoSmarthisHub.png" %}" alt="Smarthis Hub Logo" />
+        </nav>
+
+        <div class="d-flex justify-content-around w-90 h-100 my-5 mx-auto whitebackcolor">
+            {% language language %}
+            <article class='p-4 summary-new-plan mt-5 mb-auto'>
+                <p><strong>{{'summary'|translate:language}}</strong></p>
+                <div class="d-flex justify-content-between">
+                    <p><strong>
+                        <span class="d-block f-size-14">{{'value'|translate:language}}:</span>
+                        <span>
+                            {% if 'business trial' in plan.get_plan_name|lower %}
+                                {{'waiting_evaluation'|translate:language }}
+                            {% else %}
+                                R$ {{subscription.get_value|intcomma}}
+                            {% endif %}
+                        </span>
+                    </strong></p>
+                    <p class='color383838'>
+                        <strong>{{'plan'|translate:language }}</strong>:
+                        {{plan_name|title}}
+                    </p>
+                </div>
+                <hr>
+                <p>
+                    <span class="d-block">{{'plan_details'|translate:language }}:</span>
+                    <span class='f-size-14 color-muted d-block'>
+                        - {{'licenses'|translate:language|title}}:  <strong>{{subscription.get_number_of_hired_services}}</strong>
+                    </span>
+                    
+                    <span class='f-size-14 color-muted d-block'>
+                        - {{'monthly_consultations_by_license'|translate:language|capfirst }}: <strong>{% if subscription.get_queries_limit != 0 %}{{subscription.get_queries_limit|intcomma}}{% else %} {{'unlimited'|translate:language|title }}{% endif %}</strong>
+                    </span>
+                </p>
+
+                <div class="fieldset fieldset--light-gray w-100 mx-auto p-0 pb-2 mb-2">
+                    <span class="legend_hub f-size-20">
+                    {{'services'|translate:language }} {% if dashboard %} {{'and'|translate:language}} Dashboards{% endif %}:
+                    </span>
+                    <div class="zebra overflow-y-auto text-left">
+                        {% for service in hired_services %}
+                            <span class="p-2  d-block">{{ hired_services|get_obj_attr:service|get_obj_attr:'quantity'}}x <strong>{{ hired_services|get_obj_attr:service|get_obj_attr:'display_name' }}</strong></span>
+                        {% endfor %}
+                    </div>
+                </div>
+
+                <span class="f-size-12 color-muted">*{{'services_dashboards_changed_extra_charges'|translate:language }}.</span>
+            </article>
+            {% endlanguage %}
+            <section class='d-flex flex-column justify-content-center align-items-center mt-5 mb-auto p-5'>
+                <img src="{% static 'img/check_green_circle.png'%}" alt="Green Checkmark">
+
+                <h2 class='color-secondary f-size-28'>
+                    {% if 'business trial' in plan.get_plan_name|lower and subscription.get_value == 0  %}
+                        {{'request_sent_successfully'|translate:language }}
+                    {% else %}
+                        {{'successfully_contracted_plan'|translate:language }}
+                    {% endif %}
+                </h2>
+
+                <p>
+                    {% if plan == 'business' %}
+                        <span class="d-block">{{'you_will_soon_receive_evaluation_email'|translate:language }}</span>
+                    {% endif %}
+                        <span class="d-block">{{'you_can_now_use_your_services_again'|translate:language }}</span>
+                </p>
+                
+                {% if 'business trial' in plan.get_plan_name|lower and subscription.get_value == 0  %}
+                    <a href="{% url 'onboarding' %}" class="btn__purple d-inline-block px-4 py-3 no-uppercase f-size-20"><strong>{{'back_to_home'|translate:language }}</strong></a>
+                {% else %}
+                    <a href="{% url 'services' %}" class="btn__purple d-inline-block px-4 py-3 no-uppercase f-size-20"><strong>{{'use_my_services'|translate:language }}</strong></a>
+                {% endif %}
+                
+
+            </section>
+        </div>
+       
+    </div>
+
+
+<style>
+    body {
+        padding-top: 0;
+    }
+</style> 
+    <script src="{% static 'js/freeTrial.js' %}"></script>
+{% endblock %}

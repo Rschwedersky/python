@@ -1,0 +1,103 @@
+{% load general_tags %} {% load dashboard_tags %} {% load static %} {% load humanize %} {% load i18n %}
+
+{% with plan=config_infos|get_obj_attr:'plan' %}
+{% with subscription=config_infos|get_obj_attr:'subscription' %}
+<section class="plans-content" id="plan-content">
+    <div class="settings-content__title">
+        <h6><strong>{{ 'plan'|translate:language }}</strong></h6>
+        <div class="hr-bold"></div>
+    </div>
+    <p>
+        {{ 'you_signed_the_plan'|translate:language }}
+        <strong>{{ plan.get_plan_name }}</strong>
+    </p>
+    <div class="plans-content__info">
+        <div class="plans-content__info--permission">
+            {% if 'Free Trial' in plan.get_plan_name and total_progress == 100 %}
+                <p class="free_trial_extra"><strong>6 dias extras</strong></p>
+            {% endif %}
+            {% if 'business' in plan.get_plan_name %}
+                <p class="f-size-14 color-muted">
+                    {{'in_your_business_plan_1'|translate:language }} <strong>{{ subscription.get_number_of_hired_services }} {% if subscription.get_number_of_hired_services == 1 %}{{ 'license'|translate:language }}{% else %}{{ 'licenses'|translate:language }}{% endif %}</strong> {{'in_your_business_plan_2'|translate:language }}
+                    {% if subscription.get_queries_limit == 0 %}
+                        <strong>{{subscription.get_queries_limit|intcomma}}</strong> {{'monthly_consultations_by_license'|translate:language }}.
+                    {% else %}
+                        <strong>{{'unlimited_queries'|translate:language }}</strong>.
+                    {% endif %}
+                </p>
+            {% else %}
+                <p class="f-size-14 color-muted">
+                    {{ 'with_it_you_receive'|translate:language }}
+                    <strong>{{ subscription.get_number_of_hired_services }} {% if subscription.get_number_of_hired_services == 1 %}{{ 'license'|translate:language }}{% else %}{{ 'licenses'|translate:language }}{% endif %}</strong>
+                    {{ 'to_use_or_distribute_among_your_team'|translate:language }}
+                </p>
+                {% if 'Free Trial' not in plan.get_plan_name %}
+                    <span class="mb-2 f-size-14 color-muted">
+                        {{'you_can_use_up_to'|translate:language }} <strong>{{subscription.get_queries_limit|intcomma}}</strong> {{'monthly_consultations_by_license'|translate:language }}
+                    </span>
+                {% endif %}
+
+            {% endif %}
+            <div class="plans-content--price">
+                <p>
+                    {% with value_stringified=config_infos|get_obj_attr:'plan_value' %}
+                    {% with infos_number=value_stringified|add:' | 2 | True' %}
+                        <strong>R$ {{ infos_number|commaDecimalEnd:language }}</strong>
+                    {% endwith %}
+                    {% endwith %}
+                    <span class="color-muted">
+                        / 
+                        {% if 'yearly' in subscription.get_payment_period|lower %}
+                            {{ 'year'|translate:language }}
+                        {% else %}
+                            {{ 'month'|translate:language }}
+                        {% endif %}
+                    </span>
+                </p>
+            </div>
+        </div>
+    </div>
+    {% if 'Free Trial' in plan.get_plan_name or 'Business Trial' in plan.get_plan_name %}
+        <div class="settings-content__title">
+            <h6><strong>{{ 'payment'|translate:language }}</strong></h6>
+            <div class="hr-bold"></div>
+        </div>
+        <p>{{ 'no_charges_scheduled'|translate:language }}</p>
+        <div class="plan__subscription_trial">
+            <figure class="d-flex justify-content-center mb-0">
+                <img src="{% static 'dashboard/img/CreditCard.png' %}" alt="Logo Visa"/>
+            </figure>
+        </div> 
+    {% endif %}
+    
+    <div class="d-flex justify-content-end align-items-start">
+        {% comment %} <div class="plan__subscription">
+            <figure class="plan__credit-card">
+                <img
+                    src="{% static 'dashboard/img/visa.png' %}"
+                    alt="Logo Visa"
+                />
+                <figcaption
+                    class="d-flex flex-column f-size-12"
+                >
+                    Crédito
+                    <span class="f-size-14 color-muted">
+                        Visa ***** 2167
+                    </span>
+                </figcaption>
+            </figure>
+            <p class="m-0">
+                {{ 'see_the'|translate:language }}
+                <a href="{% url 'discover' %}"><u class="c-pointer opacity-hover">{{ 'complete_list_of_services_here'|translate:language }}</u></a>
+            </p>
+        </div>  {% endcomment %}
+
+        {% if 'Free Trial' not in plan.name and 'Business Trial' not in plan.name %}
+            <p class="f-size-12 color-muted c-pointer opacity-hover">
+                <a href="https://docs.google.com/forms/d/e/1FAIpQLScy_duMNRNiXQ_sxvN16CNVWsW3FCNLfmo5CQ4rGL5PQqAt3g/viewform" target="_blank"><u>{{ 'unsubscribe'|translate:language }}</u></a>
+            </p>
+        {% endif %}
+    </div>
+</section>
+{% endwith %}
+{% endwith %}

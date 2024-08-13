@@ -1,0 +1,64 @@
+{% load general_tags %} {% load dashboard_tags %} {% load static %}
+
+<div class="d-none">
+    <form class="single_process backcolor050505 py-3 mb-3">
+        {% csrf_token %}
+        <div class="header_title px-3 pb-2">
+            <p class="process_translate darkgreencolor f-size-18 light-bold mb-0">{{ process_translate }}</p>
+        </div>
+        <div class="process_content pt-2 px-3 mb-2">
+            <p class="f-size-14 brancocolor mb-1 lighter-bold">{{ 'process_capital'|translate:language }}:</p>
+            <div class="d-flex justify-content-start">
+                <div class="form_input bigger">
+                    <p class="mb-1 color9A9A9A">{{ 'process_name_on_the_machine'|translate:language }}:</p>
+                    <input class="backcolor0F0F0F brancocolor" type="text" name="process" readonly value="{{ process }}"  disabled>
+                </div>
+                <div class="form_input ml-2">
+                    <p class="mb-1 color9A9A9A">{{ 'process_translate'|translate:language }}:</p>
+                    <input class="backcolor0F0F0F brancocolor" type="text" name="process_translate" value="{{ process_translate }}" data-oldvalue="{{ process_translate }}"/>
+                    <p class="text_error f-size-10"></p>
+                </div>
+                <div class="form_input ml-2">
+                    <p class="mb-1 color9A9A9A">{{ 'business_area'|translate:language }}:</p>
+                    <select class="backcolor0F0F0F brancocolor" name="area" data-oldvalue="{{ area_id }}">
+                        <option value="">{{ 'select_department'|translate:language }}</option>
+                        {% for area in processes_filter.areas.areas %}
+                            <option value="{{ processes_filter.areas.id|get_obj_attr:forloop.counter0 }}"{% if area_selected == area %} selected{% endif %}>{{ area }}</option>
+                        {% endfor %}
+                    </select>
+                    <p class="text_error f-size-10"></p>
+                </div>
+                <div class="form_input ml-2">
+                    <p class="mb-1 color9A9A9A">{{ 'project_cost'|translate:language }}:</p>
+                    <input class="backcolor0F0F0F brancocolor text-left" type="text" name="project_cost" value="{% if project_cost != None %}{{ project_cost }}{% endif %}" data-oldvalue="{% if project_cost != None %}{{ project_cost }}{% endif %}"/>
+                    <p class="text_error f-size-10"></p>
+                </div>
+            </div>
+        </div>
+        <div class="colaborators px-3 mb-2">
+            <p class="f-size-14 brancocolor mb-1"><span class="lighter-bold">{{ 'executors'|translate:language }}</span> <span class="">({{ 'contributors_capital'|translate:language }}):</span></p>
+            <div class="d-flex justify-content-start">
+                <div class="form_input bigger">
+                    <p class="mb-1 color9A9A9A">{{ 'amount'|translate:language }}:</p>
+                    <input class="backcolor0F0F0F brancocolor text-left" type="text" name="howmany_collaborators" value="{% if howmany_collaborators != None %}{{ howmany_collaborators }}{% endif %}" data-oldvalue="{% if howmany_collaborators != None %}{{ howmany_collaborators }}{% endif %}"/>
+                </div>
+                <div class="form_input ml-2">
+                    <p class="mb-1 color9A9A9A">{{ 'average_task_time'|translate:language }}:</p>
+                    <input class="backcolor0F0F0F brancocolor text-left" type="text" name="humantime" value="{{ humantime }}" data-oldvalue="{{ humantime }}"/>
+                    <p class="text_error f-size-10"></p>
+                </div>
+                <div class="form_input ml-2">
+                    <p class="mb-1 color9A9A9A">{{ 'amount'|translate:language }}:</p>
+                    <input class="backcolor0F0F0F brancocolor text-left" type="text" name="salary_collaborator" value="{% if salary_collaborator != None %}{{ salary_collaborator }}{% endif %}" step=".01" data-oldvalue="{% if salary_collaborator != None %}{{ salary_collaborator }}{% endif %}"/>
+                    <p class="text_error f-size-10"></p>
+                </div>
+                <div class="form_input ml-2">
+                    <p class="mb-1 color9A9A9A">{{ 'hours_per_day'|translate:language }}:</p>
+                    <input class="backcolor0F0F0F brancocolor text-left" type="text" name="hours_collaborator" value="{% if hours_collaborator != None %}{{ hours_collaborator }}{% endif %}" data-oldvalue="{% if hours_collaborator != None %}{{ hours_collaborator }}{% endif %}"/>
+                    <p class="text_error f-size-10"></p>
+                </div>
+            </div>
+        </div>
+        <input type="submit" class="btn_submit darkgreenbackcolor color000000 process_to_area py-2 px-5 ml-3" data-form="process_to_area" value="{{ 'save_changes_capital'|translate:language }}">
+    </form> 
+</div>

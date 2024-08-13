@@ -1,0 +1,20 @@
+{% load general_tags %}
+
+{% include 'email_templates/default/header.html' %}
+
+<tr>
+    <tr>
+        <td width="640" align="left" valign="top" style="padding-left: 100px; padding-right: 60px; padding-bottom: 30px;">
+            <h1 style="font-size: 28px; font-family: 'Montserrat', sans-serif; margin-top: 60px; margin-bottom: 2px; padding-bottom: 0;text-align: center">{{ 'your_service_is_under_maintenance'|translate:language }}</h1>
+            <center><img src="https://i.imgur.com/E7f2OXt.png" style="margin-top: 35px; min-height: 60px;" alt="Service under maintenance Icon"></center>
+            <p style="font-family: 'Montserrat', sans-serif; font-size: 20px; padding-top: 30px;color:#3424c4">
+                <strong>{{ 'hello'|translate:language }}!</strong>
+            </p>
+            <p style="font-family: 'Montserrat', sans-serif; font-size: 20px;">
+            {{'your_service'|translate:language }} {{ automation|get_automation_display_name:language }} {{'is_under_maintenance'|translate:language }}.<br>{{'during_this_period_not_run_models'|translate:language }}.
+            </p>
+            <p style="font-family: 'Montserrat', sans-serif; font-size: 20px;">{{'as_soon_your_service_available_notified'|translate:language }}.</p>
+        </td>
+</tr>
+
+{% include 'email_templates/default/footer.html' %}

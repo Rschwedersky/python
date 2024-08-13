@@ -1,0 +1,36 @@
+{% load general_tags %} {% load static %} {% load humanize %} {% load i18n %}
+
+<div class='d-flex flex-column align-items-baseline'>
+    {% if plan_name != 'business'%}
+        <p class="mb-2 mr-auto single__plan-box--price" data-price="{{plan_info.value|multiply:10}}">R$ <strong class="f-size-26">{{ plan_info.value|floatformat:"0" }}</strong><span class='secondary__color'>/ {{'month'|translate:language }}</span></p>
+        {% if active_plan != plan_name and plan_name not in active_plan %}
+            <a href="{% url 'end_of_trial_choose_plan' plan_name 'monthly' %}" target="_blank" class="button__link button__link--box py-2 align-self-center no__link">{{'choose_this_plan'|translate:language }}</a>
+        {% else %}
+            <a href="{% url 'end_of_trial_choose_plan' plan_name 'monthly' %}" target="_blank" class="btn__purple no-uppercase align-self-center py-2 px-4 no__link">{{'continue_with_this_plan'|translate:language}}</a>
+        {% endif %}
+    {% else %}
+        <img src="{% static 'img/puzzle.svg'%}" alt="Puzzle icon" class='mr-auto h-2rem mb-3'>
+        {% if active_plan != plan_name and plan_name not in active_plan %}
+            <a href="{% url 'end_of_trial_choose_plan' plan_name %}" target="_blank" class="button__link button__link--box py-2 align-self-center no__link">{{'receive_evaluation'|translate:language }}</a>
+        {% else %}
+            <a href="{% url 'end_of_trial_choose_plan' plan_name %}" target="_blank" class="btn__purple no-uppercase align-self-center py-2 px-4">{{'receive_evaluation'|translate:language }}</a>
+        {% endif %}
+    {% endif %}
+</div>    
+<div class='mt-3 d-flex flex-column gap-10'>
+    {% if plan_name == 'starter' %}
+        <p class="m-0 f-size-14"><img src="{% static '/img/check.svg' %}" alt="Check Icon"><strong> {{ plan_info.qnt_automations }} {{'license'|translate:language }}</strong> {{'available_to_choose_any_service'|translate:language }}</p>
+        <p class="m-0 f-size-14"><img src="{% static '/img/check.svg' %}" alt="Check Icon"><strong> {{'up_to'|translate:language }} {{ plan_info.qnt_queries|intcomma }} {{'monthly_consultations'|translate:language }}</strong></p>
+        <p class="m-0 f-size-14"><img src="{% static '/img/check.svg' %}" alt="Check Icon"> {{ 'maintenance_and_updates_on_our_own'|translate:language }}</p>
+    {% elif plan_name == 'advanced' %}
+        <p class="m-0 f-size-14"><img src="{% static '/img/check.svg' %}" alt="Check Icon"> <strong>{{ plan_info.qnt_automations }} {{'licenses'|translate:language }}</strong> {{'available_to_hire_different_services'|translate:language }}</p>
+        <p class="m-0 f-size-14"><img src="{% static '/img/check.svg' %}" alt="Check Icon"> <strong> {{'up_to'|translate:language }} {{ plan_info.qnt_queries|intcomma }} {{'monthly_consultations'|translate:language }} </strong> {{'for_licenses'|translate:language }}</p>
+        <p class="m-0 f-size-14"><img src="{% static '/img/check.svg' %}" alt="Check Icon"> {{ 'invite_your_team'|translate:language }}</p>
+        <p class="m-0 f-size-14"><img src="{% static '/img/check.svg' %}" alt="Check Icon"> {{ 'maintenance_and_updates_on_our_own'|translate:language }}</p>
+    {% else %}
+        <p class="m-0 f-size-14"><img src="{% static '/img/check.svg' %}" alt="Check Icon"> <strong>4+ {{'licenses'|translate:language }}</strong>, {{'according_to_your_need'|translate:language }}</p>
+        <p class="m-0 f-size-14"><img src="{% static '/img/check.svg' %}" alt="Check Icon"> {{'more_limit_options_of_consultations'|translate:language }}</p>
+        <p class="m-0 f-size-14"><img src="{% static '/img/check.svg' %}" alt="Check Icon"> {{ 'invite_your_team'|translate:language }}</p>
+        <p class="m-0 f-size-14"><img src="{% static '/img/check.svg' %}" alt="Check Icon"> {{ 'maintenance_and_updates_on_our_own'|translate:language }}</p>
+    {% endif %}
+</div>

@@ -1,0 +1,32 @@
+{% load general_tags %}
+
+<div class="modal fade" id="remove_area_modal" tabindex="-1" role="dialog" aria-labelledby="RemoveArea" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="RemoveArea">{{ 'delete_area'|translate:language }}
+                    <div class="green__underlined green_title-modal-areas"></div>
+                </h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+            <div class="modal-body padding-0">
+                <form  class="text-center">
+                    {% csrf_token %} 
+                    <div class="d-flex justify-content-center align-items-center py-2"  id="remove_area">
+                        <p  class="text__remove-area">
+                           {{ 'do_you_want_to_delete_the_area'|translate:language }} <span name="area" value="" class="text_span-area color000000 light-bold"></span>?<br> {{ 'by_clicking_delete_this_area_will_be_permanently_deleted'|translate:language }}
+                        </p>
+                    </div>
+                    <div class="modal-footer d-flex justify-content-end mt-3">
+                        <button type="button" class="btn btn__cancel-area" data-dismiss="modal">{{ 'close'|translate:language }}</button>
+                        <button type="submit" value="Criar" class="btn ml-3 confirm_exclude_area" data-id="">{{ 'remove'|translate:language }}</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+

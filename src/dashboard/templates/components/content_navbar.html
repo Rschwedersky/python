@@ -1,0 +1,72 @@
+{% load general_tags %} {% load static %}
+<div class="navbar-collapse offcanvas-collapse" id="navbarsExampleDefault">
+    <ul class="navbar-nav mx-auto">
+        {% if is_free_trial and  total_progress < 100 and free_trial_ended != True %}
+            {% if is_admin %} 
+                <li class="nav-item-link">
+                    <a class="nav-link{% if active_page == 'onboarding' %} active{% endif %}" href="{% url 'onboarding' %}"><span class="px-3">{{ 'home_start'|translate:language }}</span><div class="green_line header"></div></a>
+                </li>
+            {% endif %}
+        {% endif %}
+        <li class="nav-item-link">
+            <a class="nav-link{% if active_page == 'services' %} active{% endif %}" href="{% url 'services' %}"><span class="px-3">{{ 'services'|translate:language }}</span><div class="green_line header"></div></a>
+        </li>
+        <li class="nav-item-link">
+            <a class="nav-link{% if active_page == 'dashboard' %} active{% endif %}" href="{% url 'dashboard' %}"><span class="px-3">Dashboards</span><div class="green_line header"></div></a>
+        </li>
+        <li class="nav-item-link">
+            <a class="nav-link{% if active_page == 'discover' %} active{% endif %}" href="{% url 'discover' %}"><span class="px-3">{{ 'discover'|translate:language }}</span><div class="green_line header"></div></a>
+        </li>
+    </ul>
+    <div class="navbar-light d-flex">
+        <div class="d-none">{% include "dashboard/components/sprite-languages.html" %}</div>
+        <ul class="def_language navbar-nav mr-2">
+            {% with url_dashboard='dashboard/img/manage_processes/'|add:language|add:'.svg'  %}
+                <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    {% include "dashboard/components/svg_icon.html" with svg_id=language %}
+                </a>
+            {% endwith %}
+            <li class="choose_language nav-item dropdown-menu backcolor2d2d2d p-0">
+                <a href="{{ request.path }}?key=language&value=pt-BR" class="single_language d-flex align-items-center p-2" data-heap="Mudar idioma para português">
+                    {% include "dashboard/components/svg_icon.html" with svg_id='pt-BR' %}
+                    <p class="brancocolor ml-2 mb-0">{{ 'portuguese'|translate:language }}</p>
+                </a>
+                <a href="{{ request.path }}?key=language&value=en" class="single_language d-flex align-items-center p-2" data-heap="Mudar idioma para inglês">
+                    {% include "dashboard/components/svg_icon.html" with svg_id='en' %}
+                    <p class="brancocolor ml-2 mb-0">{{ 'english'|translate:language }}</p>
+                </a>
+                <a href="{{ request.path }}?key=language&value=es" class="single_language d-flex align-items-center p-2" data-heap="Mudar idioma para português">
+                    {% include "dashboard/components/svg_icon.html" with svg_id='es' %}
+                    <p class="brancocolor ml-2 mb-0">{{ 'spanish'|translate:language }}</p>
+                </a>
+            </li>
+        </ul>
+        <ul class="user_options navbar-nav ml-2">
+            <li class="nav-item dropdown nav-style">
+                <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="fas mr-1"></i>{{user.get_full_name }}
+                </a>
+                <div class="dropdown-menu py-0" aria-labelledby="dropdown01">
+                    <div class="dropdown-divider m-0"></div>
+
+                    <button class="dropdown-item p-2" data-toggle="modal" data-target="#modalsettings" id="dropdown-config-button">{{ 'settings'|translate:language }}</button>
+                    <div class="dropdown-divider m-0"></div>
+                    <a class="dropdown-item p-2" href="{% url 'help_center' %}" target="_blank">{{ 'help'|translate:language }}</a>
+                    <!-- <a class="dropdown-item p-2" href="{% url 'password_change' %}">Change password</a> -->
+                    <div class="dropdown-divider m-0"></div>
+                    <a class="dropdown-item p-2" href="{% url 'logout' %}">Logout</a>
+                    {% if user.is_staff %}
+                        <div class="dropdown-divider m-0"></div>
+                        <a class="dropdown-item p-2" href="{% url 'admin:index' %}" target="_blank">Admin</a>
+                    {% endif %}
+                    {% if user.profile.client.identifier == "smarthis.com.br" %}
+                        <div class="dropdown-divider m-0"></div>
+                        <a class="dropdown-item p-2" href="{% url 'monitoring_executions' %}" >Monitoramento de Execuções</a>
+                        <a class="dropdown-item p-2" href="{% url 'uipath_api_monitoring_info' %}" >Monitoramento de Dashboard</a>
+                    {% endif %}
+                </div>
+            </li>
+        </ul>
+    </div>
+
+</div>

@@ -1,0 +1,5 @@
+<div id="{{ type }}" class="single_tab_content{% if active != type %} d-none{% endif %} {% if free_trial_ended != None and free_trial_ended == True %}opacity-40 no-pointer-events{%endif %}">
+    <div class="py-5">
+        {% include "services_tabs/single_tab_content/"|add:type|add:".html" with is_automation_active=is_automation_active %}
+    </div>
+</div>

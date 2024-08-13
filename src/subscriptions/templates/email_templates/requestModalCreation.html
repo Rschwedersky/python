@@ -1,0 +1,21 @@
+{% load general_tags %}
+
+{% include 'email_templates/default/header.html' %}
+
+<tr>
+    <tr>
+    <td width="640" align="left" valign="top" style="padding-left: 100px; padding-right: 60px; padding-bottom: 30px;">
+        <h1 style="font-family: 'Montserrat', sans-serif; font-weight: 400; text-align: left; font-size: 30px; margin-top: -160px; margin-bottom: 2px;"> {{ 'notification_of'|translate:language }}<br> <strong>Emissão de Extrato Bancário</strong></h1>
+        <div style="height: 16px; background-color:#39FFB6; border-radius: 20px; margin-top: 0; width: 350px;"></div><!-- pseudosublinhado -->
+        <p style="font-family: 'Montserrat', sans-serif; font-size: 22px;">
+       
+        <p style="font-family:'Montserrat',sans-serif;font-size: 20px;"><strong>Solicitação de configuração de modelo</strong></p>
+        
+        <ul>
+            <li>Usuário: {{user.get_full_name}}</li>
+            <li>Email: {{user.email}}</li>
+        </ul>
+        
+    </td>
+
+</tr>

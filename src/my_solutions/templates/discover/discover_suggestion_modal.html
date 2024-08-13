@@ -1,0 +1,27 @@
+{% load general_tags %} {% load static %}
+
+<section class="discover__inner-modal discover__inner-modal--suggestion">
+    <div class="d-flex flex-column w-100 p-3">
+        <img src="{% static "/dashboard/img/exit.svg" %}" alt="Close Modal" class="c-pointer opacity-hover modal__close align-self-end" data-close=".modal__background--discover"
+        />
+        <section class="discover__inner-modal--content discover__inner-modal--content--suggestion">
+            <div class="d-inline-block">
+                <p class="lighter-bold">{{'send_question'|translate:language }}</p>
+                <div class="green__underlined green__underlined--discover-modal"></div>
+            </div>
+
+            <form action="" class="discover__modal-form">
+                <label for="discover-suggestion-subject">{{'subject'|translate:language }}</label>
+                <input type="text" id="discover-suggestion-subject" name="story" rows="1"></input>
+
+                <label for="discover-suggestion-message">{{'message'|translate:language }}</label>
+                <textarea id="discover-suggestion-message" name="story" rows="5" data-button="send-suggestion"></textarea>
+                <p class="m-0 color-muted f-size-12">{{'write_a_message_send_question'|translate:language }}</p>
+            </form>
+        </section>
+    </div>        
+    <footer class="discover__inner-modal--footer">
+        <button class="button__link modal__close" data-close=".modal__background--discover">{{'cancel'|translate:language }}</button>
+        <button id="send-suggestion" class="btn__purple px-5 py-2 text-capitalize" disabled>{{'send_question'|translate:language }}</button>
+    </footer>
+</section>

@@ -1,0 +1,43 @@
+{% load static %} {% load general_tags %} {% load dashboard_tags %}
+<div class="row setup-content py-1" id="step-3">
+    <div class="col-12 responsive-columns uploader">    
+        {% if automation_type == 'upload' or  automation_type == 'credential' %}
+            <div class="col-11 responsive-columns uploader">
+                {% include 'components/receipt_of_results.html' %}
+            </div>
+            {% include 'components/modal_footer.html' with next_btn_text='save_model'|translate:language next_btn_class='step-3' no_arrow=True no_advance=True next_btn_type='submit' %}
+        {% else %}
+            {% if automation_type == 'credential_and_filter_notes' %}
+                <div class="uploader-inner">
+                    <input type="hidden" id="filter_notes" value="periodo" />
+                    <div class="d-flex justify-content-center align-items-center">
+                        <div class="mr-2">
+                            <p class="mb-1">{{ 'initial_date'|translate:language }}</p>
+                            <input type="date"  class="form-control from_date" value="">
+                            <p class="mb-1">{{ 'final_date'|translate:language }}</p>
+                            <input type="date"  class="form-control to_date" value="">
+                            <input type="hidden" id="periodo"/>
+                        </div>
+                        <div class="box-filter box-backcolor-light justify-content-between">
+                            <img class="logo-calendar d-flex justify-content-center m-5" src="{% static 'img/logo_calendar.png' %}"/></strong>
+                            <div class="text-calendar">
+                                <p class="mb-3">
+                                    {{ 'use_the_options_on_the_side_to_search_for_all_service_notes_issued_within_the_selected_period'|translate:language }}
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% else %}
+                {% include 'components/upload_content.html' %}
+            {% endif %}
+            {% include 'components/modal_footer.html' with next_btn_text='advance'|translate:language next_btn_class='step-3' next_btn_type='button' %}
+        {% endif %}
+        
+    </div>
+</div>
+
+ 
+
+
+ 

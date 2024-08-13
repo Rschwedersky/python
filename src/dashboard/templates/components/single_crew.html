@@ -1,0 +1,17 @@
+{% load static %} {% load dashboard_tags %}
+<li class="crew__list--item">
+    <div class="d-flex w-100">
+        {% include 'dashboard/components/input_checkbox.html' with input_id=parent_class|add:'_'|add:input_id input_name=parent_class input_value=id first_info=nome last_info=email %}
+    </div>
+    {% if noedition == None %}
+        {% if crew_type != None and crew_type == 'settings' %}
+            {% include 'components/popup_menu.html' with parent_class='' child_class='' edit_class=crew_type|add:' '|add:'modal__open-button' exclude_class='modal__open-button crew__exclude--settings' crew_type=crew_type user_id=id modal_edit='#crew-edit-modal' %}
+        {% else %}
+            {% include 'components/popup_menu.html' with parent_class='' child_class='' edit_class=crew_type|add:' 
+            '|add:'modal__open-button' exclude_class='modal__open-button' user_id=id %}
+        {% endif %}
+    {% endif %}
+    {% if 'services' in profile and profile|get_obj_attr:'services'|length > 0 %}
+        <input type="hidden" class="services_by_user" value="{{ profile|get_obj_attr:'services'|getStringFromDictionary }}"/>
+    {% endif %}
+</li>

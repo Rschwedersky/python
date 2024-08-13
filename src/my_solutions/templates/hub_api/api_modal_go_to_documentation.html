@@ -1,0 +1,50 @@
+{% load static %}
+
+<div class="modal  modal_api-hub" id="api_go_documentation" tabindex="-1" role="dialog" aria-labelledby="ModalApiGoDocumentation" aria-hidden="true">
+    <div class="modal-dialog content_go_documentation modal-xl" role="document">
+        <div class="modal-content">  
+            <div class="p-4">
+                <button class="close d-flex justify-content-end" data-dismiss="modal" aria-label="Fechar">
+                    <img src="/static/dashboard/img/exit.svg" alt="Close Modal" class="c-pointer" aria-hidden="true">
+                </button> 
+                <div class="px-3">
+                    <h2 class="f-size-20 dark-gray__color light-bold">
+                        <strong>Inscreva-se para acessar todo o conteúdo da API para desenvolvimento</strong>
+                    </h2>
+                </div>
+                <div class="px-3 pt-4 f-size-17">
+                    <p>A nossa API para desenvolvimento é uma feature nova, por isso ainda não está aberta a todos os nossos usuários.</p>
+                    <p>Você poderá acessar todo o seu conteúdo solicitando acesso.</p>
+                </div>
+                <div class="modal-footer py-3 d-flex align-items-center justify-content-center">
+                    <button type="button" class="btn button__receive_access f-size-20" >Receber Acesso</button>
+                </div> 
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="modal modal_api-hub" id="api_request" tabindex="-1" role="dialog" aria-labelledby="ModalApiRequest" aria-hidden="true">
+    <div class="modal-dialog content_request-api modal-xl" role="document">
+        <div class="modal-content">  
+            <div class="p-4">
+                <button class="close d-flex justify-content-end" data-dismiss="modal" aria-label="Fechar">
+                    <img src="/static/dashboard/img/exit.svg" alt="Close Modal" class="c-pointer" aria-hidden="true">
+                </button> 
+                <div class="px-3 pt-4 d-flex justify-content-center">
+                    <div>
+                        <img src="{% static 'img/img_request_api.png' %}"/>
+                    </div>
+                    <div class="px-4">
+                        <strong class="f-size-20">Recebemos a sua solicitação!</strong>
+                        <p class="f-size-17">Você receberá acesso a todo o conteúdo da API para desenvolvimento em até 48h.</p>
+                        <p class="f-size-17">Não se preocupe, nós te avisaremos.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

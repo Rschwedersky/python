@@ -1,0 +1,36 @@
+{% load static %} {% load general_tags %}
+
+<div class="modal fade registration__modal--rpa dark-gray__color" id="registration-rpa-dashboard-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl" role="document">
+        <section class="modal-content p-4">
+            <button type="button" class="close align-self-end" data-dismiss="modal" aria-label="Close">
+                <img src="{% static "/dashboard/img/exit.svg" %}" alt="">
+            </button>
+            <div class='pr-3'>
+                <h4><strong>{{'rpa_dashboard'|translate:language }}</strong></h4>
+                <h6 class='mb-3'>{{'track_compare_robots_insights_business'|translate:language }}.</h6>
+                <p>
+                    <span class='d-block'>
+                        <strong>{{'areas_and_processes'|translate:language}}</strong>
+                        <img src="{% static 'img/category_icon.svg' %}" alt="Category Icon">
+                    </span>
+                    <span class='f-size-14'>{{'areas_and_processes_subtitle'|translate:language }}.</span>
+                </p>
+                <p>
+                    <span class='d-block'>
+                        <strong>{{'graphs_and_analytics'|translate:language}}</strong>
+                        <img src="{% static 'img/trending_up_icon.svg' %}" alt="Trending Up Icon">
+                    </span>
+                    <span class='f-size-14'>{{'graphs_and_analytics_subtitle'|translate:language }}.</span>
+                </p>
+                <p>
+                    <strong><span class='d-block'>{{'integration_with_uipath_orchestrator'|translate:language}}</span></strong>
+                    <span class='f-size-14'>{{'integration_with_uipath_orchestrator_subtitle'|translate:language }}.</span>
+                </p>
+                <img src="{% static "/img/logo_orchestrator.png" %}" alt="UI Path Orchestrator Logo" class='mb-3'>
+                <button class="btn__purple no-uppercase px-3 py-2 btn__purple--registration-rpa" data-image="{% static 'img/green-check.svg' %}">{{'add_to_my_plan'|translate:language }}</button>
+            </div>
+            <img src="{% static "/img/registration-modal-dashboard-image.png" %}" alt="RPA Dashboard Image">
+        </section>
+    </div>
+</div>

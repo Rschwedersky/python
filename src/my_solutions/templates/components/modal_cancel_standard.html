@@ -1,0 +1,33 @@
+{% load general_tags %}
+<div class="modal fade" id="modalcancel" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg-standard" role="document">
+        <div class="modal-content w-80 m-auto">
+            <div class="modal-body px-0">
+                <div class="header_cancel px-3">
+                    <button type="button" class="close d-flex justify-content-end" data-dismiss="modal" aria-label="Fechar">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h5 class="modal-title modal_titulo">
+                        <small> 
+                            <h4>{{ 'cancel_this_template'|translate:language }}</h4>
+                        </small>
+                        <div class="green_line--modal-cancel-automations"></div>
+                    </h5>
+                </div>
+                <div class="content_cancel px-3 pt-4 pb-5">
+                        <p class="f-size-14">{{ 'by_clicking'|translate:language }} 
+                            {{ 'cancel_the_template'|translate:language }}  <span class="automation_name color000000 light-bold">
+                            </span>, {{ 'will_be_stopped_and_you_will_not_receive_any_results'|translate:language }}
+                        </p>
+                </div>
+                <div class="modal-footer pb-0">
+                    <button type="button" class="btn_modal_cancel cancel_btn light-bold" data-dismiss="modal"> {{ 'no'|translate:language }} </button>
+                    <button class="btn_modal_cancel confirm_cancel brancocolor light-bold disabled" type="button" data-id="">
+                        {{ 'cancel'|translate:language }}
+                    </button>
+                    {% csrf_token %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

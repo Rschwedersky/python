@@ -1,0 +1,26 @@
+{% load static %}
+
+<div class="modal modal-hub{% if stepper %} with-stepper{% endif %}" tabindex="-1" role="dialog" id="{% block id %}{% endblock %}">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">
+            {% block modal_title %}{% endblock %}
+          </h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            {% include 'icons/x-lg.svg' %}
+          </button>
+        </div>
+        <div class="modal-body">
+
+          {% block modal_body %}{% endblock %}
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn muted jsCancelBtn" data-dismiss="modal"></button>
+          <button type="button" class="btn primary jsAdvanceBtn" disabled>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>

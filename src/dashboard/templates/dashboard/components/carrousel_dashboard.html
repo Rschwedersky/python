@@ -1,0 +1,22 @@
+{% load static %}
+
+<header class='empty__header mb-5'>
+    <div id="discover-carousel" class="carousel slide" data-ride="carousel">
+        <ol class="carousel-indicators">
+            <li data-target="#discover-carousel" data-slide-to="0" class="carousel-controls active"></li>
+            <li data-target="#discover-carousel" data-slide-to="1" class="carousel-controls"></li>
+            <li data-target="#discover-carousel" data-slide-to="2" class="carousel-controls"></li>
+        </ol>
+        <div class="carousel-inner--empty">
+            <div class="carousel-item active">
+                <img src="{% static "/img/carrousel-empty-1.png" %}" alt="" class="d-block w-100">
+            </div>
+            <div class="carousel-item">
+                <img src="{% static "/img/carrousel_roi-2.png" %}" alt=""class="d-block w-100">
+            </div>
+            <div class="carousel-item">
+                <img src="{% static "/img/carrousel-empty-3.png" %}" alt=""class="d-block w-100">
+            </div>
+        </div>
+    </div>
+</header>

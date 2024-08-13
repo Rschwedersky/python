@@ -1,0 +1,27 @@
+{% extends 'base.html' %} {% block content %} {% load static %} {% load general_tags %}
+
+
+<div class="error__page">
+  <p class="error__status">
+    <span>4</span>
+    <i class="far fa-question-circle fa-spin"></i>
+    <span>4</span>
+  </p>
+  <p class="error__message text-center">
+    {{'404_message'|translate:language }}
+    <span class="d-block mt-5">
+      {{'lets_go'|translate:language}} 
+      <a href={% url 'onboarding' %}>{{'home_initial_page'|translate:language}}</a> 
+      {{'and_try_from_there'|translate:language}}.
+    </span>
+  </p>
+</div>
+
+<style>
+  body {
+    padding-top: 0;
+  }
+</style>
+
+<script src="https://kit.fontawesome.com/4b9ba14b0f.js" crossorigin="anonymous"></script>
+{% endblock %}

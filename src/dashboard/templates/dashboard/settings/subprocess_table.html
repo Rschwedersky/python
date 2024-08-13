@@ -1,0 +1,29 @@
+{% load static %} {% load general_tags %} {% load dashboard_tags %}
+<table class="table table-striped subprocesses_table {% if hidden %}d-none{% endif %}">
+    <thead>
+        <tr>
+            <th scope="col"><div class="d-flex align-items-center">{{ 'sub_hyphen_process'|translate:language }}<span class="arrow_semi_square border323232 down ml-2"></span></div></th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for single_subprocess in all_subprocesses %}
+            {% if single_subprocess.id %}
+                <tr>
+                    <td scope="row" class="subprocess_name d-flex align-items-center gap-16 justify-content-between">
+                        <span class="limitoneline">
+                            {{ single_subprocess.releasename }}
+                        </span>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td scope="row" class="subprocess_name d-flex align-items-center gap-16 justify-content-between">
+                        <span class="limitoneline">
+                            {{ single_subprocess.releasename }}
+                        </span>
+                    </td>
+                </tr>
+            {% endif %}
+        {% endfor %}
+    </tbody>
+</table>

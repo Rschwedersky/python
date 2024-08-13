@@ -1,0 +1,25 @@
+{% extends 'login_base.html' %} {% load static %} {% load general_tags %}
+{% block content %}
+    <section id="registration" class="arrow-background py-5 registration-container">
+
+        {% include 'components/_registration_form_step_one.html' with inputs=first_step_inputs %}
+        
+        {% include 'components/_registration_form_step_two.html' with inputs=second_step_inputs %}
+
+    </section>
+
+    {% include 'components/_registration_loading_one.html' %}
+
+
+    {% include 'components/footer_register.html' %}
+
+{% endblock %}
+
+{% block scripts %}
+    <script src="{% static 'js/registration.js' %}"></script>
+    <script src="{% static 'js/registrationRouter.js' %}"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.12/js/intlTelInput.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.11/jquery.mask.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.12/css/intlTelInput.css" rel="stylesheet" />
+{% endblock %}

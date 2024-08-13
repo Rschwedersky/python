@@ -1,0 +1,35 @@
+{% load general_tags %}
+
+{% include 'email_templates/default/header.html' %}
+    <tr>
+      <td width="640" align="left" valign="top">
+          <h3 style="font-size: 26px; margin-bottom: 0;margin-top:16px;">
+            <strong>{{ "hello"|translate:language }}, {{ user.first_name }}</strong>
+          </h3>
+          <p style="font-size: 22px; margin-bottom: 0;">
+            {{ "we_know_that_choosing_the_perfect_plan_is_hard_..."|translate:language }} 
+          </p>
+
+          <p style="font-size: 22px;margin-bottom: 0;">
+            {{ "so_we_thought_in_asking_you_..."|translate:language }}
+            {{ "can_we_help"|translate:language }}
+          </p>
+          
+          <p style="font-size: 22px;">
+            {{ "we_are_available_to_chat_..."|translate:language }}
+          </p>
+
+          {% include 'email_templates/default/emailButtonSecondary.html' with button_text="talk_to_expert"|translate:language button_link="https://calendly.com/guilherme-favoreto-smarthis" %}
+
+          <h2 style="margin-top: 4px; font-size: 22px;margin-bottom: 0px;"><strong>{{ "only_with_hub_you"|translate:language }}</strong></h2>
+          <div style="height: 12px; background-color:#39FFB6; border-radius: 20px; margin-top: 0px; width: 300px; margin-bottom: 30px;"></div><!-- pseudosublinhado -->
+
+          <ul style="text-align: left; font-size: 20px; margin-bottom: 30px; margin-top: 0px;margin-left:0px; list-style-type: none;">
+            <li>- {{ "gain_more_freedom_to_focus_on_strategic_tasks"|translate:language }}. </li>
+            <li>- {{ "enjoy_ready_made_solutions_for_different_areas_of_expertise"|translate:language }} </li>
+            <li>- {{ "minimizes_errors_and_avoids_delays"|translate:language }}. </li>
+            <li>- {{ "centralizes_tasks_and_results"|translate:language }}. </li>
+          </ul>
+      </td>
+    </tr>
+{% include 'email_templates/default/footer.html' %}

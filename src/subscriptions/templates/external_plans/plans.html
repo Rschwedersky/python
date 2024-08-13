@@ -1,0 +1,702 @@
+{% load static %}
+{% comment %}
+    Código do WORDPRESS, não apagar
+{% endcomment %}
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<div class="free-trial__end--summary box__color">
+    <div class="box_check">
+        <button class="button__black-and-white trial-plan-choice-buttons opacity-hover c-pointer active" data-period="month">Mensal</button>
+        <button class="button__black-and-white trial-plan-choice-buttons opacity-hover tooltip c-pointer" data-period="year">Anual<span class="tooltiptext">Economize 17%</span></button>
+    </div>
+    <div class="text__plans font__family">
+        <p class="colorblack">Economize 17% assinando um plano Anual</p>
+    </div>
+
+    <div class="boxes__plans font__family">
+        <section class="single__plan-box internal plans" data-selected="false" data-value="starter" data-monthly="149,00" data-yearly="1490,00">
+            <div class="single__plan-box-header">
+                <p class="name__plans">Starter</p>
+                <p class="description_plans colorblack">Ideal para dar início a transformação digital</p>
+            </div>
+            <div class="align-items-baseline">
+                <p class="single__plan-box--price"><span class="colorblack">R$</span> <strong class="f-size-26 font__family">149,00</strong><span class="secondary__color"><strong>/mês</strong></span></p>
+                <a class="btn__purple"><strong>Escolher este plano</strong></a>
+            </div>
+            <div class="gap-10">
+                <p><img src="/static/img/check.svg" alt="Check Icon"><strong> 1 licença</strong> <span class="colorblack">disponível para escolher qualquer serviço</span></p>
+                <p><img src="/static/img/check.svg" alt="Check Icon"><strong> <span class='current-queries'>3.000</span> consultas</strong> <span class="colorblack">mensais</span></p>
+            </div>
+            <div class="plans__modal--footer">
+                <div class="horizontal__gray-line"></div>
+                <div class="plans_footer gap-10">
+                    <label class="custom__switch">
+                        <input type="checkbox">
+                        <span class="slider round"></span>
+                    </label>
+                    <p class="m-0 f-size-13"><strong>Adicionar mais <span class='extra-queries'>6.000</span> consultas</strong> <span class="colorblack">mensais por R$ <span class='extra-queries-price'>50</span></span></p>      
+                </div>
+            </div>
+        </section>
+
+        <section class="single__plan-box internal plans__active plans" data-selected="false" data-value="advanced" data-monthly="499,00" data-yearly="4990,00">
+            <div class="discover__selected-plan--check-container gap-10">
+                <small>Mais Recomendado!</small>
+            </div>  
+            <div class="single__plan-box-header">
+                <p class="name__plans">Advanced</p>
+                <p class="description_plans colorblack">Ideal para um departamento ou pequena empresa</p>
+            </div>
+            <div class="align-items-baseline">
+                <p class="single__plan-box--price"><span class="colorblack">R$</span> <strong class="f-size-26 font__family">499,00</strong><span class="secondary__color"><strong>/mês</strong></span></p>
+                <a class="btn__purple"><strong>Escolher este plano</strong></a>  
+            </div>    
+            <div class="gap-10">
+                <p><img src="/static/img/check.svg" alt="Check Icon"> <strong>3 licenças</strong> <span class="colorblack">disponíveis para contratar diferentes serviços</span></p>
+                <p><img src="/static/img/check.svg" alt="Check Icon"> <strong> <span class='current-queries'>9.000</span> consultas</strong> <span class="colorblack">mensais</span> </p>
+                <p><img src="/static/img/check.svg" alt="Check Icon"> <span class="colorblack">Compartilhe com a sua equipe</span></p>
+            </div>
+            
+            <div class="plans__modal--footer">
+                <div class="horizontal__gray-line mb-2"></div>
+                <div class="plans_footer gap-10">
+                    <label class="custom__switch">
+                        <input type="checkbox">
+                        <span class="slider round"></span>
+                    </label>
+                    <p class="m-0 f-size-13"><strong>Adicionar mais <span class='extra-queries'>11.000</span> consultas</strong> <span class="colorblack">mensais por licença por R$ <span class='extra-queries-price'>200</span></span></p>      
+                </div>
+            </div>
+        </section>
+
+        <section class="single__plan-box plans" data-selected="false" data-value="business">
+            <div class="single__plan-box-header"> 
+                <p class="name__plans">BUSINESS</p>
+                    <p class="description_plans"><span class="colorblack">Monte um </span>
+                    <strong>plano sob medida</strong> 
+                    <span class="colorblack">e leve a sua empresa ainda mais longe </span>
+                </p>
+            </div>
+            <div class="align-items-baseline">
+                <img src="/static/img/puzzle.svg" alt="Puzzle icon" class="icon__puzzle"> 
+                <a class="btn__purple"><strong>Entrar em contato</strong></a>  
+            </div>
+            <div class="gap-10">     
+                <p><span class="colorblack">Personalize seu plano escolhendo</span> <strong>a partir de 4 licenças</strong><span class="colorblack"> e aproveite </span><strong>mais opções para o seu limite de consultas mensais.</strong></p>
+                <p class="colorblack">Entre em contato para solicitar uma avaliação ou agendar uma demonstração.</p> 
+            </div>
+        </section>
+
+    </div>
+</div>
+<style>
+html, body {
+    font-size:16px;
+}
+
+.d-flex {
+    display: flex;
+}
+
+.f-size-13 {
+    font-size: 0.8rem;
+}
+
+.colorblack {
+    color: rgba(0, 0, 0, .7);
+    font-weight: 600;
+}
+
+.horizontal__gray-line {
+    height: 0;
+    border: 1px solid #4D4D4D;
+    width: 100%;
+    margin-bottom: 0.5rem!important;
+}
+
+.boxes__plans{
+    height: 30rem;
+    margin-left: auto!important;
+    margin-right: auto!important;
+    justify-content: space-between!important;
+    display: flex!important;
+}
+
+.box__color {
+    border-radius: 4px;
+    margin: 0 auto;
+    background: #F7F7F7;
+    background-size: cover;
+    max-width: 100rem;
+    padding: 4rem 1rem 3rem 1rem;
+}
+
+.name__plans {
+    font-size: 30px;
+    display: flex;
+    align-items: center;
+    color: #333333;
+    font-family: sans-serif;
+    margin: .5rem 0;
+}
+
+.description_plans {
+    margin: 0;
+    font-size: 14px;
+}
+
+.text__plans {
+    display: flex;
+    justify-content: center;
+    padding-bottom: 2rem;
+    color: #333333;
+    font-size: 14px;
+}
+
+.former__price {
+    font-size: 14px;
+    line-height: 1.063rem;
+    color: #999999;
+}
+
+.free-trial__end--summary .button__black-and-white:first-of-type {
+    border-radius: 3px 0 0 3px;
+}
+
+.free-trial__end--summary .single__plan-box {
+    grid-template-rows: 21% 25% 35%;
+}
+
+.single__plan-box {
+    background: #ffffff;
+    border: 1px solid #4D4D4D;
+    border-radius: 4px;
+    display: grid;
+    grid-template-columns: 1fr;
+    justify-content: center;
+    width: calc(100% / 3);
+    max-width: 27%;
+    padding: 1rem!important;
+    border-top: 10px solid;
+    position: relative;
+    cursor: pointer;
+}
+
+.single__plan-box--price {
+    margin: .5rem 0;
+}
+
+.plans__active {
+    background: #ffffff;
+    border: 1px solid #3424C4;
+    border-radius: 4px;
+    display: grid;
+    grid-template-columns: 1fr;
+    justify-content: center;
+    width: calc(100% / 3);
+    max-width: 27%;
+    padding: 1rem!important;
+    border-top: 10px solid #3424C4;
+    position: relative;
+    cursor: pointer;
+    box-shadow: 0px -20px 0px #3424C4!important;
+}
+
+.discover__selected-plan--check-container {
+    position: absolute;
+    right: 0;
+    left: 0;
+    margin: auto;
+    background: #FFFFFF;
+    border: 1.5px solid #3424C4;
+    box-sizing: border-box;
+    box-shadow: -2px 2px 4px rgb(20 14 74 / 50%);
+    border-radius: 0.063rem;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    line-height: 1.5rem;
+    top: -2.125rem;
+    width: 9rem;
+    color: #3424C4;
+    font-weight: 600;
+    font-size: 15px;
+
+}
+
+.plans__active .discover__selected-plan--check-container {
+    display: flex;
+}
+
+.single__plan-box-header {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+.box_check{
+    margin-bottom: 1rem!important;
+    justify-content: center!important;
+    display: flex!important;
+}
+
+.single__plan-box.anual .single__plan-box--price {
+    line-height: 1.2;
+}
+
+
+.button__black-and-white.active {
+    background: #01FFA9;
+    border: 2px solid #01FFA9;
+    box-sizing: border-box;
+    color: #0E0E0E;
+    font-weight: 600;
+    font-size: 16px;
+}
+
+.button__black-and-white {
+    font-weight: 600;
+    font-size: 16px;
+    color: #707573;
+    padding: 0.6rem 1.5rem;
+    background: #FFFFFF;
+    border: 2px solid #01FFA9;
+    box-sizing: border-box;
+    color: #4D4D4D;
+}
+
+.btn__purple {
+    background: #FFFFFF;
+    border: 2px solid #3424C4;
+    box-sizing: border-box;
+    border-radius: 0.25rem;
+    color: #3424C4;
+    padding-bottom: 0.5rem!important;
+    padding-top: 0.5rem!important;
+    align-self: center!important;
+    width: 11rem;
+    text-align: center;
+}
+
+.btn__purple:hover {
+    color: rgba(0, 0, 0, 1);
+    background: #01ffa9;
+    border: 2px solid rgba(0, 0, 0, 1);
+}
+
+.btn__purple-active:hover {
+    color: rgba(0, 0, 0, 1);
+    background: #01ffa9;
+    border: 2px solid rgba(0, 0, 0, 1);
+}
+
+.plans__active .btn__purple {
+    background: #3424C4;
+    border: 2px solid #3424C4;
+    box-sizing: border-box;
+    border-radius: 0.25rem;
+    color: #ffffff;
+    padding-bottom: 0.5rem!important;
+    padding-top: 0.5rem!important;
+    align-self: center!important;
+    width: 12rem;
+    text-align: center;
+}
+
+.color-muted--light {
+    color: #4e4e4e;
+}
+
+.d-block {
+    display: block;
+}
+
+.secondary__color {
+    color:  #3424c4;
+}
+
+.f-size-26 {
+    font-size: 1.625rem;
+}
+
+.font__family {
+    font-family: 'Montserrat', helvetica, arial, sans-serif;
+}
+
+.gap-10 {
+    margin-top: 0;
+    margin-bottom: .6rem;
+}
+
+.gap-10 p {
+    font-size: 0.875rem;
+}
+
+.align-items-baseline {
+    align-items: baseline!important;
+    flex-direction: column!important;
+    display: flex!important;
+}
+
+.icon__puzzle {
+    height: 2rem;
+    margin-bottom: 2rem!important;
+}
+
+.custom__switch .slider.round:before {
+    border-radius: 50%;
+}
+
+.custom__switch .slider:before {
+    position: absolute;
+    content: '';
+    height: 1.5rem;
+    width: 1.688rem;
+    background-color: #333333;
+    -webkit-transition: 0.4s;
+    transition: 0.4s;
+}
+
+.f-size-13 {
+    font-size: 0.8rem;
+}
+
+.m-0 {
+    margin: 0!important;
+}
+
+.plans_footer{
+    gap: 0.6rem;
+    height: 100%!important;
+    align-items: center!important;
+    display: flex!important;
+    color:#333333;
+}
+
+.single__plan-box--selected .plans__modal--footer {
+    background-color: #f7f7f7;
+}
+
+.plans__modal--footer {
+    height: 100%!important;
+}
+
+.custom__switch {
+    position: relative;
+    display:inline-block;
+    height: 2rem;
+}
+
+.slider.round {
+    max-height: 1.5rem;
+}
+
+.custom__switch .slider.round {
+    border-radius: 34px;
+}
+
+.custom__switch .slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    -webkit-transition: 0.4s;
+    transition: 0.4s;
+    transition: 0.4s;
+    background: #FFFFFF;
+    border: 2px solid #333333;
+}
+
+.custom__switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.custom__switch input:checked + .slider {
+    background-color: #01ffa9;
+}
+
+.tooltip {
+    position: relative;
+    display: inline-block;
+}
+
+.tooltip .tooltiptext {
+    visibility: hidden;
+    width: 120px;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+    position: absolute;
+    z-index: 1;
+    bottom: 127%;
+    left: 87%;
+    margin-left: -60px;
+    color: #0E0E0E;
+    font-size: 13px;
+    background: #FFFFFF;
+    border: 2px solid #333333;
+    border-radius: 0px;
+}
+
+.tooltip .tooltiptext::after {
+    content: "";
+    position: absolute;
+    top: 110%;
+    left: 21%;
+    margin-left: -6px;
+    border-width: 7px;
+    border-style: solid;
+    border-color: black transparent transparent transparent;
+}
+
+.tooltip:hover .tooltiptext {
+    visibility: visible;
+}
+
+.c-pointer {
+    cursor: pointer;
+}
+
+.opacity-hover:hover {
+    opacity: .5;
+}
+
+@media screen and (max-width: 620px) {
+    .description_plans {
+        font-size: 0.75rem;
+    }
+    .icon__puzzle {
+        margin-bottom: -1.188rem!important;
+        margin-top: 1rem;
+    }
+    .boxes__plans {
+        flex-direction: column;
+        gap: 2rem;
+        height: auto;
+        align-items: center;
+    }
+    .boxes__plans .single__plan-box {
+        width: 100%;
+        max-width: 94%;
+    }
+    .boxes__plans .single__plan-box.plans__active {
+        margin-top: 1rem;
+    }
+    .custom__switch {
+        width: 4rem;
+    }
+    .custom__switch .slider {
+        width: 4rem;
+    }
+    .custom__switch + p {
+        width: 60%;
+        font-size: 0.75rem;
+    }
+    .custom__switch input:checked + .slider:before {
+        -webkit-transform: translateX(2.35rem);
+        -ms-transform: translateX(2.35rem);
+        transform: translateX(2.35rem);
+    }
+}
+
+@media screen and (min-width: 620px) {
+    .description_plans {
+        font-size: 0.75rem;
+    }
+    .icon__puzzle {
+        margin-bottom: 1rem!important;
+        margin-top: 1rem;
+    }
+    .custom__switch {
+        width: 3rem;
+    }
+    .custom__switch .slider {
+        width: 3rem;
+    }
+    .custom__switch + p {
+        width: 60%;
+        font-size: 0.75rem;
+    }
+    .custom__switch input:checked + .slider:before {
+        -webkit-transform: translateX(1.35rem);
+        -ms-transform: translateX(1.35rem);
+        transform: translateX(1.35rem);
+    }
+}
+@media screen and (min-width: 768px) {
+    .description_plans {
+        font-size: 0.75rem;
+    }
+    .icon__puzzle {
+        margin-bottom: 2rem!important;
+        margin-top: 0;
+    }
+    .custom__switch {
+        width: 4rem;
+    }
+    .custom__switch .slider {
+        width: 4rem;
+    }
+    .custom__switch + p {
+        width: 60%;
+        font-size: 0.75rem;
+    }
+    .custom__switch input:checked + .slider:before {
+        -webkit-transform: translateX(2.35rem);
+        -ms-transform: translateX(2.35rem);
+        transform: translateX(2.35rem);
+    }
+}
+@media screen and (min-width: 992px) {
+    .description_plans {
+        font-size: 0.875rem;
+    }
+    .custom__switch + p {
+        width: 75%;
+        font-size: 0.875rem;
+    }
+}
+</style>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const allPlansBoxes = Array.from(document.getElementsByClassName('single__plan-box'));
+    
+        const allPlansPeriodButtons = Array.from(
+            document.getElementsByClassName('trial-plan-choice-buttons')
+        );
+        const allPlansPlusSwitch = Array.from(
+            document.querySelectorAll('.plans__modal--footer .custom__switch input')
+        );
+    
+        allPlansBoxes.forEach((plan) => plan.addEventListener('click', handlePlanChoosing));
+    
+        allPlansPeriodButtons.forEach((button) => button.addEventListener('click', togglePlanPeriod));
+    
+        allPlansPlusSwitch.forEach((singlePlanPlusSwitch) => {
+            singlePlanPlusSwitch.addEventListener('change', handleExtraQueries);
+        });
+    
+        function handlePlanChoosing(event) {
+            const isExtraQueriesEvent = Boolean(event.target.closest('.custom__switch'));
+            if (isExtraQueriesEvent) return;
+    
+            const targetPlan = event.currentTarget;
+            allPlansBoxes.forEach((box) => box.classList.remove('plans__active'));
+    
+            targetPlan.classList.add('plans__active');
+        }
+        function togglePlanPeriod(event) {
+            const targetButton = event.target;
+            const otherButton = targetButton.nextElementSibling || targetButton.previousElementSibling;
+            const targetPeriod = targetButton.dataset.period;
+            const allPlanBoxes = Array.from(document.getElementsByClassName('single__plan-box'));
+            const clickedTheSameButton = targetButton.classList.contains('active');
+    
+            targetButton.classList.add('active');
+            otherButton.classList.remove('active');
+    
+            if (!clickedTheSameButton) {
+                allPlanBoxes
+                    .filter((box) => box.querySelector('.single__plan-box--price') !== null)
+                    .forEach((box) => updateBoxes(box));
+            }
+    
+            allPlansPlusSwitch
+                .filter((switchInput) => switchInput.checked)
+                .forEach((switchInput) => {
+                    const desiredPlan = switchInput.closest('.single__plan-box');
+                    updateQueriesText(desiredPlan, false);
+                    switchInput.checked = false;
+                });
+    
+            function updateBoxes(box) {
+                const pricePlaceholder = box.querySelector('.single__plan-box--price');
+                const planBox = pricePlaceholder.closest('.single__plan-box');
+                const monthlyPrice = box.dataset.monthly;
+    
+                if (targetPeriod == 'month') {
+                    pricePlaceholder.innerHTML = `R$ <strong class="f-size-26">${monthlyPrice}</strong><span class='secondary__color'>/mês</span>`;
+                } else {
+                    const formattedMonthlyPrice = getPrice(monthlyPrice);
+                    const anualPriceWithoutDiscount = formattedMonthlyPrice * 12;
+                    const anualPriceWithDiscount = formattedMonthlyPrice * 10;
+    
+                    pricePlaceholder.innerHTML = `
+                    <span class='d-block former__price'>De
+                        <span>${anualPriceWithoutDiscount}</span>, por:
+                    </span>
+                    R$ <strong class="f-size-26">${anualPriceWithDiscount}</strong><span class='secondary__color'>/ano</span>`;
+                }
+                planBox.classList.toggle('anual');
+            }
+        }
+    
+        function handleExtraQueries(event) {
+            const targetInput = event.target;
+            const targetPlan = targetInput.closest('.single__plan-box');
+            const currentPriceElement = targetPlan.querySelector('.single__plan-box--price strong');
+            const currentPrice = getPrice(currentPriceElement.textContent);
+            const extraPriceElement = targetPlan.querySelector(
+                '.plans__modal--footer .extra-queries-price'
+            );
+            const extraPrice = getPrice(extraPriceElement.textContent);
+            const currentPeriod = getCurrentPeriod();
+            const isAnualPeriod = currentPeriod == 'year';
+            const queriesAreBeingAdded = targetInput.checked;
+            let finalPrice = null;
+    
+            if (isAnualPeriod) {
+                const anualExtraPriceWithoutDiscount = extraPrice * 12;
+                const anualExtraPriceWithDiscount = extraPrice * 10;
+                const formerPriceElement = targetPlan.querySelector('.former__price span');
+                const currentFormerPrice = getPrice(formerPriceElement.textContent);
+                let formerPrice = null;
+                if (queriesAreBeingAdded) {
+                    finalPrice = currentPrice + anualExtraPriceWithDiscount;
+                    formerPrice = currentFormerPrice + anualExtraPriceWithoutDiscount;
+                } else {
+                    finalPrice = currentPrice - anualExtraPriceWithDiscount;
+                    formerPrice = currentFormerPrice - anualExtraPriceWithoutDiscount;
+                }
+                formerPriceElement.textContent = formerPrice;
+            } else {
+                if (queriesAreBeingAdded) {
+                    finalPrice = currentPrice + extraPrice;
+                } else {
+                    finalPrice = currentPrice - extraPrice;
+                }
+            }
+    
+            updateQueriesText(targetPlan, queriesAreBeingAdded);
+    
+            currentPriceElement.textContent = finalPrice;
+        }
+    
+        function updateQueriesText(targetPlan, queriesAreBeingAdded) {
+            const currentNumberOfQueriesElement = targetPlan.querySelector('.current-queries');
+            const currentNumberOfQueriesValue = Number(currentNumberOfQueriesElement.textContent);
+            const extraQueriesValue = Number(targetPlan.querySelector('.extra-queries').textContent);
+            const finalValue = queriesAreBeingAdded
+                ? (currentNumberOfQueriesValue + extraQueriesValue) * 1000
+                : (currentNumberOfQueriesValue - extraQueriesValue) * 1000;
+    
+            const formattedFinalValue = new Intl.NumberFormat().format(finalValue);
+    
+            currentNumberOfQueriesElement.textContent = formattedFinalValue;
+        }
+    
+        function getPrice(price) {
+            return Number(price.replace(',', '.'));
+        }
+    
+        function getCurrentPeriod() {
+            const container = document.querySelector('.free-trial__end--summary');
+            const period = container.querySelector('.trial-plan-choice-buttons.active').dataset.period;
+            return period;
+        }
+    });    
+</script>

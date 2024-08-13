@@ -1,0 +1,16 @@
+{% load general_tags %}
+
+ 
+<div class="single__plan-box-header {% if page != 'registration' %}p-3 pb-0{% endif %}">
+    <p class="m-0 f-size-26"><strong>{{plan_name|upper}}</strong></p>
+    {% if plan_name == 'starter'%}
+        <p class="f-size-14">{{'starter_plan_subtitle'|translate:language }}</p>
+    {% elif plan_name == 'advanced'%}
+        <p class="f-size-14">{{'advanced_plan_subtitle'|translate:language}}</p>
+    {% else %}
+        <p class="f-size-14">{{'business_plan_subtitle_1'|translate:language}} 
+        <strong>{{'bespoke_plan'|translate:language}}</strong> 
+        {{'business_plan_subtitle_2'|translate:language}} 
+        </p>
+    {% endif %}
+</div>

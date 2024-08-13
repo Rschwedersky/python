@@ -1,0 +1,41 @@
+{% load static %} {% load general_tags %} {% load dashboard_tags %}
+<table class="table table-borderless process_table" data-type="{{ process.area }}">
+    <thead>
+    <tr>
+        <th scope="col">
+            <div class="d-flex align-items-center justify-content-between py-2">
+                <div class="d-flex align-items-start justify-content-start">
+                    {% if not process.completed %}
+                        <img class="process_situation" src="{% static 'dashboard/img/logo-process_incomplete.svg' %}"/>
+                    {% else %}
+                        <img class="process_situation" src="{% static 'dashboard/img/logo-process_complete.svg' %}"/>
+                    {% endif %}
+                    <p class="f-size-18 dark-gray__color mb-0">
+                        <strong>{{ process.name }}</strong> <br/>
+                        <span class="f-size-14 color-muted">{{ process.area }}</span>
+                    </p>
+                </div>
+                
+                <div class="crew__popup-menu popup-menu__areas">
+                    <div class="crew__popup-menu-container crew__popup-menu-container--areas">
+                        
+                        <span class="btn btn-edit btn-edit-area" data-area="{{ process.area }}" data-name="{{ process.name }}" data-processid="{{ process.process_id }}" data-durationtime="{{ process.duration_time }}" data-areaid="{{ process.area_id }}"data-averagehourvalue="{{ process.average_hour_value }}" data-monthlytasks="{{ process.quantity_of_monthly_tasks }}" data-projectcost="{{ process.project_cost }}" data-completed="{{ process.completed }}" value="edit" data-toggle="modal" data-target="#process-modal" data-type="{{ process.area }}">{{ "edit_process"|translate:language }} </span>
+
+                        <span class="btn btn-remove btn-remove-area" data-toggle="modal" data-target="#confirmation-modal" data-id="{{ process.process_id }}">{{ "delete_process"|translate:language }}</span>
+                    </div>
+                    <button class="btn jsPopover">
+                        {% include "icons/config.svg" %}
+                    </button>
+                </div>
+            </div>
+        </th>
+    </tr>
+    </thead>
+    <tbody class="line-table">
+        <tr>
+            <td class="p-0">
+                {% include 'dashboard/settings/subprocess_table.html' with all_subprocesses=subprocesses subprocesses_type='registered' %}
+            </td>
+        </tr>
+    </tbody>
+</table>

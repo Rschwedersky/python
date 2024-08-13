@@ -1,0 +1,73 @@
+{% load general_tags %} {% load dashboard_tags %} {% load static %}
+
+<section class="crew-content" id="crew-content">
+    <div class="settings-content__title">
+        <h6><strong>{{'crew'|translate:language }}</strong></h6>
+        <div class="hr-bold"></div>
+    </div>
+    {% comment %}
+    <div class="settings-generic__header">
+         <div>
+            <p class="f-size-12 m-0">Filtrar por:</p>
+            <div class="margin-top-5 filter-buttons__container">
+                <button
+                    class="btn__pill btn__pill--settings-crew f-size-12	opacity-hover btn__pill--active
+                    "
+                    data-type="allFilters"
+                    data-class="btn__pill--settings-crew"
+                    data-query=""
+                >
+                    Todos
+                </button>
+                <button
+                    class="
+                        btn__pill btn__pill--settings-crew
+                        f-size-12
+                        opacity-hover
+                    "
+                    data-type=""
+                    data-class="btn__pill--settings-crew"
+                    data-query=""
+                >
+                    Ativos
+                </button>
+                <button
+                    class="
+                        btn__pill btn__pill--settings-crew
+                        f-size-12
+                        opacity-hover
+                    "
+                    data-type=""
+                    data-class="btn__pill--settings-crew"
+                    data-query=""
+                >
+                    Inativos
+                </button>
+            </div>
+        </div>
+
+        <button
+            class="
+                btn__purple btn__purple--services
+                f-size-14
+                opacity-hover
+            "
+        >
+            Convidar novo colaborador
+        </button> 
+    </div>
+    {% endcomment %}
+    <button
+        class="crew__remove-selected margin-bottom-15 crew__exclude modal__open-button crew__exclude--settings"
+        data-close=".crew__settings-modal" data-modal="#crew-exclude-modal" data-background=".modal__background--settings" data-exclude='all'
+        disabled
+        id="crew-remove-selected"
+    >
+        <img src="{% static 'dashboard/img/delete.svg' %}" alt="Trash can" data-disabled="{% static 'dashboard/img/delete.svg' %}" data-enabled="{% static 'dashboard/img/delete_filled.svg' %}"
+        id="crew-remove-selected-icon"/>
+        <span class="margin-left-10">{{'delete_selected'|translate:language }}</span>
+    </button>
+    {% include 'components/users_overflow.html' with crew_type='settings' profiles=config_infos|get_obj_attr:'profiles' %}
+</section>
+
+<script src="{% static 'dashboard/js/crew_checkbox.js' %}"></script>

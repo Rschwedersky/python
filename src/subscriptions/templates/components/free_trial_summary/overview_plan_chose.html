@@ -1,0 +1,111 @@
+{% load general_tags %} {% load dashboard_tags %} {% load static %}
+{% if has_plan_negotiation == False %}
+    <h1 class='f-size-32'><strong>{{'your_free_trial_period_ended'|translate:language }}</strong></h1>
+    <p class='color-muted f-size-18 w-65'>{{'your_free_trial_period_ended_subtitle'|translate:language }}.</p>
+
+    <div class="d-flex gap-32 w-90 mx-auto justify-content-between mt-5">
+        <div class='flex-basis-40'>
+            {% comment %} <div class="d-flex gap-32 justify-content-between w-80 mx-auto">
+                <p class='f-size-24'>{{'you_saved'|translate:language }}
+                    <br>
+                    <strong class='secondary__color f-size-28'>31h 48min</strong>
+                </p>
+                <img src="{% static 'img/check_altar.svg' %}" alt="Styled checkmark">
+            </div>
+            <div class='d-flex justify-content-between'>
+                <div class="fieldset">
+                    <span class="legend_hub">{{'without_the_hub_you_would_take'|translate:language }}</span>
+                    <span class='f-size-22 d-block'><strong>32h 22min</strong></span>
+                </div>
+                <img src="{% static 'img/right_double_arrow.svg' %}" alt="Double arrow right" class='mx-2'>
+                <div class="fieldset">
+                    <span class="legend_hub">{{'with_the_hub_you_took'|translate:language }}</span>
+                    <span class='f-size-22 d-block'><strong>34min</strong></span>
+                </div>
+            </div> {% endcomment %}
+
+            <p class='f-size-24'>{{'you_used'|translate:language }}...</p>
+            <div class="d-flex gap-32 justify-content-between w-80 mx-auto align-items-center trial-services-count">
+                <div class='d-flex flex-column'>
+                    <p class="d-flex align-items-center gap-16">
+                        <strong class='secondary__color f-size-28'>{{ services_used }}</strong>
+
+                        <span class="color-muted">
+                        {% if services_used == 1 %}
+                        {{'service'|translate:language|lower }}
+                        {% else %}
+                        {{'services'|translate:language|lower }}
+                        {% endif %}
+                        </span>
+                    </p>
+                    <p class="d-flex align-items-center gap-16">
+                        {% if dashboard == 0 %}
+                        <strong class='secondary__color f-size-28'>00</strong>
+                        <span class="color-muted">dashboards</span>
+                        {% else %}
+                        <strong class='secondary__color f-size-28'>01</strong>
+                        <span class="color-muted">dashboard</span>
+                        {% endif %}
+                        
+                    </p>
+                    {% comment %} <p class="d-flex align-items-center gap-16">
+                        <strong class='secondary__color f-size-28'>{{licenses_used}}</strong>
+                        <span class="color-muted">
+                        {% if licenses_used == 1 %}
+                        {{'license'|translate:language|lower }}
+                        {% else %}
+                        {{'licenses'|translate:language|lower }}
+                        {% endif %}
+                        </span>
+                    </p> {% endcomment %}
+                    
+                </div>
+                <img src="{% static 'img/check_altar.svg' %}" alt="Styled checkmark">
+            </div>
+        </div>
+        
+        {% include 'components/free_trial_plan_box.html' with plan=plan|lower plan_info=plan plan=recommended_plan %}
+    </div>
+{% elif subscription.get_value == 0 %}
+    <h1 class='f-size-32 text-center w-75 m-auto'><strong>{{'your_free_trial_period_ended'|translate:language }}. Estamos analisando sua avaliação e estaremos enviando uma proposta!</strong></h1>
+{% else %}
+    <h1 class='f-size-32'><strong>{{'your_bespoke_plan'|translate:language }}</strong> {{ 'to_take_your_company_even_further'|translate:language }}</h1>
+    <p class="f-size-14">{{'from_your_order_we_made_a_personalized_evaluation'|translate:language }}</p>
+    <div class="smarthis_box_shadowed p-4">
+        <p class="f-size-36 color3424C4 d-flex justify-content-between align-items-center mb-1">    
+            <strong>{{ 'your_business_plan'|translate:language }} </strong>
+            <img src="{% static 'img/puzzle.svg'%}" alt="Puzzle icon" class=''>
+        </p>
+        <p class="mb-2">{{ 'you_chose'|translate:language }}</p>
+        <p class="m-0 f-size-14"><img src="{% static '/img/check.svg' %}" alt="Check Icon"><strong> {{ subscription.get_number_of_hired_services }} {{'licenses'|translate:language }}</strong> {{'available_to_choose_any_service'|translate:language }}</p>
+        <p class="f-size-14">
+            <img src="{% static '/img/check.svg' %}" alt="Check Icon">
+            <strong> 
+                {% if subscription.get_queries_limit == 0 %}
+                    <span class="text-capitalize">{{ 'unlimited_queries'|translate:language }}</span>
+                {% else %}
+                    {{'up_to'|translate:language }} {{ subscription.get_queries_limit }} {{'monthly_consultations'|translate:language }}
+                {% endif %}
+            </strong>
+        </p>
+
+        <div class="d-flex justify-content-between gap-64">
+            {% include 'components/free_trial_summary/single_assign_plan_box.html' with subscription=subscription title_box='yearly'|translate:language subtitle_box='payment_every_year'|translate:language type_payment='year'|translate:language plan_value=subscription.get_value|multiply_int_result:10 has_discount=True plan_type='business' plan_type_payment='yearly' button_text='sign_anual_plan'|translate:language discount_text='17%_off'|translate:language %}
+
+            {% if subscription.get_payment_period != 'YEARLY' %}
+                {% include 'components/free_trial_summary/single_assign_plan_box.html' with subscription=subscription title_box='monthly'|translate:language subtitle_box='payment_every_month'|translate:language type_payment='month'|translate:language plan_value=subscription.get_value|multiply_int_result:1 has_discount=False plan_type='business' plan_type_payment='monthly' button_text='sign_monthly_plan'|translate:language %}
+            {% endif %}
+        </div>
+    </div>
+    <div class="my-5 px-4">
+        <div class="backgroundf7f7f7 mx-3 d-flex justify-content-center align-items-center gap-16 p-5">
+            <img src="{% static 'img/human_doubts_questions.svg'%}" alt="Questions about the plan" class="ml-3">
+            <div class="px-4">
+                <p class="f-size-30 color3424C4"><strong>{{ 'still_not_sure_if_this_is_what_you_need'|translate:language }}</strong></p>
+                <p class="f-size-18 w-75">{{ 'we_will_be_happy_to_help_you_find_the_ideal_plan_for_your_business'|translate:language }}</p>
+                <p class="f-size-18 w-75">{{ 'other_doubts_and_inquiries_are_also_very_welcome'|translate:language }}</p>
+                <button class="btn_smarthis white py-3 px-5"><strong>{{ 'talk_with_us'|translate:language }}</strong></button>
+            </div>
+        </div>
+    </div>
+{% endif %}

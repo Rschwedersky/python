@@ -1,0 +1,35 @@
+{% load general_tags %} {% load subscriptions_tags %} {% load static %} {% load humanize %} {% load i18n %}
+
+{% language language %}
+
+{% with plan_info=plan_name|get_plan_info %}
+    {% if page == 'registration'%}
+        <section class="single__plan-box registration{% if active_plan == plan_name %} plans__active position-relative{% endif %} plans {{classes}}" data-selected="{% if active_plan == plan_name %}true{% else %}false{% endif %}" data-value="{{plan_name}}" data-howmany_automations="{{number_of_services}}">
+
+        <div class='discover__selected-plan--check-container align-items-center gap-10 p-1 f-size-14'>
+            <img src="{% static '/img/thumbs_up.svg' %}" alt="Check Icon" class="discover__selected-plan--check">
+            <span>{{'recommended_capitalized'|translate:language }}</span>
+        </div>  
+    {% else %}
+        <section class="single__plan-box internal{% if plan_name in active_plan %} single__plan-box--selected position-relative{% endif %} {{classes}}" data-selected="{% if active_plan == plan_name %}true{% else %}false{% endif %}" data-value="{{plan_name}}" data-howmany_automations="{{number_of_services}}">
+    {% endif %}
+
+
+    
+        <div class="top_infos c-pointer">
+            {% include "components/plans/plan_header.html" with active_plan=active_plan plan_name=plan_name page=page %}
+
+            {% if page == 'registration'%}
+                {% include "components/plans/subscriptions_plan_body.html" with plan_name=plan_name active_plan=active_plan plan_info=plan_info language=language %}
+            {% else %}
+                {% include "components/plans/plan_body.html" with plan_name=plan_name active_plan=active_plan plan_info=plan_info language=language subscription=subscription %}
+            {% endif %}
+        </div>
+        
+        {% if page != 'registration'%}
+            {% include "components/plans/plan_footer.html" with active_plan=active_plan plan_name=plan_name plan_info=plan_info language=language subscription=subscription %}
+        {% endif %}
+        
+    </section>
+{% endwith %}
+{% endlanguage %}

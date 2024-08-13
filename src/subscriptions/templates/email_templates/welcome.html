@@ -1,0 +1,41 @@
+{% load general_tags %}
+
+{% include 'email_templates/default/header.html' %}
+
+    <tr>
+      <td width="640" align="left" valign="top" style="padding-left: 100px; padding-right: 60px;; padding-bottom: 30px;">
+        <h1 style="font-family: 'Montserrat', sans-serif; font-weight: 400; text-align: left; font-size: 30px;  margin-bottom: 2px;"> {{ 'welcome_to'|translate:language }} <br> <strong> Smarthis Hub </strong></h1>
+        <div style="height: 18px; background-color:#39FFB6; border-radius: 20px; margin-top: 0; width: 350px;"></div>
+
+      </td>
+    </tr>
+    <tr width="640" align="left" valign="top">
+      <td style="padding-left: 100px; font-size: 20px;">
+        <p>{{ 'hello'|translate:language }}, <strong>{{ user.first_name }}</strong></p>
+        {% if is_admin == False %}
+        <p>{{ 'welcome_hub'|translate:language }}!
+        <br> {{ 'welcome_hub_2'|translate:language }}!</p>
+        {% else %}
+        <p>{{ 'the_female'|translate:language }} <strong>{{ client.name }}</strong> {{ 'is_now_part_of_smarthis_hub'|translate:language }}.
+        <br> {{ 'complete_your_registration_and'|translate:language }}</p>
+        {% endif %}
+      </td>
+    </tr>
+    <tr width="640" align="center" valign="top">
+      <td>
+        {% if is_admin == False %}
+        <a href="{{ url }}" style='display: block;text-align:center;background: #3c2dca;border: 2px solid #000000;	box-shadow: 6px 6px 0px #000000;border-radius: 4px;font-weight: bold;color: #ffffff;margin-top: 15px;font-size:28px;text-decoration:none;max-width:330px;padding:32px'><span style='display:block;margin: auto 0; width:100%; height: 100%;'>Acessar o Hub</span></a>
+        {% else %}
+        <a href="{{ url }}register/conclude"><img src="https://i.imgur.com/GLIj5Do.png" alt="Completar Cadastro" style="margin-top: 15px; min-height: 80px;"></a>
+        {% endif %}
+      </td>
+    </tr>
+    <tr>
+      <td width="640" align="center" valign="top" style="padding-bottom:0;">
+      <p>{{ 'if_you_cannot_access_the_link'|translate:language }}, <a href="{{ url }}register/conclude">{{ 'click_here_small'|translate:language }}</a></p>
+    </td>
+  </tr>
+  {% include 'email_templates/default/benefits_smarthishub.html' %}
+  {% include 'email_templates/default/about_smarthishub.html' %}
+
+{% include 'email_templates/default/footer.html' %}

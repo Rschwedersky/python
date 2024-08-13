@@ -1,0 +1,20 @@
+{% load static %} {% load general_tags %}
+
+<div id="calendar_tab" class="dashboard_tab virgin calendar-tab">
+    <div id="calendar_container"></div>
+    <div id="modal-calendar-processes" class="modal modal-top fade calendar-modal">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-body">
+            <h4 class="modal-title"><span class="event-title"></span></h4>
+            <div class="event-body"></div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary" data-dismiss="modal">{{ 'close'|translate:language }}</button>
+          </div>
+        </div>
+      </div>
+	  </div>
+</div>
+<script src='https://unpkg.com/tooltip.js/dist/umd/tooltip.min.js'></script>
+<script src="{% static 'dashboard/js/dashboard/calendar.js' %}"></script>

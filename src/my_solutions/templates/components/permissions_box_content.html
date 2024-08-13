@@ -1,0 +1,5 @@
+<div class="permission-box__content--collaborator">
+    {% for collaborator in collaborators %}
+        {% include 'components/single_permission_box.html' with collaborator=collaborator %}
+    {% endfor %}
+</div>

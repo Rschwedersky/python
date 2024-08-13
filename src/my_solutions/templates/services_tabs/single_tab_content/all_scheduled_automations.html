@@ -1,0 +1,22 @@
+{% load static %} {% load general_tags %}
+<section>
+    {% if active_tab != 'all_scheduled_automations' %}
+        <div class="d-flex justify-content-center align-items-center p-5">
+            {% include 'components/loading.html' with show=True %}
+        </div>
+    {% elif scheduled_automations|length == 0 %}
+        {% include 'services_tabs/empty_appointments.html' with class_empty_schedules_box='backgroundf2f2f2 p-6 m-auto m-5 w-90 d-flex justify-content-center gap-32' img_calendar='ml-5' empty_text1_class='f-size-24 color000000' empty_text2_class='f-size-18 w-75' link_myservices=False %}
+    {% else %}
+        <div class="all_automations_scheduled_by_month d-flex align-items-center flex-column gap-24">
+            {% for month_key, days_obj in scheduled_automations.items %}
+                {% include 'services_tabs/all_scheduled_automations/single_month_scheduled.html' with month_title=month_key|translate:language days_obj=days_obj class_scheduled_box='scheduled_box_automation' %}
+            {% endfor %}
+        </div>
+        {% if page_obj_scheduled_automations.has_other_pages %}
+            {% url 'services' 'all_scheduled_automations' as the_url %}
+            {% include 'components/pagination.html' with url=the_url page_obj=page_obj_scheduled_automations classes="d-flex justify-content-center" %}
+        {% endif %}
+    {% endif %}
+</section>
+
+<script src="{% static 'js/empty_appointments.js' %}"></script>

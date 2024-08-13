@@ -1,0 +1,15 @@
+<div class="single_type c-pointer d-flex justify-content-between {{ info_type }}{% if active %} active{% endif %}">
+    <div class="min_column pt-2">
+        <div class="tick-mark ml-2 mr-3"></div>
+    </div>
+    {% if input_name == None %}
+        <div class="single_type--info w-100 {{ info_type }} pr-2 py-2">
+            <p class="single_type__info--title f-size-12 light-bold mb-1">{{ title }}</p>
+        </div>
+    {% else %}
+        <div class="single_type--info pr-2">
+            <p class="single_type__info--title f-size-12 light-bold mb-1">{{ title }}</p>
+            <p class="f-size-13 mb-2">{{ text }}</p>
+        </div>
+    {% endif %}
+</div>

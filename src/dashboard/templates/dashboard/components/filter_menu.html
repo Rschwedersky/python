@@ -1,0 +1,39 @@
+{% load general_tags %}
+<div id="filter_menu">
+    <p class="f-size-26 color-muted"><b>{{ 'filters'|translate:language }}</b></p>
+    <p class="f-size-16 color-muted mb-0 mt-4">{{ 'duration'|translate:language }}</p>
+    <div class="line_div backcolorc4c4c4 w-100 mb-3"></div>
+
+    <div class="d-flex justify-content-between">
+        <div class="custom_period w-100 f-size-14 light-bold set_dates active">{{ 'custom'|translate:language }}</div>
+        <select class="custom_period w-100 f-size-14 light-bold set_interval">
+            <option value="0">{{ 'today'|translate:language }}</option>
+            <option value="1">{{ 'yesterday'|translate:language }}</option>
+            <option value="7">{{ 'last_male'|translate:language }} 7 {{ 'days'|translate:language }}</option>
+            <option value="30">{{ 'last_male'|translate:language }} 30 {{ 'days'|translate:language }}</option>
+            <option value="60">{{ 'last_male'|translate:language }} 60 {{ 'days'|translate:language }}</option>
+            <option value="90">{{ 'last_male'|translate:language }} 90 {{ 'days'|translate:language }}</option>
+        </select>
+    </div>
+    <div class="custom_dates d-flex justify-content-between mt-4 mb-3">
+        <div class="w-50 pr-1">
+            <p class="f-size-12 mb-1">{{ 'begin_from'|translate:language }}:</p>
+            {% include 'dashboard/components/dateInputCalendar.html' with input_class='from_datetime' date=date_from %}
+        </div>
+        <div class="w-50 pl-1">
+            <p class="color-muted f-size-12 mb-1">{{ 'end'|translate:language }}:</p>
+            {% include 'dashboard/components/dateInputCalendar.html' with input_class='to_datetime' date=date_to %}
+        </div>
+    </div>
+    <div class="line_div backcolorc4c4c4 w-100 mb-3"></div>
+
+    <div class="all_filters mt-4">
+        {% for key,filter in all_filters.items %}
+            {% include 'dashboard/components/single_filter.html' with parent_class=key title=filter.title inputs=filter.inputs  %}
+        {% endfor %}
+    </div>
+    <div class="d-flex flex-column align-items-center mt-4">
+        <button type="button" class="apply_filters btn_smarthis px-4 py-2 mt-0">{{ 'apply_filters'|translate:language }} </button>
+        <button type="button" class="btn button-gray jsCleanAllFilters px-4 py-2 mt-4">{{ "clean_all"|translate:language }} </button>
+    </div>
+</div>

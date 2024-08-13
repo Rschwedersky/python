@@ -1,0 +1,22 @@
+{% load general_tags %}
+<div class="resumed_infos d-flex justify-content-end align-items-center">
+    <div class="resumed_infos d-flex justify-content-between mb-2">
+        {% if tab == 'roi' %}
+            {% include 'dashboard/components/single_box_resumed_info.html' with parent_class='roi_investment px-5' icon='menu-icons/roi' box_about_text='roi_investment'|translate:language %}
+            {% include 'dashboard/components/single_box_resumed_info.html' with parent_class='roi_process px-5' icon='dashboard-topinfo-icons/icon-process' box_about_text='processes'|translate:language %}
+            {% include 'dashboard/components/single_box_resumed_info.html' with parent_class='roi_areas px-5' icon='dashboard-topinfo-icons/icon-areas' box_about_text='business_areas'|translate:language %}
+        {% elif tab == 'rpa' %}
+            {% include 'dashboard/components/single_box_resumed_info.html' with parent_class='jsTotalRpa px-5' icon='menu-icons/rpa' box_about_text="returned_hours"|translate:language %}
+            {% include 'dashboard/components/single_box_resumed_info.html' with parent_class='jsTotalRpaProcesses px-5' icon='dashboard-topinfo-icons/icon-process' box_about_text='processes'|translate:language %}
+            {% include 'dashboard/components/single_box_resumed_info.html' with parent_class='jsTotalRpaAreas px-5' icon='dashboard-topinfo-icons/icon-areas' box_about_text='business_areas'|translate:language %}
+        {% elif tab == 'return_hours' %}
+            {% include 'dashboard/components/single_box_resumed_info.html' with parent_class='jsTotalHoursReturned px-5' icon='menu-icons/clock' box_about_text="returned_hours"|translate:language %}
+            {% include 'dashboard/components/single_box_resumed_info.html' with parent_class='jsTotalHoursReturnedProcesses px-5' icon='dashboard-topinfo-icons/icon-process' box_about_text='processes'|translate:language %}
+            {% include 'dashboard/components/single_box_resumed_info.html' with parent_class='jsTotalHoursReturnedAreas px-5' icon='dashboard-topinfo-icons/icon-areas' box_about_text='business_areas'|translate:language %}
+        {% elif tab == 'robots_tab' %}   
+            {% include 'dashboard/components/single_box_resumed_info.html' with parent_class='occupation px-5' icon='menu-icons/robot' box_about_text='robot_utilization_per_hour'|translate:language %}
+            {% include 'dashboard/components/single_box_resumed_info.html' with parent_class='robots px-5' icon='dashboard-topinfo-icons/icon-new-bot' box_about_text="robots"|translate:language %}
+            {% include 'dashboard/components/single_box_resumed_info.html' with parent_class='robot_process px-5' icon='dashboard-topinfo-icons/icon-process' box_about_text='processes'|translate:language %}
+        {% endif %}
+    </div>
+</div>

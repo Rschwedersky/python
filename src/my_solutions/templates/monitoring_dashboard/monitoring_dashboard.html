@@ -1,0 +1,73 @@
+{% extends 'base.html' %}{% load static %} {% load general_tags %} {% load mysolutions_tags %} {% load dashboard_tags %}
+
+{% block content %}
+    
+    <div class="backgroundf2f2f2 container container-100 h-100 container__height">
+         <div class="d-flex justify-content-center gap-5">  
+             <div class="pl-3 ml-3 pr-2">
+                    <div id="tableDiv">
+                      <table class="table-hub table-striped">
+                        <thead>
+                          <tr>
+                            {% for head in headings %}
+                            <th scope="col">{{head}}</th>
+                            {% endfor %}
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {% for task in tasks %}
+                          <tr class="table-row-divider">
+                            <td scope="row">{{task|get_obj_attr:'client_name'}}</td>
+                            <td scope="row">{{task|get_obj_attr:'automation_name'|get_automation_by_name|get_automation_display_name:language}}</td>
+                            <td scope="row">
+                              {% if task|get_obj_attr:'model_name' and task|get_obj_attr:'model_name' != 'Indisponível' %}
+                              {{task|get_obj_attr:'model_name'}}
+                              {% else %}
+                              -
+                              {% endif %}
+                            </td>
+                            <td scope="row">
+                             {% if task|get_obj_attr:'scheduled_time' and task|get_obj_attr:'scheduled_time' != 'None' %}
+                              {{task|get_obj_attr:'scheduled_time'|to_date|date:"d/m/Y"}}<br>{{task|get_obj_attr:'execution_time'|to_date|time:"H:i"}}
+                              {% else %}
+                              -
+                              {% endif %}
+                            </td>
+                            <td scope="row">
+                              {% if task|get_obj_attr:'task_executed' and task|get_obj_attr:'task_executed' != 'True' %}
+                              {{ 'yes'|translate:language }}
+                              {% else %}
+                              {{ 'no'|translate:language }}
+                              {% endif %}
+                            </td>
+                            <td scope="row">{{task|get_obj_attr:'execution_time'|to_date|date:"d/m/Y"}}<br>
+                              {{task|get_obj_attr:'execution_time'|to_date|time:"H:i"}}
+                            </td>
+                            <td scope="row">{{task|get_obj_attr:'success_percentage'}}</td>
+                            <td scope="row">{{task|get_obj_attr:'business_exception_percentage'}}</td>
+                            <td scope="row">{{task|get_obj_attr:'application_exception_percentage'}}</td>
+                          </tr>
+                             {% endfor %}
+                        </tbody>
+                      </table>
+             </div>
+      <div class="d-flex justify-content-center gap-5 mt-4">
+        <nav aria-label="...">
+          <ul class="pagination">
+           <li class="page-item {% if is_first_page %}disabled {% endif %}">
+             <a class="page-link" href="?page={{page|subtract:1}}" tabindex="-1">{{ 'previous'|translate:language }}</a>
+           </li>                        
+           <li class="page-item">
+             <a class="page-link" href="#">{{page}} <span class="sr-only">{{page}}</span></a>
+           </li>
+           <li class="page-item">
+             <a class="page-link" href="?page={{page|add:1}}">{{ 'next'|translate:language }}</a>
+           </li>
+          </ul>                           
+        </nav>
+       </div>
+    </div>
+ </div>
+</div>  
+    {% comment %} {% include 'components/footer.html' %} {% endcomment %}
+{% endblock %}

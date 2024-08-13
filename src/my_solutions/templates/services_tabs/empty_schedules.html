@@ -1,0 +1,16 @@
+{% load static %} {% load dashboard_tags %}
+<div class="{{ class_empty_schedules_box }}">
+    <img class="{{ img_calendar }}" src="{% static 'img/calendar-with-pencil.svg' %}" />
+    <div class="{{ empty_text_schedules }}">
+        <p class="{{ empty_text1 }} color000000"><strong>{{ 'there_are_no_scheduled_services'|translate:language }}</strong></p>
+        <p class="{{ empty_text2 }}">{{ 'schedule_the_execution_of_the_services_and_follow_them_here'|translate:language }}</p>
+        {% if class_empty_schedules_box == 'box_empty_history' %}
+            <a href="{% url 'services' %}" class="text-history_link">{{ 'go_to'|translate:language }} <strong>{{ 'my_services'|translate:language }}</strong></a>
+        {% else %}
+            <u  class="goto_myservices color3424C4 c-pointer">{{ 'go_to'|translate:language }} <strong>{{ 'my_services'|translate:language }}</strong></u>
+        {% endif %}
+    </div>
+</div>
+
+<script src="{% static 'js/empty_schedules.js' %}"></script>
+

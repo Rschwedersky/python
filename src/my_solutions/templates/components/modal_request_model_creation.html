@@ -1,0 +1,56 @@
+{% load static %} {% load general_tags %}
+
+<div class="modal  modal_cannot_create_model" id="modal_request_create_model" tabindex="-1" role="dialog" aria-labelledby="ModalCannotCreateModel" aria-hidden="true">
+    <div class="modal-dialog content_go_documentation modal-xl" role="document">
+        <div class="modal-content">  
+            <div class="p-4">
+                <button class="close d-flex justify-content-end" data-dismiss="modal" aria-label="Fechar">
+                    <img src="/static/dashboard/img/exit.svg" alt="Close Modal" class="c-pointer" aria-hidden="true">
+                </button> 
+                <div class="px-3">
+                    <h2 class="dark-gray__color">
+                        <strong class="f-size-20">{{ 'template_configuration_request'|translate:language }}</strong>
+                        <p class="f-size-18">{{ 'issuance_of_bank_statement'|translate:language }}</p>
+                    </h2>
+                </div>
+                <div class="px-3 pt-4 f-size-17">
+                    <p>{{ 'to_configure_a_template_for_this_service_we_need_to_contact_you_to_help_you_with_some_steps'|translate:language }}</p>
+                    <p>{{ 'do_you_want_to_confirm_this_request_our_experts_will_contact_you_within_24_hours'|translate:language }}</p>
+                </div>
+                <div class="modal-footer d-flex align-items-center justify-content-between">
+                    <button type="button" class="btn_modal btn_cannot_create_model_cancel light-bold" data-dismiss="modal">{{ 'cancel'|translate:language }}</button>
+                    <button type="button" class="btn_modal btn_cannot_create_model_access light-bold"{% if can_create_model == 2 %}disabled{% endif %}>
+                        {% if can_create_model == 2 %}
+                            {{ 'contact_requested'|translate:language }}
+                        {% else %}
+                            {{ 'request_contact'|translate:language }}
+                        {% endif %}
+                    </button>
+                </div> 
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="modal modal_cannot_create_model" id="request_create_model_success" tabindex="-1" role="dialog" aria-labelledby="ModalBankRequestRequest" aria-hidden="true">
+    <div class="modal-dialog content_request-api modal-xl" role="document">
+        <div class="modal-content">  
+            <div class="p-4">
+                <button class="close d-flex justify-content-end" data-dismiss="modal" aria-label="Fechar">
+                    <img src="/static/dashboard/img/exit.svg" alt="Close Modal" class="c-pointer" aria-hidden="true">
+                </button> 
+                <div class="px-3 pt-4 d-flex justify-content-center">
+                    <div>
+                        <img src="{% static 'img/img_request_api.png' %}"/>
+                    </div>
+                    <div class="px-4">
+                        <strong class="f-size-20">{{ 'request_received'|translate:language }}!</strong>
+                        <p class="f-size-17">{{ 'our_experts_will_contact_you_within_24_hours_to_assist_you_with_the_initial_setup_steps'|translate:language }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> 

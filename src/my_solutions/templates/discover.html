@@ -1,0 +1,127 @@
+{% extends 'base.html' %} {% block content %} {% load general_tags %} {% load dashboard_tags %} {% load static %} {% load mysolutions_tags %}
+<section class="discover__container {% if free_trial_ended != None and free_trial_ended == True %}no-pointer-events{% endif %}">
+<section class='discover__container'>
+    <div class='discover__content'>
+        <header class='discover__header'>
+            <div>
+                <h1 class='f-size-30  light__weight'>
+                {{'discover_services'|translate:language }} <br>
+                    <span class='d-inline-block'>{{'to_boost'|translate:language }}<div class="green__underlined green__underlined--discover-heading "></div></span> <br>
+                    <span class='d-inline-block'>{{'work'|translate:language }}<div class="green__underlined green__underlined--discover-heading "></div></span>
+                </h1>
+                <h2 class='f-size-18 color-muted light__weight' >{{'discover_services_available'|translate:language }}</h2>
+            </div>
+            <!-- Boostrap -->
+            <div id="discover-carousel" class="carousel slide" data-ride="carousel">
+                <!-- Indicators -->
+                <ol class="carousel-indicators">
+                    <li data-target="#discover-carousel" data-slide-to="0" class="carousel-controls active"></li>
+                    <li data-target="#discover-carousel" data-slide-to="1" class="carousel-controls"></li>
+                    <li data-target="#discover-carousel" data-slide-to="2" class="carousel-controls"></li>
+                    <li data-target="#discover-carousel" data-slide-to="3" class="carousel-controls"></li>
+                    <li data-target="#discover-carousel" data-slide-to="4" class="carousel-controls"></li>
+                </ol>
+                <!-- Wrapper for slides -->
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <img src="{% static "/img/carrossel_discover_1.png" %}" alt="" class="d-block w-100">
+                    </div>
+
+                    <div class="carousel-item">
+                        <img src="{% static "/img/carrossel_discover_2.png" %}" alt=""class="d-block w-100">
+                    </div>
+
+                    <div class="carousel-item">
+                        <img src="{% static "/img/carrossel_discover_3.png" %}" alt=""class="d-block w-100">
+                    </div>
+
+                    <div class="carousel-item">
+                        <img src="{% static "/img/carrossel_discover_4.png" %}" alt=""class="d-block w-100">
+                    </div>
+
+                    <div class="carousel-item">
+                        <img src="{% static "/img/carrossel_discover_5.png" %}" alt=""class="d-block w-100">
+                    </div>
+                </div>
+            </div>
+            <!-- Boostrap end  -->
+        </header>
+        <main class="d-flex flex-column align-items-start gap-32">
+            <section class="discover__content--section">
+                <form action="{% url 'discover_search_results' %}" method="GET" role="search" id="search-results-form" class="d-flex search-form-services">
+                    <div class="w-100">
+                        <input class="form-control jsSearch input-search" type="search" placeholder="{{"search_by_services_or_terms"|translate:language}}" value="{{ request.GET.q }}" aria-label="Search" name="q">
+                        
+                        {% if 'search' in request.path %}
+                            <button class="btn border-0" type="button">
+                                <a href="{% url 'discover' %}">
+                                    <i class="fas fa-times"></i>
+                                </a>
+                            </button>
+                        {% else %}
+                            <button class="btn border-0" type="button">
+                                <i class="fas fa-times"></i>
+                            </button>
+                        {% endif %}
+                        
+                        <button class="btn border-0" type="submit">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </div>
+                </form>
+                <div class="d-flex gap-16 align-items-center mt-2 mb-5">
+                    {% include "components/button_pill.html" with filters=filters class_modifier="discover-more" data_query="discover__service-box" %}
+                </div>
+
+                <h3 class="discover__section-heading">{{'services'|translate:language }}<div class="green__underlined green__underlined--discover-section"></div></h3>
+                    
+                    <section class="services-cards__container services-cards__container--discover">
+                    {% for automation in automations_translate %}
+                        {% with automation_obj=automation|get_automation_by_name %}
+                            {% if automation_obj.active %}
+                                {% include "discover/discover_service_box.html" with automation_display_name=automation|get_automation_display_name:language  logo='/img/logo_'|add:automation.name|add:'.png' data_type=automation.group|translate:language automation_name=automation.name all_users_allowed=all_users_allowed is_admin=is_admin is_active=automation_obj.active available_licenses=available_licenses is_user_interested=user|check_if_user_is_interested_in_fixed_automation:automation_obj automation_obj=automation_obj subscription=subscription %} 
+                            {% endif %}  
+                        {% endwith %}  
+                    {% endfor %}
+                    </section>
+            </section>
+            <section class="discover__suggestion">
+                <img src="{% static "/img/woman-typing.svg" %}"  alt="Woman typing">
+                <div class="ml-5">
+                    <p class="m-0 f-size-30"><strong>{{'did_not_find'|translate:language }}</strong></p>
+                    <p class="f-size-20 mt-1">Envie sua sugestão para: <span class='d-block'><strong><u>{{'hub_contact_email'|translate:language}}</u></strong>.</span></p>
+                    <p class="m-0 f-size-18">{{'always_working_new_services'|translate:language }}</p>
+                    <button class="btn__purple btn__purple--discover-suggestion modal__open-button d-none" data-close=".discover__inner-modal" data-background=".modal__background--discover" data-modal=".discover__inner-modal--suggestion">{{'leave_suggestion'|translate:language }}</button>
+                </div>
+                <img src="{% static "/img/hand-paper.svg" %}" alt="Hand choing service in a paper">
+            </section>    
+            {% comment %} <section class="discover__content--section">
+                <h3 class="discover__section-heading">{{'coming_soon'|translate:language }}<div class="green__underlined green__underlined--discover-section"></div></h3>
+                <p class="">{{'more_services_to_come'|translate:language }}</p>
+                <section class="services-cards__container services-cards__container--discover">
+                    {% for future_automation in all_future_automations %}
+                        {% include "discover/discover_soon_box.html" with service_name=all_future_automations|get_obj_attr:future_automation|get_obj_attr:'name' logo='/img/logo_'|add:future_automation|add:'.png' text_hover=all_future_automations|get_obj_attr:future_automation|get_obj_attr:'info' interested=all_future_automations|get_obj_attr:future_automation|get_obj_attr:'interested' automation_name=future_automation %}
+                    {% endfor %}
+                </section>
+            </section>     {% endcomment %}
+        </main>
+    </div>
+
+    {% include 'components/footer.html' %}
+</section>    
+
+
+
+<div class="modal__background modal__background--discover discover__modal-close ">
+
+    {% include 'discover/discover_steps_modal.html' %}
+
+    {% include 'discover/discover_suggestion_modal.html' %}
+
+    {% if available_licenses > 0 or 'free' in subscription.get_subscription_plan.get_plan_name|lower  %}
+        {% include 'discover/add_service_modal.html' with plan_name=subscription.get_subscription_plan.get_plan_name|lower %}
+    {% endif %}
+</div>
+<script src="{% static 'js/discover.js' %}"></script>
+
+{% endblock %}

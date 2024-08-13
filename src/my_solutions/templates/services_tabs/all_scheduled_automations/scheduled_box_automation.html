@@ -1,0 +1,22 @@
+{% load static %} {% load general_tags %}
+<a class="color212529 decorationnone" href="{% url 'automations' automation_name %}">
+    <div class="{{ class_scheduled_box }} backgroundf2f2f2 px-4 py-2">
+        <div class="top_content d-flex justify-content-between align-items-center">
+            <div>
+                <p class="f-size-16 color3424C4 light-bold mb-0">[{{ automation_type }}] {{ schedule_name }}</p>
+                <p class="f-size-14">{{ automation_title }}</p>
+            </div>
+            <img src="{% static 'dashboard/img/calendar.svg' %}">
+        </div>
+        <div class="bottom_content d-flex justify-content-between align-items-center">
+            <div class="">
+                <p class="f-size-11 mb-0">{{ 'forecast'|translate:language }}:</p>
+                <p class="f-size-11 mb-0">{{ send_results_date }}</p>
+            </div>
+            <div class="period_type backcolorBCBCBC d-flex justify-content-start p-1 align-items-center gap-5">
+                <img src="{% static 'dashboard/img/re-cycle.svg' %}" />
+                <p class="f-size-12 mb-0">{{ period_type }}</p>
+            </div>
+        </div>
+    </div>
+</a>

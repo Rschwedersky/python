@@ -1,0 +1,10 @@
+{% load static %} {% load general_tags %}
+
+<div class="d-flex justify-content-center mb-3">
+    {% if only_upgrade and not 'yearly' in payment_period %}
+        <button class="button__black-and-white trial-plan-choice-buttons opacity-hover{% if "monthly" in payment_period %} active{% endif %}" data-period='month'>{{'monthly_capitalized_small_portuguese'|translate:language }}</button>
+    {% elif not only_upgrade %}
+        <button class="button__black-and-white trial-plan-choice-buttons opacity-hover{% if "monthly" in payment_period %} active{% endif %}" data-period='month'>{{'monthly_capitalized_small_portuguese'|translate:language }}</button>
+    {% endif %}
+    <button class="button__black-and-white trial-plan-choice-buttons opacity-hover{% if "yearly" in payment_period %} active{% endif %}" data-period='year'>{{'yearly'|translate:language }}</button>
+</div>

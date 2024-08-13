@@ -1,0 +1,43 @@
+{% load general_tags %}
+
+{% include 'email_templates/default/header.html' %}
+    <tr>
+      <td width="640" align="left" valign="top">
+          <h3 style="font-size: 26px; margin-bottom: 0;margin-top:16px;">
+            <strong>{{ "hello"|translate:language }}, {{ user.get_full_name}}</strong>
+          </h3>
+          <p style="font-size: 22px; margin-bottom: 0;">
+            {{ "your_trial_period_ended"|translate:language }} 
+          </p>
+
+          <p style="font-size: 22px;margin-bottom: 0;">
+            {{ "it_was_incredible_14_days_..."|translate:language }}
+          </p>
+          
+          <p style="font-size: 22px;">
+            {{ "now_find_perfect_plan_..."|translate:language }}
+          </p>
+
+          {% include 'email_templates/default/emailButton.html' with button_text="discover_hub_plans"|translate:language button_link=link %}
+
+          <h2 style="margin-top: 4px; font-size: 22px; margin-bottom: 0px;"><strong>{{ "brespoke_plans"|translate:language }}</strong></h2>
+          <div style="height: 12px; background-color:#39FFB6; border-radius: 20px; width: 300px; margin-top: 0px; margin-bottom: 30px;"></div><!-- pseudosublinhado -->
+
+          <p style="font-size: 22px;">
+            {{ "didnt_find_the_ideal_plan_..."|translate:language }}
+          </p>
+
+          {% include 'email_templates/default/emailButtonSecondary.html' with button_text="talk_to_expert"|translate:language button_link="https://calendly.com/guilherme-favoreto-smarthis" %}
+
+          <h2 style="margin-top: 4px; font-size: 22px;margin-bottom: 0px;"><strong>{{ "only_with_hub_you"|translate:language }}</strong></h2>
+          <div style="height: 12px; background-color:#39FFB6; border-radius: 20px; margin-top: 0px; width: 300px; margin-bottom: 30px;"></div><!-- pseudosublinhado -->
+
+          <ul style="text-align: left; font-size: 20px; margin-bottom: 30px; margin-top: 0px;margin-left:0px; list-style-type: none;">
+            <li>- {{ "gain_more_freedom_to_focus_on_strategic_tasks"|translate:language }}. </li>
+            <li>- {{ "enjoy_ready_made_solutions_for_different_areas_of_expertise"|translate:language }} </li>
+            <li>- {{ "minimizes_errors_and_avoids_delays"|translate:language }}. </li>
+            <li>- {{ "centralizes_tasks_and_results"|translate:language }}. </li>
+          </ul>
+      </td>
+    </tr>
+{% include 'email_templates/default/footer.html' %}

@@ -1,0 +1,29 @@
+{% load static %} {% load general_tags %} {% load dashboard_tags %}
+
+<section class="container registration d-none jsRegistrationStep">
+    <div>
+        <div class="d-flex flex-column align-items-start">
+            <img class="img-logo" src="{% static 'dashboard/img/LogoSmarthisHub.png' %}" alt="HUB logo" >
+
+            <span class="f-size-20 title-register my-4">
+                <strong>{{"almost_ready"|translate:language}}! </strong>{{"for_a_more_personalized_experience"|translate:language}}
+            </span>
+
+        </div>
+
+        <div class="container-form">
+            <form id="second-step-form" class="needs-validation" novalidate>
+                {% for input in inputs %}
+                    {% if input|get_obj_attr:"type" == "select" %}
+                        {% include "components/_input_form.html" with id=input|get_obj_attr:'id' label=input|get_obj_attr:'label' type=input|get_obj_attr:'type' input_classes=input|get_obj_attr:'classes' placeholder=input|get_obj_attr:'placeholder' name=input|get_obj_attr:'name' options=input|get_obj_attr:"options" required=input|get_obj_attr:'required'  %}
+                    {% else %}
+                        {% include "components/_input_form.html" with id=input|get_obj_attr:'id' label=input|get_obj_attr:'label' type=input|get_obj_attr:'type' input_classes=input|get_obj_attr:'classes' placeholder=input|get_obj_attr:'placeholder' name=input|get_obj_attr:'name' required=input|get_obj_attr:'required'  %}
+                    {% endif %}
+                {% endfor %}
+
+                <button type="submit" class="btn btn-hub-primary w-100 mt-4" data-admin="{% if invite_with_service != True %}true{% else %}false{% endif %}">{{"proceed"|translate:language}}</button>
+            </form>
+        </div>
+    </div>
+    <img class="ilustration" src="{% static 'img/ilust_screen_hub.svg' %}" alt="Ilustração" />
+</section>

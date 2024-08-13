@@ -1,0 +1,62 @@
+{% load static %} {% load general_tags %}  {% load dashboard_tags %}
+
+{% if confirm_email == False %}
+    {% include 'onboarding_user/onboardingModal.html' with modal_title='confirm_your_email'|translate:language id='onboarding__modal_1' pontos='15' text_1='text_one_confirm_your_email'|translate:language btn_text='OK'  onboarding='/img/onboarding_'|add:'box4'|add:'.svg' completed=reference|get_obj_attr:'confirm_email'|get_obj_attr:'completed' %}
+    {% include 'onboarding_user/modalConfirmYourEmail.html' with modal_title='confirm_your_email'|translate:language id='modal__confirm_email'  btn_text='ok' completed=reference|get_obj_attr:'confirm_email'|get_obj_attr:'completed' %}
+{% endif %}
+<div class="crew__popup-menu {{parent_class}}">
+    {% if popup_type == None or popup_type != 'execute_template' %}
+        <div class="crew__popup-menu-container {{child_class}}"{% if user_id != None %} data-user_id="{{ user_id }}"{% endif %}>
+            {% if edit_class != None %}
+                <span class="crew__edit {{edit_class}}"{% if schedule != None %} data-toggle="modal" data-target="#modalExemplo" data-id="{{ schedule.id }}" data-automation={{schedule_automation_name}}{% if schedule.state == 2 %} disabled{% endif %}{% elif schedule == None %} data-close=".crew__settings-modal" data-modal="{{ modal_edit }}" data-background=".modal__background--settings"{% endif %}>
+                    {% if crew_type == 'settings' %}
+                        {{ 'visualize'|translate:language }}
+                    {% else %}
+                        {{ 'edit'|translate:language }}
+                    {% endif %}
+                </span>
+            {% endif %}
+            <span class="crew__exclude {{exclude_class}}"{% if schedule != None %} data-toggle="modal" data-target="#modaldelet" data-id="{{ schedule.id }}"{% if schedule.state == 2 %} disabled{% endif %}{% elif schedule == None %} data-close=".crew__settings-modal" data-modal="#crew-exclude-modal" data-background=".modal__background--settings" data-exclude='single'{% endif %}>
+                {{ 'delete'|translate:language }}
+            </span>
+        </div>
+        <img src="{% static "/dashboard/img/three-dots.svg" %}"alt="Three dots to show more info"
+            class="c-pointer opacity-hover px-2 crew__popup-menu--icon"
+        />
+    {% else %}
+        <div class="crew__popup-menu-container {{child_class}}">
+            {% if not email_was_verified %}
+                <span class="crew__edit create_appointment d-flex justify-content-start align-items-center gap-10" data-toggle="modal" data-target="#onboarding__modal_1">
+                    <img src="{% static 'img/icon_caledar-btn.png' %}" />{{ 'schedule_execution'|translate:language }}
+                </span>
+            {% else %}
+                <span class="crew__edit create_appointment d-flex justify-content-start align-items-center gap-10" data-toggle="modal" data-target="#modalcreateappointment" data-id="{{ schedule.id }}">
+                    <img src="{% static 'img/icon_caledar-btn.png' %}" />{{ 'schedule_execution'|translate:language }}
+                </span>
+            {% endif %}
+            <span>
+                <div class="btn-group btn__group--start">
+                    {% if not email_was_verified %}
+                        <button class="start__automation d-flex justify-content-start align-items-center gap-10 p-0" data-toggle="modal" data-target="#onboarding__modal_1">
+                            <img src="{% static 'img/icon_btn_run.png' %}" /> {{ 'run_now'|translate:language }}
+                        </button>
+                    {% elif is_automation_active == True or user.profile.client.name == 'Smarthis' %}
+                        <button class="iniciar start__automation d-flex justify-content-start align-items-center gap-10 p-0" data-id="{{ schedule.id }}"{% if schedule.state == 2 %} disabled{% endif %}>
+                            <img src="{% static 'img/icon_btn_run.png' %}" /> {{ 'run_now'|translate:language }}
+                        </button>
+                    {% else %}
+                        <button class="start__automation d-flex justify-content-start align-items-center gap-10 p-0" data-toggle="modal" data-target="#service-under-maintenance-modal" data-backdrop='static'>
+                            <img src="{% static 'img/icon_btn_run.png' %}" /> {{ 'run_now'|translate:language }}
+                        </button>
+                    {% endif %}
+                </div>
+            </span>
+        </div>
+        <button class="crew__popup-menu--icon btn-schedule_select-box d-flex justify-content-start align-items-center light-bold f-size-15 w-auto px-2">
+            <img class="pr-2" src="{% static 'img/img_select_box_automation.png' %}" />{{ 'run_template'|translate:language }}
+        </button>
+    {% endif %}
+</div>
+
+
+

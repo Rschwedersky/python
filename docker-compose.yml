@@ -1,0 +1,72 @@
+# Dockerfile for DEV environment, to run localy
+# DO NOT use in production
+
+version: '3.3'
+
+services:
+    proxy:
+        build: ./nginx
+        entrypoint: dockerize -template /app/nginx/default.temp.conf:/etc/nginx/conf.d/default.conf -wait tcp://app:8000 nginx
+        environment:
+            - APP_NAME=app
+            - APP_PORT=8000
+        ports:
+            - 80:80          
+        networks:
+            #- traefik-public
+            - broker-network
+            - database-network
+            #- orchestrator_bot_network
+        volumes:
+            - static_django:/app/static/
+    app:
+        build: .
+        entrypoint: python3 ./manage.py runserver 0.0.0.0:8000
+        depends_on:
+            - database
+        env_file: .env
+        ports:
+            - 8000:8000
+        networks:
+            - broker-network
+            - database-network
+            - app-tier
+        volumes:
+            - static_django:/app/static/
+            - worker-volume:/app/encryption/
+
+    database:
+        image: postgres:13.4
+        environment:
+            - POSTGRES_PASSWORD=postgres
+        volumes:
+            - db-data:/var/lib/postgresql/data
+        networks:
+            - database-network
+        ports:
+            - 5433:5432
+
+    cache:
+        image: bitnami/memcached:1.6.12-debian-10-r46
+        networks:
+            - app-tier
+        ports:
+            - 11211:11211
+
+volumes:
+    db-data:
+    worker-volume:
+    static_django:
+
+networks:
+    broker-network:
+        external: false
+        attachable: true
+    database-network:
+        external: false
+        attachable: true
+    worker-network:
+        external: false
+        attachable: true
+    app-tier:
+        driver: bridge

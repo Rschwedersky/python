@@ -1,0 +1,56 @@
+{% load general_tags %}
+<nav role="navigation" aria-label="Pagination Navigation" class="align-self-center {{ classes }}">
+    <ul class="pagination align-items-center">
+        {% if page_obj.has_previous %}
+            <li class="page-item">
+                <a href="{{ url }}?page=1" class="page-link">
+                    &laquo; {{'first'|translate:language}}
+                </a>
+            </li>
+            <li class="page-item">
+                <a href="{{ url }}?page={{ page_obj.previous_page_number }}" class="page-link">
+                    {{'previous'|translate:language}}
+                </a>
+            </li>
+        {% else %}
+            <li class="page-item disabled">
+                <a href="{{ url }}?page=1" class="page-link">
+                    &laquo; {{'first'|translate:language}}
+                </a>
+            </li>
+            <li class="page-item disabled">
+                <a href="?" class="page-link">
+                    {{'previous'|translate:language}}
+                </a>
+            </li>
+        {% endif %}
+
+        <li class="page-item mx-3">
+            {{'page'|translate:language}} {{ page_obj.number }} {{'of'|translate:language}} {{ page_obj.paginator.num_pages }}
+        </li>
+
+        {% if page_obj.has_next %}
+            <li class="page-item">
+                <a href="{{ url }}?page={{ page_obj.next_page_number }}" class="page-link">
+                    {{'next'|translate:language}}
+                </a>
+            </li>
+            <li class="page-item">
+                <a href="{{ url }}?page={{ page_obj.paginator.num_pages }}" class="page-link">
+                    {{'last'|translate:language}} &raquo;
+                </a>
+            </li>
+        {% else %}
+            <li class="page-item disabled">
+                <a href="?" class="page-link">
+                    {{'next'|translate:language}}
+                </a>
+            </li>
+            <li class="page-item disabled">
+                <a href="{{ url }}?page={{ page_obj.paginator.num_pages }}" class="page-link">
+                    {{'last'|translate:language}} &raquo;
+                </a>
+            </li>
+        {% endif %}
+    </ul>
+</nav>

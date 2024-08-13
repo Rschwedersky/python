@@ -1,0 +1,53 @@
+{% load static %} {% load general_tags %} {% load dashboard_tags %}
+
+
+<div class="topic_content my-2 d-flex justify-content-center">
+    <div class="d-flex justify-content-center mb-3">
+        <button type="button" class="btn button__register-area mr-3 light-bold" data-toggle="modal" data-target="#new_area_modal">
+            {{ 'add_business_area'|translate:language }}
+        </button>
+    </div>
+</div>
+
+<div class="py-4">
+    <table class="table table-striped table-borderless">
+        <thead>
+        <tr>
+            <th scope="col" class="w-70">{{ 'business_areas'|translate:language }}</th>
+            <th scope="col">{{ 'number_of_processes'|translate:language }} 
+               <a class="c-pointer hasTooltip hasTooltip__areas f-size-12" ><img src="{% static "/dashboard/img/icon-info.png" %}"alt="info"> 
+                    <span>{{ 'you_can_associate_processes_to_areas_in'|translate:language }}
+                        <p class="mb-0">{{ 'settings_processes'|translate:language }}</p>
+                        {{ 'this_helps_us_provide_more_complete_information_on_the_rpa_dashboard'|translate:language }}
+                    </span></a> 
+                </img>
+            </th>
+        </tr>
+        </thead>
+        <tbody class="line-table">
+            {% for a in processes_filter.areas.areas %}
+                <tr class="backgroundF8F8F8">
+                    <th scope="row" data-area_id="{{ processes_filter.areas.id|get_obj_attr:forloop.counter0 }}">{{ a }}</th>
+                    <th scope="row" class="row_process"> 
+                        <div class="{% if processes_in_areas|get_obj_attr:a == 0 %}box__process-table-text{% else %}box__process-table{% endif %}">
+                        <p class=" f-size-12 text-process_table" value="{{ processes_in_areas|get_obj_attr:a }}" >{{ processes_in_areas|get_obj_attr:a }} {{ 'processes'|translate:language }}</p>
+                        </div>
+                        <div class="d-flex gap-16 manage__areas-container">
+                            <div class="crew__popup-menu popup-menu__areas">
+                                <div class="crew__popup-menu-container crew__popup-menu-container--areas">
+                                    <span class="btn btn-edit btn-edit-area" data-toggle="modal" data-target="#edit_area_modal">{{ 'edit'|translate:language }} </span>
+                                    <span class="btn btn-remove btn-remove-area" data-toggle="modal" data-target="#remove_area_modal">{{ 'delete'|translate:language }}</span>
+                                </div>
+                                <img src="{% static "/dashboard/img/three-dots.svg" %}"alt="Three dots to show more info"
+                                    class="c-pointer opacity-hover px-2 crew__popup-menu--icon" />
+                            </div>
+                        </div>
+                    </th>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div> 
+<div class="text-center">
+    <p class="color-muted">{{ 'there_are_no_more_business_areas'|translate:language }}</p>
+</div> 

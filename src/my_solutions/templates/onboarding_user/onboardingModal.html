@@ -1,0 +1,70 @@
+{% load static %} {% load general_tags %} {% load dashboard_tags %}
+
+<div class="modal onboarding_modal-hub" tabindex="-1" role="dialog" id='{{id}}'>
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">
+           {{ modal_title}}
+          </h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <img src="{% static 'img/x-lg.svg' %}"/>
+          </button>
+        </div>
+        {% if total_progress == 100 %}
+          <div class="modal-body">
+            <div class="d-flex  justify-content-center align-items-center">
+              <section class="onboarding__box-header">
+                  <span class="box_completed-img check_box"><img class="mt-3 check_img" src="{% static 'img/onboarding_box1.svg' %}" alt="icons boxes"></span>
+                  <span class="box_completed-img check_box"><img class="mt-3 check_img" src="{% static 'img/onboarding_box2.svg' %}" alt="icons boxes"></span>
+                  <span class="box_completed-img check_box"><img class="mt-3 check_img" src="{% static 'img/onboarding_box3.svg' %}" alt="icons boxes"></span>
+                  <span class="box_completed-img check_box"><img class="mt-3 check_img" src="{% static 'img/onboarding_box4.svg' %}" alt="icons boxes"></span>
+              </section>
+            </div>
+            <div class="d-flex flex-column gap-10 px-3">
+                <p class="py-3 mb-0"><strong>{{text_1}}{{name_user}}!</strong></p>
+                <p><strong>{{text_completed}}</strong></p>
+                <p>{{text_2}}</p>
+                <p>{{text_3}}<a href="{% url 'help_center' %}">{{help_center}}</a></p>
+            </div>
+          </div>
+
+        {% else %}
+          <div class="modal-body">
+              <div class="d-flex  justify-content-center align-items-center">
+                <section class="onboarding__box-header">
+                  <span class="onboarding_icon_circle {% if completed %}check_box{% endif %}"><img class="mt-3 {% if completed %}check_img{% endif %}" src="{% static onboarding %}" alt="icons boxes"></span>
+                </section>
+              </div>
+              <div class="d-flex justify-content-center align-items-center py-3">
+                <span class="btn_boxes color3424C4 {% if completed %}check_pontos{% endif %}">
+                  <img src="{% if completed %}{% static 'img/icon_check-pontos.svg' %}{% else %}{% static 'img/icon_mais-pontos.svg' %}{% endif %}" /> 
+                  <strong>{{ pontos }}</strong> {{ 'points'|translate:language }}
+                </span> 
+              </div>
+              {% if id == 'onboarding__modal_1' %}
+                <div class="d-flex flex-column gap-10 px-3">
+                  <p><strong>{{text_1}}</strong></p>
+                  <p>{{ 'we_sent_the_message_to'|translate:language }} <strong class="email_banner">[{{user.email}}].</strong> {{ 'if_you_havent_received_it_click'|translate:language }} <a class="resend_email decoration_link_text c-pointer">{{ 'here_to_resend'|translate:language }}<a/> {{ 'or'|translate:language }} <a class="decoration_link_text c-pointer" data-toggle="modal" data-target="#modalsettings" id="dropdown-config-button">{{ 'here_to_edit_the_address'|translate:language }} .<a/></p>
+                </div>
+              {% else %}
+                <div class="d-flex flex-column gap-10 px-3">
+                  <p><strong>{{text_1}}</strong></p>
+                  <p>{{text_2}}</p>
+                  <p>{{text_3}}</p>
+                </div>
+              {% endif %}
+          </div>
+        {% endif %}
+
+        <div class="modal-footer">
+            <a href={{bnt_href}} {% if id == 'onboarding__modal_4' %} "{% url 'services' 'manage_permissions' %}" {% endif %}
+              type="button" 
+              class="no__link btn-primary-onborading mx-auto w-50 d-flex justify-content-center align-items-center" {% if id == 'onboarding__modal_1' %} data-dismiss="modal" aria-label="Fechar" {% endif %}>
+              {{btn_text}}
+            </a>
+        </div>
+      </div>
+    </div>
+</div>
+

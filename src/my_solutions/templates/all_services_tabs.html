@@ -1,0 +1,32 @@
+{% load general_tags %} {% load dashboard_tags %}
+<div class="services_tabs">
+    <div class="tab_header d-flex justify-content-between pr-2">
+        <div class="left_content d-flex justify-content-between mt-2">
+            {% for single_tab in all_services_tabs %}
+                {% include 'services_tabs/single_tab_header.html' with title=single_tab|get_obj_attr:'title' active=single_tab|get_obj_attr:'active_tab' type=single_tab|get_obj_attr:'type' free_trial_ended=free_trial_ended %}
+            {% endfor %}
+        </div>
+        {% if is_admin %}
+        <div class="right_content pt-2">
+            <button class="btn__purple white py-1 px-4 mb-2 no-uppercase" data-heap="Fazer upgrade" data-toggle="modal" data-target="#plans-modal--upgrade-button"{% if free_trial_ended %} disabled{% endif %}>
+                {% if 'Trial' in subscription.plan.name and 'Business' not in subscription.plan.name %}
+                    {{ 'hire_plan'|translate:language }}
+                {% else %}
+                    {{ 'manage_plan'|translate:language }}
+                {% endif %}
+            </button>
+        </div>
+        {% endif %}
+    </div>
+    <div class="tab_content">
+        {% if free_trial_ended != None and free_trial_ended == True %}
+            {% include 'components/end_of_trial_banner.html' %}
+        {% endif %}
+
+        {% for single_tab in all_services_tabs %}
+            {% include 'services_tabs/single_tab_content.html' with type=single_tab|get_obj_attr:'type' active=single_tab|get_obj_attr:'active_tab' template=single_tab|get_obj_attr:'template' is_automation_active=is_automation_active free_trial_ended=free_trial_ended %}
+        {% endfor %}
+    </div>
+</div>
+
+{% include "components/plans/plans_modal.html" with switch_button_classes='h-50 w-35' classes='modal__plans--tabs margin-top--2' modal_id='plans-modal--upgrade-button' plans_container_height_classes='h-25rem' %}

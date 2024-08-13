@@ -1,0 +1,42 @@
+{% load general_tags %} {% load dashboard_tags %} {% load static %}
+
+{% if active_tab == 'processes_history' or active_tab == 'all_scheduled_automations' or standard_variables != None %}
+    <div class="d-flex justify-content-center align-items-center p-5">
+        {% include 'components/loading.html' with show=True %}
+    </div>
+{% else %}
+    <section class="manage__permissions-container">
+        <div class="d-flex justify-content-between align-items-center">
+            <p class="color-muted--light mb-0">{{ 'you_can_transfer_licenses_to_other_members_on_team'|translate:language }}.  <a href="{% url 'help_center' %}">{{ 'know_more'|translate:language }} {{ 'here'|translate:language }}.</a></p>
+            <div class="d-flex flex-column align-items-center mb-4">
+                <p class="f-size-14 m-0"><strong>
+                    {% if permissions_available < 0 %}0{% else %}{{ permissions_available }}{% endif %}
+                    {% if permissions_available == 1 %}
+                        {{ 'license_available'|translate:language }}
+                    {% else %}
+                        {{ 'licenses_available'|translate:language }}
+                    {% endif %}
+                </strong></p>
+                <a href="{% url 'discover' %}" class="btn__purple btn__purple--services f-size-14 no-uppercase" data-heap="{{ 'hire_more_services'|translate:language }}"
+                >{{ 'hire_more_services'|translate:language }}</a>
+            </div>
+        </div>
+        {% include "components/button_pill.html" with filters=filters class_modifier="permissions" data_query="permissions-box__container" page='services' %}
+        <div class="d-flex flex-column gap-16 mt-4">
+            {% for solution in solutions %}
+                {% with automation__name=solution.name %}
+                    {% with total_licenses=licenses_info|get_obj_attr:automation__name|get_obj_attr:'total' available_licenses=licenses_info|get_obj_attr:automation__name|get_obj_attr:'available' %}
+                            {% with permissions_numbers=all_users_allowed|get_obj_attr:automation__name %}
+                                    {% include "components/automation_permission_box.html" with heading=solution|get_automation_display_name:language permissions_available=available_licenses permissions_total=total_licenses  collaborators=permissions_numbers|get_obj_attr:'licenses' data_type=solution.group|translate:language automation_name=automation__name admin=user logo='img/logo_'|add:automation__name|add:'.png' %}
+                            {% endwith %}
+                    {% endwith %}
+                {% endwith %}
+            {% endfor %}
+        </div>
+    </section>
+
+    <div class="modal__background modal__background--permissions" >
+        {% include "components/permissions_collaborator_modal.html" %}  
+    </div>
+{% endif %}
+<script rel="text/javascript" src="{% static 'js/managePermissions.js' %}"></script>

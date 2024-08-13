@@ -1,0 +1,27 @@
+{% load general_tags %} {% load dashboard_tags %}
+<div class="row setup-content" id="step-2">
+    <div class="col-12 uploader">
+        {% if automation_type == 'upload' %}
+            {% include 'components/upload_content.html' %}
+        {% else %}
+            <div class="form-text-input" id="form-input d-flex justify-content-center">
+                {% include 'components/step_form_input.html' with form='form-login' type='text' name='login' id='' text_small=standard_variables|get_obj_attr:'small_login' input_form_title=standard_variables|get_obj_attr:'input_form_login' %}
+
+                {% include 'components/step_form_input.html' with form='form-pass' type='password' name='pass' id='pass' text_small=standard_variables|get_obj_attr:'small_password' input_form_title=standard_variables|get_obj_attr:'input_form_pass'%}
+                {% if automation_name == 'nibo' %}
+                    {% include 'components/step_form_input.html' with form='form-login py-3' type='text' name='link_results' id='form_link' text_small=standard_variables|get_obj_attr:'small_link' input_form_title=standard_variables|get_obj_attr:'input_form_link' %}
+                {% endif %}
+                <!-- <button class="btn button-credentials" type="button">{{ 'check_credentials'|translate:language }}</button> -->
+            </div>
+            {% endif %}
+            <input type="hidden" name="automation" value="{{ automation_name }}" />
+            <input type="hidden" name="action_type" value="new" />
+        <br>
+        {% if automation_type != 'upload' %}
+            {% include 'components/modal_footer.html' with next_btn_text='advance'|translate:language next_btn_class="step-2 credentials_advance" next_btn_type='button' %}
+        {% else %}
+            {% include 'components/modal_footer.html' with next_btn_text='advance'|translate:language next_btn_class="step-2" next_btn_type='button' %}
+        {% endif %}
+    </div>
+</div>
+

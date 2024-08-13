@@ -1,0 +1,77 @@
+{% load static %} {% load general_tags %} {% load dashboard_tags %} {% load humanize %} {% load i18n %}
+
+{% language language %}
+<article class='flex-basis-55 plan__first-row position-relative'>
+    <header class='d-flex align-items-center'>
+        <div class='recommended__label recommended__label--secondary align-items-center gap-10 p-1 f-size-14'>
+            <img src="{% static '/img/thumbs_up.svg' %}" alt="Check Icon" class="discover__selected-plan--check">
+            <span>{{'recommended_capitalized'|translate:language }}</span>
+        </div> 
+        <div class='margin-top--1'>
+            <p class="m-0 f-size-30"><strong>{{ plan|title }}</strong></p>
+
+            {% if plan == 'starter' %}
+            <span class='f-size-14'>{{'starter_plan_subtitle'|translate:language }}</span>
+            {% elif plan == 'advanced' %}
+            <span class='f-size-14'>{{'advanced_plan_subtitle'|translate:language}}</span>
+            {% elif plan == 'business' %}
+            <span class='f-size-14'>{{'business_plan_subtitle_1'|translate:language}}
+            <strong>{{'bespoke_plan'|translate:language}}</strong>
+            {{'business_plan_subtitle_2'|translate:language}}</span>
+            {% endif %}
+        </div>
+        <div class='text-right w-45 ml-auto'>
+            {% if plan != 'business' %}
+                <p class="m-0 f-size-26"><strong>R$ {{plan_info.value}}</strong> <span class='secondary__color'>/ {{'month'|translate:language }}</span></p>
+                <span class='f-size-12 color-muted d-inline-block line-height-1'>{{'or_get_2_months_free_subscribing'|translate:language}} R$ {{plan_info.value|multiply:10 }}.</span>
+            {% else %}
+                <p class="d-flex align-items-center text-left gap-16">
+                    <img src="{% static 'img/email_black.png'%}" alt="Email icon">
+                    <span>{{'set_up_your_plan_receive_personalized_assessment'|translate:language }}</span>
+                </p>
+            {% endif %}
+        </div>
+        {% comment %} <span class='plan__label plan__label--secondary f-size-12 d-flex flex-column align-items-center w-50'>
+            <strong class='f-size-14'>{{'get_17%_off'|translate:language}}</strong>
+        {{'annual_billing'|translate:language }}
+        </span> {% endcomment %}
+    </header>
+    <ul>
+        {% if plan == 'starter' %}
+            <li>
+                <strong>{{ plan_info.qnt_automations }} {{'license'|translate:language }}</strong> {{'available_to_choose_any_service'|translate:language }}
+            </li>
+            <li>
+                <strong> {{'up_to'|translate:language }} {{ plan_info.qnt_queries|intcomma }} {{'monthly_consultations'|translate:language }}</strong>
+            </li>
+            <li>{{ 'maintenance_and_updates_on_our_own'|translate:language }}</li>
+        {% elif plan == 'advanced' %}
+            <li>
+                <strong>{{ plan_info.qnt_automations }} {{'licenses'|translate:language }}</strong> {{'available_to_hire_different_services'|translate:language }}
+            </li>
+            <li>
+                <strong>{{'up_to'|translate:language }} {{ plan_info.qnt_queries|intcomma }}</strong> {{'monthly_consultations_by_license'|translate:language }}
+            </li>
+            <li>{{ 'invite_your_team'|translate:language }}</li>
+            <li>{{ 'maintenance_and_updates_on_our_own'|translate:language }}</li>
+        {% else %}
+            <li>
+                <strong>4+ {{'licenses'|translate:language }}</strong>, {{'according_to_your_need'|translate:language }}
+            </li>
+            <li>
+                {{'more_limit_options_of_consultations'|translate:language }}
+            </li>
+            <li>{{ 'invite_your_team'|translate:language }}</li>
+            <li>{{ 'maintenance_and_updates_on_our_own'|translate:language }}</li>
+        {% endif %}
+    </ul>
+    <div class="d-flex flex-column justify-content-center align-items-center gap-16">
+        {% if plan == 'business' %}
+            <a href={% url 'end_of_trial_choose_plan' plan %} target="_blank" class="btn__purple w-70 mx-auto py-2 px-3 no-uppercase">{{'continue_and_receive_evaluation'|translate:language }}</a>
+            <span class='color-muted f-size-14'>{{'set_up_your_plan_receive_personalized_assessment'|translate:language }}</span>
+        {% else %}
+            <a href={% url 'end_of_trial_choose_plan' plan 'monthly' %} target="_blank" class="btn__purple w-70 mx-auto py-2 px-3 no-uppercase">{{'continue_with_this_plan'|translate:language}}</a>
+        {% endif %}
+    </div>    
+</article>
+{% endlanguage %}

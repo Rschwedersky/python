@@ -1,0 +1,8 @@
+{% load general_tags %}
+<div class="steps_header d-flex justify-content-around align-items-center backcolorfafafa py-2 px-3 mb-4">
+    <p class="company_data f-size-12 mb-0 c-pointer{% if first_step != None %} active{% endif %}">{{ 'company_data'|translate:language }}</p>
+    <span class="arrow_semi_square border323232 right{% if first_step != None %} active{% endif %}"></span>
+    <p class="f-size-12 mb-0{% if second_step != None %} active{% endif %}">{{ 'address'|translate:language }}</p>
+    <span class="arrow_semi_square border323232 right{% if second_step != None %} active{% endif %}"></span>
+    <p class="f-size-12 mb-0">{{ 'payment'|translate:language }}</p>
+</div>

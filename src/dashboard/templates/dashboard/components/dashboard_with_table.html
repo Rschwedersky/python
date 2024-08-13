@@ -1,0 +1,33 @@
+{% load static %} {% load general_tags %}
+
+<article class="dashboard table__dashboard full-screen js-capture">
+    <div>
+        <header class='d-flex justify-content-between align-items-start mb-3'>
+            <div>
+                <h5><strong>{{ title|translate:language }}</strong></h5>
+                {% if legend_green or legend_blue or legend_light_blue %}
+                    {% include 'dashboard/components/legend.html' with legend_blue=legend_blue legend_green=legend_green %}
+                {% endif %}
+            </div>
+            {% include 'dashboard/components/dashboard_select_order_by.html' with label_name='order_by'|translate:language select_id=select_id data_selected='returnInHours' select_class="ml-1" %}
+            {% include 'dashboard/components/dashboard_header_buttons.html' with graph_id=graph_id %}
+        </header>
+        <article class="table__dashboard--content">
+            <section class="single_chartcontent">
+                <article id="{{graph_id}}">
+                    <div class="loading_div d-flex justify-content-center align-items-center">
+                        <div class="loader"></div>
+                    </div>
+                </article>
+            </section>
+            <table id="{{table_id}}" class="dashboard__info-table visibility-hidden js-extra-content {{ table_class }}" data-heading={{'table'|translate:language}}>
+                <thead>
+                    <tr>
+                        <th colspan="2">{{table_header}}</th>
+                    </tr>
+                </thead>
+                <tbody data-icon={% static 'dashboard/img/info_black.svg'%}></tbody>
+            </table>
+        </article>
+    </div>    
+</article>

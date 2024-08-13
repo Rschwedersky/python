@@ -1,0 +1,39 @@
+{% extends 'base.html' %} {% block content %} {% load static %}
+<div id="standard_solution_inner_content" class="pt-5">
+    <div class="container container-90 h-90 whitebackcolor py-3">
+        {% include 'all_services_tabs.html' with all_services_tabs=all_services_tabs is_automation_active=is_automation_active %}
+    </div>
+</div>
+
+<div class="footer"></div>
+
+{% include 'components/modal_new_standard.html' with standard_variables=standard_variables %} 
+{% include 'components/modal_delete_standard.html' with standard_variables=standard_variables %} 
+{% include 'components/modal_cancel_standard.html' with standard_variables=standard_variables %}
+{% if can_create_model != 1 %}
+    {% include 'components/modal_request_model_creation.html' %}
+{% endif %}
+
+<input type="hidden" id="automation_type" value="{{ automation_name }}" />
+
+<script src="{% static 'js/modalUploadController.js' %}"></script>
+
+{% if automation_type == 'credential' or automation_type == 'credential_and_filter_notes' %}
+    <script src="{% static 'js/modal_credential.js' %}"></script>
+{% else %}
+    {% if automation_type == 'upload' %}
+    <script src="{% static 'js/modal_upload.js' %}"></script>
+    {% else %}
+    <script src="{% static 'js/modal_upload_and_credential.js' %}"></script>
+    {% endif %}
+{% endif %}
+
+<script src="{% static 'js/standardSolution.js' %}"></script>
+<script src="{% static 'js/multistep.js' %}"></script>
+{% if can_create_model != 1 %}
+    <script src="{% static 'js/cannot_create_model.js' %}"></script>
+{% endif%}
+
+
+
+{% endblock %}

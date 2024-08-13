@@ -1,0 +1,26 @@
+{% load static %} {% load general_tags %} {% load dashboard_tags %}
+{% for schedule in page_obj %}
+{# Each "schedule" is a Schedule model object. #}
+        {% if page == 'processes_history'  %}
+            {% with automation__name=schedule|get_obj_attr:'automation__name' %}
+                {% with automation_obj=automation__name|get_automation_by_name %}
+                    {% if schedule.id in tasks %}
+                            {% include "processes/single_process_box.html" with page="processes" schedule=schedule subtitle=automation_obj|get_automation_display_name:language date=tasks|get_obj_attr:schedule.id|get_obj_attr:'date'|date:'d/m/y' logo='img/logo_'|add:automation__name|add:'.png' tasks=tasks task_state=tasks|get_obj_attr:schedule.id|get_obj_attr:'state' %}
+                    {% else %}
+                            {% include "processes/single_process_box.html" with page="processes" schedule=schedule subtitle=automation_obj|get_automation_display_name:language date=schedule|get_obj_attr:'updated_at'|date:'d/m/y' logo='img/logo_'|add:automation__name|add:'.png' tasks=tasks %}
+                    {% endif %}
+                {% endwith %}
+            {% endwith %}
+        {% else %}
+                {% include 'components/box_automation.html' with schedule=schedule automation_description=standard_variables|get_obj_attr:'title' loop=forloop.counter allschedule_credentials=allschedule_credentials tasks=tasks is_automation_active=is_automation_active  schedule_automation_name=schedule.automation__name appointments=appointments %}
+        {% endif %}
+{% endfor %}
+
+{% if page != 'processes_history' %}
+    {% include 'components/modals/manage_appointments.html' %}
+{% endif %}
+
+
+{% if page_obj.has_other_pages %}
+    {% include 'components/pagination.html' with url=the_url page_obj=page_obj %}
+{% endif %}

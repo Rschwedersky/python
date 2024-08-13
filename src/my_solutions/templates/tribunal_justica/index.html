@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}
+    <img class="ml-2" src="{% static 'img/tjrj.jpg' %}" width="50" height="50"/> Processos Tribunal de Justiça 
+{% endblock %}
+
+{% block content %}
+    <div id="tribunal_justica_content">
+        <p class="ml-3 mb-1">Preencha os campos abaixo para agendar a verificação dos processos. Você receberá o resultado por email em um arquivo (*.csv).</p>
+        {% include 'tribunal_justica/tribunal_justica_form.html' %}
+    </div>
+    <script src="{% static 'js/tribunal_justica.js' %}"></script>
+{% endblock %}

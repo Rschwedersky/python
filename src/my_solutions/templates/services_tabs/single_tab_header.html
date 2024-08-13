@@ -1,0 +1,5 @@
+{% load general_tags %}
+<div class="single_tab_header c-pointer px-3 py-2{% if active == type %} active{% endif %} {% if type == 'manage_permissions' and free_trial_ended != None and free_trial_ended == True %}no-pointer-events{% endif %}" data-href="{{ type }}">
+    <span class="px-3">{{ title|translate:language }}</span>
+    <div class="green_line header"></div>
+</div>

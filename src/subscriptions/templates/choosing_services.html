@@ -1,0 +1,61 @@
+{% extends 'base.html' %} {% load static %} {% load general_tags %} {% load dashboard_tags %}
+{% block content %}
+
+{% csrf_token %}
+<div class="registration__background">
+    <header>
+        <img src="{% static "dashboard/img/LogoSmarthisHub.png" %}" alt="Smarthis Hub Logo" />
+    </header>
+    <div class="registration__inner-content" data-licenses='0'>
+        <section id='choosing-services'class="pb-3 mb-5">
+            <header class="d-flex flex-column justify-content-between mb-3 pr-3">
+                <p class="dark-gray__color f-size-18 m-0"><strong>{{'choose_services_to_test'|translate:language }}</strong></p>
+                <p class="color-muted">{{'registration_choosing_subtitle'|translate:language }}</p>
+            </header>
+            <div class="d-flex gap-10 align-items-center">
+                {% include "components/button_pill.html" with filters=filters class_modifier="registration-services" data_query="registration__single-service-box" with_dashboard=True %}
+            </div>
+            <section class="services-cards__container services-cards__container--registration">
+                {% for automation in all_automations%}
+                    {% if automation.active == True or user.profile.client.name == 'Smarthis' %}
+                        {% include "components/single_allocation_service.html" with automation_display_name=automation|get_automation_display_name:language logo='/img/logo_'|add:automation.name|add:'.png'  data_type=automation.group|translate:language text_hover=automation.name|getStandardVariables:language|get_obj_attr:'service_hover_text' automation_name=automation btn_manipulation='conclude_registry' is_active=automation.active %}
+                    {% endif %}    
+                {% endfor %}
+            </section>
+            <article class='registration-box registration__single-service-box--dashboard' data-type='dashboard'>
+                <div class='ml-3'>
+                    <div>
+                        <h5>{{'rpa_dashboard'|translate:language }}</h5>
+                        <h6>{{'manage_your_rpa_with_our_dashboard'|translate:language }}</h6>
+                    </div>
+                    <div class='d-flex flex-column align-items-center mr-auto'>
+                        <button id='button-add-rpa-dashboard' class="btn__purple py-2 no-uppercase btn__purple--registration-rpa" data-image="{% static 'img/green-check.svg' %}">{{'add_to_my_plan'|translate:language }}</button>
+                        <button class="button__muted my-3" data-toggle="modal" data-target="#registration-rpa-dashboard-modal">{{'learn_more'|translate:language }}</button>
+                    </div>
+                </div>
+                <img src="{% static 'img/registration-dashboard.png'%}" alt="Dashboard Image">
+            </article>
+            <section class='d-flex flex-column align-items-center gap-16 margin-top-4'>
+                <button id='registration-choosing-licenses-advance-button'class='btn__purple px-4 py-2 no-uppercase' disabled>{{'test_selected_services'|translate:language }}</button>
+                <span class='dark-gray__color'><strong>{{'choose_at_least_3_to_proceed'|translate:language }}</strong></span>
+            </section>
+        </section>
+
+        {% include "components/registration_rpa_dashboard_modal.html" %}
+    </div>
+</div>        
+<div class="jsConcludeRegistryLoading d-none">
+{% include 'components/_registration_loading_two.html' %}
+</div>
+
+{% include 'components/footer_register.html' %}
+
+<input type="hidden" id="with_dashboard" value="0"/>
+<script src="{% static '/js/choosingServices.js' %}"></script>
+
+<style>
+    body {
+        padding-top: 0;
+    }
+</style>
+{% endblock %}

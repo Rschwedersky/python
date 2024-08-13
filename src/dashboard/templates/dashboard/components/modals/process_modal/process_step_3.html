@@ -1,0 +1,67 @@
+{% load general_tags %} {% load static %} 
+
+
+<div class="setup-content h-max-content" id="step-3">
+    <section class="modal-body">
+        <article class="process_summary p-3 w-75 mx-auto jsContainer">
+            <p>{{ 'tell_us_how_this_process_was_performed_prior_to_rpa_implementation'|translate:language }}</p>
+            <div class="px-3 d-flex flex-column gap-32">
+                {% include 'dashboard/components/settings_input_form.html' with input_id='quantity-of-monthly-tasks' input_name="quantityOfMonthlyTasks" title="qty_of_monthly_tasks"|translate:language tooltip_text=False input_class='' input_type='number' label_class=""  input_value=0 input_min_value=0 input_value=0 input_min_value=0 input_placeholder="zero_monthly_tasks"|translate:language %}
+
+                {% include 'dashboard/components/settings_input_form.html' with input_id='processStep2AverageTimeSpent' title="minutes_per_task"|translate:language tooltip_text='average_time_staff_member_performs_task_example'|translate:language input_class='' input_type='text' label_class="" input_placeholder="zero_minutes"|translate:language %}
+                
+                {% with tooltip_text_1="average_salary_meployees_divided_by_hours"|translate:language tooltip_text_2="important_average_salary_meployees_divided_by_hours_with_html"|translate:language %}
+                    <div>
+                        <label class="settings_input_form" for="process-average-hour-value">
+                            {{ "average_hourly_value"|translate:language }}
+                            {% include 'components/_tooltip.html' with  text=tooltip_text_1|add:'<br><br>'|add:tooltip_text_2 html=True %}
+                            <input type="text" id="process-average-hour-value" class="input__money" placeholder="R$ 0,00" name="averageHourValue">
+                        </label>
+                        <button type="button" id="open-calculator" class="btn btn-link open-calculator-btn" data-toggle="modal" data-target="#calculator-modal" disabled>{{ "how_to_calculate"|translate:language }}</button>
+                        {% include 'components/_tooltip.html' with text="calculator_tooltip"|translate:language %}
+                    </div>
+                {% endwith %}
+            </div>
+        </article>
+        <article class="p-2 jsContainer d-none">
+            <div class="d-flex align-items-start gap-5">
+                <button type="button" class="btn" id="back-calculator">
+                    <img src="{% static 'dashboard/img/undo.svg' %}" alt="Return Icon" class="c-pointer opacity-hover advanced__back-btn" id="back-to-manage_areas" data-back="advanced-settings-language"/>
+                </button>
+                <strong class-"f-size-18">{{ "calculator"|translate:language }}</strong>
+            </div>
+            <p>{{ "calculator_subtitle_one"|translate:language }}</p>
+            <p class="f-size-14 mb-4">
+                <strong>{{ "important"|translate:language }}:</strong> {{ "calculator_subtitle_two"|translate:language }}
+            </p>
+
+            <div class="d-flex flex-column w-85 mx-auto jsContainer" id="calculator-input-container">
+                <div class="align-self-end d-flex align-items-center gap-5">
+                    <label for="number-of-columns-calculator" class="mb-0 w-auto">{{ "columns"|translate:language }}</label>
+                    <input type="number" id="number-of-columns-calculator" class="w-4rem" value="1" min="1" max="6">
+                </div>
+
+                <div  id="calculator-wrapper" class="calculator-wrapper border mt-2 jsGridWrapper">
+                    <div>
+                        <div>{{ "qty"|translate:language }}</div>
+                        <div>{{ "wage"|translate:language }}(R$)</div>
+                        <div>{{ "dedication"|translate:language }}(%)</div>
+                    </div>
+                    <div class="d-flex flex-column">
+                        <input type="number" value="0" class="h-auto">
+                        <input type="text" value="R$ 0,00" class="h-auto jsCurrencyInput">
+                        <input type="text" value="0%" class="h-auto jsPercentageInput">
+                    </div>
+
+                </div>
+
+                <div class="align-self-center d-flex flex-column gap-10 mt-3">
+                    <label for="calculator-total-value" class="w-auto mb-0 text-center">{{ "average_hourly_value"|translate:language }}</label>
+                    <input type="text" id="calculator-total-value" class="jsCurrencyInput" placeholder="R$ 0,00" readonly>
+                    <button type="button" class="btn primary medium" id="use-calculator-value" disabled>{{ "use_value"|translate:language }}</button>
+                </div>
+            </div>
+        </article>
+    </section>
+    {% include 'dashboard/components/modals/process_modal/process_footer.html' with prev_btn_disabled=False next_btn_type='submit' no_advance=True no_arrow=True next_btn_text='save_process'|translate:language %}
+</div>

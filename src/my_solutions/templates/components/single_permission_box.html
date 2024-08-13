@@ -1,0 +1,16 @@
+{% load static %} {% load general_tags %} {% load dashboard_tags %}
+<div class="single_permission_box" data-user_id="{{ collaborator.id }}">
+    <div class="d-flex gap-16">
+        <p class="m-0 border__circle border__circle--permissions">{{ collaborator.get_full_name|get_name_initials }}</p>
+        <div class="d-flex flex-column">
+            <p class="m-0 f-size-16 color-muted">{{ collaborator.get_full_name }}</p>
+            <p class="m-0 f-size-14 color-muted">{{ collaborator.email }}</p>
+        </div>
+    </div>
+
+    <div class="d-flex gap-16 align-items-center">
+        <img src="{% static "/img/permission-ticket.svg" %}" alt="Permission Icon">
+        <span>1 {{'license'|translate:language}}</span>
+        {% include 'components/popup_menu.html' with parent_class='' child_class='' %}
+    </div>    
+</div>

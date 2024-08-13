@@ -1,0 +1,36 @@
+{% load static %} {% load general_tags %}
+{% include 'components/excelorcsv.html' %}
+<div class="form-item">
+    <div class="title-email-modal">
+    <small class="control-label color000000 f-size-14 light-bold">
+        {{ 'email_to_receive_results'|translate:language }}
+    </small>
+    </div>
+    <div class="form-item">
+        <div class="forminput input-email-text">
+            <small class="control-label">{{ 'email'|translate:language }}:</small>
+            <div class="d-flex justify-content-between">
+                <div class="w-100">
+                    <input maxlength="100" type="email" name="email_to_send_results" class="form-control control-text automation__input--email" id="input-email" pattern="(?![_.-])((?![_.-][_.-])[a-z\d_.-]){0,63}[a-z\d]@((?!-)((?!--)[a-z\d-]){0,63}[a-z\d]\.){1,2}([a-z]{2,14}\.)?[a-z]{2,14}" placeholder="{{'enter_email_here'|translate:language }}"/>
+                    <p class="f-size-12 color-error error"></p>
+                </div>
+                <div class="logo_mais">
+                    <button type="button" id="add-mais" class="light-bold">
+                        {{ 'add_email'|translate:language }}
+                        <img src="{% static 'img/logo_add_email.png' %}"/>
+                    </button>  
+                </div>
+            </div>
+            <br>
+            <div class="row text-saida">
+                <div class="color000000 row d-flex justify-content-between align-items-center w-90" id="all_emails"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% if 'wilson sons' in user.profile.client.company.get_razao_social|lower %}
+    {% if automation_name == 'iss-rio-grande' or  automation_name == 'iss-ipojuca-wilson' or automation_name == 'iss-barcarena' or automation_name == 'iss-oriximina' or automation_name == 'sefaz-rj' or automation_name == 'iss-cabedelo' %}
+        <input type="hidden" value="taxcompliancematriz.indiretos@wilsonsons.com.br" id="email-setado"/>
+    {% endif %}
+{% endif %}

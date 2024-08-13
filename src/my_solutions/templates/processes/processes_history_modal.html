@@ -1,0 +1,85 @@
+{% load static %} {% load general_tags %}
+
+<div class="modal__background modal__background--processes">
+    <section class="modal-processes-history__container">
+        <header class="modal-processes-history__header">
+            <h2 class="f-size-18 m-0">Por que estou recebendo esta mensagem?</h2>
+            <img src="{% static '/dashboard/img/close-white.svg' %}" alt="Close Modal" class="c-pointer opacity-hover modal__close" data-close=".modal__background--processes"/>
+        </header>
+
+
+        {% comment %} EXECUTING {% endcomment %}
+        <section class="modal-processes-history__content modal-processes-history__content--executing">
+        <p class="mb-4"><strong>Saiba mais sobre o estado do seu serviço:</strong></p>
+        <div class="d-flex gap-16 align-items-center mb-3">
+            <p class="history__badge processes__history-badge--executing">{{ 'in_execution'|translate:language }}</p>
+            <div class="spinner-grow spinner-grow-sm executing__icon">
+                <span class="sr-only">Loading...</span>
+            </div>
+        </div>
+        <p class="f-size-14 color-muted">Seu serviço está em execução. Assim que for finalizado, o resultado será enviado para todos os emails que foram cadastrados juntos a este modelo.</p>    
+        </section>
+        
+        {% comment %} SUCCESS {% endcomment %}
+
+        <section class="modal-processes-history__content modal-processes-history__content--success">
+        <p class="mb-4"><strong>Saiba mais sobre o estado do seu serviço:</strong></p>
+        <div class="d-flex gap-16 align-items-center mb-3">
+            <p class="history__badge processes__history-badge--success modal__open-button">{{ 'finished_with_success'|translate:language }} </p>
+            <img src="{% static '/img/history-check.svg' %}" alt="Check Icon" class="success__icon"/>
+        </div>
+        <p class="f-size-14 color-muted">Seu serviço já foi executado e finalizado com sucesso! Os resultados estão disponíveis em todos os emails cadastrados junto a este modelo.</p>    
+        </section>
+
+
+        {% comment %} ERROR {% endcomment %}
+
+        <section class="modal-processes-history__content modal-processes-history__content--error">
+            <p class="mb-4 f-size-14"><strong>Houve um erro e o seu processo não pôde ser concluído. Veja o que pode ter acontecido:</strong></p>
+            <div class="d-flex gap-16 align-items-center mb-3">
+                <p class="history__badge processes__history-badge--error modal__open-button">{{ 'finished_with_error'|translate:language }}</p>
+                <img src="{% static '/img/history-x.svg' %}" alt="Error Icon" class="error__icon"/>
+            </div>
+            <div class="error-badge__info-container">
+                <div class="d-flex flex-column">
+                    <p class="m-0 f-size-14"><strong><u>Não foi possível ler o arquivo fonte</u></strong></p>
+                    <p class="color-muted f-size-12 m-0">O arquivo .csv/.xlsx fornecido para este modelo não coincide com os campos necessários para sua execução.</p>
+                </div>
+                <img src="{% static 'img/arrow-right.svg' %}" alt="Arrow right icon">
+                <div class="d-flex flex-column">
+                    <p class="m-0 f-size-14"><strong>O que fazer?</strong></p>
+                    <p class="color-muted f-size-12 m-0">Atualize o modelo salvo com o arquivo correto.</p>
+                </div>
+            </div>   
+            <div class="error-badge__info-container">
+                <div class="d-flex flex-column">
+                    <p class="m-0 f-size-14"><strong><u>Credenciais desatualizadas</u></strong></p>
+                    <p class="color-muted f-size-12 m-0">Não foi possível acessar o site deste serviço por que as credenciais fornecidas neste modelo estão desatualizas.</p>
+                </div>    
+                <img src="{% static 'img/arrow-right.svg' %}" alt="Arrow right icon">
+                
+                <div class="d-flex flex-column">
+                    <p class="m-0 f-size-14"><strong>O que fazer?</strong></p>
+                    <p class="color-muted f-size-12 m-0">Atualize suas credenciais no modelo salvo.</p>
+                </div>
+            </div>   
+            <div class="error-badge__info-container">
+                <div class="d-flex flex-column">
+                    <p class="m-0"><strong><u>Serviço indisponível</u></strong></p>
+                    <p class="color-muted f-size-12 m-0">O website necessário para executar este serviço está fora do ar no momento.</p>
+                </div>      
+                <img src="{% static 'img/arrow-right.svg' %}" alt="Arrow right icon">
+                <div class="d-flex flex-column">
+                    <p class="m-0 f-size-14"><strong>O que fazer?</strong></p>
+                    <p class="color-muted f-size-12 m-0">Aguarde até que o website do serviço esteja disponível.</p>
+                </div>   
+            </div>   
+        </section>
+
+        {% comment %} {% endif %} {% endcomment %}
+        <footer class="modal-processes-history__footer">
+        <button class="btn__purple btn__purple--processes-modal modal__close" data-close=".modal__background--processes">OK</button>
+        </footer>
+    </section>    
+
+</div>

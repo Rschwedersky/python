@@ -1,0 +1,5 @@
+{% load static %}
+<div class='d-flex gap-10 align-self-start align-items-start dashboard__plot-header-buttons'>
+    <img src="{% static 'dashboard/img/download-dashboard.svg'%}" alt="Download Dashboard" class='c-pointer opacity-hover js-download-button' data-html2canvas-ignore data-toggle="modal" data-target="#downloading-plot-modal">
+    <img src="{% static 'dashboard/img/maximize-dashboard.svg'%}" alt="Maximize Dashboard" class='c-pointer opacity-hover button__fullscreen' data-plot="{{graph_id}}" data-html2canvas-ignore>
+</div>

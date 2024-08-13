@@ -1,0 +1,21 @@
+{% extends 'base.html' %} {% block content %} {% load static %} {% load general_tags %}
+
+<section class="container whitebackcolor d-flex flex-column justify-content-center align-items-center p-4">
+    <img src="{% static 'dashboard/img/LogoSmarthisHub.png' %}" alt="Smarthis HUB logo">
+    <div class="d-flex gap-32 align-items-center mt-5">
+        <img src="{% static 'img/check_green_circle.png' %}" alt="Green Checkmarck" class="align-self-start">
+        <div class="d-flex flex-column gap-16">
+            <h2><strong>{{'your_email_has_been_successfully_verified'|translate:language}}.</strong></h2>
+            <p>{{'now_you_can_enjoy_hub_with_security'|translate:language}}.</p>
+        </div>
+    </div>
+    <a href="{% url 'onboarding' %}" class="btn__purple no__link d-inline-block no-uppercase p-3 mx-auto align-self-center mt-2">{{'back_to_hub'|translate:language}}</a>
+</section>
+
+<style>
+    html, body, main, main > div {
+        height: 100%;
+    }
+
+</style>
+{% endblock %}

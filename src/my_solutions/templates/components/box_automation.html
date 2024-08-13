@@ -1,0 +1,116 @@
+{% load static %} {% load general_tags %} {% load dashboard_tags %} {% load mysolutions_tags %} {% load humanize %}
+
+{% if schedule.id in tasks %}
+    {% if tasks|get_obj_attr:schedule.id|get_obj_attr:'state' == 4 %}
+        <div class="automation box-backcolor-light mb-5 error jsRealtime" data-id="{{ schedule.id }}" data-schedule="true">
+    {% elif tasks|get_obj_attr:schedule.id|get_obj_attr:'state' == 3 %}
+        <div class="automation box-backcolor-light mb-5 executing jsRealtime" data-id="{{ schedule.id }}" data-schedule="true">
+    {% elif tasks|get_obj_attr:schedule.id|get_obj_attr:'state' == 6 or tasks|get_obj_attr:schedule.id|get_obj_attr:'state' == 7 %}
+        <div class="automation box-backcolor-light mb-5 success jsRealtime" data-id="{{ schedule.id }}" data-schedule="true">
+    {% else %}
+        <div class="automation box-backcolor-light mb-5 jsRealtime" data-id="{{ schedule.id }}" data-schedule="true">
+    {% endif %}
+{% else %}
+    <div class="automation box-backcolor-light mb-5 jsRealtime" data-id="{{ schedule.id }}" data-schedule="false">
+{% endif %}
+    <div class="line_loading primary-color"></div>
+    <div class="top_content{% if schedule.cron_expression != '' and schedule.cron_expression is not None %} scheduled_defined{% endif %} p-3 pt-4 w-100 d-flex justify-content-between">
+        <div class="box_header">
+            <p class="color-muted--light light-bold mb-1">{{ schedule.name }}</p>
+            <small class="color838383">{{ automation_description }}</small>
+            {% if schedule.cron_expression != '' and schedule.cron_expression is not None %}
+                <div class="appointments_content d-flex justify-content-start align-items-center gap-16">
+                    <p class="scheduled_defined-text light-bold my-1 px-2 py-1 f-size-13 backcolore5e5e5 text-center">
+                        {% if schedule.cron_expression|translate_single_cron:language != 'does_not_repeat'|translate:language %}
+                            <img src="{% static 'dashboard/img/re-cycle.svg' %}" />
+                        {% endif %}
+                        {{ schedule.cron_expression|translate_single_cron:language }}
+                    </p>
+                    <div class="open_manage_appointment f-size-12 color3424C4 c-pointer" data-target="#manage_appointments" data-toggle="modal">
+                        <u>{{ 'manage_appointments'|translate:language }}</u>
+                        <input type="hidden" class="single_cron" value="{{ schedule.cron_expression|translate_single_cron:language }}" data-fullcrontext="{% get_template_cron_recurrence_text schedule.cron_expression schedule.execution_date language %}" data-templateid="{{ schedule.id }}" data-templatename="{{ schedule.name }}" data-cronexpression="{{ schedule.cron_expression }}" data-executiondate="{{ schedule.execution_date|date:'Y-m-d' }}" />
+                    </div>
+                </div>
+            {% endif %}
+            {{schedule.get_execution_date}}
+        </div>
+        <div class="d-flex gap-16">
+            <div class="box-spinner">
+                <div class="starting">
+                    <small>
+                        <span class="spinner-border  visually-hidden"></span>
+                        <strong>{{ 'starting'|translate:language }}...</strong>
+                    </small>
+                </div>
+                <div class="running_automation">
+                    <small>
+                        <span class="spinner-grow  spinner-grow-sm visually-hidden"></span>
+                        <strong>{{ 'in_progress'|translate:language }}...</strong>
+                    </small>
+                </div>
+                <div class="concluded">
+                    <small>
+                        {% include 'icons/check-circle-fill.svg'  %}
+                        <div>
+                            <strong>{{ 'finished_with_success'|translate:language }}</strong>
+                            <br>
+                            {% if schedule.id in tasks %}
+                                <small>
+                                    {{ tasks|get_obj_attr:schedule.id|get_obj_attr:'date'|naturaltime|translate_relative_date:language }}
+                                </small>
+                            {% endif %}
+                        </div>
+                    </small>
+                </div>
+                <div class="with-error">
+                    <small>
+                        {% include 'icons/exclamation-triangle-fill.svg'  %}
+                        <div>
+                            <strong>{{ "execution_error"|translate:language }}</strong>
+                            <br>
+                            {% if schedule.id in tasks %}
+                                <small>
+                                    {{ tasks|get_obj_attr:schedule.id|get_obj_attr:'date'|naturaltime|translate_relative_date:language }}
+                                </small>
+                            {% endif %}
+                        </div>
+                    </small>
+                </div>
+            </div>
+            <input type="hidden" class="automation_file_format" value="{{ schedule.file_format }}" />
+            <input type="hidden" class="automation_email" value="{{ schedule.email_to_send_results|check_and_maybe_encrypt_string:language }}" />
+            
+            {% if automation_type == 'credential_and_filter_notes' or automation_type == 'upload_and_credential' %}
+                {% if allschedule_credentials|get_obj_attr:schedule.id != None %}
+                    <input type="hidden" class="automation_extra_info" value="{{ allschedule_credentials|get_obj_attr:schedule.id }}" />
+                {% elif extra_info != None %} 
+                    <input type="hidden" class="automation_extra_info" value="{{ extra_info }}" />
+                {% endif %}
+            {% endif %}
+            
+            {% if automation_type != 'credential' %}
+                <input type="hidden" class="automation_upload" value="{{ schedule.input_path|getScheduleFileName }}" />
+            {% endif %}
+        
+            {% include 'components/popup_menu.html' with parent_class='crew__popup-menu--automations' child_class='crew__popup-menu-container--automations' edit_class='btn_edit btn_edit_remove' exclude_class='btn_remove btn_edit_remove' schedule=schedule schedule_automation_name=schedule_automation_name %}
+        </div>
+    </div>
+    <div class="line__box-automations"></div>
+    <div class="button_automation btn-group btn-group-lg d-flex justify-content-around align-items-center pt-2 pb-3">
+
+        <div class="btn-group btn__group--cancel d-flex">
+            {% if schedule.id in tasks %}
+                <button type="button" class="btn_cancel btn_edit_cancel cancel light-bold" {% if not tasks|get_obj_attr:schedule.id|get_obj_attr:'state' == 3 %}disabled{% endif %} data-toggle="modal" data-target="#modalcancel" data-id="{{ schedule.id }}">
+                    <div>{{ 'cancel'|translate:language }}</div>
+                </button>
+            {% else %}
+                <button type="button" class="btn_cancel btn_edit_cancel cancel light-bold" disabled data-toggle="modal" data-target="#modalcancel" data-id="{{ schedule.id }}">
+                    <div>{{ 'cancel'|translate:language }}</div>
+                </button>
+            {% endif %}
+            
+        </div>
+
+        {% include 'components/popup_menu.html' with popup_type='execute_template' child_class='schedule_popup f-size-15' schedule=schedule %}
+    </div>
+</div>

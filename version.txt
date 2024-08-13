@@ -1,0 +1,2 @@
+TAG_HUB=v1.0.0
+TAG_NGINX=v1.0.0

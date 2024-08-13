@@ -1,0 +1,68 @@
+{% load static %} {% load general_tags %} {% load dashboard_tags %}
+
+<div class="service__dropdown service__dropdown--services" data-type="{{data_type}}">
+    <header class="service__header">
+        <div class="d-flex align-items-center">
+            <img src="{% static logo %}" alt="Services icon" class='manage__permissions--logo'/>
+
+            <div class="d-flex flex-column margin-left-15">
+                <p class="f-size-14 m-0">
+                    {{ heading }}
+                    <strong>| {{ service }}</strong>
+                </p>
+                {% if data_type != 'dashboard' %}
+                    <p class="f-size-12 m-0 color-muted">
+                        {{ howmany_schedules_created }} {{ 'configured_models'|translate:language }}
+                    </p>
+                {% endif %}
+            </div>
+        </div>
+        {% if data_type != 'dashboard' %}
+            <img
+                src="{% static 'dashboard/img/down-arrow.svg' %}"
+                alt="Down arrow"
+                class="c-pointer arrow__button--dropdown"
+                data-image="{% static '/dashboard/img/up-arrow.svg'%}"
+            />
+        {% endif %}
+    </header>
+    <div class="service__dropdown-info">
+        <div class="service__dropdown-info--change">
+            {% comment %} <p class="service__dropdown-warning">
+                <strong>
+                    Não é possível trocar esse serviço no
+                    momento.
+                </strong>
+                <span class="d-block">
+                    Ele foi trocado há menos de XX dias. Aguarde
+                    até DD/MM.
+                    <a href="#">Entenda</a>
+                </span>
+            </p> {% endcomment %}
+            {% comment %} <button
+                class="btn__purple btn__purple--services-info"
+                disabled
+            >
+                <img
+                    src="{% static 'dashboard/img/autorenew.svg' %}"
+                    alt="Auto renew icon"
+                />
+                Trocar por outro serviço
+            </button> {% endcomment %}
+        </div>
+        {% if data_type != 'dashboard' %}
+            <p class="m-0"><strong>{{ 'used_by'|translate:language }}:</strong></p>
+            {% for collaborator in collaborators %}
+                <div class="service__collaborator-box">
+                    <p class="m-0 border__circle">{{ collaborator.user.get_full_name|get_name_initials }}</p>
+                    <div class="d-flex flex-column">
+                        <p class="m-0 f-size-14">{{ collaborator.user.get_full_name }}</p>
+                        <p class="m-0 f-size-12">
+                            {{ collaborator.user.email }}
+                        </p>
+                    </div>
+                </div>
+            {% endfor %}
+        {% endif %}
+    </div>
+</div>

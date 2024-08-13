@@ -1,0 +1,28 @@
+{% load general_tags %} {% load dashboard_tags %} {% load static %}
+<div class="modal__background" >
+    <section class="dashboard_invite_modal inner__modal whitebackcolor">
+        {% include 'components/default_header_modal.html' with header_class='whitebackcolor color000000' modal_title='invite_to_rpa_dashboard'|translate:language close_img='exit.svg' close_data=".modal__background" %}
+        <section class="inner__modal-content">
+            <p class="f-size-14 mb-1">{{ 'email'|translate:language }}</p>
+            <form class="invite_form d-flex justify-content-between w-100 mb-3 gap-16">
+                <div class="d-flex content_bordered w-100">
+                    <input type="email" class="w-100 border-none pl-2" name="invite_email" placeholder="{{ 'invite_staff_members_with_their_email'|translate:language }}" />
+                    {% include 'dashboard/components/dashboard_view_type.html' with with_exclude=False active='leitor' %}
+                </div>
+                <button type="submit" class="btn btn__purple text-none btn__submit" disabled><img src="{% static "/img/add-person.svg" %}" alt="Person add"/> {{ 'invite'|translate:language }}</button>
+            </form>
+            <div class="all_dashboard_access w-100 content_bordered">
+                {% include 'components/users_overflow.html' with crew_type='dashboard_invite' noedition=True profiles=request|getAllDashboardUsersFromClient:'' %}
+            </div>
+            <div id="clone_view_type" class="d-none">
+                {% include 'components/single_permission_crew.html' with  name='' email='' id=0 crew_type='dashboard_invite' role=5 %}
+            </div>
+        </section>
+        <footer class="invite__modal-footer p-3 mt-2 d-flex justify-content-between align-items-center">
+            <button type="button" class="btn btn__cancel modal__close color000000" data-close=".modal__background">{{ 'cancel'|translate:language }}</button>
+            <button type="submit" class="btn btn__purple text-none px-4 btn__submit ml-3" disabled>{{ 'to_save'|translate:language }}</button>
+        </footer>
+    </section>
+</div>
+
+<script src="{% static 'dashboard/js/dashboard_view_invite.js' %}"></script>

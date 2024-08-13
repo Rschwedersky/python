@@ -1,0 +1,20 @@
+{% load static %} {% load general_tags %}
+<div class="modal fade" id="manage_appointments" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <header class="modal-header no-border">
+                <div class='d-flex flex-column w-100'>
+                    <strong class="d-block color000000 f-size-24">{{ 'appointments'|translate:language }}</strong>
+                    <p class="mb-0 mt-1">{{ 'of_masculine'|translate:language }} {{ 'template_model_small'|translate:language }} <span class="model_title"></span></p>
+                </div>
+                <img src="{% static 'dashboard/img/exit.svg' %}" alt="Exit Modal" class="opacity-hover c-pointer close" data-dismiss='modal' aria-label="Close"/>
+            </header>
+            <div class="d-flex justify-content-between py-4 px-3">
+                <div class="cron_expressions_content d-flex flex-column gap-10"></div>
+                <div class="px-3">
+                    <img class="mr-5" src="{% static 'img/calendar-with-pencil.svg' %}" />
+                </div>
+            </div>
+        </div>
+    </div>
+  </div>

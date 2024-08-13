@@ -1,0 +1,41 @@
+{% load general_tags %}
+
+{% include 'email_templates/default/header.html' %}
+    <tr>
+      <td width="640" align="left" valign="top">
+          <h3 style="font-size: 26px; margin-bottom: 0;margin-top:16px;">
+            <strong>{{ "hello"|translate:language }}, {{ user.first_name }}</strong>
+          </h3>
+          <p style="font-size: 22px; margin-bottom: 0;">
+            {{ "we_ve_noticed_you_havent_used_hub"|translate:language }} 
+          </p>
+
+          <p style="font-size: 22px; margin-bottom: 0;">
+            {{ "do_not_worry"|translate:language }} 
+            <strong>{{ "we_are_here_for_you"|translate:language }}</strong>
+          </p>
+
+          <p style="font-size: 22px;">
+            {{ "how_about_scheduling_a_conversation_..."|translate:language }} 
+          </p>
+
+          {% include 'email_templates/default/emailButton.html' with button_text="schedule_a_conversation"|translate:language button_link="https://calendly.com/guilherme-favoreto-smarthis" %}
+
+          <h2 style="margin-top: 4px; font-size: 22px; margin-bottom: 0px;"><strong>{{ 'how_to_begin'|translate:language }}</strong></h2>
+          <div style="height: 12px; background-color:#39FFB6; border-radius: 20px; width: 300px; margin-top: 0px; margin-bottom: 30px;"></div><!-- pseudosublinhado -->
+
+          <p style="font-size: 22px;">
+            {{ "to_start_using_selected_services_1"|translate:language }}
+            <a href="{{services_link}}">{{"my_services"|translate:language}}</a>
+            {{ "to_start_using_selected_services_2"|translate:language }}
+            <a href="{{discover_link}}" >{{"discover"|translate:language}}</a>
+          </p>
+          
+          <p style="font-size: 22px;">
+            {{ "here_are_some_tips_lets_check"|translate:language }}
+          </p>
+
+          {% include 'email_templates/default/emailButtonSecondary.html' with button_text="check_tips"|translate:language button_link="https://smarthis-hub.s3.amazonaws.com/TUTORIAL_HUB.pdf" %}
+      </td>
+    </tr>
+{% include 'email_templates/default/footer.html' %}

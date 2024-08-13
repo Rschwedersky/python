@@ -1,0 +1,27 @@
+{% load dashboard_tags %} {% load general_tags %}
+<div class="single_month_scheduled w-100 mb-5 pb-3">
+    <div class="single_month_scheduled_header">
+        <div class="month_scheduled d-flex flex-column justify-content-center">
+            <p class="month_title pos-relative f-size-26 mb-0 text-center"><strong>{{ month_title }}</strong></p>
+            <div class="green_line header pos-relative w-100"></div>
+        </div>
+    </div>
+    <div class="single_month_scheduled_content">
+        <div class="single_month_scheduled_single_day d-flex flex-column gap-32">
+            {% for day_key, data_obj in days_obj.items %}
+                <div class="d-flex justify-content-between align-items-center">
+                    <div class="day_infos mr-4">
+                        <span class="f-size-16">{{ data_obj|get_obj_attr:'weekday' }}</span>
+                        <p class="f-size-40">{{ day_key }}</p>
+                    </div>
+                    <div class="horizontal_line w-100 h2 backcolor363636"></div>
+                </div>
+                <div class="all_scheduled_automations_box_automation d-flex flex-column gap-24">
+                    {% for schedule in data_obj|get_obj_attr:'data' %}
+                        {% include 'services_tabs/all_scheduled_automations/scheduled_box_automation.html' with automation_type=schedule.automation_type schedule_name=schedule.name automation_title=schedule.automation_title send_results_date=data_obj|get_obj_attr:'execution_text' period_type=schedule.recurrence_text automation_name=schedule.automation__name class_scheduled_box=class_scheduled_box %}
+                    {% endfor %}
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>

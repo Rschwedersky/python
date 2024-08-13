@@ -1,0 +1,10 @@
+{% load general_tags %} {% load static %}
+
+<footer class="modal-footer px-0 d-flex justify-content-between pb-0">
+    <button type='button' class="btn button-cancel-modal w-auto" type="button" data-dismiss="modal">
+        {{ 'cancel'|translate:language }}
+    </button>
+    <button type={{next_btn_type}} class="btn__purple {% if  advance_button_padding %}{{advance_button_padding}}{% else %}py-2 px-3{% endif %} btn-advance gap-16 no-uppercase {% if no_advance != True %}nextBtn{% else %}submit{% endif %} {{ next_btn_class }}" {% if close_modal %}data-dismiss="modal"{% endif %}{% if next_btn_disabled %} disabled{% endif %}>
+        {{ next_btn_text }}
+    </button>
+</footer>

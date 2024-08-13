@@ -1,0 +1,76 @@
+{% load static %} {% load general_tags %}
+<div class="py-5">
+    <div class="d-flex justify-content-around align-items-center w-100">
+        <div class="w-50 color000000">
+            <strong class="f-size-40">{{'integrate_smarthis_hub_services_with_your_business_operation'|translate:language }}</strong>
+            <p class="f-size-18 py-2">{{'develop_with_our_api_to_create_and_manage_models_automatically'|translate:language }}</p>
+            <button type="button" class="btn button__documentation-api f-size-21 light-bold" data-toggle="modal" data-target="#api_go_documentation">{{'go_to_documentation'|translate:language }}</button>
+        </div>  
+        <div>
+            <img src="{% static 'img/img_home-api.png' %}"/>
+        </div>
+    </div>
+
+    <div class="d-flex justify-content-center py-4">
+        <div class="box_requisitos-api box-backcolor-light d-flex">
+            <div class="d-flex justify-content-around align-items-center w-100">
+                <div class="w-50 color000000">
+                    <strong class="f-size-40 light-bold">{{'requirements'|translate:language }}</strong>
+                    <p class="f-size-21 py-2 color3424C4 d-flex align-items-center">
+                        <strong>{{'active_account_on_smarthis_hub'|translate:language }}</strong>
+                        <img class="p-2" src="{% static 'img/img_check-api.png' %}"/>
+                    </p>
+                    <p class="f-size-18 py-2">{{'to_use_the_hub_api_you_must_have_an_active_account'|translate:language }}</p>
+                    <p class="f-size-18 py-2">{{'you_will_not_be_able_to_access_services_that_are_not_subscribed'|translate:language }}</p>
+                </div>  
+                <div>
+                    <img src="{% static 'img/img_requisitos-api.png' %}"/>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="d-flex justify-content-center py-4">
+        <div class="d-flex">
+            <div class="d-flex justify-content-around align-items-center w-100">
+                <div>
+                    <img src="{% static 'img/img_upload-api.png' %}"/>
+                </div>
+                <div class="w-50 color000000">
+                    <strong class="f-size-40 light-bold">{{'input_data_and_file_upload'|translate:language }}</strong>
+                    <p class="f-size-18 py-2">{{'in_order_for_the_services_to_be_performed_it_is_necessary_to_provide_some_data_which_varies_from_service'|translate:language }}</p>
+                    <p class="f-size-18 py-2">{{'you_can_use_our_spreadsheet_templates_or_set_up_a_csv_following_the_necessary_standards'|translate:language }}</p>
+                    <button type="button" class="btn button__upload-api f-size-21 light-bold" >{{'view_data_and_input_files'|translate:language }}</button>
+                </div>  
+            </div>
+        </div>
+    </div>
+
+    <div class="d-flex justify-content-center py-4">
+        <div class="box_suporte-api box-backcolor-light d-flex">
+            <div class="d-flex justify-content-around align-items-center w-100">
+                <div class="w-50 color000000">
+                    <strong class="f-size-40 light-bold">{{'support'|translate:language }}</strong>
+                    <div class="f-size-21 py-3 color3424C4 d-flex align-items-center justify-content-center">
+                        <img src="{% static 'img/img_issues-api.png' %}"/> 
+                    </div>
+                    <div class="d-flex justify-content-center py-3">
+                        <button type="button" class="btn button__suporte-api f-size-21 light-bold" >{{'access_issues'|translate:language }}</button>
+                    </div> 
+                </div> 
+                <div class="color000000">
+                    <div class="f-size-21 py-2 color3424C4 d-flex align-items-center">
+                        <img src="{% static 'img/img_suporte-api.png' %}"/> 
+                    </div>
+                    <div class="py-3 d-flex align-items-center justify-content-center">
+                        <button type="button" class="btn button__contact-api f-size-21 light-bold" >{{'contact_us'|translate:language }}</button>
+                    </div> 
+                </div>  
+            </div>
+        </div>
+    </div>     
+</div>
+{% include 'components/footer.html' %}
+{% include "hub_api/api_modal_go_to_documentation.html" %}
+<script src="{% static 'js/api_hub.js' %}"></script>
+

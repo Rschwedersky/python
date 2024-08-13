@@ -1,0 +1,96 @@
+{% load general_tags %} {% load dashboard_tags %} {% load static %}
+
+
+<section class="discover__inner-modal--switch">
+    <p class='color-muted f-size-14' id='discover-modal-switch-services-subtitle'>{{'choose_a_service_exchange_license'|translate:language }}  {{heading}} </p>
+    <section class='discover__switch-plans-grid--external h-100'>
+        <div class='discover__switch-plans-grid--nested'>
+            <p class="m-0 f-size-14">{{'current_service'|translate:language }}:</p>
+            <div class="position-relative" id="discover-switch-plans-select">
+                <button class="discover__switch-service-select discover__switch-service-select--selected">
+                    <div class="d-flex gap-16 align-items-center" id="discover-dropdown-selected-placeholder">
+                        <img src="{% static "/img/select-service.svg" %}" alt="Hand selecting button">
+                        <div class="text-left" id="discover-switch-service-placeholder">
+                            <p class="m-0">{{'choose_a_service'|translate:language }}</p>
+                            <p class="color-muted--light m-0 f-size-12">({{'to_take_licenses'|translate:language }})</p>
+                        </div>
+                    </div>
+                    <img src="{% static "dashboard/img/down-arrow.svg" %}" alt="Down Arrow" id="open-hired-services" data-select='true' class="arrow__button--dropdown p-0" data-image="{% static '/dashboard/img/up-arrow.svg'%}">
+                </button>
+                <div class="discover__services-dropdown-container" id="discover-switch-service-dropdown">
+                    {% for automations_contracted in all_automations_contracted %}
+                        {% with automation__name=automations_contracted|get_obj_attr:'automation__name' %}
+                        {% if automation__name|check_if_automation_name_is_in_query:automations_translate %}
+                            {% with qnt_automations=automations_contracted|get_obj_attr:'qnt_automations' %}
+                            {% with automation_infos=automation__name|get_automation_by_name %}
+                                {% with permissions_numbers=all_users_allowed|get_obj_attr:automation__name %}
+                                    {% with qnt_permissions=permissions_numbers|get_obj_attr:'qnt' %}
+                                        {% if automation__name != automation_name %}
+                                            {% include "discover/discover_hired_service_dropdown_item.html" with heading=automation_infos|get_automation_display_name:language  permissions_available=qnt_automations|subtract:qnt_permissions permissions_total=qnt_automations  collaborators=permissions_numbers|get_obj_attr:'items' automation_name=automation__name admin=user logo='/img/logo_'|add:automation__name|add:'.png' %}
+                                        {% endif %}    
+                                    {% endwith %}
+                                {% endwith %}
+                            {% endwith %}
+                            {% endwith %}
+                        {% endif %}
+                        {% endwith %}
+                    {% endfor %}
+                </div>    
+            </div>
+            <section class="discover__switch-service-permission">
+                <div class='d-flex align-items-center gap-10'>
+                    <img src="{% static "/img/permission-ticket-disabled.svg" %}" alt="Gray Ticket">
+                    <span id='discover-permission-text-active' class='discover__switch-services-header'>0 {{'licenses'|translate:language }}</span>
+                </div>
+                <button class="btn__purple f-size-14 py-2 px-3 gap-10 no-uppercase discover__button-switch discover__button-switch--trade" data-switch='all' disabled>
+                    <img src="{% static '/img/double-arrow-right-disabled.svg' %}" alt="Double arrow right">
+                    <img src="{% static '/img/double-arrow-right-black.svg' %}" alt="Double arrow right"> 
+                    {{'change_all'|translate:language }}
+                </button>
+            </section>
+            <section class="discover__switch-service-box discover__switch-service-box--empty" id='discover-permissions-box-active'>
+                
+                <div class='discover__empty-collaborators'>
+                    <img src="{% static "img/no-disponibility.svg" %}" alt="Empty Ticket Icon">
+                    <div>
+                        <p class="m-0">{{'no_licenses_available'|translate:language }}</p>
+                        <p class="f-size-14 m-0">{{'select_a_service_above'|translate:language }}</p>
+                    </div>
+                </div>
+                
+            </section>
+        </div>
+        <div class="discover__switch-plans-grid--nested ">
+            <p class="m-0 f-size-14">{{'new_service'|translate:language }}:</p>
+            <div class="discover__switch-service-new" data-service="{{automation_name}}">
+                {% if logo %}
+                    <img src="{% static logo %}" alt="Service Logo" class="discover__switch-service-logo" id='discover-switch-new-service-logo'>
+                {% else %}
+                    <img src="{% static '/img/services-icon-green.svg' %}" alt="Service Logo" class="discover__switch-service-logo" id='discover-switch-new-service-logo'>
+                {% endif %}
+                <div class="d-flex flex-column color-muted--light">
+                    <p class="m-0 f-size-14" id='discover-switch-new-service-text'>
+                        {{ heading }}
+                    </p>
+                    <p class="m-0 f-size-12">{{'hiring'|translate:language }}...</p>
+                </div>
+            </div>
+            <section class="discover__switch-service-permission">
+                <div class='d-flex align-items-center gap-10'>
+                    <img src="{% static "/img/permission-ticket-disabled.svg" %}" alt="Gray Ticket">
+                    <span id='discover-permission-text-new' class='discover__switch-services-header'>0 {{'licenses'|translate:language }}</span>
+                </div>
+                <button class="button__light-gray f-size-14 py-2 px-3 gap-10 no-uppercase discover__button-switch discover__button-switch--return" data-switch='all' disabled><img src="{% static '/img/double-arrow-left-disabled.svg' %}" alt="Double arrow left">{{'return_all'|translate:language }}</button>
+            </section>
+            <section class="discover__switch-service-box" id='discover-permissions-box-new'>
+            </section>
+        </div>
+    </section>
+</section>
+<footer class="discover__inner-modal--footer">
+    <button class="button__link button__link--box modal__step" data-step="return">{{'go_back'|translate:language }}</button>
+    <div class="d-flex gap-16 align-items-center">
+        <button class="button__link modal__close discover__modal-close" data-close=".modal__background--discover">{{'cancel'|translate:language }}</button>
+        <button id="discover-modal-no-permissions-advance-button" class="btn__purple px-5 py-2 text-capitalize modal__open-button" data-background='.modal__background--discover-confirmation' data-close='.discover__confirmation-modal' data-modal='.discover__confirmation-modal--switch' disabled>{{'make_exchange'|translate:language }}</button>
+    </div>
+</footer>

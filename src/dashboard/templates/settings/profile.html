@@ -1,0 +1,242 @@
+{% load general_tags %} {% load static %}
+
+<section class="profile-content active-settings__content" id="profile-content">
+    {% csrf_token %}
+    <div class="settings-content__title">
+        <h6><strong>{{ 'profile'|translate:language }}</strong></h6>
+        <div class="hr-bold"></div>
+    </div>
+    
+    <form class="profile-content__form" id="settings-profile-form">
+        <label for="input-profile-name" class="m-0 margin-top-50px f-size-12">
+            <strong>{{'name'|translate:language }}</strong>
+        </label>
+        <div class="settings__edit-container" id="container-profile-name">
+            <input
+                type="text"
+                id="input-profile-name"
+                class=" settings__edit-form--input profile__edit-form--input"
+                data-type="name"
+                data-old="{{user.get_full_name}}"
+            />
+            <img
+                src="{% static 'dashboard/img/exit.svg' %}"
+                alt="Clear Input Box"
+                class="opacity-hover settings__clear--icon"
+                data-paragraph="p-profile-name"
+            />
+        </div>
+
+        <p class="settings-edit__item--muted profile-edit__item--muted" id="p-profile-name">
+            <span>{{user.get_full_name}}</span>
+            <img
+                src="{% static 'dashboard/img/edit.svg' %}"
+                alt="Edit Icon"
+                class="c-pointer opacity-hover settings__edit--icon"
+                data-container="container-profile-name"
+                data-input="input-profile-name"
+            /> 
+        </p>
+
+        <label for="input-profile-email" class="m-0 f-size-12">
+            <strong>E-mail</strong>
+        </label>
+
+        <div class="settings__edit-container" id="container-profile-email">
+            <input
+                type="email"
+                id="input-profile-email"
+                class="settings__edit-form--input profile__edit-form--input"
+                pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9_-]+\..[a-zA-Z0-9-.]{2,61}"
+                data-old="{{user.email}}"
+            />
+            <img
+                src="{% static 'dashboard/img/exit.svg' %}"
+                alt="Clear Input Box"
+                class="opacity-hover settings__clear--icon"
+                data-paragraph="p-profile-email"
+            />
+        </div>
+
+        <p class="settings-edit__item--muted profile-edit__item--muted" id="p-profile-email">
+            <span>{{user.email}}</span>
+            <img
+                src="{% static 'dashboard/img/edit.svg' %}"
+                alt="Edit Icon"
+                class="c-pointer opacity-hover settings__edit--icon"
+                id="profile-edit-email"
+                data-container="container-profile-email"
+                data-input="input-profile-email" 
+            />
+        </p>
+
+        <label for="input-profile-phone" class="m-0 f-size-12 tooltip-phone">
+            <strong>{{'cell'|translate:language}}</strong>
+            {% include 'components/_tooltip.html' with  text='tooltip_phone_register'|translate:language %}
+        </label>
+
+        <div class="settings__edit-container" id="container-profile-phone">
+            <input
+                type="text"
+                id="input-profile-phone"
+                class=" settings__edit-form--input profile__edit-form--input"
+                data-type="phone"
+                data-old="{{user.profile.phone}}"
+            />
+            <img
+                src="{% static 'dashboard/img/exit.svg' %}"
+                alt="Clear Input Box"
+                class="opacity-hover settings__clear--icon"
+                data-paragraph="p-profile-phone"
+            />
+        </div>
+
+        <p class="settings-edit__item--muted profile-edit__item--muted" id="p-profile-phone">
+            <span>{% if user.profile.phone == false %}{% else %}{{user.profile.phone}}{% endif %}</span>
+            <img
+                src="{% static 'dashboard/img/edit.svg' %}"
+                alt="Edit Icon"
+                class="c-pointer opacity-hover settings__edit--icon"
+                data-container="container-profile-phone"
+                data-input="input-profile-phone"
+            /> 
+        </p>
+
+        <label for="input-profile-department" class="m-0 f-size-12">
+            <strong>{{'occupation_department'|translate:language }}</strong>
+        </label>
+
+        <div class="settings__edit-container" id="container-profile-department">
+            <input
+                type="text"
+                id="input-profile-department"
+                class="settings__edit-form--input profile__edit-form--input"
+                data-old="{{user.profile.department}}"
+            />
+            <img
+                src="{% static 'dashboard/img/exit.svg' %}"
+                alt="Clear Input Box"
+                class="opacity-hover settings__clear--icon"
+                data-paragraph="p-profile-department"
+            />
+        </div>
+
+        <p class="settings-edit__item--muted profile-edit__item--muted" id="p-profile-department">
+            <span>{{user.profile.department}}</span>
+            <img
+                src="{% static 'dashboard/img/edit.svg' %}"
+                alt="Edit Icon"
+                class="c-pointer opacity-hover settings__edit--icon"
+                data-container="container-profile-department"
+                data-input="input-profile-department"
+            /> 
+        </p>
+
+        <p class="m-0 f-size-12">
+            <strong>{{'password'|translate:language }}</strong>
+        </p>
+        <p class="settings-edit__item--muted profile-edit__item--muted" id="link-change-password">
+            <u class="c-pointer opacity-hover">{{'change_password'|translate:language }}</u>
+        </p>
+    </form>
+
+    <div class="profile__change-password--container" id="new-password-screen">
+        <nav class="settings__breadcrumbs">
+            <img
+                src="{% static 'dashboard/img/undo.svg' %}"
+                alt="Return Icon"
+                class="c-pointer opacity-hover"
+                id="back-to-profile"
+            />
+            <p class="color-muted m-0">{{'profile'|translate:language }}</p>
+            <p class='m-0'>{{'password_change'|translate:language }}</p>
+        </nav>
+
+        <form class="profile__change-password--form">
+            <label for="profile-old-password" class="profile__change-password--label m-0 f-size-12">
+                <strong>{{'current_password'|translate:language }}</strong>
+            </label>
+
+            <div class="d-flex align-items-center">
+                <input
+                    type="password"
+                    class="profile__change-password--input"
+                    id="profile-old-password"
+                    required
+                />
+                <img
+                    src="{% static 'dashboard/img/visibility.svg' %}"
+                    alt="Toggle visibility of password"
+                    class="toggle__visibility--icon c-pointer opacity-hover"
+                    data-password="profile-old-password"
+                />
+            </div>
+
+            <label for="profile-new-password" class="profile__change-password--label m-0 f-size-12">
+                <strong>{{'new_password'|translate:language }}</strong>
+            </label>
+
+            <div class="d-flex align-items-center">
+                <input
+                    type="password"
+                    placeholder=" "
+                    class="profile__change-password--input profile-password__validation"
+                    id="profile-new-password"
+                    pattern="^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[!@#$%^&*()_+]).{8,}$"
+                    required
+                />
+                <img
+                    src="{% static 'dashboard/img/visibility.svg' %}"
+                    alt="Toggle visibility of password"
+                    class="toggle__visibility--icon c-pointer opacity-hover"
+                    data-password="profile-new-password"
+                />
+                <p class="profile-password--success" id='profile-password-strong'>
+                    <img src="{% static 'dashboard/img/check_circle.svg' %}" alt="Green check"/>
+                    {{'strong_password'|translate:language }}.
+                </p>
+
+                <p class="profile-password--error">
+                    <img src="{% static 'dashboard/img/cancel.svg' %}" alt="Red x"/>
+                    {{'invalid_password'|translate:language }}.
+                </p>
+            </div>
+
+            <label for="profile-repeat-new-password" class="profile__change-password--label m-0 f-size-12">
+                <strong>{{'repeat_new_password'|translate:language }}</strong>
+            </label>
+
+            <div class="d-flex align-items-center">
+                <input
+                    type="password"
+                    placeholder=" "
+                    class="profile__change-password--input profile-password__validation"
+                    id="profile-repeat-new-password"
+                    required
+                />
+                <img
+                    src="{% static 'dashboard/img/visibility.svg' %}"
+                    alt="Toggle visibility of password"
+                    class="toggle__visibility--icon c-pointer opacity-hover"
+                    data-password="profile-repeat-new-password"
+                />
+
+                <p class="profile-password--success" id="password-is-equal">
+                    <img src="{% static 'dashboard/img/check_circle.svg' %}" alt="Green check"/>
+                </p>
+
+                <p class="profile-password--error" id="password-is-different">
+                    <img src="{% static 'dashboard/img/cancel.svg' %}" alt="Red x"/>
+                    {{'passwords_dont_match'|translate:language }}.
+                </p>
+            </div>
+        </form>
+
+        <p class="margin-top-30 f-size-12">
+            <strong>
+                * {{'passwords_requirements'|translate:language }}.
+            </strong>
+        </p>
+
+    </div>
+</section>

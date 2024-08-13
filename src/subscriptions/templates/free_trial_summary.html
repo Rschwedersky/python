@@ -1,0 +1,69 @@
+{% extends 'base.html' %} {% load static %} {% load general_tags %} {% load dashboard_tags %} {% load subscriptions_tags %}
+{% block content %}
+    <div class='free-trial__end--summary dark-gray__color'>
+        <nav class='d-flex align-items-center mb-5'>
+            <img src="{% static "dashboard/img/LogoSmarthisHub.png" %}" alt="Smarthis Hub Logo" />
+        </nav>
+        <section {% if has_plan_negotiation != False %} class="no-backimage"{% endif %}>
+            {% include 'components/free_trial_summary/overview_plan_chose.html' %}
+            {% comment %} <div class="fieldset fieldset--gray w-60 mx-auto">
+                <span class="legend_hub f-size-24">{{'you_used'|translate:language }}</span>
+                <div class="d-flex justify-content-between f-size-20 table__header pb-2">
+                    <span>04 <br> {{'services'|translate:language|lower }}</span>
+                    <span>00 <br> dashboards</span>
+                    <span>04 <br> {{'licenses'|translate:language }}</span>
+                    <span>2817 <br> {{'queries_lowercase'|translate:language }}</span>
+                </div>
+                <div class="services__list">
+                    <div class='grid__list'>
+                        <span>Emissão de Guias de ISS <strong>|  Barcarena</strong></span>
+                            <span>14h 12min <br> tempo economizado</span>
+                            <span>821 <span>consultas feitas</span></span>
+                    </div>
+                    <div class='grid__list'>
+                        <span>Emissão de Guias de ISS <strong>|  Barcarena</strong></span>
+                            <span>14h 12min <br> tempo economizado</span>
+                            <span>821 <span>consultas feitas</span></span>
+                    </div>
+                    <div class='grid__list'>
+                        <span>Emissão de Guias de ISS <strong>|  Barcarena</strong></span>
+                            <span>14h 12min <br> tempo economizado</span>
+                            <span>821 <span>consultas feitas</span></span>
+                    </div>
+                    <div class='grid__list'>
+                        <span>Emissão de Guias de ISS <strong>|  Barcarena</strong></span>
+                            <span>14h 12min <br> tempo economizado</span>
+                            <span>821 <span>consultas feitas</span></span>
+                    </div>
+                </div>    
+            </div>
+            <button class="btn__purple mx-auto py-2 px-3 no-uppercase">{{'continue_with'|translate:language }} Plano Business</button> {% endcomment %}
+            {% include 'components/free_trial_summary/comparing_plans.html' %}
+
+            <article class='mt-5'>
+                <p>
+                    <img src="{% static 'img/right_double_arrow.svg' %}" alt="Double arrow right" class='mx-2 w-2rem h-2rem'>
+                    <strong>{{'doubts'|translate:language }}?</strong>
+                </p>
+                <div class="d-flex gap-32">
+                    <div class="flex-basis-60">
+                        {% for question in help_questions %}
+                                {% include 'components/single_help_box_container.html' with subtitletext=question|get_obj_attr:'title' text=question|get_obj_attr:'text'  %}
+                        {% endfor %}
+                    </div>
+                    <div class="flex-basis-40 d-flex flex-column align-items-end">
+                        {% include 'components/box_chat_help.html' %}
+                    </div>
+                </div>
+            </article>
+        </section>
+    </div>
+
+    <style>
+        body {
+            padding-top: 0;
+        }
+    </style> 
+
+    <script src="{% static 'js/freeTrial.js' %}"></script>
+{% endblock %}

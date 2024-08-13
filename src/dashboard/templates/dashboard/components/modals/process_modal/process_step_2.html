@@ -1,0 +1,17 @@
+{% load static %} {% load general_tags %}
+<div class="setup-content" id="step-2">
+    <section class="modal-body d-flex w-75 mx-auto gap-32">
+        <div class='d-flex flex-column w-100'>
+            <p>{{ 'select_the_subprocesses_that_make_up_this_process'|translate:language }}.</p>
+            <section class="pl-3 pr-5">
+                {% include 'dashboard/components/single_filter.html' with parent_class='subprocesses' title='sub_hyphen_processes'|translate:language no_clean=True resume_choices_text='select'|translate:language inputs=processes_not_registered show_comment_filter='select_all_that_apply'|translate:language %}
+
+                <div class="subprocesses_selected"></div>
+            </section>
+        </div>
+    </section>
+
+
+    {% include 'dashboard/components/modals/process_modal/process_footer.html' with prev_btn_disabled=False next_btn_type='button' no_advance=False no_arrow=False show_next_arrow=True next_btn_text='next_male'|translate:language next_btn_disabled=True %}
+
+</div>

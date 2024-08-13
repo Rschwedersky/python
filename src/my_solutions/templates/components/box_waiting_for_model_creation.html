@@ -1,0 +1,25 @@
+{% load general_tags %}
+<div class=" pt-5 d-flex flex-column">   
+    <div class="automation box-backcolor-light mb-5">
+        <div class="line_loading primary-color"></div>
+        <div class="top_content p-3 pt-4 w-100 d-flex justify-content-between">
+            <div class="box_header">
+                <p class="color-muted--light light-bold mb-1">{{ 'pending_configuration_request_sent'|translate:language }}</p>
+                <small class="color838383">{{ 'issuance_of_bank_statement'|translate:language }}</small>        
+            </div>
+            <div class="d-flex gap-16">
+                <div>
+                    <img src="/static/dashboard/img/three-dots.svg" alt="Three dots to show more info" class="opacity-hover px-2 crew__popup-menu--icon">
+                </div>
+            </div>
+        </div>
+
+        <div class="line__box-automations"></div>
+        <div class="d-flex justify-content-end align-items-end m-3">
+            <button class="crew__popup-menu--icon btn-box_cannot_create_model d-flex justify-content-start align-items-center light-bold f-size-15 w-auto px-2">
+                <img class="pr-2" src="/static/img/img_select_box_automation.png">
+                {{ 'run_template'|translate:language }}
+            </button>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,29 @@
+{% load static %} {% load general_tags %}
+<label class="settings_input_form {{ label_class }}" for="{{ input_id }}">
+    {{ title }}
+    {% if tooltip_text %}
+        {% include 'components/_tooltip.html' with  text=tooltip_text %}
+    {% elif tooltip_html %}
+        {% include 'components/_tooltip.html' with  text=tooltip_html html=True %}
+    {% endif %}
+    {% if complement_title %}
+        <span class="f-size-12">({{ complement_title }})</span>:
+    {% endif %}
+    {% if input_type == 'select' %}
+        <select id="{{ input_id }}">
+        </select>
+    {% else %}
+        <input
+            type="{{ input_type }}"
+            id="{{ input_id }}"
+            class="{{ input_class }}"
+            {% if input_placeholder %} placeholder="{{ input_placeholder }}"{% endif %}
+            {% if input_type == 'number' %}value="{{ input_value }}" min="{{ input_min_value }}"{% endif %}
+            name="{{ input_name }}"
+        >
+    {% endif %}
+
+    {% if example_input %}
+        <span class="color-muted f-size-12 font-italic">{{ example_input }}</span>
+    {% endif %}
+</label>

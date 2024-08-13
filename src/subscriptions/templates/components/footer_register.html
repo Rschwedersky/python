@@ -1,0 +1,58 @@
+{% load static %} {% load general_tags %}
+
+<footer class="home__footer">
+	<div class="padding_conditions px-5 pb-3 d-flex flex-column gap-16">
+		<section class="top_content w-100 d-flex">
+			<div class=" pr-3">
+				<img class="home__footer-image my-3" src="{% static 'img/hub_verde_2.svg' %}" />
+				<div class="register__footer-text-smarthis f-size-14">
+					<span>
+                        O <strong>Smarthis Hub </strong>{{'takes_care_of_your_repetitive_tasks_so_you_can_focus_on_what_matters'|translate:language }}
+					</span>
+				</div>
+			</div>
+            <div class="d-flex justify-content-end align-items-end w-100">
+                <div class="register__footer-left_content px-2">
+                    <a class="no__link link_api-footer" href="https://jivo.chat/Gwz3I0tvDX" target="_blank">
+                    <p class="f-size-14 brancocolor mb-0">{{ 'contact'|translate:language }}</p>
+                    </a> 
+                </div>
+                <div class="register__footer-left_content px-2">
+                    <a class="no__link link_api-footer" href="{% static 'instructions/Politica_de_Privacidade.pdf' %}" target="_blank"> 
+                        <p class="f-size-14 brancocolor mb-0">{{ 'privacy_policy'|translate:language }}</p>  
+                    </a>
+                </div>
+                <div class="register__footer-left_content px-2">
+                    <a class="no__link link_api-footer" href="{% static 'instructions/Termos_de_uso.pdf' %}" target="_blank" >
+                        <p class="f-size-14 brancocolor mb-0">{{ 'terms_of_use'|translate:language }}</p>
+                    </a>
+                </div>
+            </div>
+
+            <section class="developed_by w-100 d-flex justify-content-end align-items-end gap-16">
+                <div>
+                    <p class="f-size-13 brancocolor mb-0">{{ 'developed_by'|translate:language }}</p>
+                    <img class="name-smarthis__footer" src="{% static 'img/smarthis_verde_2.svg' %}" height="45" />
+                </div>
+                <a href="https://www.instagram.com/smarthis.ai/" target="_blank" >
+                    <img src="{% static 'img/logo_instagram.png' %}" />
+                </a>
+                <a href="https://br.linkedin.com/company/smarthis" target="_blank" >
+                    <img src="{% static 'img/logo_linkedln.png' %}" />
+                </a>
+            </section>
+		</section>
+		
+	</div>
+	<div class="home__footer-line w-100 d-flex justify-content-between">
+		<div class="home__footer-text f-size-12">
+			<p>
+				<strong>Smarthis Hub {% now "Y" %}</strong>
+				| {{ 'all_rights_reserved'|translate:language }}
+			</p>
+		</div>
+		<div class="ilustracao-text">
+			<p class="f-size-10">{{ 'illustration_by'|translate:language }}<span class="decoration-text__footer">Aleksey Chizhikov.</span></p>
+		</div>
+	</div>
+</footer>

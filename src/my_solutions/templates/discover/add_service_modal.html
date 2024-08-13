@@ -1,0 +1,47 @@
+{% load general_tags %} {% load static %}
+
+<section class="discover__inner-modal discover__confirmation-modal discover__confirmation-modal--success  discover__inner-modal-show discover__inner-modal--add-service ">
+    <div class="d-flex flex-column w-100 p-3 h-100">
+        <img src="{% static "/dashboard/img/exit.svg" %}"
+        alt="Close Modal" class="c-pointer opacity-hover modal__close align-self-end discover__confirmation-modal-close" data-close=".modal__background--discover"
+        />
+        <section class='flex-column align-items-start py-0 px-3 discover__inner-modal--section'>
+            <div class='d-inline-block mb-3'>
+                <p class="lighter-bold discover__inner-modal--heading">{{'add'|translate:language }}<strong id='discover-heading'> {{heading}} </strong>{{'to_your_plan'|translate:language }}?</p>
+                <div class="green__underlined green__underlined--discover-modal w-100"></div>
+            </div>
+            <p class="m-0 color-muted--light">{{'choose_how_many_licenses_to_use'|translate:language }}:</p>
+            <p class="mb-5 color-muted--light {% if 'free' in plan_name %}d-none{% endif %}"><strong>
+            {{available_licenses}}
+            {% if available_licenses == 1 %}
+            {{'available_singular'|translate:language }}
+            {% else %}
+            {{'available'|translate:language }}{% endif %}
+            </strong></p>
+            <div class="discover__modal-success-btn-container {% if 'trial' in plan_name %}mt-3{% endif %}" data-limit="{{available_licenses}}" data-plan="{{plan_name}}">
+                <button class="btn__green btn__green--small btn__manipulate-permissions--discover" data-manipulation="decrease">-</button>
+                <span class="color-muted--light"><span class='services-count'>01</span> {{'license'|translate:language}}</span>
+                <button class="btn__green btn__green--small btn__manipulate-permissions--discover" data-manipulation="increase">+</button>
+            </div>
+        </section>
+
+        <section class="discover__inner-modal--hire__loading d-none discover__inner-modal--section discover__inner-modal-hide">
+            <div class="spinner-border text-secondary" role="status" style="width: 3rem; height: 3rem;">
+                <span class="sr-only">Loading...</span>
+            </div>
+        </section>
+
+        <section class='discover__inner-modal-hide discover__inner-modal--section flex-row align-items-center gap-16 d-none'>
+            <img src="{% static "/img/check_green_circle.png" %}" alt="Checkmark Icon">
+            <div class='d-flex flex-column gap-10 jsShowcase'>
+                <p class="m-0"><strong>{{'service_added_successfully'|translate:language }}!</strong></p>
+                <p>{{'you_can_already_access_your_service'|translate:language }}.</p>
+            </div>
+        </section>
+    </div> 
+
+    <footer class="discover__confirmation-modal-footer">
+        <button class="button__muted py-2 px-4 w-25 modal__close" data-close=".modal__background--discover">{{'cancel'|translate:language }}</button>
+        <button class="btn__purple py-2 px-4 w-25 discover__add-service no-uppercase">{{ 'confirm'|translate:language }}</button>
+    </footer>
+</section>

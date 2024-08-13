@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="{{language}}">
+
+<head>
+  {% load static %}
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <title>Smarthis Hub</title>
+  
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
+    
+    <link rel="apple-touch-icon" sizes="180x180" href="{% static 'dashboard/icon/apple-touch-icon.png' %}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{% static 'dashboard/icon/favicon-32x32.png' %}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{% static 'dashboard/icon/favicon-16x16.png' %}">
+    <link rel="manifest" href="{% static 'dashboard/icon/site.webmanifest' %}">
+    <meta name="msapplication-config" content="{% static 'dashboard/icon/browserconfig.xml' %}" />
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="theme-color" content="#ffffff">
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
+
+  {% load static%}
+  <style>
+  html, body {
+    height: 100%;
+  }
+    h1 {
+      font-weight: lighter;
+    }
+    .card {
+      box-shadow: 0px 0px 25px #444444;
+      border-radius: 1rem;
+    }
+
+    .form-signin {
+      width: 100%;
+      max-width: 360px;
+      padding: 15px;
+      margin: auto;
+    }
+    .errorlist {
+      color: red;
+    }
+    .errorlist::before {
+      content:'The following requirements were not fulfilled.';
+      color: #000;
+      font-weight: bold;
+      text-align: center;
+      display: block;
+      margin-bottom: 1rem;
+    }
+  </style>
+  <link href="{% static 'dashboard/css/main.css' %}" rel="stylesheet">
+  <link href="{% static 'dashboard/css/responsive.css' %}" rel="stylesheet">
+</head>
+
+<body>
+
+  <main class="w-100 h-100 d-flex flex-column">
+    {% block content %}
+    {% endblock  %}
+  </main>
+
+  {% block ga%}
+    {% include "snippets/ga.html" %}
+  {% endblock ga%}
+
+  <script src="{% static 'dashboard/js/translate.js' %}"></script>
+  <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+  integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+  integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+  <script src="{% static 'dashboard/js/global.js' %}"></script>
+
+  {% block scripts %}{% endblock %}
+
+</body>
+
+
+
+</html>

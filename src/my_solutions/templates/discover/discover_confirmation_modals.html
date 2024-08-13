@@ -1,0 +1,83 @@
+{% load general_tags %} {% load static %}
+
+{% comment %} CONFIRMATION MODAL CHANGE PLANS {% endcomment %}
+
+<section class="discover__inner-modal discover__confirmation-modal discover__confirmation-modal--success  discover__inner-modal-close">
+    <div class="d-flex flex-column w-100 p-3 h-100">
+        <img src="{% static "/dashboard/img/exit.svg" %}" id='close-button-discover-modal-success' alt="Close Modal" class="c-pointer opacity-hover modal__close align-self-end discover__confirmation-modal-close" data-close=".modal__background--discover-confirmation"
+        />
+
+        <section class='discover__modal-success--step1 discover__inner-modal-show'>
+            <img src="{% static "/img/check_green_circle.png" %}" alt="Checkmark Icon">
+            <div class='d-flex flex-column gap-10'>
+                <p class="m-0"><strong>{{'request_sent_successfully'|translate:language }}!</strong></p>
+                <p>{{'dont_worry_soon_receive_email'|translate:language }}</p>
+            </div>
+        </section>
+
+        <section class='discover__modal-success--step2 discover__inner-modal-close' id='modal-discover-upgrade-success-step-2'>
+            <div class='d-inline-block mb-3'>
+                <p class="lighter-bold discover__inner-modal--heading">{{'add'|translate:language }}<strong> {{heading}} </strong>{{'to_your_plan'|translate:language }}?</p>
+                <div class="green__underlined green__underlined--discover-modal w-100"></div>
+            </div>
+            <p class="m-0 color-muted--light">{{'choose_how_many_licenses_to_use'|translate:language }}:</p>
+            <p class="mb-5 color-muted--light"><strong>3 {{'available'|translate:language }}</strong></p>
+            <div class="discover__modal-success-btn-container">
+                <button class="btn__green btn__green--small btn__manipulate-permissions" data-manipulation="decrease" disabled>-</button>
+                <span class="color-muted--light">01 {{'license'|translate:language}}</span>
+                <button class="btn__green btn__green--small btn__manipulate-permissions" data-manipulation="increase">+</button>
+            </div>
+        </section>
+    </div> 
+
+    <footer class="discover__confirmation-modal-footer">
+        <button class="button__muted py-2 px-4 w-25 visibility-hidden modal__close discover__confirmation-modal-close" data-close=".modal__background--discover-confirmation">{{'cancel'|translate:language }}</button>
+        <button id='ok-button-discover-modal-success' class="btn__purple py-2 px-4 w-25 confirmation-modal__step no-uppercase">OK</button>
+    </footer>
+</section>
+
+
+{% comment %} CONFIRMATION MODAL SWITCH PERMISSIONS {% endcomment %}
+
+
+<section class="discover__inner-modal discover__confirmation-modal discover__confirmation-modal--switch discover__inner-modal-close">
+    <div class="d-flex flex-column w-100 p-3 h-100">
+        <img src="{% static "/dashboard/img/exit.svg" %}" alt="Close Modal" class="c-pointer opacity-hover modal__close align-self-end discover__confirmation-modal-close" data-close=".modal__background--discover-confirmation"
+        />
+
+        <div class='confirmation-modal__tab confirmation-modal__tab--switch d-flex flex-column discover__inner-modal-show discover__modal-switch-confirmation--1'>
+            <div class="d-inline-block">
+                <p class="lighter-bold f-size-18">{{'confirm_exchange'|translate:language }}?</p>
+                <div class="green__underlined green__underlined--discover-modal"></div>
+            </div>
+            <p class='color-muted' id='discover-confirmation-modal-message'></p>
+        </div>
+
+
+        <div class='confirmation-modal__tab confirmation-modal__tab--switch discover__inner-modal-close'>
+            <section class="discover__inner-modal--hire__loading h-100">
+                <p class="f-size-20">{{'finalizing_request'|translate:language }}...</p>
+                <div class="spinner-border text-secondary" role="status" style="width: 3rem; height: 3rem;">
+                    <span class="sr-only">Loading...</span>
+                </div>
+            </section>    
+        </div>         
+
+
+        <div class='confirmation-modal__tab confirmation-modal__tab--switch discover__inner-modal-close'>
+            <img src="{% static "/img/check_green_circle.png" %}" alt="Checkmark Icon" id='discover-confirmation-modal-switch-image'>
+            <div class='d-flex flex-column gap-16 align-items-start jsShowcase'>
+                <div class='d-inline-block'>
+                    <p class="lighter-bold" id='discover-confirmation-modal-switch-heading'>{{'exchange_confirmed'|translate:language }}!</p>
+                    <div class="green__underlined green__underlined--discover-modal w-100"></div>
+                </div>
+                <p class="m-0 color-muted" id='discover-confirmation-modal-switch-body'>{{'you_can_already_access_your_service'|translate:language }}</p>
+            </div>    
+        </div>           
+
+    </div>    
+    <footer class="discover__confirmation-modal-footer">
+        <button class="button__muted py-2 px-4 w-25 modal__close discover__confirmation-modal-close" data-close=".modal__background--discover-confirmation">{{'cancel'|translate:language }}</button>
+        <button id='advance-button-discover-confirmation-modal-switch' class="btn__purple py-2 px-4 w-25 confirmation-modal__step no-uppercase">{{'confirm'|translate:language }}</button>
+    </footer>
+</section>

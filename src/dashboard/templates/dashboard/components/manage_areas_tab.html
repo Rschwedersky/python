@@ -1,0 +1,27 @@
+{% load static %} {% load general_tags %}
+ 
+
+<div class="container-100 h-90 whitebackcolor py-3 " id="manage_areas_tab" >
+    <div class="top_header py-4">
+        <p class="card-text "><small class="text-muted"> <a href="" class="back_settings"> {{ 'settings'|translate:language }}</a> > {{ 'business_areas'|translate:language }} </small></p>
+    </div>
+    <nav class="settings__breadcrumbs">
+        <a href="" class="back_settings">
+            <img src="{% static 'dashboard/img/undo.svg' %}" alt="Return Icon" class="c-pointer opacity-hover advanced__back-btn" id="back-to-manage_areas" data-back="advanced-settings-language"/>
+        </a>
+        <h3 class="title_tab light-bold f-size-24">{{ 'business_areas'|translate:language }}
+            <div class="green__underlined green_manage-areas"></div>
+        </h3>  
+    </nav>
+    <div class="include_empty_area{% if processes_filter.areas.areas|length != 0 %} d-none {% endif %}">
+        {% include 'dashboard/components/empty_state_area_tab.html' %}
+    </div>
+    <div class="manage_areas_table{% if processes_filter.areas.areas|length == 0 %} d-none {% endif %}">
+        {% include 'dashboard/components/manage_areas_table.html' %}
+    </div>
+    
+</div>
+
+{% include 'dashboard/components/areas_tab_modal_delete.html' %}
+{% include 'dashboard/components/areas_tab_modal_edit.html' %}
+{% include 'dashboard/components/areas_tab_modal_register.html' %}

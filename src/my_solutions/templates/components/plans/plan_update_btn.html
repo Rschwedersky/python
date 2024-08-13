@@ -1,0 +1,8 @@
+{% load general_tags %}
+<a class="update_plan decorationnone" href="" target="_blank"><button class="btn__purple px-5 py-2 text-capitalize" disabled>
+    {% if 'trial' in plan.get_plan_name|lower %}
+        {{ 'hire_plan'|translate:language }}
+    {% else %}
+        {{'change_plan'|translate:language }}
+    {% endif %}
+</button></a>

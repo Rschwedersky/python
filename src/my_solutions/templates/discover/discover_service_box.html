@@ -1,0 +1,48 @@
+{% load general_tags %} {% load dashboard_tags %} {% load static %} {% load mysolutions_tags %}
+
+<section class="discover__service-box discover__service-box--more {% if is_active == False and user.profile.client.name != 'Smarthis' %}no-pointer-events position-relative{% elif is_active == False and user.profile.client.name == 'Smarthis' %}position-relative{% endif %}" data-type="{{data_type}}" data-service="{{automation_name}}" data-showcase="{% if automation_obj.is_showcase %}true{% else %}false{% endif %}">
+    {% if is_active == False %}
+        <div class="permissions-text--inactive bottom" data-inactive="True">
+            <span class='d-block mb-1'><strong>{{'service_under_maintenance'|translate:language }}</strong></span>
+            {% if user|check_if_user_has_service:automation_obj == False %}
+                {% if is_user_interested == True %}
+                    <button class='d-flex  f-size-14 align-items-center gap-5' data-image="{% static '/img/check.svg' %}" data-clicked="1">
+                        <img src="{% static '/img/check.svg' %}" alt="Check mark Icon">
+                        {{'you_will_be_notified'|translate:language }}
+                    </button>
+                {% else %}
+                    <button class='d-flex  f-size-14 align-items-center' data-image="{% static '/img/check.svg' %}">{{'notify_me_when_available'|translate:language }}</button>
+                {% endif %}
+            {% else %}
+                <span class='color-muted d-block'>{{'will_soon_be_back'|translate:language}}</span>
+            {% endif %} 
+        </div>
+    {% endif %}  
+    <section class="discover__box-header discover__box-header--more {% if is_active == False %}opacity-50{% endif %}">
+        <img src="{% static logo %}" alt="Automation Logo">
+    </section>
+    <p class="m-0 text-center px-2 {% if is_active == False %}opacity-50{% endif %}">
+            {{ automation_display_name }}   
+    </p>
+    <section class="discover__box-btn-container {% if is_active == False %}opacity-50{% endif %}">
+        {% if available_licenses > 0 or 'free' in subscription.get_subscription_plan.get_plan_name|lower %}
+            <button class="btn__purple modal__open-button discover__add-service-modal py-2 px-4 no-uppercase " data-close=".discover__inner-modal" data-background=".modal__background--discover" data-modal="{% if is_admin == True %}.discover__inner-modal--add-service{% else %}.discover__confirmation-modal--no-admin{% endif %}" data-admin={{is_admin}} data-heap="Adicionar {{automation_name}} ao meu plano">{{'add_to_my_plan'|translate:language }}</button>
+        {% else %}
+            <button class="btn__purple modal__open-button discover__modal--btn-hire py-2 px-4 no-uppercase" data-close=".discover__inner-modal" data-background=".modal__background--discover" data-modal="{% if is_admin == True %}.discover__inner-modal--hire{% else %}.discover__confirmation-modal--no-admin{% endif %}" data-admin={{is_admin}} data-heap="Adicionar {{automation_name}} ao meu plano">{{'add_to_my_plan'|translate:language }}</button>
+        {% endif %}
+        <a  href='/discover/{{ automation_name }}' class="button__muted w-50" data-heap="Saber mais sobre {{automation_name}}">{{'learn_more'|translate:language }}</a>
+    </section>
+</section>
+
+{% with hired_automation=request|get_hired_automation_by_automation_obj:automation_obj %}
+    {% if hired_automation %}
+        {% with permissions_numbers=all_users_allowed|get_obj_attr:automation_name %}  {% with qnt_permissions=permissions_numbers|get_obj_attr:'qnt' %}
+                {% with permissions_available=hired_automation.get_qnt_automations|subtract:qnt_permissions permissions_total=automations_contracted.get_qnt_automations %}
+                    {% if hired_automation.automation.name == automation_name and permissions_available > 0 %}
+                        <input type="hidden" data-available={{permissions_available}} data-name={{automation_name}}>
+                    {% endif %}
+                {% endwith %}
+            {% endwith %}
+        {% endwith %}
+    {% endif %}
+{% endwith %}

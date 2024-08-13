@@ -1,0 +1,10 @@
+{% load static %} {% load general_tags %}
+
+<div class="row setup-content py-1" id="step-4">
+    <div class="col-12 responsive-columns uploader">
+        <div class="col-11 responsive-columns uploader">
+            {% include 'components/receipt_of_results.html' %}
+        </div> 
+        {% include 'components/modal_footer.html' with next_btn_text='save_model'|translate:language next_btn_class='step-3' no_arrow=True no_advance=True next_btn_type='submit' %}
+    </div>
+</div>

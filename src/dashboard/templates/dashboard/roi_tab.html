@@ -1,0 +1,26 @@
+{% load static %} {% load dashboard_tags %} {% load general_tags %}
+
+<div id="roi_tab" class="dashboard_tab virgin{% if all_processes_translated is None or fakejson is not None %} jsNotAllowed{% endif %}">
+        <div class="d-flex justify-content-between align-items-start">
+            <div class="jsDashboardTitleAndDateContainer">
+                <p class="title color000000 f-size-26 mb-0 font-weight-bold">{{ 'return_on_investment'|translate:language }} (ROI)</p>
+                <p class="period f-size-13 mb-1"></p>
+            </div>
+
+            <button class="btn d-flex align-items-center white-bg small gap-8" data-toggle="modal" data-target="#dashboard-modal" data-modal="how-it-works-roi">
+                {% include 'icons/info-circle-white.svg' %}
+                {{ 'how_does_it_works'|translate:language }}
+            </button>
+        </div>
+        {% include 'dashboard/components/resumed_infos.html' with tab='roi' %}
+        <div class="charts o-hidden">
+            <div class="d-flex flex-column gap-48">
+                {% include 'dashboard/components/dashboard_with_sideinfos.html' with title='individual_roi_by_processes' header_label_name='order_by'|translate:language select_id='roi-process-order' graph_id='roi_process' select_options=all_select_options|get_obj_attr:'roi-process-order' legend_blue='individual_roi'|translate:language selected="returnInHours" %}
+                
+                {% include 'dashboard/components/dashboard_with_sideinfos.html' with title='return_by_business_area' header_label_name='order_by'|translate:language select_id='roi-area-order' graph_id='roi_area' select_options=all_select_options|get_obj_attr:'roi-area-order' legend_light_blue='individual_roi'|translate:language selected="returnInHours" %}
+
+                {% include 'dashboard/components/dashboard_with_sideinfos.html' with title="roi_history" header_label_name='order_by'|translate:language select_id='' graph_id='roi_history' select_options=all_select_options|get_obj_attr:'roi-history-order'  legend_green="manual_costs"|translate:language legend_blue="automated_costs"|translate:language legend_solid="current_roi"|translate:language legend_dashed="start_of_positive_roi"|translate:language selected="roi_month" %}
+            </div>
+        </div>
+</div>
+<script src="{% static 'dashboard/js/dashboardRoiTab.js' %}"></script>

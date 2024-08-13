@@ -1,0 +1,150 @@
+{% extends 'base.html' %} {% block content %} {% load general_tags %} {% load dashboard_tags %} {% load static %}
+<section class="dark-gray__color {% if free_trial_ended != None and free_trial_ended == True %}no-pointer-events{% endif %}">
+    <header class="discover-service__header">
+        <div>
+            <p class="m-0 color-muted color-muted--lightest f-size-12"><a href="/discover" class="no__link opacity-hover">{{'discover'|translate:language }}</a> > {{ standard_variables|get_obj_attr:'title' }}</p>
+            <div class="mb-3">
+                <h1 class="f-size-26 text__decoration--green">{{ standard_variables|get_obj_attr:'title' }}</h1>
+            </div>
+            <h2 class="f-size-18 mb-3">
+                {% if standard_variables|get_obj_attr:'service_hover_text' %}
+                    {{ standard_variables|get_obj_attr:'service_hover_text'}} 
+                {% else %}  
+                    {{ standard_variables|get_obj_attr:'title_text_solution' }} 
+                {% endif %}
+            </h2>
+            <h2 class="f-size-18 mb-3">{{ standard_variables|get_obj_attr:'subtitle_text_solution' }}</h2>
+
+            {% if available_licenses > 0 or 'free' in subscription.get_subscription_plan.get_plan_name|lower %}
+                <button class="btn__purple modal__open-button discover__add-service-modal py-2 px-4 no-uppercase " data-close=".discover__inner-modal" data-background=".modal__background--discover" data-modal="{% if is_admin == True %}.discover__inner-modal--add-service{% else %}.discover__confirmation-modal--no-admin{% endif %}" data-admin={{is_admin}} data-service="{{automation_name}}" data-heap="Adicionar {{automation_name}} ao meu plano">{{'add_to_my_plan'|translate:language }}</button>
+            {% else %}
+                <button class="btn__purple modal__open-button discover__modal--btn-hire py-2 px-4 no-uppercase" data-service="{{automation_name}}" data-close=".discover__inner-modal" data-background=".modal__background--discover" data-modal="{% if is_admin == True %}.discover__inner-modal--hire{% else %}.discover__confirmation-modal--no-admin{% endif %}" data-admin={{is_admin}} data-heap="Adicionar {{automation_name}} ao meu plano">{{'add_to_my_plan'|translate:language }}</button>
+            {% endif %}
+
+            {% comment %} <button class="btn__purple py-2 px-3 no-uppercase modal__open-button" data-close=".discover__inner-modal" data-background=".modal__background--discover" data-modal="{% if is_admin == True %}.discover__inner-modal--hire{% else %}.discover__confirmation-modal--no-admin{% endif %}" data-admin={{is_admin}} data-heap="Adicionar {{automation_name}} ao meu plano">{{'add_to_my_plan'|translate:language }}</button> {% endcomment %}
+        </div>
+        <section class='discover-service__advantages-card'>
+            <header>
+                <div class="green__dot"></div>
+                <div class="green__dot"></div>
+                <div class="green__dot"></div>
+            </header>
+            <section class='px-4 py-5 d-flex flex-column gap-32'>
+                <div>
+                    <img src="{% static '/img/clock.png'%}" alt="">
+                    {% if standard_variables|get_obj_attr:'advantages_1'%}
+                        <span class="f-size-18">{{ standard_variables|get_obj_attr:'advantages_1' }}</span>
+                    {% else %} 
+                        <span class="f-size-18">{{'save_time_advantages_1'|translate:language }}</span>
+                    {% endif %}
+                    <img src="{% static '/img/check.svg'%}" alt="">
+                    </div>
+                    <div>
+                    <img src="{% static '/img/no_errors.png'%}" alt="">
+                    {% if standard_variables|get_obj_attr:'advantages_2' %}
+                        <span class="f-size-18">{{ standard_variables|get_obj_attr:'advantages_2' }}</span>
+                    {% else %} 
+                        <span class="f-size-18">{{'avoid_mistakes_rework_advantages_2'|translate:language }}</span>
+                    {% endif %}
+                    <img src="{% static '/img/check.svg'%}" alt="">
+                    </div>
+                    <div>
+                    <img src="{% static '/img/centralized.png'%}" alt="">
+                    {% if standard_variables|get_obj_attr:'advantages_3' %}
+                        <span class="f-size-18">{{ standard_variables|get_obj_attr:'advantages_3' }}</span>
+                    {% else %}
+                        <span class="f-size-18">{{'get_all_results_in_one_place_advantages_3'|translate:language }}</span>
+                    {% endif %}
+                    <img src="{% static '/img/check.svg'%}" alt="">
+                </div>
+            </section>
+        </section>
+    </header>
+    <section class="text-center">
+        <section class="discover-service__steps-container">
+            {% if automation_type ==  'upload' or automation_name ==  'notas-servicos-rj' %}
+            <figure>
+                <img src="{% static '/img/spreadsheet.svg'%}" alt="">
+                {% if automation_name ==  'notas-servicos-rj' %}
+                    <figcaption>{{'fill_upload_file_if_necessary'|translate:language }}</figcaption>
+                {% else %}
+                    <figcaption>{{'fill_upload_file'|translate:language }}</figcaption>    
+                {% endif %}
+            </figure>
+            <img src="{% static '/img/right_double_arrow.svg'%}" alt="">
+            {% endif %}
+            <figure>
+                <img src="{% static '/img/slider.svg'%}" alt="">
+                {% if automation_name ==  'notas-servicos-rj' %}
+                    <figcaption>{{'set_up_template'|translate:language }}</figcaption>
+                {% else %}
+                    <figcaption>{{'set_up_reusable_template'|translate:language }}</figcaption>   
+                {% endif %}    
+            </figure>
+            <img src="{% static '/img/right_double_arrow.svg'%}" alt="">
+            <figure>
+                <img src="{% static '/img/one_click.png'%}" alt="">
+                <figcaption>{{'use_the_template_one_click'|translate:language }}</figcaption>
+            </figure>
+            <img src="{% static '/img/right_double_arrow.svg'%}" alt="">
+            {% if automation_name == 'nibo' %}
+                <figure>
+                    <img src="{% static '/img/email.png'%}" alt="">
+                    <figcaption>Receba os resultados pelo OneDrive</figcaption>
+                </figure>
+            {% else %}
+                <figure>
+                    <img src="{% static '/img/email.png'%}" alt="">
+                    <figcaption>{{'receive_results_by_email'|translate:language }}</figcaption>
+                </figure>
+            {% endif %}
+        </section>
+        <section class="discover-service__video-tutorial">
+            <video controls width="80%">
+                <source src="" type="video/webm">
+                <source src="" type="video/mp4">
+                Sorry, your browser doesn't support embedded videos.
+            </video>
+            <div>
+                <h3 class="d-inline-block">{{ 'how_does_it_works'|translate:language }}<div class="green__underlined green__underlined--discover-heading"></div></h3>
+                {% if not standard_variables|get_obj_attr:'how_it_works_1'|cut:" "  and not standard_variables|get_obj_attr:'how_it_works_2'|cut:" " %}
+                <p class="f-size-18">{{'content_not_available'|translate:language }} {{ 'hub_contact_email'|translate:language }}</span></p>
+                {% endif %}
+                <p class="f-size-18">{{ standard_variables|get_obj_attr:'how_it_works_1' }}</p>
+                <p class="f-size-18">{{ standard_variables|get_obj_attr:'how_it_works_2' }}</p>
+
+                {% if available_licenses > 0 %}
+                    <button class="btn__purple modal__open-button discover__add-service-modal py-2 px-4 no-uppercase " data-close=".discover__inner-modal" data-background=".modal__background--discover" data-modal="{% if is_admin == True %}.discover__inner-modal--add-service{% else %}.discover__confirmation-modal--no-admin{% endif %}" data-admin={{is_admin}} data-service="{{automation_name}}" data-heap="Adicionar {{automation_name}} ao meu plano">{{'add_to_my_plan'|translate:language }}</button>
+                {% else %}
+                    <button class="btn__purple modal__open-button discover__modal--btn-hire py-2 px-4 no-uppercase" data-service="{{automation_name}}" data-close=".discover__inner-modal" data-background=".modal__background--discover" data-modal="{% if is_admin == True %}.discover__inner-modal--hire{% else %}.discover__confirmation-modal--no-admin{% endif %}" data-admin={{is_admin}} data-heap="Adicionar {{automation_name}} ao meu plano">{{'add_to_my_plan'|translate:language }}</button>
+                {% endif %}
+
+                {% comment %} <button class="btn__purple p-3 no-uppercase modal__open-button" data-close=".discover__inner-modal" data-background=".modal__background--discover" data-modal="{% if is_admin == True %}.discover__inner-modal--hire{% else %}.discover__confirmation-modal--no-admin{% endif %}" data-admin={{is_admin}} data-heap="Adicionar {{automation_name}} ao meu plano">{{'add_to_my_plan'|translate:language }}</button> {% endcomment %}
+            </div>
+        </section>
+    </section>
+    <section class="discover__suggestion">
+        <img src="{% static '/img/man_seated_typing.png'%}" alt="">
+        <div>
+            <h4><strong>{{'doubts'|translate:language }}?</strong></h4>
+            <p class='d-none'>{{'any_doubt_about_hub'|translate:language }}?<br>{{'contact_us_we_will_help'|translate:language }}.</p>
+            <p class="f-size-18">Entre em contato pelo email: <span class='d-block'><strong><u>{{'hub_contact_email'|translate:language}}</u></strong>.</span></p>
+            <p class="f-size-18">Nossa equipe está pronta para te ajudar!</p>
+            <button class="btn__purple btn__purple--discover-suggestion d-none">{{'contact_us'|translate:language }}</button>
+        </div>
+        <img src="{% static '/img/lupa.png'%}" alt="Man seated typing in his notebook">
+    </section>
+    {% include 'components/footer.html' %}
+</section>
+
+<div class="modal__background modal__background--discover discover__modal-close">
+    {% include 'discover/discover_steps_modal.html' with heading=standard_variables|get_obj_attr:'title' logo='/img/logo_'|add:automation_name|add:'.png' permissions_context=all_automations_contracted automation_name=automation_name%}
+
+    {% include 'discover/discover_suggestion_modal.html' %}
+
+    {% include 'discover/add_service_modal.html' %}
+</div>
+
+<script src="{% static 'js/discover.js' %}"></script>
+
+{% endblock %}

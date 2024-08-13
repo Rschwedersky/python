@@ -1,0 +1,30 @@
+<article class="dashboard single__dashboard full-screen js-capture">
+    <div>
+        <header class="whitebackcolor d-flex justify-content-between align-items-center py-2">
+            <div>
+                <div class="d-flex gap-10 align-items-center">
+                    <h5><strong>{{ title }}</strong></h5>
+                    {% if header_select_id == 'robot-occupation-time-band-select-order' %}
+                        {% include 'dashboard/components/tooltip_grafico.html' %}
+                    {% endif %}
+                </div>
+                {% if legend_green or legend_blue %}
+                    <div  class="{{ legend_class }}">
+                        {% include 'dashboard/components/legend.html' with legend_blue=legend_blue legend_green=legend_green %}
+                    </div>
+                {% endif %}
+            </div>
+            {% include 'dashboard/components/dashboard_select_order_by.html' with label_name=header_label_name select_id=header_select_id data_selected=header_data_selected label_class="f-size-12 light-bold mb-0" nav_class="d-grid" select_class="" %}
+            {% include 'dashboard/components/dashboard_header_buttons.html' with graph_id=graph_id %}
+        </header>
+        <article class="single__dashboard--content">
+            <section class="single_chartcontent">
+                <article id="{{ graph_id }}" class="{{plot_classes}}">
+                    <div class="loading_div d-flex justify-content-center align-items-center">
+                        <div class="loader"></div>
+                    </div>
+                </article>
+            </section>
+        </article>
+    </div>
+</article>

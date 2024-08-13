@@ -1,0 +1,15 @@
+{% load static %}
+<header class="inner__modal-header{% if header_class != None %} {{ header_class }}{% endif %}">
+    <h2 class="f-size-18 m-0">
+        {% if icon_img != None %}
+            <img src="{% static "/img/"|add:icon_img %}" alt="{{ icon_alt }}"/>
+        {% endif %}
+        {{ modal_title }}
+    </h2>
+    <img
+        src="{% static "/dashboard/img/"|add:close_img %}"
+        alt="Close Modal"
+        class="c-pointer opacity-hover modal__close{% if close_class != None %} {{ close_class }}{% endif %}"
+        data-close="{{ close_data }}"
+    />
+</header>

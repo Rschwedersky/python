@@ -1,0 +1,16 @@
+{% load general_tags %} 
+<div class="form-item {{form}}">
+    {% if type == 'password' %}
+        <small class="control-label light-bold">{{ input_form_title }}</small>
+        <div class="position-relative w-90 d-flex align-items-center">
+            <input maxlength="100" type="{{type}}" required="required" name="{{name}}" class="form-control control-text form-credential w-100"  id="{{id}}"/>
+            {% include 'components/view_password.html' %}
+        </div>
+        <small class="form-text text-muted">{{ text_small }}</small>
+    {% else %}
+        <small class="control-label light-bold">{{ input_form_title }}</small>{% if automation_name == 'nibo' and id == 'form_link' %}{% include "components/_tooltip.html" with text='to_receive_the_file_you_need_to_create_a_folder_on_onedrive'|translate:language %}{% endif %}
+        <input maxlength="200" type="{{type}}" required="required" name="{{name}}" class="form-control control-text form-credential w-90"  id="{{id}}"/>
+        <small class="form-text text-muted">{{ text_small }}</small>
+    {% endif %}
+</div>
+

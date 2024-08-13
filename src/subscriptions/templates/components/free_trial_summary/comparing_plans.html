@@ -1,0 +1,31 @@
+{% load general_tags %}
+{% if has_plan_negotiation == False %}
+    <p class='text-in-middle mt-5 w-90 mx-auto d-flex align-items-center'>
+        <strong>{{'or_compare_all_plans'|translate:language }}</strong>
+    </p>
+    <div class='mt-3 w-25'>
+        <span class='plan__label plan__label--primary f-size-12 d-flex flex-column align-items-center'>
+            <strong class='f-size-14'>{{'get_17%_off'|translate:language}}</strong>
+            {{'annual_billing'|translate:language }}
+        </span>
+    </div>
+    {% include 'components/plans/plan_period_buttons.html' with payment_period=subscription.get_payment_period|lower %}
+    <div class="d-flex justify-content-between w-90 mx-auto">
+        {% for plan in all_plans %}
+            {% include 'components/plan_box.html' with plan_name=plan|lower active_plan=recommended_plan page='registration' switch_button_classes='plan__switch--registration' has_plan_negotiation=has_plan_negotiation subscription=subscription %}
+        {% endfor %}
+    </div>
+{% elif subscription.get_value > 0 and subscription.get_payment_period|lower == 'monthly' %}
+    <p class='text-in-middle mt-5 w-90 mx-auto d-flex align-items-center'>
+        <strong>{{'or_compare_all_plans'|translate:language }}</strong>
+    </p>
+    {% include 'components/plans/plan_period_buttons.html' with payment_period=subscription.get_payment_period|lower %}
+    <p class="text-center mb-5">
+        17% {{ 'discount_on_annual_payment'|translate:language }}
+    </p>
+    <div class="d-flex justify-content-between w-90 mx-auto">
+        {% for plan in all_plans %}
+            {% include 'components/plan_box.html' with plan_name=plan|lower active_plan=recommended_plan page='registration' switch_button_classes='plan__switch--registration' has_plan_negotiation=has_plan_negotiation subscription=subscription %}
+        {% endfor %}
+    </div>
+{% endif %}

@@ -1,0 +1,41 @@
+{% load static %} {% load general_tags %} {% load dashboard_tags %}
+
+<div class="modal fade" id="modalExemplo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg new-modal" role="document">
+        <div class="modal-content modal-border">
+            <div class="modal-body">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Fechar" style="justify-content:flex-end;display: flex;">
+                    <span aria-hidden="true" class='f-size-40'>&times;</span>
+                </button>
+                <small class="subtitle_modal">
+                    {{ standard_variables|get_obj_attr:'title' }}
+                </small>
+                <h3 class="titulo_modal">{{ 'configure_new_template'|translate:language }}</h3>
+                <div class="green_line modal-standard"></div>
+                <br>
+                <hr class="line-horizontal-modal">
+
+                    {% if automation_type == 'upload_and_credential' or automation_type == 'credential_and_filter_notes'%}
+                        {% include 'components/modal_stepper.html' with role='utilizations' step_1_title='name_model'|translate:language step_2_title=standard_variables|get_obj_attr:'title_step2' step_3_title=standard_variables|get_obj_attr:'title_step3' step_4_title=standard_variables|get_obj_attr:'title_step4'  %}
+                    {% else %}
+                        {% include 'components/modal_stepper.html' with role='utilizations' step_1_title='name_model'|translate:language step_2_title=standard_variables|get_obj_attr:'title_step2' step_3_title=standard_variables|get_obj_attr:'title_step3'  %}
+                    {% endif %}
+                    <br>
+                    <form role="form" action="{% url 'new_model' %}">
+                        {% csrf_token %}
+                       
+                        {% include 'components/modal_step1.html' with standard_variables=standard_variables %}
+                        {% include 'components/modal_step2.html' with standard_variables=standard_variables %}
+                        {% include 'components/modal_step3.html' with standard_variables=standard_variables %}
+
+                        {% if  automation_type == 'upload_and_credential' or automation_type == 'credential_and_filter_notes' %}
+                            {% include 'components/modal_step4.html' with standard_variables=standard_variables %}
+                        {% endif %}
+                        <br>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

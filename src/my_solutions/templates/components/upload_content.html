@@ -1,0 +1,34 @@
+{% load static %} {% load general_tags %}
+<div class="uploader-inner">
+    <div class="upload-none">
+        <div class="linha_upload text-center {% if automation_type == 'upload' %} text-upload {% endif %}">
+            <small>{{ 'questions_about_file_format'|translate:language }}
+                {% with href_file='instructions/example_'|add:automation_name|add:'.xlsx' %}
+                <a class="color11067A" href="{% static href_file %}">{{ 'download_the_example_here'|translate:language}}</a>{% endwith %}
+            </small>
+        </div>
+        <div id="drop_zone" class="py-3 file-container{% if automation_name == 'notas_fiscais_rj' %} logo-lower{% endif %}">
+            <div class="no-file-content gap-10 ">
+                <p class="text-center">{{'drag_the_file_or_click_the_upload_button'|translate:language }}</p>
+
+                <img src="{% static 'img/logo_upload.png' %}" class="icone-large" />
+
+                <label role="button" for="file-picker" class="btn btn__purple no-uppercase rounded">
+                    <span>{{ 'choose_file'|translate:language }}</span>
+                </label>
+                <input type="file" id="file-picker" accept=".csv,.xlsx,.xls,.enc.encx" name="file-input">
+            </div>
+            <div class="with-file-content p-1">
+                <div class="upload-box-bar"></div>
+                <p class="align-self-start">{{'file_upload_completed'|translate:language }}</p>
+                <div class="d-flex gap-10 align-items-center">
+                    <span class="js-file-name"></span>
+                    <img src="{% static 'img/history-x.svg' %}" alt="Remove file" width="15" height="15" class="js-remove-file c-pointer">
+                </div>
+                <p class="js-file-size text-muted f-size-12"></p>
+               
+            </div>
+
+        </div>
+    </div>
+</div>        

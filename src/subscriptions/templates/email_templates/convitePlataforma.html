@@ -1,0 +1,32 @@
+{% load general_tags %}
+
+{% include 'email_templates/default/header.html' %}
+
+    <tr>
+      <tr>
+        <td width="640" align="left" valign="top" style="padding-left: 100px; padding-right: 60px;; padding-bottom: 30px;">
+          <img src="https://i.imgur.com/EjT1cK1.png" alt="null" style="height: 220px; margin-left: 740px; margin-top: 20px;">
+          <h1 style="font-family: 'Montserrat', sans-serif; font-weight: 400; text-align: left; font-size: 30px; margin-top: -160px; margin-bottom: 2px;"> {{ 'welcome_to'|translate:language }} <br> <strong>Smarthis Hub </strong></h1>
+          <div style="height: 18px; background-color:#39FFB6; border-radius: 20px; margin-top: 0; width: 350px;"></div>
+          <p style="font-family: 'Montserrat', sans-serif; font-size: 22px; padding-top: 60px;">
+            {{ 'hello'|translate:language }}!<br>
+
+            <strong>{{ user.get_full_name }}</strong> {{ 'invited_to_his_team_on'|translate:language }} Smarthis Hub.<br><br>
+
+            {{ 'click_on_the_button_bellow_to_complete_register'|translate:language }}.
+          </p>
+
+        </td>
+
+    </tr>
+    <tr>
+      <td width="640" align="center" valign="top" style="padding-left: 100px; padding-right: 60px;; padding-bottom: 30px;">
+        <a href="{{ link_invite }}"><img src="https://i.imgur.com/pK6grOP.png" style="text-align: center; height: 90px;"></a>
+        <p style="font-size: 18px;">{{ 'if_you_cannot_access_the_link'|translate:language }}, <a href="{{ link_invite }}">{{ 'click_here_small'|translate:language }}</a></p>
+      </td>
+    </tr>
+    
+    {% include 'email_templates/default/benefits_smarthishub.html' %}
+    {% include 'email_templates/default/about_smarthishub.html' %}
+    
+{% include 'email_templates/default/footer.html' %}

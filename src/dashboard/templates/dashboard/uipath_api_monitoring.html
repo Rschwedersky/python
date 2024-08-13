@@ -1,0 +1,32 @@
+{% extends 'base.html' %}{% load static %} {% load dashboard_tags %}
+
+{% block content %}
+  <div class="backgroundf2f2f2 container container-100 h-100">
+    <div class="d-flex flex-column justify-content-center gap-5">
+      <table class="table-hub table-striped">
+        <thead>
+          <tr>
+            {% for head in headings %}
+            <th scope="col">{{head}}</th>
+            {% endfor %}
+          </tr>
+        </thead>
+        <tbody>
+          {% for item in page_obj %}
+            <tr class="table-row-divider">
+              <td scope="row">{{item.client.name}}</td>
+              {% with updated_at=item.updated_at days_passed=item.updated_at|days_passed %}
+                <td scope="row" class="{% if days_passed < 2 %}bg-success{% elif days_passed < 7 %}bg-warning{% else %}bg-danger{% endif %}">{{ updated_at|date:"d/m/Y" }} {{ updated_at|from_UTC|time:"H:i" }}</td>
+              {% endwith %}
+              <td scope="row">{% if item.error_message %}{{item.error_message}}{% else %}-{% endif %}</td>
+              <td scope="row">{% if item.error_code %}{{item.error_code}}{% else %}-{% endif %}</td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+        <div class="d-flex justify-content-center gap-5 mt-4">
+          {% include 'components/pagination.html' with page_obj=page_obj %}
+        </div>
+    </div>
+  </div>
+{% endblock %}

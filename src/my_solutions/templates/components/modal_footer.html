@@ -1,0 +1,19 @@
+{% load general_tags %} {% load static %}
+<div class="modal-footer style-footer  d-flex justify-content-between px-0">
+    <button type='button' class="button__link button__link--box ml-3 prevBtn" {% if prev_btn_disabled == True %} disabled {% endif %}> 
+    {{ 'back'|translate:language }}
+    </button>
+    <div class="button-spacing d-flex"> 
+        <button  type='button' class="btn w-10 button-cancel-modal" type="button" data-dismiss="modal"> 
+            {{ 'cancel'|translate:language }}
+        </button>
+        <button type={{next_btn_type}} class="btn__purple py-2 px-3 btn-advance gap-16 no-uppercase mr-3 {% if no_advance != True %}nextBtn{% else %}submit{% endif %} {{ next_btn_class }} " disabled>
+            {{ next_btn_text }}
+            {% if no_arrow != True %}
+            <img src="{% static 'img/logo_advance.png' %}"/>
+            <img src="{% static 'img/arrow-right-disabled.png' %}"/>
+            {% endif %}
+        </button>
+    </div>
+</div>
+

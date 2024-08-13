@@ -1,0 +1,156 @@
+name: 'Build and Deploy Homolog'
+
+on:
+  push:
+    branches: [ homolog ]
+    paths: [./version_hub]
+  workflow_dispatch:
+
+
+jobs:
+  # static-test:
+  #   name: Static Test
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - uses: actions/checkout@v2
+  #       with:
+  #         fetch-depth: 0
+  #     - uses: sonarsource/sonarqube-scan-action@master
+  #       env:
+  #         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+  #         SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
+
+      # If you wish to fail your job when the Quality Gate is red, uncomment the
+      # following lines. This would typically be used to fail a deployment.
+      # - uses: sonarsource/sonarqube-quality-gate-action@master
+      #   timeout-minutes: 5
+      #   env:
+      #     SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+  build-and-push:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.ECR_AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.ECR_AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-east-1
+
+      - name: Login to Amazon ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v1
+       
+      
+      - name: Copy docker-compose-homolog via ssh
+        uses: appleboy/scp-action@master
+        with:
+          host: ${{ secrets.EC2_HOMOLOG_HOST }}
+          username: ${{ secrets.EC2_HOMOLOG_SSH_USERNAME }}
+          key: ${{ secrets.EC2_HOMOLOG_SSH_KEY }}
+          source: "docker-compose-homolog.yml"
+          target: "hub"
+
+
+      - name: Login to registry
+        uses: garygrossgarten/github-action-ssh@release
+        with:
+          command: aws ecr get-login-password --region us-east-1 | sudo docker login --username AWS --password-stdin 526932095279.dkr.ecr.us-east-1.amazonaws.com
+          host: ${{ secrets.EC2_HOMOLOG_HOST }}
+          username: ${{ secrets.EC2_HOMOLOG_SSH_USERNAME }}
+          privateKey: ${{ secrets.EC2_HOMOLOG_SSH_KEY}}
+
+      - name: Assign release version from version.txt to Env variable
+        run: |
+           source ./version.txt
+           echo "TAG_HUB=$(echo $TAG_HUB)" >> $GITHUB_ENV
+           echo "TAG_NGINX=$(echo $TAG_NGINX)" >> $GITHUB_ENV
+           echo "Version from txt"
+           echo $TAG_HUB
+           echo "Version from GITHUB_ENV"
+           echo "${{ env.TAG_HUB }}"
+
+      - name: Another step to show env value
+        run: |
+           echo "Version from GITHUB_ENV"
+           echo "${{ env.TAG_HUB }}"
+
+      - name: Show env value inside target host
+        uses: garygrossgarten/github-action-ssh@release
+        env: 
+          TAG_HUB: ${{ env.TAG_HUB }}
+          TAG_NGINX: ${{ env.TAG_NGINX }}
+        with:          
+          command: echo $TAG_HUB
+          host: ${{ secrets.EC2_HOMOLOG_HOST }}
+          username: ${{ secrets.EC2_HOMOLOG_SSH_USERNAME }}
+          privateKey: ${{ secrets.EC2_HOMOLOG_SSH_KEY}}
+
+
+      - name: Pull docker image
+        uses: garygrossgarten/github-action-ssh@release
+        env: 
+          TAG_HUB: ${{ env.TAG_HUB }}
+          TAG_NGINX: ${{ env.TAG_NGINX }}
+        with:          
+          command: sudo docker-compose -f ./hub/docker-compose-homolog.yml pull
+          host: ${{ secrets.EC2_HOMOLOG_HOST }}
+          username: ${{ secrets.EC2_HOMOLOG_SSH_USERNAME }}
+          privateKey: ${{ secrets.EC2_HOMOLOG_SSH_KEY}}
+
+      - name: Wait to completely pull images
+        uses: jakejarvis/wait-action@master
+        with:
+          time: '60s'
+
+
+      - name: Removes old docker stack
+        uses: garygrossgarten/github-action-ssh@release
+        with:
+          command: sudo docker stack rm manager
+          host: ${{ secrets.EC2_HOMOLOG_HOST }}
+          username: ${{ secrets.EC2_HOMOLOG_SSH_USERNAME }}
+          privateKey: ${{ secrets.EC2_HOMOLOG_SSH_KEY}}
+
+      - name: Wait to completely removes old stack
+        uses: jakejarvis/wait-action@master
+        with:
+          time: '60s'
+
+      - name: Deploy docker stack
+        uses: garygrossgarten/github-action-ssh@release
+        env: 
+          TAG_HUB: ${{ env.TAG_HUB }}
+          TAG_NGINX: ${{ env.TAG_NGINX }}
+        with:
+          command: sudo docker stack deploy manager -c ./hub/docker-compose-homolog.yml --with-registry-auth
+          host: ${{ secrets.EC2_HOMOLOG_HOST }}
+          username: ${{ secrets.EC2_HOMOLOG_SSH_USERNAME }}
+          privateKey: ${{ secrets.EC2_HOMOLOG_SSH_KEY}}
+
+      - name: Wait to deployment completes
+        uses: jakejarvis/wait-action@master
+        with:
+          time: '60s'
+
+      - name: Deploy docker stack
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.EC2_HOMOLOG_HOST }}
+          username: ${{ secrets.EC2_HOMOLOG_SSH_USERNAME }}
+          key: ${{ secrets.EC2_HOMOLOG_SSH_KEY}}
+          port: ${{ secrets.EC2_SSH_PORT }}
+          script: |
+            #!/bin/bash
+            sudo docker exec $(sudo docker ps -q -f name=manager_app) python manage.py migrate
+            sudo docker exec $(sudo docker ps -q -f name=manager_app) python manage.py collectstatic --noinput --clear
+
+      - name: Discord notification
+        env:
+          DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
+        uses: Ilshidur/action-discord@master
+        with:
+          args: 'The project {{ EVENT_PAYLOAD.repository.full_name }} has been deployed.'
+      

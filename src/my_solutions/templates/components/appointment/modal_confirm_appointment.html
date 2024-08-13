@@ -1,0 +1,25 @@
+{% load static %} {% load general_tags %}
+
+<div class="modal confim_schedule" id="modalconfirmschedule" tabindex="-1" role="dialog" aria-labelledby="#modalConfirmSchedule" aria-hidden="true">
+    <div class="modal-dialog content_confirm_appointment modal-xl" role="document">
+        <div class="modal-content">  
+            <div class="p-4">
+                <button class="close d-flex justify-content-end close_solucao" data-dismiss="modal" aria-label="Fechar" data-close="#modalconfirmschedule">
+                    <img src="/static/dashboard/img/exit.svg" alt="Close Modal" class="c-pointer" aria-hidden="true">
+                </button> 
+                <div class="px-3">
+                    <strong class="f-size-20">{{ 'confirm_appointment'|translate:language }}</strong>
+                    <div class="green_line modal-schedule-confirm"></div>
+                </div>
+                <div class="px-3 pt-4 f-size-16 dark-gray__color">
+                    <p class="execution_time-text"></p>
+                    <p>{{ 'you_will_receive_your_results_via_email_as_usual_as_soon_as_they_are_available'|translate:language }}</p>
+                </div>
+                <div class="modal-footer pb-0">
+                    <button type="button" class="btn_modal cancel_confim_appointment light-bold" data-dismiss="modal">{{ 'go_back'|translate:language }}</button>
+                    <button class="send_appointment btn_smarthis smaller py-2 px-3 brancocolor light-bold disabled" type="button" >{{ 'create_schedule'|translate:language }}</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

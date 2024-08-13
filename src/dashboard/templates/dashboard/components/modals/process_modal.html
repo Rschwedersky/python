@@ -1,0 +1,28 @@
+{% load general_tags %} {% load static %}
+
+<div class="modal fade dashboard__process-modal" id="process-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <header class="modal-header">
+        <div class='d-flex flex-column w-100'>
+            <strong class="d-block f-size-18">{{'edit_process'|translate:language}}</strong>
+            <div class="subtitle_modal w-min_content mw-80">
+              <h5 class="modal-title">Banco 01 - feito</h5>
+              <div class="green__underlined"></div>
+          </div>
+        </div>
+        <img src="{% static 'dashboard/img/exit.svg' %}" alt="Exit Modal" class="opacity-hover c-pointer close" data-dismiss='modal' aria-label="Close"/>
+      </header>
+        <nav class="mt-4 jsStepper">
+          {% include 'components/modal_stepper.html' with role='utilizations' step_1_title='general'|translate:language step_2_title='sub_hyphen_processes'|translate:language step_3_title='before_rpa'|translate:language  %}
+        </nav>
+        <form action="">
+          {% include 'dashboard/components/modals/process_modal/process_step_1.html' %}
+
+          {% include 'dashboard/components/modals/process_modal/process_step_2.html' %}
+
+          {% include 'dashboard/components/modals/process_modal/process_step_3.html' %}
+        </form>
+    </div>
+  </div>
+</div>

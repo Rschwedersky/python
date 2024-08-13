@@ -1,0 +1,26 @@
+{% load general_tags %}
+
+{% include 'email_templates/default/header.html' %}
+    <tr>
+        <td width="640" align="left" valign="top" style="padding:15px 30px;">
+            <p style="font-family: 'Montserrat', sans-serif; font-size:16px;color:#000000; padding-top: 30px;">
+                {{ 'hello'|translate:language }}, <strong>{{ user.get_full_name }}</strong>!
+            </p>
+            <p style="font-family: 'Montserrat', sans-serif; font-size:16px;color:#000000; padding-top: 30px;">{{ 'you_have_scheduled_the_next_runs_of_your_template'|translate:language }} <strong>{{ schedule.name }} | {{ automation_name }}.</strong> {{ 'check_the_information_below'|translate:language }}</p>
+        </td>
+    </tr>
+    <tr>
+        <td width="640" align="center" valign="top" style="padding:15px 30px;">
+            <div style="">
+                <ul style="font-size:16px;color:#000000; font-family: 'Montserrat'; list-style:none; text-align:left; margin:0;">
+                    <li style="color:#000000;">{{ 'template_model'|translate:language }}: {{ schedule.name }}</li>
+                    <li style="color:#000000;">{{ 'service'|translate:language }}: {{ automation_name }}</li>
+                    <li style="color:#000000;">{{ 'start_date'|translate:language }}: {{ date_text }}</li>
+                    <li style="color:#000000;">{{ 'recurrence'|translate:language }}: {{ recurrence_small_text }}</li>
+                </ul>
+                <p style="font-family: 'Montserrat', sans-serif; padding-top: 30px; text-align:left; font-size:16px;color:#000000;">{{ 'this_means_that_your_template_will_run'|translate:language }} {{ execution_text }}</p>
+                <p style="font-family: 'Montserrat', sans-serif; padding-top: 10px; text-align:left; font-size:16px;color:#000000;">{{ 'you_will_receive_your_results_via_email_as_usual_as_soon_as_they_are_available'|translate:language }}.</p>
+            </div>
+        </td>
+    </tr>
+{% include 'email_templates/default/footer.html' %}

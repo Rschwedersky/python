@@ -1,0 +1,90 @@
+{% load general_tags %} {% load static %}
+
+                        {% comment %} MODAL NO PERMISSIONS LEFT {% endcomment %}
+
+<section class="discover__inner-modal discover__inner-modal--hire">
+    <header class="discover__inner-modal--header">
+        <div class="d-inline-block">
+            <p class="lighter-bold discover__inner-modal--heading" id="discover-hire-service-modal-heading">{{'add'|translate:language }}<strong> {{heading}} </strong>{{'to_your_plan'|translate:language }}?</p>
+            <div class="green__underlined green__underlined--discover-modal"></div>
+        </div>
+        <img src="{% static "/dashboard/img/exit.svg" %}" alt="Close Modal" class="c-pointer opacity-hover modal__close discover__modal-close" data-close=".modal__background--discover"
+        />
+    </header>
+
+    {% comment %} STEP 1 - CHOICES {% endcomment %}
+
+    <div class="d-flex flex-column modal__tab discover__inner-modal-show">
+        <section class="d-flex flex-column w-100 px-4 h-100">
+            <p class="color-muted--light mb-0 mt-2 f-size-14">{{'looks_like_you_used_all_licenses'|translate:language }}.</p>
+            <p class="color-muted--light f-size-14 mb-5">{{'to_have_this_service_you_can'|translate:language }}:</p>
+            <section class="discover__inner-modal--hire__choices">
+                <section class="discover__modal--options-box" data-option='upgrade' data-heap="Fazer upgrade de plano">
+                    <img src="{% static "/img/upgrade-plans.png" %}" alt="Toolcase">
+                    <p class="mb-0 mt-2 secondary__color">{{'do_upgrade'|translate:language }}</p>
+                    <p class="f-size-14">{{'have_access_more_services'|translate:language }}</p>
+                </section>
+                <section class="discover__modal--options-box" data-option='switch' data-heap="Trocar serviços">
+                    <img src="{% static "/img/rewind.svg" %}" alt="Rewind icon">
+                    <p class="mb-0 mt-2 secondary__color">{{'switch_service'|translate:language }}</p>
+                    <p class="f-size-14">{{'replace_service_with_this_one'|translate:language }}</p>
+                </section>
+            </section>
+        </section>
+
+
+        <footer class="discover__inner-modal--footer">
+            <button class="button__link button__link--box modal__step" data-close=".modal__background--discover" data-step='return' disabled>{{'go_back'|translate:language }}</button>
+            <div class="d-flex gap-16 align-items-center">
+                <button class="button__link modal__close discover__modal-close" data-close=".modal__background--discover">{{'cancel'|translate:language }}</button>
+                <button class="btn__purple px-5 py-2 text-capitalize modal__step" data-step='advance' disabled>{{'advance'|translate:language }}</button>
+            </div>
+        </footer>
+    </div>
+
+    {% comment %} STEP 2 - LOADING {% endcomment %}
+
+    <div class="modal__tab modal__tab--upgrade discover__inner-modal-close" id='discover-modal-loading'>
+        <section class="discover__inner-modal--hire__loading">
+                <p class="f-size-20">{{'opening_upgrade_options'|translate:language }}...</p>
+                <div class="spinner-border text-secondary" role="status" style="width: 3rem; height: 3rem;">
+                    <span class="sr-only">Loading...</span>
+                </div>
+        </section>
+    </div>
+
+    {% comment %} STEP 3 - PLANS {% endcomment %}
+    <div class="modal__tab modal__tab--upgrade discover__inner-modal-close justify-content-center">
+        {% include "components/plans/plans_only_upgrade.html" with classes='' id=id subscription=subscription plan_box_classes=plan_box_classes switch_button_classes='h-50 w-35' only_upgrade=True footer_plan='discover' %}
+    </div>
+
+
+    {% comment %} MODAL CHANGE SERVICE {% endcomment %}
+
+    <div class='modal__tab modal__tab--switch discover__inner-modal-close'>
+    </div>
+
+</section>
+
+{% comment %} MODAL CONTACT ADMIN {% endcomment %}
+
+<section class="discover__inner-modal discover__confirmation-modal discover__confirmation-modal--no-admin">
+    <div class='p-3 d-flex flex-column'>
+        <img src="{% static "/dashboard/img/exit.svg" %}" alt="Close Modal" class="c-pointer opacity-hover modal__close align-self-end discover__confirmation-modal-close mb-3" data-close=".modal__background--discover"
+        />
+
+        {% if admin_info %}
+            <p>{{'please_contact_admin'|translate:language }} <strong>{{ admin_info.get_full_name }}</strong>, {{'please_contact_admin_2'|translate:language }}.</p>
+        {% else %}
+            <p><strong>{{'please_contact_admin_3'|translate:language }}.</strong></p>
+        {% endif %}    
+    </div>    
+
+    <footer class="discover__confirmation-modal-footer">
+        <button  class="btn__purple py-2 px-4 w-25 modal__close" data-close=".modal__background--discover">OK</button>
+    </footer>
+</section> 
+
+<div class="modal__background modal__background--discover-confirmation discover__modal-close ">
+    {% include 'discover/discover_confirmation_modals.html' %}
+</div>

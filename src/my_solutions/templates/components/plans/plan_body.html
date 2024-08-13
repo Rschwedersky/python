@@ -1,0 +1,42 @@
+{% load general_tags %} {% load dashboard_tags %} {% load static %} {% load humanize %} {% load i18n %}
+
+<div class='d-flex flex-column align-items-baseline px-3'>
+    {% if plan_name != 'business'%}
+        {% include 'components/plans/plan_box_price.html' with subscription=subscription anual_price=plan_info.value|multiply:10 extra_price=plan_info.extra_price anual_extra_price=plan_info.extra_price|multiply:10 using_plan_value=subscription.get_value plan_info_value=plan_info.value plan_name=plan_name %}
+
+        <div class='horizontal__gray-line mb-2'></div>
+    {% else %}
+        <img src="{% static 'img/puzzle.svg'%}" alt="Puzzle icon" class='mr-auto h-2rem mb-3'>
+    
+        <div class='horizontal__gray-line mb-2'></div>
+    {% endif %}
+</div>    
+<div class='d-flex flex-column gap-10 px-3'>
+    {% if plan_name == 'business' %}
+        <p class="m-0 f-size-14">
+            {{'digital_transformation_as_your_company_needs'|translate:language }}
+            <strong>4+ {{'licenses'|translate:language}}</strong>
+            {{'and'|translate:language }}
+            <strong>{{'more_options_for_your_queries_limit'|translate:language }}</strong>, {{'according_to_your_needs'|translate:language }}.
+        </p>
+    {% else %}
+        <p class='m-0 f-size-14'>
+            {{'plan_info_text_1'|translate:language }}
+            <strong>
+                {{'up_to'|translate:language|lower }}
+                <span class='current-queries'>{{ plan_info.qnt_queries|intcomma }}</span> {{'monthly_consultations'|translate:language }}
+
+                </strong>
+            {{'in'|translate:language }}
+            <strong>
+                {{ plan_info.qnt_automations }}
+                {% if plan_info.qnt_automations == 1 %}
+                    {{'service'|translate:language|lower }},
+                {% else %}
+                    {{'services'|translate:language|lower }},
+                {% endif %}
+            </strong>
+            {{'plan_info_text_2'|translate:language }}.
+        </p>
+    {% endif %}
+</div>

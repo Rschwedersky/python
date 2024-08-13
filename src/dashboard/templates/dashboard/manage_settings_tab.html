@@ -1,0 +1,45 @@
+{% load general_tags %} {% load dashboard_tags %} {% load static %}
+
+<div id="manage_settings_tab" class="dashboard_tab">
+    <div class="container container-100 h-90 whitebackcolor py-3 container__height">
+        <div class="top_header py-4">
+            <p class="card-text "><small class="text-muted"> {{ 'settings'|translate:language }} </small></p>
+        </div>
+        <h3 class="title_tab f-size-24">
+            {{ 'settings'|translate:language }}
+            <div class="green__underlined"></div>
+        </h3>
+        <div class="container container__settings-dash pt-3">
+            <section class="d-flex flex-column w-100 px-4 h-100">
+                <section class="section__options-box__config">
+                    <section class="section__config--options-box" id="areas">
+                        <img class="logo_areas_default" src="{% static 'dashboard/img/logo_areas.png' %}" alt="areas icon">
+                        <img class="logo_areas_active" src="{% static 'dashboard/img/logo_areas_active.png' %}" alt="areas icon active">
+                        <p class="mb-0 mt-2 color11067A light-bold">{{ 'business_areas'|translate:language }}</p>
+                    </section>
+                    <section class="section__config--options-box" id="process">
+                        <img class="logo_processos_default" src="{% static 'dashboard/img/logo_processos.png' %}" alt="processos icon">
+                        <img class="logo_processos_active" src="{% static 'dashboard/img/logo_processos_active.png' %}" alt="processos icon active">
+                        <p class="mb-0 mt-2 color11067A light-bold">{{ 'processes'|translate:language }}</p>
+                    </section>
+                </section>
+            </section>
+        </div>
+    </div>
+    <div class="d-none">
+        {% comment %} CONTENT FOR ROI INFORMATIONS {% endcomment %}
+        <div class="topic_selection px-2 py-3 box mb-3">
+            <div class="topic_header d-flex justify-content-between align-items-center pb-2">
+                <p class="f-size-26 darkgreencolor mb-0">{{ 'processes'|translate:language }}</p>
+                <div class="arrow_process down mr-2"></div>
+            </div>
+            <div class="topic_content my-2">
+                {% for key, values in processes_translated.items %}
+                    {% if values.completed %}
+                        {% include 'dashboard/components/single_process.html' with process_translate=values.name humantime=values.duration_time area_selected=values.area area_id=values.area_id salary_collaborator=values.salary_collaborator hours_collaborator=values.hours_collaborator howmany_collaborators=values.howmany_collaborators project_cost=values.project_cost %}
+                    {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>

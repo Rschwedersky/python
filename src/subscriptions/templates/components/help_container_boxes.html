@@ -1,0 +1,20 @@
+{% load dashboard_tags %} {% load static %}
+
+{% for hole_section in help_center %}
+    <div id="{{ hole_section|get_obj_attr:'title'|lower|cut:' '}}">
+        <div class="pt-5">
+            <div class="light-bold px-4 py-4 f-size-21">
+                <img class="" src="{% static 'img/logo_circulo.png' %}">
+                {{ hole_section|get_obj_attr:'title' }}
+            </div>
+            <div class="section_box">
+                {% for single_section in hole_section|get_obj_attr:'sections' %}
+                    <p class="title__single--section px-4 mb-0 light-bold f-size-18">{{single_section|get_obj_attr:'title'}}</p>
+                    {% for item in single_section|get_obj_attr:'items' %}
+                        {% include 'components/single_help_box_container.html' with subtitletext=item|get_obj_attr:'title' text=item|get_obj_attr:'text'  %}
+                    {% endfor %}
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+{% endfor %}

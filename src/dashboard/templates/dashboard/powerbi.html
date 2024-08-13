@@ -1,0 +1,28 @@
+<!--dashboard/templates/dashboard/dashboard.html-->
+
+{% extends 'base_powerbi.html' %}
+
+
+{% block title %}
+  Dashboard
+{% endblock  %}
+
+
+{% block content %}
+
+{% if user.is_authenticated %}
+
+<div class="iframe-container">
+<iframe
+  width="100%"
+  height="900"
+  src="{{dashboard.url}}"
+  frameborder="0"
+  allowFullScreen="true">
+</iframe>
+</div>
+{% else %}
+  <a href="{% url 'login' %}">Login</a>
+{% endif %}
+
+{% endblock  %}

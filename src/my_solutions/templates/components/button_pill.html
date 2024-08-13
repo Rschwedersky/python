@@ -1,0 +1,25 @@
+{% load static %} {% load general_tags %}
+
+{% if filters|length > 0 %}
+
+    <nav class="filter-buttons__container mt-3 f-size-14">
+        {% if with_dashboard == True %}
+            <button class="btn__pill btn__pill--{{class_modifier}}" data-type="dashboard"data-class="btn__pill--{{class_modifier}}" data-query="{{data_query}}" data-tohide="{{ data_to_hide }}">
+                Dashboard
+            </button>
+        {% endif %} 
+        
+        {% for key, value in filters.items %}
+            {% if key == 'all_male' %}
+                <button class="btn__pill btn__pill--{{class_modifier}} btn__pill--active" data-type="allFilters"data-class="btn__pill--{{class_modifier}}" data-query="{{data_query}}" data-tohide="{{ data_to_hide }}">
+                    {{ 'all_male'|translate:language }} {% if value %} <span>({{ value }})</span> {% endif %}
+                </button>
+            {% else %}
+                <button class="btn__pill btn__pill--{{class_modifier}}" data-type="{{ key }}"data-class="btn__pill--{{class_modifier}}" data-query="{{data_query}}" data-tohide="{{ data_to_hide }}">
+                    {{ key }} {% if value %} <span>({{ value }})</span> {% endif %}
+                </button>
+            {% endif %}
+        {% endfor %}                        
+    </nav>
+
+{% endif %}

@@ -1,0 +1,35 @@
+{% extends 'login_base.html' %} {% load static %} {% load general_tags %} {% load dashboard_tags %}
+{% block content %}
+    {% with language=request|getLanguage %}
+    <section id="cadastro" class="arrow-background py-5 flex-grow-1">
+        <div class="container d-flex justify-content-center">
+            <div class="login_content d-flex justify-content-center p-5">
+                <form method="POST" class="form-signin w-100">
+                    {% if form.errors %}
+                    <div style="margin-bottom: 15px;">
+                      <div class="alert alert-danger text-center" role="alert">
+                        <strong>{{ 'access_denied_exclamation'|translate:language }}</strong><br/>
+                        {{ 'your_username_and_password_didnt_match_please_try_again'|translate:language }}
+                      </div>
+                    </div>
+                  {% endif %}
+                    <div class="text-center mb-2">
+                      <img src="{% static 'dashboard/img/LogoSmarthisHub.png' %}" alt="Logo SmarthisHub" height="50">
+                    </div>
+                    {% csrf_token %}
+
+                    {% include "components/_input_form.html" with  type='email' label='E-mail' placeholder='E-mail'  name='username' id="id_username" %}
+                    
+                    {% include "components/_input_form.html" with type="password" id="id_password" name="password" no_validation=True input_classes="w-100" %}
+
+                    <p class="text-center mb-1"><a class="btn btn-sm btn-link" href="{% url 'password_reset' %}">{{ 'i_forgot_my_password'|translate:language }}</a></p>
+                    <input type="submit" class="btn_smarthis w-100 py-3" value="{{ 'login_capital'|translate:language }}"/>
+                    <p class="text-center mt-2 mb-2"><a class="btn btn-sm btn-link" href="{% url 'registration' %}">{{ 'still_without_registry_create_your_account'|translate:language }}</a></p>
+                </form>
+            </div>
+        </div>
+    </section>
+    {% include 'components/footer_register.html' %}
+
+    {% endwith %}
+{% endblock %}
